@@ -17,7 +17,7 @@ def renderTab (txt : String) (href : String) (pred : Bool) : Html :=
 
 def navbar (config : SConfig) (currentPage : NavbarState) : List Html := [
   .h2 [] [
-    .a "https://github.com/dwrensha/compfiles" [cls "external"] "Compfiles",
+    .a "https://github.com/Imbernoulli/compfiles" [cls "external"] "Compfiles",
     ": Catalog Of Math Problems Formalized In Lean",
   ],
   .div [cls "navbar"] [

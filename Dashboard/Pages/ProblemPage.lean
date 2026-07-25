@@ -8,7 +8,7 @@ import SSG.Util
 /-! Problem page template -/
 
 def solutionUrl (id : String) : String :=
-  s!"https://github.com/dwrensha/compfiles/blob/main/Compfiles/{id}.lean"
+  s!"https://github.com/Imbernoulli/compfiles/blob/main/Compfiles/{id}.lean"
 
 open Html
 
@@ -103,7 +103,7 @@ def Problem.generateStub (p : ProblemInfo C) : List Html := [
   .h2 [] [.text <| problemId p.leanName],
   .p [] [.text "This problem has not been formalized yet!"],
   .p [] [.text "To add a formalization of it, submit a pull request to the ",
-    .a "https://github.com/dwrensha/compfiles" [cls "external"]
+    .a "https://github.com/Imbernoulli/compfiles" [cls "external"]
       [.text "Compfiles Github repository"]],
 ] ++ writeups p
 

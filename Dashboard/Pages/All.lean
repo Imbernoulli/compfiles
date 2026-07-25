@@ -26,7 +26,7 @@ def problemTable (config : SConfig)
       .a (problemHtmlUrl config rawName) [] name,
     ],
     .td [cls "solved-col"] [
-      .a s!"https://github.com/dwrensha/compfiles/blob/main/Compfiles/{name}.lean"
+      .a s!"https://github.com/Imbernoulli/compfiles/blob/main/Compfiles/{name}.lean"
         [] [
           if metadata.proved then
             .span [("title", "complete solution")] "✅"
