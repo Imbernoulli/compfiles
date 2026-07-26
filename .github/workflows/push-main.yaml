@@ -51,13 +51,13 @@ jobs:
         run: |
           set -o pipefail
           echo "Starting build at $(date +'%T')"
-          # Build large problem files one at a time to bound peak memory
-          # (a single big lean process can exceed the runner's RAM when
-          # several run in parallel), then build the rest normally.
-          for f in $(find Compfiles -name '*.lean' -size +60k | sed 's|Compfiles/|Compfiles.|; s|/|.|g; s|\.lean$||' | sort); do
-            echo "=== big module: $f"
-            lake build "+$f" || { echo "FAILED: $f"; exit 1; }
+          # Build every problem module one at a time to bound peak memory
+          # to a single lean process (parallel builds of large files get
+          # OOM-killed on the 16GB runner). Cached modules are near-instant.
+          for m in $(grep -oE '^import (Compfiles\.[A-Za-z0-9]+)' Compfiles.lean | awk '{print $2}' | sort); do
+            lake build "+$m" || { echo "FAILED: $m"; exit 1; }
           done
+          echo "All problem modules built at $(date +'%T'); building remaining targets"
           lake build
           result_run1=$?
           echo "Complete at $(date +'%T'); return value $result_run1"
