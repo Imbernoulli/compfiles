@@ -46,14 +46,27 @@ jobs:
         if: steps.restore-build-cache.outputs.cache-hit != 'true'
         run: lake exe cache get
 
+      - name: add swap space
+        run: |
+          FREE_KB=$(df --output=avail / | tail -1 | tr -d ' ')
+          SIZE_GB=$(( FREE_KB / 1024 / 1024 > 70 ? 48 : 24 ))
+          echo "Available disk: $((FREE_KB / 1024 / 1024))G; adding ${SIZE_GB}G swap"
+          sudo fallocate -l ${SIZE_GB}G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          sudo sysctl vm.swappiness=10
+          free -h
+
       - name: lake build
         id: build
         run: |
           set -o pipefail
           echo "Starting build at $(date +'%T')"
-          lake build
+          lake build -j2
           result_run1=$?
           echo "Complete at $(date +'%T'); return value $result_run1"
+          exit $result_run1
 
       - name: save build cache
         uses: actions/cache/save@v5
