@@ -1106,7 +1106,7 @@ lemma inv_prefBoard (p : Play) (hp : FollowsStrategy bobMove p) :
           rw [hcardF] at hcardST
           exact ⟨m - k, by omega⟩
         have hcardR : (Finset.univ.filter fun c : Cell => ¬ c.1.1 ≤ 1).card = 24 := by
-          native_decide
+          decide
         have hTR : T ⊆ Finset.univ.filter (fun c : Cell => ¬ c.1.1 ≤ 1) := by
           intro c hc
           obtain ⟨-, hc2⟩ := Finset.mem_filter.mp hc

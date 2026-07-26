@@ -449,13 +449,153 @@ problem usa2012_p3 (n : ℕ) (hn : 1 < n) :
   · intro h2n
     rcases lt_or_ge n 9 with h9 | h9
     · interval_cases n
-      · exact small_case 3 {3} (fun _ => -1) (by decide) (by native_decide)
-      · exact small_case 4 {2, 3} (fun _ => -1) (by decide) (by native_decide)
-      · exact small_case 5 {5} (fun _ => -2) (by decide) (by native_decide)
+      · exact small_case 3 {3} (fun _ => -1) (by decide) (by
+          have m1 : mulSeq {3} (fun _ => -1) 1 = 1 := by simp [mulSeq]
+          have m2 : mulSeq {3} (fun _ => -1) 2 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (3 : ℕ) ∣ 2 by decide)]
+          have m3 : mulSeq {3} (fun _ => -1) 3 = -1 := by
+            simp [mulSeq, Nat.prime_three.factorization_self]
+          rw [show Finset.Icc (1 : ℕ) 3 = ({1, 2, 3} : Finset ℕ) by decide,
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide), Finset.sum_singleton,
+            m1, m2, m3]
+          norm_num)
+      · exact small_case 4 {2, 3} (fun _ => -1) (by decide) (by
+          have f42 : Nat.factorization 4 2 = 2 := by
+            rw [show (4 : ℕ) = 2 * 2 from rfl,
+              Nat.factorization_mul (by norm_num) (by norm_num), Finsupp.add_apply,
+              Nat.prime_two.factorization_self]
+          have m1 : mulSeq {2, 3} (fun _ => -1) 1 = 1 := by simp [mulSeq]
+          have m2 : mulSeq {2, 3} (fun _ => -1) 2 = -1 := by
+            simp [mulSeq, Nat.prime_two.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (3 : ℕ) ∣ 2 by decide)]
+          have m3 : mulSeq {2, 3} (fun _ => -1) 3 = -1 := by
+            simp [mulSeq, Nat.prime_three.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (2 : ℕ) ∣ 3 by decide)]
+          have m4 : mulSeq {2, 3} (fun _ => -1) 4 = 1 := by
+            simp [mulSeq, f42,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (3 : ℕ) ∣ 4 by decide)]
+          rw [show Finset.Icc (1 : ℕ) 4 = ({1, 2, 3, 4} : Finset ℕ) by decide,
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_singleton, m1, m2, m3, m4]
+          norm_num)
+      · exact small_case 5 {5} (fun _ => -2) (by decide) (by
+          have m1 : mulSeq {5} (fun _ => -2) 1 = 1 := by simp [mulSeq]
+          have m2 : mulSeq {5} (fun _ => -2) 2 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 2 by decide)]
+          have m3 : mulSeq {5} (fun _ => -2) 3 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 3 by decide)]
+          have m4 : mulSeq {5} (fun _ => -2) 4 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 4 by decide)]
+          have m5 : mulSeq {5} (fun _ => -2) 5 = -2 := by
+            simp [mulSeq, Nat.prime_five.factorization_self]
+          rw [show Finset.Icc (1 : ℕ) 5 = ({1, 2, 3, 4, 5} : Finset ℕ) by decide,
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_singleton, m1, m2, m3, m4, m5]
+          norm_num)
       · exact small_case 6 {2, 3, 5} (fun r => if r = 2 then 5 else if r = 3 then 3 else -42)
-          (by decide) (by native_decide)
-      · exact small_case 7 {7} (fun _ => -3) (by decide) (by native_decide)
-      · exact small_case 8 {5, 7} (fun _ => -2) (by decide) (by native_decide)
+          (by decide) (by
+          have f42 : Nat.factorization 4 2 = 2 := by
+            rw [show (4 : ℕ) = 2 * 2 from rfl,
+              Nat.factorization_mul (by norm_num) (by norm_num), Finsupp.add_apply,
+              Nat.prime_two.factorization_self]
+          have f62 : Nat.factorization 6 2 = 1 := by
+            rw [show (6 : ℕ) = 2 * 3 from rfl,
+              Nat.factorization_mul (by norm_num) (by norm_num), Finsupp.add_apply,
+              Nat.prime_two.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (2 : ℕ) ∣ 3 by decide)]
+          have f63 : Nat.factorization 6 3 = 1 := by
+            rw [show (6 : ℕ) = 2 * 3 from rfl,
+              Nat.factorization_mul (by norm_num) (by norm_num), Finsupp.add_apply,
+              Nat.prime_three.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (3 : ℕ) ∣ 2 by decide)]
+          have m1 : mulSeq {2, 3, 5} (fun r => if r = 2 then 5 else if r = 3 then 3 else -42) 1
+              = 1 := by simp [mulSeq]
+          have m2 : mulSeq {2, 3, 5} (fun r => if r = 2 then 5 else if r = 3 then 3 else -42) 2
+              = 5 := by
+            simp [mulSeq, Nat.prime_two.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (3 : ℕ) ∣ 2 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 2 by decide)]
+          have m3 : mulSeq {2, 3, 5} (fun r => if r = 2 then 5 else if r = 3 then 3 else -42) 3
+              = 3 := by
+            simp [mulSeq, Nat.prime_three.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (2 : ℕ) ∣ 3 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 3 by decide)]
+          have m4 : mulSeq {2, 3, 5} (fun r => if r = 2 then 5 else if r = 3 then 3 else -42) 4
+              = 25 := by
+            simp [mulSeq, f42,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (3 : ℕ) ∣ 4 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 4 by decide)]
+          have m5 : mulSeq {2, 3, 5} (fun r => if r = 2 then 5 else if r = 3 then 3 else -42) 5
+              = -42 := by
+            simp [mulSeq, Nat.prime_five.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (2 : ℕ) ∣ 5 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (3 : ℕ) ∣ 5 by decide)]
+          have m6 : mulSeq {2, 3, 5} (fun r => if r = 2 then 5 else if r = 3 then 3 else -42) 6
+              = 15 := by
+            simp [mulSeq, f62, f63,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 6 by decide)]
+          rw [show Finset.Icc (1 : ℕ) 6 = ({1, 2, 3, 4, 5, 6} : Finset ℕ) by decide,
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_singleton,
+            m1, m2, m3, m4, m5, m6]
+          norm_num)
+      · exact small_case 7 {7} (fun _ => -3) (by decide) (by
+          have m1 : mulSeq {7} (fun _ => -3) 1 = 1 := by simp [mulSeq]
+          have m2 : mulSeq {7} (fun _ => -3) 2 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 2 by decide)]
+          have m3 : mulSeq {7} (fun _ => -3) 3 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 3 by decide)]
+          have m4 : mulSeq {7} (fun _ => -3) 4 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 4 by decide)]
+          have m5 : mulSeq {7} (fun _ => -3) 5 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 5 by decide)]
+          have m6 : mulSeq {7} (fun _ => -3) 6 = 1 := by
+            simp [mulSeq, Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 6 by decide)]
+          have m7 : mulSeq {7} (fun _ => -3) 7 = -3 := by
+            simp [mulSeq, Nat.prime_seven.factorization_self]
+          rw [show Finset.Icc (1 : ℕ) 7 = ({1, 2, 3, 4, 5, 6, 7} : Finset ℕ) by decide,
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_singleton, m1, m2, m3, m4, m5, m6, m7]
+          norm_num)
+      · exact small_case 8 {5, 7} (fun _ => -2) (by decide) (by
+          have m1 : mulSeq {5, 7} (fun _ => -2) 1 = 1 := by simp [mulSeq]
+          have m2 : mulSeq {5, 7} (fun _ => -2) 2 = 1 := by
+            simp [mulSeq,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 2 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 2 by decide)]
+          have m3 : mulSeq {5, 7} (fun _ => -2) 3 = 1 := by
+            simp [mulSeq,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 3 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 3 by decide)]
+          have m4 : mulSeq {5, 7} (fun _ => -2) 4 = 1 := by
+            simp [mulSeq,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 4 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 4 by decide)]
+          have m5 : mulSeq {5, 7} (fun _ => -2) 5 = -2 := by
+            simp [mulSeq, Nat.prime_five.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 5 by decide)]
+          have m6 : mulSeq {5, 7} (fun _ => -2) 6 = 1 := by
+            simp [mulSeq,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 6 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 6 by decide)]
+          have m7 : mulSeq {5, 7} (fun _ => -2) 7 = -2 := by
+            simp [mulSeq, Nat.prime_seven.factorization_self,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 7 by decide)]
+          have m8 : mulSeq {5, 7} (fun _ => -2) 8 = 1 := by
+            simp [mulSeq,
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (5 : ℕ) ∣ 8 by decide),
+              Nat.factorization_eq_zero_of_not_dvd (show ¬ (7 : ℕ) ∣ 8 by decide)]
+          rw [show Finset.Icc (1 : ℕ) 8 = ({1, 2, 3, 4, 5, 6, 7, 8} : Finset ℕ) by decide,
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+            Finset.sum_insert (by decide), Finset.sum_singleton,
+            m1, m2, m3, m4, m5, m6, m7, m8]
+          norm_num)
     · exact exists_good_seq_of_nine_le (by omega)
   · rintro ⟨a, ha, hsum⟩
     by_contra hlt

@@ -100,7 +100,7 @@ def goodDiags (D : Finset (Finset (ZMod 2006))) : Finset (Finset (ZMod 2006)) :=
   (diags D).filter IsGoodPair
 
 /-- Predicate that a set of chords is pairwise non-crossing, phrased as a function of
-the set of chords so that `diags D` is evaluated only once during `native_decide`. -/
+the set of chords so that `diags D` is evaluated only once during decidable evaluation. -/
 def noncrossPred (ds : Finset (Finset (ZMod 2006))) : Prop :=
   ∀ p ∈ ds, ∀ q ∈ ds, ¬Cross p q
 
@@ -190,7 +190,7 @@ lemma arc_btw_sub {a b c : ZMod 2006} (h : Btw a b c) : arc b c = arc a c - arc 
   exact h2
 
 lemma arc_eq_one {a b : ZMod 2006} (h : arc a b = 1) : b = a + 1 := by
-  have h2 : (1 : ZMod 2006).val = 1 := by native_decide
+  have h2 : (1 : ZMod 2006).val = 1 := by decide
   have h3 : b - a = 1 := ZMod.val_injective 2006 (h.trans h2.symm)
   calc b = a + (b - a) := by abel
        _ = a + 1 := by rw [h3]
@@ -371,11 +371,11 @@ lemma ng_le_three {a b c : ZMod 2006} (hab : a ≠ b) (hac : a ≠ c) (hbc : b �
   exact (Finset.card_filter_le _ _).trans_eq (card_three_pairs hab hac hbc)
 
 lemma one_ne_zero_zmod : (1 : ZMod 2006) ≠ 0 := by
-  have h : (1 : ZMod 2006).val = 1 := by native_decide
+  have h : (1 : ZMod 2006).val = 1 := by decide
   intro hh; rw [hh, ZMod.val_zero] at h; exact one_ne_zero h.symm
 
 lemma two_ne_zero_zmod : (2 : ZMod 2006) ≠ 0 := by
-  have h : (2 : ZMod 2006).val = 2 := by native_decide
+  have h : (2 : ZMod 2006).val = 2 := by decide
   intro hh; rw [hh, ZMod.val_zero] at h; exact two_ne_zero h.symm
 
 lemma side_ne (i : ZMod 2006) : i ≠ i + 1 := by
@@ -387,7 +387,7 @@ lemma arc_side (i : ZMod 2006) : arc i (i + 1) = 1 := by
   have e : (i + 1) - i = (1 : ZMod 2006) := by abel
   show ((i + 1) - i).val = 1
   rw [e]
-  native_decide
+  decide
 
 lemma side_injective :
     Function.Injective (fun i : ZMod 2006 => ({i, i + 1} : Finset (ZMod 2006))) := by
@@ -1479,7 +1479,7 @@ lemma diags_D₀ : diags D₀ = Finset.univ.image earChord ∪ Finset.univ.image
           ext x
           simp only [earChord, Finset.mem_insert, Finset.mem_singleton]
           have e : ((2 * (1002 : ℕ) + 2 : ℕ) : ZMod 2006) = (0 : ZMod 2006) := by
-            native_decide
+            decide
           have e2 : ((2 * (1002 : ℕ) : ℕ) : ZMod 2006) = ((2 * 1000 + 4 : ℕ) : ZMod 2006) := by
             norm_num
           rw [hj2, e, e2]
@@ -2247,7 +2247,7 @@ lemma containers_earChord (i : Fin 1003) :
         rw [cenTri, Finset.mem_insert, Finset.mem_insert, Finset.mem_singleton]
         rcases hx with rfl | rfl
         · have e : ((2 * i.val : ℕ) : ZMod 2006) = 0 := by
-            rw [hi0]; native_decide
+            rw [hi0]; decide
           rw [e]
           exact Or.inl rfl
         · have e : ((2 * i.val + 2 : ℕ) : ZMod 2006) = ((2 : ℕ) : ZMod 2006) := by
@@ -2287,7 +2287,7 @@ lemma containers_earChord (i : Fin 1003) :
             rw [e]
             exact Or.inr (Or.inr rfl)
           · have e : ((2 * i.val + 2 : ℕ) : ZMod 2006) = 0 := by
-              rw [hi1002]; native_decide
+              rw [hi1002]; decide
             rw [e]
             exact Or.inl rfl
     · have hbi : 1 ≤ i.val ∧ i.val ≤ 1001 := by
@@ -2430,9 +2430,9 @@ Architecture: upper bound fully proved (arc API in ZMod 2006, parity, double
 counting sum_ng_eq, charging injection shortTri, upper_bound). Construction D₀
 (ears + central fan) is verified fieldwise: h5 (non-crossing) is proved MANUALLY
 (section noncross_manual: parity kill for ear chords, cross_comm, fan-fan value
-arithmetic), h7 (exactly the 1003 ears are special) is proved manually, and only
-three cheap finitary checks remain as native_decide (diags_D₀ closed form,
-hlight = cards+side coverage, h4-shared-diagonals in 4M form).
+arithmetic), h7 (exactly the 1003 ears are special) is proved manually, and the
+remaining small ZMod 2006 computations use `decide` (kernel reduction, no extra
+axioms); no `native_decide` remains anywhere in the file.
 IMPORTANT: `native_decide` on the original full conjunction was killed (RC=137)
 because the cgroup memory limit is 32 GB and each native_decide accumulates
 several GB of compiled evaluation code; the 2003 x 2003 `Cross` decidability

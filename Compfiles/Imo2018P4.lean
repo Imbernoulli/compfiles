@@ -123,7 +123,7 @@ The answer is K = 100.
 /-- The black squares of the checkerboard coloring. -/
 def blacks : Finset Site := Finset.univ.filter fun c => (c.1.val + c.2.val) % 2 = 0
 
-lemma blacks_card : blacks.card = 200 := by native_decide
+lemma blacks_card : blacks.card = 200 := by set_option maxRecDepth 10000 in decide
 
 /-- No two black squares are at knight's move distance. -/
 lemma not_knightAdj_of_black {a b : Site} (ha : a ∈ blacks) (hb : b ∈ blacks) :
@@ -163,7 +163,7 @@ together with its label within the block. -/
 def cyc (c : Site) : ℕ :=
   (c.1.val / 4 * 5 + c.2.val / 4) * 4 + lab (c.1.val % 4) (c.2.val % 4)
 
-lemma cyc_lt_100 : ∀ c : Site, cyc c < 100 := by native_decide
+lemma cyc_lt_100 : ∀ c : Site, cyc c < 100 := by set_option maxRecDepth 10000 in decide
 
 /-- The opposite coordinate within a `4×4` block: `i ↦ 3 − i` within
 the block. -/
@@ -177,17 +177,17 @@ cycle that are *not* a knight's move apart. -/
 def opp (c : Site) : Site :=
   (⟨oppCoord c.1.val, oppCoord_lt c.1.isLt⟩, ⟨oppCoord c.2.val, oppCoord_lt c.2.isLt⟩)
 
-lemma opp_ne : ∀ c : Site, opp c ≠ c := by native_decide
+lemma opp_ne : ∀ c : Site, opp c ≠ c := by set_option maxRecDepth 10000 in decide
 
-lemma opp_opp : ∀ c : Site, opp (opp c) = c := by native_decide
+lemma opp_opp : ∀ c : Site, opp (opp c) = c := by set_option maxRecDepth 10000 in decide
 
-lemma cyc_opp : ∀ c : Site, cyc (opp c) = cyc c := by native_decide
+lemma cyc_opp : ∀ c : Site, cyc (opp c) = cyc c := by set_option maxRecDepth 10000 in decide
 
 /-- Two sites in the same 4-cycle are either equal, opposite, or a
 knight's move apart. -/
 lemma eq_or_opp_or_adj_of_cyc_eq :
     ∀ a b : Site, cyc a = cyc b → a = b ∨ a = opp b ∨ KnightAdj a b := by
-  native_decide
+  decide +kernel
 
 /-- Ben's invariant: every 4-cycle contains at most one red stone, and
 the blue stones are exactly the opposite sites of the red stones. -/

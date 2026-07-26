@@ -238,7 +238,7 @@ snip begin
 
 open Classical
 
-theorem perpIdx_card : perpIdx.card = 30 := by native_decide
+theorem perpIdx_card : perpIdx.card = 30 := by decide
 
 /-- The source point of an index triple. -/
 abbrev pt3 (t : Triple) : Fin 5 := t.1
@@ -291,11 +291,11 @@ def samePtPairs : Finset (Finset Triple) := allPairs.filter samePtPred
 /-- The 30 pairs of altitudes of a common triangle. -/
 def altPairs : Finset (Finset Triple) := allPairs.filter altPred
 
-theorem parPairs_card : parPairs.card = 30 := by native_decide
+theorem parPairs_card : parPairs.card = 30 := by decide
 
-theorem samePtPairs_card : samePtPairs.card = 75 := by native_decide
+theorem samePtPairs_card : samePtPairs.card = 75 := by decide
 
-theorem altPairs_card : altPairs.card = 30 := by native_decide
+theorem altPairs_card : altPairs.card = 30 := by decide
 
 theorem disjoint_parPairs_samePtPairs : Disjoint parPairs samePtPairs := by
   rw [Finset.disjoint_left]
@@ -709,7 +709,7 @@ theorem interSet_ncard_le (cfg : Config K) : (interSet cfg).ncard ≤ 315 := by
 def ptsQ : Fin 5 → Fin 2 → ℚ := ![![3, 5], ![1, 7], ![2, 0], ![6, 3], ![0, 4]]
 
 theorem ptsQ_inj : Function.Injective ptsQ := fun a b h => by
-  have hall : ∀ i j : Fin 5, ptsQ i = ptsQ j → i = j := by native_decide
+  have hall : ∀ i j : Fin 5, ptsQ i = ptsQ j → i = j := by decide
   exact hall a b h
 
 /-- The rational configuration. -/
@@ -718,11 +718,11 @@ def cfgQ : Config ℚ where
   inj := ptsQ_inj
   npar := by
     have h : ∀ i j k l : Fin 5, i ≠ j → k ≠ l → ({i, j} : Finset (Fin 5)) ≠ {k, l} →
-        cross (ptsQ j - ptsQ i) (ptsQ l - ptsQ k) ≠ 0 := by native_decide
+        cross (ptsQ j - ptsQ i) (ptsQ l - ptsQ k) ≠ 0 := by decide +kernel
     exact h
   nperp := by
     have h : ∀ i j k l : Fin 5, i ≠ j → k ≠ l → ({i, j} : Finset (Fin 5)) ≠ {k, l} →
-        dot (ptsQ j - ptsQ i) (ptsQ l - ptsQ k) ≠ 0 := by native_decide
+        dot (ptsQ j - ptsQ i) (ptsQ l - ptsQ k) ≠ 0 := by decide +kernel
     exact h
 
 /-- The perpendiculars of the rational configuration, as a computable function. -/
@@ -737,7 +737,7 @@ def computedPts : Finset (Fin 2 → ℚ) :=
     cross (perpOfQ ab.1).n (perpOfQ ab.2).n ≠ 0)).image
     (fun ab => interPt (perpOfQ ab.1) (perpOfQ ab.2))
 
-theorem computedPts_card : computedPts.card = 315 := by native_decide
+theorem computedPts_card : computedPts.card = 315 := by decide +kernel
 
 /-- Embedding of rational points into real points. -/
 def castPt (v : Fin 2 → ℚ) : Fin 2 → ℝ := fun i => (v i : ℝ)

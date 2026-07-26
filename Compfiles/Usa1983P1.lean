@@ -51,7 +51,8 @@ times `3!` orders of the first three points within the block, times `3!`
 orders of the remaining three points. Verified by exhaustive enumeration. -/
 lemma card_favorable :
     (Finset.univ.filter Favorable).card = 216 := by
-  native_decide
+  set_option maxRecDepth 10000 in
+  decide
 
 /-- The total number of cyclic orders of the six points. -/
 lemma card_orderings : Fintype.card Ordering = 720 := by

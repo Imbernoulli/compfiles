@@ -9352,12 +9352,12 @@ theorem pairCount_succ {n : ℕ} (hn : 2 ≤ n) :
     exact (Nat.coprime_sub_self_right han).mpr (Nat.coprime_comm.mp ha2)
 
 theorem pairCount_two : pairCount 2 = 1 := by
-  native_decide
+  decide
 
 /-! ## The beautiful-counting side -/
 
 theorem beautifulCount_two : beautifulCount 2 = 2 := by
-  native_decide
+  decide
 
 /-- The key recurrence: the number of beautiful labellings of `[0, n + 1]` up to
 rotation is the number for `[0, n]` plus `φ (n + 1)`. Proved by deleting the largest
@@ -9462,7 +9462,7 @@ COMPLETE — zero errors, zero `sorry`. The full proof of
   (`val_eq_of_extParallel_ne_zero`)).
 - `fiber_count` PROVED: `#{c // Beautiful (InsertNorm τ c)} = if Linear τ then 2 else 1`.
 - `pairCount_succ`, `pairCount_two`, `beautifulCount_two` (the last two by
-  `native_decide`), `beautifulCount_succ`, and the final induction `imo2013_p6`.
+  `decide`), `beautifulCount_succ`, and the final induction `imo2013_p6`.
 
 ### How the proof goes (map of the official Solution 1 onto the code)
 

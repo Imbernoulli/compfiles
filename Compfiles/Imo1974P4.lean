@@ -170,14 +170,14 @@ lemma sum_whiteCount (T : Finset Rect) (hT : ValidDecomp T) :
       exact ⟨⟨R, hR, hxcell⟩, hxw⟩
     · rintro ⟨⟨R, hR, hxcell⟩, hxw⟩
       exact ⟨R, hR, hxcell, hxw⟩
-  have hcard : (board.filter isWhite).card = 32 := by native_decide
+  have hcard : (board.filter isWhite).card = 32 := by decide
   have key := Finset.card_biUnion hpd
   rw [hunion, hcard] at key
   rw [key]
   exact rfl
 
 /-- The five sets of seven distinct positive integers summing to 32.
-(Enumerated by `native_decide` over the 7-subsets of `[1, 11]`.) -/
+(Enumerated by `decide` over the 7-subsets of `[1, 11]`.) -/
 lemma seven_distinct_sum_32 (S : Finset ℕ) (hcard : S.card = 7)
     (hpos : ∀ x ∈ S, 1 ≤ x) (hmax : ∀ x ∈ S, x ≤ 11) (hsum : ∑ x ∈ S, x = 32) :
     S ∈ ({{1, 2, 3, 4, 5, 6, 11}, {1, 2, 3, 4, 5, 7, 10},
@@ -190,7 +190,7 @@ lemma seven_distinct_sum_32 (S : Finset ℕ) (hcard : S.card = 7)
       (fun s ↦ ∑ x ∈ s, x = 32) =
       {{1, 2, 3, 4, 5, 6, 11}, {1, 2, 3, 4, 5, 7, 10}, {1, 2, 3, 4, 5, 8, 9},
        {1, 2, 3, 4, 6, 7, 9}, {1, 2, 3, 5, 6, 7, 8}} := by
-    native_decide
+    decide
   have h : S ∈ ((Finset.Icc 1 11).powersetCard 7).filter
       (fun s ↦ ∑ x ∈ s, x = 32) :=
     Finset.mem_filter.mpr ⟨hmem, hsum⟩
@@ -290,9 +290,9 @@ problem imo1974_p4 :
   · -- Each of the four sets is realised by an explicit decomposition.
     simp only [solutions, Finset.mem_insert, Finset.mem_singleton] at hs
     rcases hs with rfl | rfl | rfl | rfl
-    · exact ⟨decomp₁, by native_decide, by native_decide, by native_decide⟩
-    · exact ⟨decomp₂, by native_decide, by native_decide, by native_decide⟩
-    · exact ⟨decomp₃, by native_decide, by native_decide, by native_decide⟩
-    · exact ⟨decomp₄, by native_decide, by native_decide, by native_decide⟩
+    · exact ⟨decomp₁, by decide, by decide, by decide⟩
+    · exact ⟨decomp₂, by decide, by decide, by decide⟩
+    · exact ⟨decomp₃, by decide, by decide, by decide⟩
+    · exact ⟨decomp₄, by decide, by decide, by decide⟩
 
 end Imo1974P4

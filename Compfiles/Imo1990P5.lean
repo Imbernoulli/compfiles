@@ -195,19 +195,20 @@ theorem not_pp1991 : ¬ IsPrimePow 1991 :=
   not_isPrimePow_of_dvd_of_dvd (a := 11) (b := 181) (by norm_num) (by norm_num) (by decide)
     (by decide) (by decide)
 
-theorem divisors30 : Nat.divisors 30 = {1, 2, 3, 5, 6, 10, 15, 30} := by native_decide
+theorem divisors30 : Nat.divisors 30 = {1, 2, 3, 5, 6, 10, 15, 30} := by decide
 theorem divisors60 : Nat.divisors 60 = {1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60} := by
-  native_decide
+  decide
 theorem divisors140 : Nat.divisors 140 = {1, 2, 4, 5, 7, 10, 14, 20, 28, 35, 70, 140} := by
-  native_decide
+  decide
 theorem divisors280 :
     Nat.divisors 280 = {1, 2, 4, 5, 7, 8, 10, 14, 20, 28, 35, 40, 56, 70, 140, 280} := by
-  native_decide
+  decide
 theorem divisors504 : Nat.divisors 504 =
     {1, 2, 3, 4, 6, 7, 8, 9, 12, 14, 18, 21, 24, 28, 36, 42, 56, 63, 72, 84, 126, 168,
       252, 504} := by
-  native_decide
-theorem divisors1991 : Nat.divisors 1991 = {1, 11, 181, 1991} := by native_decide
+  decide
+set_option maxRecDepth 10000 in
+theorem divisors1991 : Nat.divisors 1991 = {1, 11, 181, 1991} := by decide
 
 /-! ### A wins from `n₀ ≥ 8`
 

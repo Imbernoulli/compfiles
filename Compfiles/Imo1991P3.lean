@@ -54,27 +54,30 @@ def coprimeSet6 : Finset ℕ := {46, 57, 85, 91, 121}
 def bigUnion : Finset ℕ :=
   coprimeSet1 ∪ coprimeSet2 ∪ coprimeSet3 ∪ coprimeSet4 ∪ coprimeSet5 ∪ coprimeSet6
 
-lemma bigUnion_card : bigUnion.card = 88 := by native_decide
+set_option maxRecDepth 10000 in
+lemma bigUnion_card : bigUnion.card = 88 := by decide
 
-lemma bigUnion_subset : ∀ x ∈ bigUnion, x ∈ Finset.Icc 1 280 := by native_decide
+set_option maxRecDepth 10000 in
+lemma bigUnion_subset : ∀ x ∈ bigUnion, x ∈ Finset.Icc 1 280 := by decide
 
+set_option maxRecDepth 10000 in
 lemma coprimeSet1_pairwise :
-    ∀ a ∈ coprimeSet1, ∀ b ∈ coprimeSet1, a ≠ b → Nat.gcd a b = 1 := by native_decide
+    ∀ a ∈ coprimeSet1, ∀ b ∈ coprimeSet1, a ≠ b → Nat.gcd a b = 1 := by decide
 
 lemma coprimeSet2_pairwise :
-    ∀ a ∈ coprimeSet2, ∀ b ∈ coprimeSet2, a ≠ b → Nat.gcd a b = 1 := by native_decide
+    ∀ a ∈ coprimeSet2, ∀ b ∈ coprimeSet2, a ≠ b → Nat.gcd a b = 1 := by decide
 
 lemma coprimeSet3_pairwise :
-    ∀ a ∈ coprimeSet3, ∀ b ∈ coprimeSet3, a ≠ b → Nat.gcd a b = 1 := by native_decide
+    ∀ a ∈ coprimeSet3, ∀ b ∈ coprimeSet3, a ≠ b → Nat.gcd a b = 1 := by decide
 
 lemma coprimeSet4_pairwise :
-    ∀ a ∈ coprimeSet4, ∀ b ∈ coprimeSet4, a ≠ b → Nat.gcd a b = 1 := by native_decide
+    ∀ a ∈ coprimeSet4, ∀ b ∈ coprimeSet4, a ≠ b → Nat.gcd a b = 1 := by decide
 
 lemma coprimeSet5_pairwise :
-    ∀ a ∈ coprimeSet5, ∀ b ∈ coprimeSet5, a ≠ b → Nat.gcd a b = 1 := by native_decide
+    ∀ a ∈ coprimeSet5, ∀ b ∈ coprimeSet5, a ≠ b → Nat.gcd a b = 1 := by decide
 
 lemma coprimeSet6_pairwise :
-    ∀ a ∈ coprimeSet6, ∀ b ∈ coprimeSet6, a ≠ b → Nat.gcd a b = 1 := by native_decide
+    ∀ a ∈ coprimeSet6, ∀ b ∈ coprimeSet6, a ≠ b → Nat.gcd a b = 1 := by decide
 
 /-- If `P ∩ T` has at least `5` elements and the elements of `P` are pairwise coprime,
 then `T` contains five pairwise coprime numbers. -/
@@ -118,7 +121,7 @@ problem imo1991_p3 :
   refine ⟨?_, ?_⟩
   · -- every 217-element subset contains five pairwise coprime numbers
     intro T hTsub hTcard
-    have hScard : (Finset.Icc 1 280).card = 280 := by native_decide
+    have hScard : (Finset.Icc 1 280).card = 280 := by decide +kernel
     have hST : (Finset.Icc 1 280 \ T).card = 63 := by
       rw [Finset.card_sdiff_of_subset hTsub, hScard, hTcard]
     have hBT : 25 ≤ (bigUnion ∩ T).card := by
@@ -161,7 +164,7 @@ problem imo1991_p3 :
     intro n hn
     by_contra hcon
     push Not at hcon
-    have hbadcard : badSet.card = 216 := by native_decide
+    have hbadcard : badSet.card = 216 := by decide +kernel
     obtain ⟨T, hTsub, hTcard⟩ := Finset.exists_subset_card_eq (show n ≤ badSet.card by omega)
     have hTIcc : T ⊆ Finset.Icc 1 280 := fun x hx => (Finset.mem_filter.mp (hTsub hx)).1
     obtain ⟨U, hUT, hUcard, hUpair⟩ := hn T hTIcc hTcard
@@ -170,7 +173,7 @@ problem imo1991_p3 :
       fun x _ => Finset.mem_coe.mpr (smallPrimeFactor_mem x)
     have hcardlt : ({2, 3, 5, 7} : Finset ℕ).card < U.card := by
       rw [hUcard]
-      native_decide
+      decide
     obtain ⟨a, ha, b, hb, hab, hfab⟩ :=
       Finset.exists_ne_map_eq_of_card_lt_of_maps_to hcardlt hmaps
     have hcop : Nat.gcd a b = 1 := hUpair (Finset.mem_coe.mpr ha) (Finset.mem_coe.mpr hb) hab

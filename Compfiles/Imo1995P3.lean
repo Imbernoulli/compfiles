@@ -491,11 +491,155 @@ def C3B (s : Fin 10 → Bool) : Bool :=
   (List.finRange 5).any fun e =>
     dist5B a b c d e && quadB s a b c d && quadB s a b e d
 
+/-! ### Packing sign assignments as natural numbers for the finite check
+
+Kernel evaluation of the classification over all `2^10` assignments is only
+feasible when reading a sign is a cheap `Nat` operation, so assignments are
+packed into natural numbers below `2^10` and unpacked via `Nat.testBit`. -/
+
+/-- Unpack a natural number into a sign assignment: the `i`-th bit. -/
+def unpack (n : Nat) (i : Fin 10) : Bool := Nat.testBit n i.val
+
+/-- Pack a sign assignment into a natural number below `2^10` (Horner form). -/
+def pack (s : Fin 10 → Bool) : Nat :=
+  (s 0).toNat + 2 * ((s 1).toNat + 2 * ((s 2).toNat + 2 * ((s 3).toNat + 2 * ((s 4).toNat +
+    2 * ((s 5).toNat + 2 * ((s 6).toNat + 2 * ((s 7).toNat + 2 * ((s 8).toNat +
+    2 * (s 9).toNat))))))))
+
+lemma pack_lt (s : Fin 10 → Bool) : pack s < 1024 := by
+  have h0 : (s 0).toNat ≤ 1 := Bool.toNat_le _
+  have h1 : (s 1).toNat ≤ 1 := Bool.toNat_le _
+  have h2 : (s 2).toNat ≤ 1 := Bool.toNat_le _
+  have h3 : (s 3).toNat ≤ 1 := Bool.toNat_le _
+  have h4 : (s 4).toNat ≤ 1 := Bool.toNat_le _
+  have h5 : (s 5).toNat ≤ 1 := Bool.toNat_le _
+  have h6 : (s 6).toNat ≤ 1 := Bool.toNat_le _
+  have h7 : (s 7).toNat ≤ 1 := Bool.toNat_le _
+  have h8 : (s 8).toNat ≤ 1 := Bool.toNat_le _
+  have h9 : (s 9).toNat ≤ 1 := Bool.toNat_le _
+  simp only [pack]
+  omega
+
+lemma testBit_pack0 (b : Bool) (m : Nat) : Nat.testBit (b.toNat + 2 * m) 0 = b := by
+  have h1 : (b.toNat + 2 * m) % 2 = b.toNat % 2 := by omega
+  have h2 := Nat.testBit_zero (b.toNat + 2 * m)
+  rw [h1] at h2
+  rw [h2]
+  cases b <;> decide
+
+lemma testBit_packS (b : Bool) (m i : Nat) :
+    Nat.testBit (b.toNat + 2 * m) (i + 1) = Nat.testBit m i := by
+  have h1 : (b.toNat + 2 * m) / 2 = m := by
+    have hb : b.toNat ≤ 1 := Bool.toNat_le b
+    omega
+  have h2 := Nat.testBit_succ (b.toNat + 2 * m) i
+  rw [h1] at h2
+  exact h2
+
+lemma unpack_pack (s : Fin 10 → Bool) : unpack (pack s) = s := by
+  funext i
+  fin_cases i <;> simp only [unpack, pack]
+  · exact testBit_pack0 (s 0) _
+  · exact (testBit_packS (s 0) _ 0).trans (testBit_pack0 (s 1) _)
+  · exact (testBit_packS (s 0) _ 1).trans ((testBit_packS (s 1) _ 0).trans
+      (testBit_pack0 (s 2) _))
+  · exact (testBit_packS (s 0) _ 2).trans ((testBit_packS (s 1) _ 1).trans
+      ((testBit_packS (s 2) _ 0).trans (testBit_pack0 (s 3) _)))
+  · exact (testBit_packS (s 0) _ 3).trans ((testBit_packS (s 1) _ 2).trans
+      ((testBit_packS (s 2) _ 1).trans ((testBit_packS (s 3) _ 0).trans
+      (testBit_pack0 (s 4) _))))
+  · exact (testBit_packS (s 0) _ 4).trans ((testBit_packS (s 1) _ 3).trans
+      ((testBit_packS (s 2) _ 2).trans ((testBit_packS (s 3) _ 1).trans
+      ((testBit_packS (s 4) _ 0).trans (testBit_pack0 (s 5) _)))))
+  · exact (testBit_packS (s 0) _ 5).trans ((testBit_packS (s 1) _ 4).trans
+      ((testBit_packS (s 2) _ 3).trans ((testBit_packS (s 3) _ 2).trans
+      ((testBit_packS (s 4) _ 1).trans ((testBit_packS (s 5) _ 0).trans
+      (testBit_pack0 (s 6) _))))))
+  · exact (testBit_packS (s 0) _ 6).trans ((testBit_packS (s 1) _ 5).trans
+      ((testBit_packS (s 2) _ 4).trans ((testBit_packS (s 3) _ 3).trans
+      ((testBit_packS (s 4) _ 2).trans ((testBit_packS (s 5) _ 1).trans
+      ((testBit_packS (s 6) _ 0).trans (testBit_pack0 (s 7) _)))))))
+  · exact (testBit_packS (s 0) _ 7).trans ((testBit_packS (s 1) _ 6).trans
+      ((testBit_packS (s 2) _ 5).trans ((testBit_packS (s 3) _ 4).trans
+      ((testBit_packS (s 4) _ 3).trans ((testBit_packS (s 5) _ 2).trans
+      ((testBit_packS (s 6) _ 1).trans ((testBit_packS (s 7) _ 0).trans
+      (testBit_pack0 (s 8) _))))))))
+  · exact (testBit_packS (s 0) _ 8).trans ((testBit_packS (s 1) _ 7).trans
+      ((testBit_packS (s 2) _ 6).trans ((testBit_packS (s 3) _ 5).trans
+      ((testBit_packS (s 4) _ 4).trans ((testBit_packS (s 5) _ 3).trans
+      ((testBit_packS (s 6) _ 2).trans ((testBit_packS (s 7) _ 1).trans
+      ((testBit_packS (s 8) _ 0).trans (testBit_pack0 (s 9) 0)))))))))
+
+/-- The Boolean checked over all packed sign assignments. -/
+def checkSigns (n : Nat) : Bool :=
+  !(pluckerBB (unpack n)) || !(acycBB (unpack n)) ||
+    (C1B (unpack n) || C2B (unpack n) || C3B (unpack n))
+
+/-- The finite classification, checked over all `2^10` packed sign
+assignments.  The check is split into chunks of `128` assignments to bound
+the memory needed by each kernel reduction. -/
+lemma sign_classify_chunk0 :
+    (List.range 128).all (fun k => checkSigns (128 * 0 + k)) = true := by
+  decide +kernel
+
+lemma sign_classify_chunk1 :
+    (List.range 128).all (fun k => checkSigns (128 * 1 + k)) = true := by
+  decide +kernel
+
+lemma sign_classify_chunk2 :
+    (List.range 128).all (fun k => checkSigns (128 * 2 + k)) = true := by
+  decide +kernel
+
+lemma sign_classify_chunk3 :
+    (List.range 128).all (fun k => checkSigns (128 * 3 + k)) = true := by
+  decide +kernel
+
+lemma sign_classify_chunk4 :
+    (List.range 128).all (fun k => checkSigns (128 * 4 + k)) = true := by
+  decide +kernel
+
+lemma sign_classify_chunk5 :
+    (List.range 128).all (fun k => checkSigns (128 * 5 + k)) = true := by
+  decide +kernel
+
+lemma sign_classify_chunk6 :
+    (List.range 128).all (fun k => checkSigns (128 * 6 + k)) = true := by
+  decide +kernel
+
+lemma sign_classify_chunk7 :
+    (List.range 128).all (fun k => checkSigns (128 * 7 + k)) = true := by
+  decide +kernel
+
+theorem sign_classify_packed : (List.range 1024).all checkSigns = true := by
+  apply List.all_eq_true.mpr
+  intro n hn
+  have hn' : n < 1024 := List.mem_range.mp hn
+  have hq : n / 128 < 8 := by omega
+  have hr : n % 128 < 128 := by omega
+  have he : 128 * (n / 128) + n % 128 = n := by omega
+  have hsel : ∀ q, q < 8 → checkSigns (128 * q + n % 128) = true := by
+    intro q hq'
+    interval_cases q
+    · exact List.all_eq_true.mp sign_classify_chunk0 _ (List.mem_range.mpr hr)
+    · exact List.all_eq_true.mp sign_classify_chunk1 _ (List.mem_range.mpr hr)
+    · exact List.all_eq_true.mp sign_classify_chunk2 _ (List.mem_range.mpr hr)
+    · exact List.all_eq_true.mp sign_classify_chunk3 _ (List.mem_range.mpr hr)
+    · exact List.all_eq_true.mp sign_classify_chunk4 _ (List.mem_range.mpr hr)
+    · exact List.all_eq_true.mp sign_classify_chunk5 _ (List.mem_range.mpr hr)
+    · exact List.all_eq_true.mp sign_classify_chunk6 _ (List.mem_range.mpr hr)
+    · exact List.all_eq_true.mp sign_classify_chunk7 _ (List.mem_range.mpr hr)
+  have h := hsel (n / 128) hq
+  rwa [he] at h
+
 /-- The finite classification, checked over all `2^10` sign assignments. -/
 theorem sign_classify_bool :
     ∀ s ∈ (Finset.univ : Finset (Fin 10 → Bool)),
       (!(pluckerBB s) || !(acycBB s) || (C1B s || C2B s || C3B s)) = true := by
-  native_decide
+  intro s _
+  have h : (!(pluckerBB (unpack (pack s))) || !(acycBB (unpack (pack s))) ||
+      (C1B (unpack (pack s)) || C2B (unpack (pack s)) || C3B (unpack (pack s)))) = true :=
+    (List.all_eq_true.mp sign_classify_packed) (pack s) (List.mem_range.mpr (pack_lt s))
+  rwa [unpack_pack] at h
 
 /-- `Prop` form of `relB`. -/
 @[reducible]

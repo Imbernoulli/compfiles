@@ -155,7 +155,7 @@ lemma build_region_all :
     ∀ a ∈ Finset.range 19, ∀ b ∈ Finset.range 5,
       ((a : ℤ) - 9 - ((b : ℤ) - 2)) % 3 = 0 →
       (build 8 ((a : ℤ) - 9) ((b : ℤ) - 2)).isSome := by
-  native_decide
+  decide
 
 lemma build_region_some (u v : ℤ) (hu : -9 ≤ u ∧ u ≤ 9) (hv : -2 ≤ v ∧ v ≤ 2)
     (h3 : (u - v) % 3 = 0) : ∃ ds, build 8 u v = some ds := by

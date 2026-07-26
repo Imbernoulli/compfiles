@@ -128,32 +128,32 @@ lemma hole_translate {s : Finset (ℤ × ℤ)} (hs : s.Nonempty) (t : ℤ × ℤ
 
 lemma shape_bounds : ∀ σ ∈ hookShapes, ∀ c ∈ σ,
     0 ≤ c.1 ∧ c.1 ≤ 2 ∧ 0 ≤ c.2 ∧ c.2 ≤ 2 := by
-  native_decide
+  decide
 
 lemma shape_extremes : ∀ σ ∈ hookShapes,
     (∃ c ∈ σ, c.1 = 0) ∧ (∃ c ∈ σ, c.1 = 2) ∧ (∃ c ∈ σ, c.2 = 0) ∧ (∃ c ∈ σ, c.2 = 2) := by
-  native_decide
+  decide
 
 lemma hole_shape : ∀ σ ∈ hookShapes, hole σ = (1, 1) := by
-  native_decide
+  decide
 
 lemma hole_not_mem : ∀ σ ∈ hookShapes, hole σ ∉ σ := by
-  native_decide
+  decide
 
 lemma card_hook : ∀ σ ∈ hookShapes, σ.card = 6 := by
-  native_decide
+  decide
 
 /-- Every hook orientation contains cells two apart in some row. -/
 lemma hook_row3 : ∀ σ ∈ hookShapes,
     ((σ.filter fun c => c.2 = 0).image Prod.fst ∩
       (σ.filter fun c => c.2 = 2).image Prod.fst).card ≠ 0 := by
-  native_decide
+  decide
 
 /-- Every hook orientation contains cells two apart in some column. -/
 lemma hook_col3 : ∀ σ ∈ hookShapes,
     ((σ.filter fun c => c.1 = 0).image Prod.snd ∩
       (σ.filter fun c => c.1 = 2).image Prod.snd).card ≠ 0 := by
-  native_decide
+  decide
 
 /-- The key local fact. Suppose two disjoint hooks are such that the hole of
 the first one is covered by the second one, and moreover the hole of the
@@ -173,7 +173,7 @@ lemma pair_check :
             0 < (tileShapes.filter fun τ =>
               σ₁ ∪ (σ₂.image (· + t)) =
                 τ.image (· + (lo (σ₁ ∪ (σ₂.image (· + t))) - lo τ))).card := by
-  native_decide
+  decide +kernel
 
 lemma tileable_empty : Tileable ∅ := ⟨∅, by simp, by simp, by simp⟩
 
@@ -201,7 +201,7 @@ the eight symmetries of the square). -/
 lemma hookShapes_swap : ∀ σ ∈ hookShapes,
     0 < (hookShapes.filter fun σ' =>
       σ.image Prod.swap = σ'.image (· + (lo (σ.image Prod.swap) - lo σ'))).card := by
-  native_decide
+  decide
 
 lemma isHook_swap {s : Finset (ℤ × ℤ)} (h : IsHook s) : IsHook (s.image Prod.swap) := by
   obtain ⟨σ, hσ, t, rfl⟩ := h
@@ -419,18 +419,18 @@ lemma tileable_transpose {m n : ℕ} (h : Tileable (rect m n)) : Tileable (rect 
 /-- Two hooks tile a `3 × 4` rectangle. -/
 lemma tileable_3_4 : Tileable (rect 3 4) := by
   have h1 : IsHook ({(0, 0), (0, 1), (0, 2), (1, 0), (1, 2), (2, 0)} : Finset (ℤ × ℤ)) := by
-    refine ⟨{(0, 0), (0, 1), (0, 2), (1, 0), (1, 2), (2, 0)}, by native_decide, (0, 0), ?_⟩
-    native_decide
+    refine ⟨{(0, 0), (0, 1), (0, 2), (1, 0), (1, 2), (2, 0)}, by decide, (0, 0), ?_⟩
+    decide
   have h2 : IsHook ({(0, 3), (1, 1), (1, 3), (2, 1), (2, 2), (2, 3)} : Finset (ℤ × ℤ)) := by
-    refine ⟨{(0, 2), (1, 0), (1, 2), (2, 0), (2, 1), (2, 2)}, by native_decide, (0, 1), ?_⟩
-    native_decide
+    refine ⟨{(0, 2), (1, 0), (1, 2), (2, 0), (2, 1), (2, 2)}, by decide, (0, 1), ?_⟩
+    decide
   refine ⟨{ {(0, 0), (0, 1), (0, 2), (1, 0), (1, 2), (2, 0)},
             {(0, 3), (1, 1), (1, 3), (2, 1), (2, 2), (2, 3)} }, ?_, ?_, ?_⟩
   · intro H hH
     fin_cases hH <;> assumption
   · intro H₁ hH₁ H₂ hH₂ hne
-    fin_cases hH₁ <;> fin_cases hH₂ <;> first | contradiction | native_decide
-  · native_decide
+    fin_cases hH₁ <;> fin_cases hH₂ <;> first | contradiction | decide
+  · decide
 
 /-- Every natural number other than `1, 2, 5` is a sum of `3`s and `4`s. -/
 lemma nat_3_4 {n : ℕ} (h : n ≠ 1 ∧ n ≠ 2 ∧ n ≠ 5) : ∃ a b, n = 3 * a + 4 * b := by
@@ -812,7 +812,7 @@ lemma tile_parities : ∀ τ ∈ tileShapes, ∀ t : ℤ × ℤ,
   fin_cases hτ <;>
     rcases hk2 with hk2 | hk2 | hk2 | hk2 <;>
     rcases hk1 with hk1 | hk1 | hk1 | hk1 <;>
-    rw [hk2, hk1] <;> native_decide
+    rw [hk2, hk1] <;> decide
 
 lemma rect_filter_snd_card (m n : ℕ) :
     ((rect m n).filter fun c => 4 ∣ c.2).card =
@@ -1052,14 +1052,14 @@ def cornerCell (τ₀ : Finset (ℤ × ℤ)) : ℤ × ℤ :=
   else if (0, 2) ∉ τ₀ then (0, 2) else (0, 1)
 
 lemma cornerCell_not_mem : ∀ τ₀ ∈ tileShapes, (0, 0) ∈ τ₀ → cornerCell τ₀ ∉ τ₀ := by
-  native_decide
+  decide
 
 lemma cornerCell_snd : ∀ τ₀ ∈ tileShapes, (cornerCell τ₀).2 ≤ 2 := by
-  native_decide
+  decide
 
 lemma cornerCell_val : ∀ τ₀ ∈ tileShapes,
     cornerCell τ₀ ∈ ({(3, 0), (4, 0), (0, 2), (0, 1)} : Finset (ℤ × ℤ)) := by
-  native_decide
+  decide
 
 /-- The corner propagation check: no tile covering `cornerCell τ₀` within
 the bounds of a five-row strip is disjoint from the corner tile `τ₀`. -/
@@ -1068,14 +1068,14 @@ lemma corner_check :
       ∀ τ' ∈ tileShapes, ∀ v ∈ (τ'.image fun c => cornerCell τ₀ - c),
         (∀ cell ∈ τ'.image (· + v), 0 ≤ cell.1 ∧ cell.1 < 5 ∧ 0 ≤ cell.2 ∧ cell.2 < 6) →
         ¬ Disjoint (τ'.image (· + v)) τ₀ := by
-  native_decide
+  decide +kernel
 
 lemma tile_bounds : ∀ τ ∈ tileShapes, ∀ c ∈ τ,
     0 ≤ c.1 ∧ c.1 ≤ 3 ∧ 0 ≤ c.2 ∧ c.2 ≤ 3 := by
-  native_decide
+  decide
 
 lemma tile_min : ∀ τ ∈ tileShapes, (∃ c ∈ τ, c.1 = 0) ∧ (∃ c ∈ τ, c.2 = 0) := by
-  native_decide
+  decide
 
 /-- A `5 × n` rectangle cannot be tiled. -/
 lemma not_tileable_5 (n : ℕ) (hn : 0 < n) : ¬ Tileable (rect 5 n) := by
