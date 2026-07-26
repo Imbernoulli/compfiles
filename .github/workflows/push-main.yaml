@@ -46,32 +46,6 @@ jobs:
         if: steps.restore-build-cache.outputs.cache-hit != 'true'
         run: lake exe cache get
 
-      - name: free disk space and add swap
-        run: |
-          df -h /
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL 2>/dev/null || true
-          sudo docker image prune -a -f 2>/dev/null || true
-          df -h /
-          FREE_KB=$(df --output=avail / | tail -1 | tr -d ' ')
-          FREE_GB=$(( FREE_KB / 1024 / 1024 ))
-          SIZE_GB=$(( FREE_GB > 55 ? 40 : (FREE_GB > 20 ? FREE_GB - 12 : 8) ))
-          echo "Available disk: ${FREE_GB}G; trying ${SIZE_GB}G swap"
-          if sudo fallocate -l ${SIZE_GB}G /swapfile 2>/dev/null || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SIZE_GB * 1024)) 2>/dev/null; then
-            sudo chmod 600 /swapfile
-            if sudo mkswap /swapfile >/dev/null && sudo swapon /swapfile; then
-              echo "swap enabled: ${SIZE_GB}G"
-            else
-              echo "WARNING: mkswap/swapon failed; continuing without swap"
-              sudo rm -f /swapfile
-            fi
-          else
-            echo "WARNING: could not allocate swapfile; continuing without swap"
-            sudo rm -f /swapfile
-          fi
-          sudo sysctl vm.swappiness=10 2>/dev/null || true
-          free -h
-          true
-
       - name: lake build
         id: build
         run: |
