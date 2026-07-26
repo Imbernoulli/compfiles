@@ -18,7 +18,7 @@ of P are rational numbers. Prove that the lengths of all sides of all
 polygons in the dissection are also rational numbers.
 -/
 
-notation "Pt" => EuclideanSpace ℝ (Fin 2)
+local notation "Pt" => EuclideanSpace ℝ (Fin 2)
 
 namespace Usa2003P2
 
