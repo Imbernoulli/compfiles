@@ -58,13 +58,17 @@ jobs:
         run: |
           set -o pipefail
           echo "Starting build at $(date +'%T')"
-          # Build every problem module one at a time to bound peak memory
-          # to a single lean process (parallel builds of large files get
-          # OOM-killed on the 16GB runner). Cached modules are near-instant.
+          # Build large problem files with limited parallelism (2 at a time)
+          # to bound peak memory, then build everything else with lake's
+          # normal parallelism. Cached modules are near-instant.
           (
-          for m in $(grep -oE '^import (Compfiles\.[A-Za-z0-9]+)' Compfiles.lean | awk '{print $2}' | sort); do
-            lake build "+$m" || { echo "FAILED: $m"; exit 1; }
-          done
+          grep -oE '^import (Compfiles\.[A-Za-z0-9]+)' Compfiles.lean | awk '{print $2}' | sort > /tmp/all_modules.txt
+          find Compfiles -name '*.lean' -size +60k | sed 's|Compfiles/|Compfiles.|; s|/|.|g; s|\.lean$||' | sort > /tmp/big_modules.txt
+          comm -23 /tmp/all_modules.txt /tmp/big_modules.txt > /tmp/small_modules.txt
+          echo "big: $(wc -l < /tmp/big_modules.txt), small: $(wc -l < /tmp/small_modules.txt)"
+          cat /tmp/big_modules.txt | xargs -P2 -I{} sh -c 'lake build "+{}" || { echo "FAILED: {}"; exit 1; }' || exit 1
+          echo "Big modules done at $(date +'%T')"
+          cat /tmp/small_modules.txt | xargs -P4 -I{} sh -c 'lake build "+{}" || { echo "FAILED: {}"; exit 1; }' || exit 1
           echo "All problem modules built at $(date +'%T'); building remaining targets"
           lake build
           ) 2>&1 | tee /tmp/build.log
