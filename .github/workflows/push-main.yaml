@@ -48,12 +48,12 @@ jobs:
 
       - name: free disk space and add swap
         run: |
+          {
+          set -x
           df -h /
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL 2>/dev/null || true
           sudo docker image prune -a -f 2>/dev/null || true
           df -h /
-          # A few problem files need >16GB RAM to elaborate; give the runner
-          # breathing room with a swapfile sized to fit the freed disk.
           FREE_KB=$(df --output=avail / | tail -1 | tr -d ' ')
           FREE_GB=$(( FREE_KB / 1024 / 1024 ))
           SIZE_GB=$(( FREE_GB > 30 ? 20 : (FREE_GB > 14 ? FREE_GB - 10 : 4) ))
@@ -72,6 +72,7 @@ jobs:
           fi
           sudo sysctl vm.swappiness=10 2>/dev/null || true
           free -h
+          } 2>&1 | tee /tmp/build.log
           true
 
       - name: lake build
@@ -94,7 +95,7 @@ jobs:
           cat /tmp/small_modules.txt | xargs -P4 -I{} sh -c 'lake build "+{}" || { echo "FAILED: {}"; exit 1; }' || exit 1
           echo "All problem modules built at $(date +'%T'); building remaining targets"
           lake build
-          ) 2>&1 | tee /tmp/build.log
+          ) 2>&1 | tee -a /tmp/build.log
           result_run1=${PIPESTATUS[0]}
           echo "Complete at $(date +'%T'); return value $result_run1"
           exit $result_run1
