@@ -51,7 +51,14 @@ jobs:
         run: |
           set -o pipefail
           echo "Starting build at $(date +'%T')"
-          lake build -j2
+          # Build large problem files one at a time to bound peak memory
+          # (a single big lean process can exceed the runner's RAM when
+          # several run in parallel), then build the rest normally.
+          for f in $(find Compfiles -name '*.lean' -size +60k | sed 's|Compfiles/|Compfiles.|; s|/|.|g; s|\.lean$||' | sort); do
+            echo "=== big module: $f"
+            lake build "+$f" || { echo "FAILED: $f"; exit 1; }
+          done
+          lake build
           result_run1=$?
           echo "Complete at $(date +'%T'); return value $result_run1"
           exit $result_run1
