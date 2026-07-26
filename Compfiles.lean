@@ -631,6 +631,7 @@ import Compfiles.Usa2008P5
 import Compfiles.Usa2008P6
 import Compfiles.Usa2009P1
 import Compfiles.Usa2009P2
+import Compfiles.Usa2009P3
 import Compfiles.Usa2009P4
 import Compfiles.Usa2009P5
 import Compfiles.Usa2009P6
