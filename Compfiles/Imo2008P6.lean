@@ -4011,7 +4011,7 @@ Proved so far (no `sorry`):
   chord-radius identity `⟪X -ᵥ T, ω.center -ᵥ T⟫ = ‖X -ᵥ T‖ ^ 2 / 2`
   (computational content of "the sphere lies on one side of a tangent
   line") — the primitive for all side-propagation arguments.
-- Incircle touchpoint package (proved by a subagent, merged):
+- Incircle touchpoint package (proved):
   `dist_point_touchpoint_empty_eq`, `touchpoint_dist_eqs`,
   `touchpoint_dist_eqs_mk`, `points_mk_zero`, `points_mk_two`,
   `wbtw_touchpoint_insphere`, `dist_touchpoint_insphere_left`
@@ -4027,7 +4027,7 @@ Proved so far (no `sorry`):
   the orthogonal basis `{u, J u}` — the workhorse for coefficient
   computations (proved via the Lagrange identity
   `Orientation.inner_sq_add_areaForm_sq`).
-- `inner_neg_of_areaForm_mul` (proved by a subagent, merged): the wedge
+- `inner_neg_of_areaForm_mul` (proved): the wedge
   computation — if `ωF x u * ωF u v = r‖u‖|ωF u v|` and
   `ωF x v * ωF u v = -r‖v‖|ωF u v|` with `r > 0`, `u ≠ 0`, `ωF u v ≠ 0`,
   then `⟪x, u⟫ < 0`. Applied with `x := ω.center -ᵥ D`, `u := A -ᵥ D`
@@ -4045,7 +4045,7 @@ Proved so far (no `sorry`):
 - **Step 1 COMPLETE — the external Pitot theorem** (`external_pitot`):
   `dist B A + dist A D = dist C B + dist C D`. Built from:
   `areaForm_center_left` / `areaForm_center_right` (the two side-chain
-  lemmas; the former by a subagent), `inner_neg_of_areaForm_mul`
+  lemmas), `inner_neg_of_areaForm_mul`
   instantiated twice (wedge at `D` on both sides),
   `wbtw_of_projection_beyond` (touchpoints `U, W` lie beyond `D`), and
   the length chase with `Wbtw.dist_add_dist` and mathlib's
@@ -4061,7 +4061,7 @@ Proved so far (no `sorry`):
   `Simplex.sSameSide_excenter_singleton_point`,
   `sOppSide_excenter_singleton_point`) into `areaForm` sign relations
   and back (needed for `CommonExternalTangent`'s `SSameSide`).
-- **Excircle touchpoint package** (proved by a subagent, merged):
+- **Excircle touchpoint package** (proved):
   `dist_point_touchpoint_singleton_eq`, `touchpoint_exsphere_dist_eqs`,
   `dist_touchpoint_exsphere_left`
   (`AT' = (BC + CA - AB)/2` for the B-excircle touchpoint `T'` on `AC`),
@@ -4075,7 +4075,7 @@ Proved so far (no `sorry`):
   `smul_of_areaForm_pattern` (two centers with the same signed-normal
   pattern are proportional, with an overall sign flipping the ratio),
   `areaForm_ne_zero_of_affineIndependent`, and the helper
-  `areaForm_center_mul_areaForm_of_isTangentAt` (by a subagent:
+  `areaForm_center_mul_areaForm_of_isTangentAt` (
   magnitude × sign for a tangent circle with center on a given side).
 - **Signed normal components of all relevant centers**:
   `areaForm_center_B_left/right` (for `ω.center` at `B`, sign chain via
@@ -4100,7 +4100,7 @@ Proved so far (no `sorry`):
 - **The normal relation** `touchpoint_vsub_incenter_neg_smul`:
   `T -ᵥ O2 = -(r2/r1) • (P -ᵥ O1)` (the two incircle touchpoint offsets
   are antiparallel — the incenters lie on opposite sides of `AC`).
-- **Collinearities (subagent)**: `excenter_vsub_touchpoint_eq_smul`
+- **Collinearities**: `excenter_vsub_touchpoint_eq_smul`
   (`E_B -ᵥ T' = (r_B/r1) • (P -ᵥ O1)`, the classical lemma R2),
   `collinear_B_Q_T : T -ᵥ B = (r_B/r1) • ((O1 -ᵥ P) + (O1 -ᵥ B))` and
   `collinear_D_S_P : P -ᵥ D = (r_D/r2) • ((O2 -ᵥ T) + (O2 -ᵥ D))`.
@@ -4112,7 +4112,7 @@ Proved so far (no `sorry`):
   `Kpoint_vsub_D : K -ᵥ D = -(R/r2) • ((O2 -ᵥ T) + (O2 -ᵥ D))`
   (built on `center_vsub_B_eq_smul`, `center_vsub_D_eq_neg_smul`, and
   `touchpoint_vsub_incenter_neg_smul`).
-- **Step 5 COMPLETE — K is the exsimilicenter** (subagent, merged):
+- **Step 5 — K is the exsimilicenter**:
   `Kpoint_exsimilicenter_spec : r1 ≠ r2 ∧ K -ᵥ O2 = (r2/r1) • (K -ᵥ O1) ∧
   r1 < dist K O1`. Built from `span_singleton_eq_span_singleton_of_smul`,
   `insphere_tangent_inner_package` (the step-A vector/inner-product
@@ -4124,7 +4124,7 @@ Proved so far (no `sorry`):
   `antipode_lines_ne` (`line QT' ≠ line PS`), and uniqueness of the
   intersection of two distinct lines (`AffineSubspace.ext_of_direction_eq`).
 - **Step 6 COMPLETE — external tangents through the exsimilicenter**
-  (subagent, merged): `external_tangents_through_exsimilicenter` (two
+  `external_tangents_through_exsimilicenter` (two
   distinct `CommonExternalTangent` lines of `⟨O1, r1⟩`, `⟨O2, r2⟩` through
   `E`, given `E -ᵥ O2 = (r2/r1) • (E -ᵥ O1)` and `r1 < dist E O1`), built
   from `exsimilicenter_tangent_line` (the `X±` construction: tangency at
@@ -4480,7 +4480,4 @@ Let `P` = touchpoint of ω1 with `AC`, `T` = touchpoint of ω2 with `AC`,
   identity for strict Cauchy–Schwarz).
 - `vsub_add_vsub_cancel a b c : (a -ᵥ b) + (b -ᵥ c) = a -ᵥ c` (mind the
   direction; `.symm` often needed).
-- No git operations per instructions; check with
-  `/home/lvbohan/compfiles-wt/check.sh
-  /home/lvbohan/compfiles-wt/Imo2008P6/Compfiles/Imo2008P6.lean`.
 -/

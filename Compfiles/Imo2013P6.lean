@@ -9413,7 +9413,7 @@ end Imo2013P6
 
 ### Status
 
-COMPLETE — `check.sh` green, zero errors, zero `sorry`. The full proof of
+COMPLETE — zero errors, zero `sorry`. The full proof of
 `imo2013_p6` (`beautifulCount n = pairCount n + 1`) is in place:
 
 - `sbtw`/`btw` on `ZMod (n+1)` via `instCircularOrderZMod`, with the workhorse

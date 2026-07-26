@@ -856,7 +856,7 @@ end Imo2016P1
 # PROGRESS NOTES — status: COMPLETE
 
 The bridge (`geo_main`) and the faithful statement (`imo2016_p1`) are proved;
-`check.sh` passes with no errors and no warnings (and no `sorry`).
+The file compiles with no errors and no warnings (and no `sorry`).
 
 Architecture (bottom-up):
 * `concurrent_aux`: algebraic engine — for `c s : ℝ` with `c ≠ 0`,

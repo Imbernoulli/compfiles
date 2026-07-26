@@ -5239,9 +5239,9 @@ end Imo2016P6Geo
 The geometric layer is now complete: the schedule `SegConf.schedule` is
 built and all `FrogSchedule` fields are verified, and the two faithful
 geometric statements `imo2016_p6_part_a_geo` / `imo2016_p6_part_b_geo`
-are proved. Everything below is check.sh green, zero sorry.
+are proved.
 
-## What is proved (all in namespace `Imo2016P6Geo`, check.sh green, zero sorry)
+## What is proved (all in namespace `Imo2016P6Geo`)
 
 G0 — 2D determinant algebra:
   `detv` (scalar cross product on ℝ × ℝ) with add/smul/neg/sub/antisymmetry
