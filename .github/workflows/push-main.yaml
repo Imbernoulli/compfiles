@@ -46,26 +46,49 @@ jobs:
         if: steps.restore-build-cache.outputs.cache-hit != 'true'
         run: lake exe cache get
 
-      - name: free disk space
+      - name: free disk space and add swap
         run: |
           df -h /
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL 2>/dev/null || true
           sudo docker image prune -a -f 2>/dev/null || true
           df -h /
+          # A few problem files need >16GB RAM to elaborate; give the runner
+          # breathing room with a swapfile sized to fit the freed disk.
+          FREE_KB=$(df --output=avail / | tail -1 | tr -d ' ')
+          FREE_GB=$(( FREE_KB / 1024 / 1024 ))
+          SIZE_GB=$(( FREE_GB > 30 ? 20 : (FREE_GB > 14 ? FREE_GB - 10 : 4) ))
+          echo "Available disk: ${FREE_GB}G; trying ${SIZE_GB}G swap"
+          if sudo fallocate -l ${SIZE_GB}G /swapfile 2>/dev/null || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SIZE_GB * 1024)) 2>/dev/null; then
+            sudo chmod 600 /swapfile
+            if sudo mkswap /swapfile >/dev/null 2>&1 && sudo swapon /swapfile; then
+              echo "swap enabled: ${SIZE_GB}G"
+            else
+              echo "WARNING: mkswap/swapon failed; continuing without swap"
+              sudo rm -f /swapfile
+            fi
+          else
+            echo "WARNING: could not allocate swapfile; continuing without swap"
+            sudo rm -f /swapfile
+          fi
+          sudo sysctl vm.swappiness=10 2>/dev/null || true
+          free -h
+          true
 
       - name: lake build
         id: build
         run: |
           set -o pipefail
           echo "Starting build at $(date +'%T')"
-          # Build large problem files with limited parallelism (2 at a time)
-          # to bound peak memory, then build everything else with lake's
-          # normal parallelism. Cached modules are near-instant.
+          # Memory monsters (>200KB) one at a time, big files (60-200KB) two
+          # at a time, everything else four at a time.
           (
           grep -oE '^import (Compfiles\.[A-Za-z0-9]+)' Compfiles.lean | awk '{print $2}' | sort > /tmp/all_modules.txt
-          find Compfiles -name '*.lean' -size +60k | sed 's|Compfiles/|Compfiles.|; s|/|.|g; s|\.lean$||' | sort > /tmp/big_modules.txt
-          comm -23 /tmp/all_modules.txt /tmp/big_modules.txt > /tmp/small_modules.txt
-          echo "big: $(wc -l < /tmp/big_modules.txt), small: $(wc -l < /tmp/small_modules.txt)"
+          find Compfiles -name '*.lean' -size +200k | sed 's|Compfiles/|Compfiles.|; s|/|.|g; s|\.lean$||' | sort > /tmp/huge_modules.txt
+          find Compfiles -name '*.lean' -size +60k -size -200k | sed 's|Compfiles/|Compfiles.|; s|/|.|g; s|\.lean$||' | sort > /tmp/big_modules.txt
+          comm -23 /tmp/all_modules.txt <(cat /tmp/huge_modules.txt /tmp/big_modules.txt | sort) > /tmp/small_modules.txt
+          echo "huge: $(wc -l < /tmp/huge_modules.txt), big: $(wc -l < /tmp/big_modules.txt), small: $(wc -l < /tmp/small_modules.txt)"
+          cat /tmp/huge_modules.txt | xargs -P1 -I{} sh -c 'lake build "+{}" || { echo "FAILED: {}"; exit 1; }' || exit 1
+          echo "Huge modules done at $(date +'%T')"
           cat /tmp/big_modules.txt | xargs -P2 -I{} sh -c 'lake build "+{}" || { echo "FAILED: {}"; exit 1; }' || exit 1
           echo "Big modules done at $(date +'%T')"
           cat /tmp/small_modules.txt | xargs -P4 -I{} sh -c 'lake build "+{}" || { echo "FAILED: {}"; exit 1; }' || exit 1
