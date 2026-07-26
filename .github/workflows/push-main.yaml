@@ -55,13 +55,22 @@ jobs:
           FREE_KB=$(df --output=avail / | tail -1 | tr -d ' ')
           FREE_GB=$(( FREE_KB / 1024 / 1024 ))
           SIZE_GB=$(( FREE_GB > 55 ? 40 : (FREE_GB > 20 ? FREE_GB - 12 : 8) ))
-          echo "Available disk: ${FREE_GB}G; adding ${SIZE_GB}G swap"
-          sudo fallocate -l ${SIZE_GB}G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SIZE_GB * 1024))
-          sudo chmod 600 /swapfile
-          sudo mkswap /swapfile
-          sudo swapon /swapfile
-          sudo sysctl vm.swappiness=10
+          echo "Available disk: ${FREE_GB}G; trying ${SIZE_GB}G swap"
+          if sudo fallocate -l ${SIZE_GB}G /swapfile 2>/dev/null || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SIZE_GB * 1024)) 2>/dev/null; then
+            sudo chmod 600 /swapfile
+            if sudo mkswap /swapfile >/dev/null && sudo swapon /swapfile; then
+              echo "swap enabled: ${SIZE_GB}G"
+            else
+              echo "WARNING: mkswap/swapon failed; continuing without swap"
+              sudo rm -f /swapfile
+            fi
+          else
+            echo "WARNING: could not allocate swapfile; continuing without swap"
+            sudo rm -f /swapfile
+          fi
+          sudo sysctl vm.swappiness=10 2>/dev/null || true
           free -h
+          true
 
       - name: lake build
         id: build
