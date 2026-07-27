@@ -58,17 +58,17 @@ jobs:
           FREE_GB=$(( FREE_KB / 1024 / 1024 ))
           SIZE_GB=$(( FREE_GB > 30 ? 20 : (FREE_GB > 14 ? FREE_GB - 10 : 4) ))
           echo "Available disk: ${FREE_GB}G; trying ${SIZE_GB}G swap"
-          if sudo fallocate -l ${SIZE_GB}G /swapfile 2>/dev/null || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SIZE_GB * 1024)) 2>/dev/null; then
+          if sudo fallocate -l ${SIZE_GB}G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SIZE_GB * 1024)); then
             sudo chmod 600 /swapfile
-            if sudo mkswap /swapfile >/dev/null 2>&1 && sudo swapon /swapfile; then
+            if sudo mkswap /swapfile && sudo swapon /swapfile; then
               echo "swap enabled: ${SIZE_GB}G"
             else
               echo "WARNING: mkswap/swapon failed; continuing without swap"
-              sudo rm -f /swapfile
+              sudo rm -f /swapfile || true
             fi
           else
             echo "WARNING: could not allocate swapfile; continuing without swap"
-            sudo rm -f /swapfile
+            sudo rm -f /swapfile || true
           fi
           sudo sysctl vm.swappiness=10 2>/dev/null || true
           free -h
@@ -90,6 +90,19 @@ jobs:
         run: |
           set -o pipefail
           echo "Starting build at $(date +'%T')"
+          # Periodic log push from a side worktree, so the build log is
+          # visible even if the runner hard-kills this step (OOM).
+          git worktree add /tmp/logwt build-log 2>/dev/null || git worktree add /tmp/logwt -b build-log
+          (
+            while true; do
+              sleep 240
+              cp /tmp/build.log /tmp/logwt/build-log.txt 2>/dev/null || continue
+              git -C /tmp/logwt add build-log.txt 2>/dev/null || continue
+              git -C /tmp/logwt -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "progress $(date +'%T')" 2>/dev/null || continue
+              git -C /tmp/logwt push -q -f origin build-log 2>/dev/null || true
+            done
+          ) &
+          PUSHER=$!
           # Memory monsters (>200KB) one at a time, big files (60-200KB) two
           # at a time, everything else four at a time.
           (
@@ -107,6 +120,7 @@ jobs:
           lake build
           ) 2>&1 | tee -a /tmp/build.log
           result_run1=${PIPESTATUS[0]}
+          kill $PUSHER 2>/dev/null || true
           echo "Complete at $(date +'%T'); return value $result_run1"
           exit $result_run1
 
