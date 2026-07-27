@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.CharP.Defs
+import Mathlib.Algebra.Group.Nat.Range
+import Mathlib.Data.Fintype.BigOperators
+import Mathlib.Order.Lattice.Nat
+import Mathlib.Tactic.IntervalCases
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

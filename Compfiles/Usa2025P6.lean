@@ -5,7 +5,16 @@ Authors: Kimi K3
 -/
 
 import Mathlib.Tactic
-import Mathlib
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Combinatorics.Hall.Basic
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Real.Basic
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Tactic.Abel
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

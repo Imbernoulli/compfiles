@@ -4,7 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.RCLike.Basic
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Nat.Squarefree
+import Mathlib.Data.Rat.Star
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Mathlib.NumberTheory.Padics.PadicVal.Basic
+import Mathlib.NumberTheory.Real.Irrational
+import Mathlib.Order.CompletePartialOrder
 
 import ProblemExtraction
 

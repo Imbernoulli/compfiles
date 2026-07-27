@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: hillosanation
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Data.Int.Star
+import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+import Mathlib.Order.CompletePartialOrder
 
 import ProblemExtraction
 

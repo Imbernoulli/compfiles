@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.EuclideanDomain.Int
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.Normed.Order.Lattice
+import Mathlib.RingTheory.SimpleRing.Principal
+import Mathlib.Tactic.IntervalCases
 
 import ProblemExtraction
 
