@@ -1058,6 +1058,24 @@ lemma nexy (i : Fin 1010) : xi i ≠ yi i := by
   rw [xi_val, yi_val] at hv
   omega
 
+lemma xex (i j : Fin 1010) (h : i ≠ j) : xi i ≠ xi j := by
+  intro hh
+  have hv := congr_arg Fin.val hh
+  rw [xi_val, xi_val] at hv
+  exact h (Fin.eq_of_val_eq (by omega))
+
+lemma yey (i j : Fin 1010) (h : i ≠ j) : yi i ≠ yi j := by
+  intro hh
+  have hv := congr_arg Fin.val hh
+  rw [yi_val, yi_val] at hv
+  exact h (Fin.eq_of_val_eq (by omega))
+
+lemma xey (i j : Fin 1010) : xi i ≠ yi j := by
+  intro hh
+  have hv := congr_arg Fin.val hh
+  rw [xi_val, yi_val] at hv
+  omega
+
 /-- The edge set of the construction: the edge `0-1` together with, for each
 `i < 1010`, the three further edges `1-xᵢ`, `xᵢ-yᵢ`, `yᵢ-0` of a 4-cycle
 `0-1-xᵢ-yᵢ-0` sharing the edge `0-1`. -/
@@ -1266,10 +1284,80 @@ lemma constr_edgeFinset : constrGraph.edgeFinset = constrEdges := by
   apply Finset.coe_inj.mp
   rw [SimpleGraph.coe_edgeFinset, constr_edgeSet]
 
+/-- If the first endpoint of `s(a, b)` differs from both endpoints of `s(c, d)`,
+the two edges are distinct. -/
+lemma sym2_ne_of_fst {a b c d : Fin 2022} (hac : a ≠ c) (had : a ≠ d) :
+    s(a, b) ≠ s(c, d) := by
+  intro h
+  rw [Sym2.eq_iff] at h
+  rcases h with ⟨h1, -⟩ | ⟨h1, -⟩
+  · exact hac h1
+  · exact had h1
+
+/-- If the second endpoint of `s(a, b)` differs from both endpoints of `s(c, d)`,
+the two edges are distinct. -/
+lemma sym2_ne_of_snd {a b c d : Fin 2022} (hbc : b ≠ c) (hbd : b ≠ d) :
+    s(a, b) ≠ s(c, d) := by
+  intro h
+  rw [Sym2.eq_iff] at h
+  rcases h with ⟨-, h1⟩ | ⟨-, h1⟩
+  · exact hbd h1
+  · exact hbc h1
+
 /-- The construction has exactly `3031` friendships. -/
 lemma constr_edge_ncard : constrGraph.edgeSet.ncard = 3031 := by
   rw [← SimpleGraph.coe_edgeFinset, Set.ncard_coe_finset, constr_edgeFinset]
-  native_decide
+  -- the three edges of the `i`-th 4-cycle are distinct
+  have hcard3 : ∀ i : Fin 1010,
+      ({s(1, xi i), s(xi i, yi i), s(yi i, 0)} : Finset (Sym2 (Fin 2022))).card = 3 := by
+    intro i
+    rw [Finset.card_insert_of_notMem, Finset.card_insert_of_notMem, Finset.card_singleton]
+    · simp only [Finset.mem_singleton]
+      exact sym2_ne_of_fst (nexy i) (Ne.symm (ne0x i))
+    · simp only [Finset.mem_insert, Finset.mem_singleton, not_or]
+      exact ⟨sym2_ne_of_fst (ne1x i) (ne1y i), sym2_ne_of_fst (ne1y i) (by decide)⟩
+  -- the edge families of two distinct 4-cycles are disjoint
+  have hdisj : ∀ i ∈ (Finset.univ : Finset (Fin 1010)),
+      ∀ j ∈ (Finset.univ : Finset (Fin 1010)), i ≠ j →
+      Disjoint ({s(1, xi i), s(xi i, yi i), s(yi i, 0)} : Finset (Sym2 (Fin 2022)))
+        {s(1, xi j), s(xi j, yi j), s(yi j, 0)} := by
+    intro i _ j _ hij
+    rw [Finset.disjoint_iff_ne]
+    intro e he e' he'
+    simp only [Finset.mem_insert, Finset.mem_singleton] at he he'
+    rcases he with rfl | rfl | rfl <;> rcases he' with rfl | rfl | rfl
+    · exact sym2_ne_of_snd (Ne.symm (ne1x i)) (xex i j hij)
+    · exact sym2_ne_of_fst (ne1x j) (ne1y j)
+    · exact sym2_ne_of_fst (ne1y j) (by decide)
+    · exact sym2_ne_of_fst (Ne.symm (ne1x i)) (xex i j hij)
+    · exact sym2_ne_of_fst (xex i j hij) (xey i j)
+    · exact sym2_ne_of_fst (xey i j) (Ne.symm (ne0x i))
+    · exact sym2_ne_of_fst (Ne.symm (ne1y i)) (Ne.symm (xey j i))
+    · exact sym2_ne_of_fst (Ne.symm (xey j i)) (yey i j hij)
+    · exact sym2_ne_of_fst (yey i j hij) (Ne.symm (ne0y i))
+  -- the edge `0-1` belongs to no 4-cycle family
+  have hnotmem : s(0, 1) ∉ Finset.biUnion (Finset.univ : Finset (Fin 1010))
+      (fun i : Fin 1010 => ({s(1, xi i), s(xi i, yi i), s(yi i, 0)} :
+        Finset (Sym2 (Fin 2022)))) := by
+    rw [Finset.mem_biUnion]
+    rintro ⟨i, -, hi⟩
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hi
+    rcases hi with h | h | h
+    · exact sym2_ne_of_fst (by decide) (ne0x i) h
+    · exact sym2_ne_of_fst (ne0x i) (ne0y i) h
+    · exact sym2_ne_of_snd (ne1y i) (by decide) h
+  -- hence the `1010` families contribute `1010 * 3` edges
+  have hbU : (Finset.biUnion (Finset.univ : Finset (Fin 1010)) (fun i : Fin 1010 =>
+      ({s(1, xi i), s(xi i, yi i), s(yi i, 0)} : Finset (Sym2 (Fin 2022))))).card
+        = 3030 := by
+    rw [Finset.card_biUnion hdisj]
+    trans ∑ _i ∈ (Finset.univ : Finset (Fin 1010)), (3 : ℕ)
+    · exact Finset.sum_congr rfl (fun i _ => hcard3 i)
+    · rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul]
+  -- count: `1 + 1010 * 3 = 3031`
+  unfold constrEdges
+  rw [Finset.card_union_of_disjoint (by rwa [Finset.disjoint_singleton_left]),
+    Finset.card_singleton, hbU]
 
 snip end
 

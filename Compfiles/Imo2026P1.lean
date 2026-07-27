@@ -9,7 +9,11 @@ import ProblemExtraction
 
 set_option backward.isDefEq.respectTransparency false
 
-problem_file { tags := [.NumberTheory] }
+problem_file {
+  tags := [.NumberTheory]
+  problemImportedFrom :=
+    "https://github.com/humanfia/imo2026"
+}
 
 /-!
 # International Mathematical Olympiad 2026, Problem 1
@@ -27,6 +31,9 @@ moves, exactly one integer M on the blackboard is greater than 1.
 
 (Note that gcd(x, y) denotes the greatest common divisor of positive integers
 x and y, and lcm(x, y) denotes the least common multiple of x and y.)
+
+Statement formalization adapted from AxiomMath/IMO2026; proof adapted from
+Humanfia's Kimi-K3 solutions (https://github.com/humanfia/imo2026).
 -/
 
 namespace Imo2026P1

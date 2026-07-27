@@ -338,8 +338,8 @@ problem usamo2020_p4 :
         p.1 < p.2 ∧ |det (v p.1) (v p.2)| = 1).card} answer := by
   constructor
   · refine ⟨fun i => if i = 0 then (1, 0) else (i.val, 1), ?_, ?_⟩
-    · native_decide
-    · native_decide
+    · decide
+    · set_option maxRecDepth 10000 in decide
   · intro N hN
     obtain ⟨v, hv, hN'⟩ := hN
     rw [hN']

@@ -98,7 +98,7 @@ lemma primesum_inv_sq_le (M : ℕ) (hM : 50 ≤ M) :
   rw [hsplit]
   have hL : ∑ p ∈ (Finset.range 50).filter Nat.Prime, (1 : ℚ) / p ^ 2
       ≤ 47 / 100 - 1 / 49 := by
-    native_decide
+    decide +kernel
   have hP1 : ∑ p ∈ ((Finset.range (M + 1)).filter Nat.Prime).filter (· < 50), (1 : ℚ) / p ^ 2
       ≤ ∑ p ∈ (Finset.range 50).filter Nat.Prime, (1 : ℚ) / p ^ 2 := by
     apply Finset.sum_le_sum_of_subset_of_nonneg

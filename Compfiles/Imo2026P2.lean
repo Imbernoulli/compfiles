@@ -8,7 +8,11 @@ import Mathlib
 
 import ProblemExtraction
 
-problem_file { tags := [.Geometry] }
+problem_file {
+  tags := [.Geometry]
+  problemImportedFrom :=
+    "https://github.com/humanfia/imo2026"
+}
 
 /-!
 # International Mathematical Olympiad 2026, Problem 2
@@ -21,6 +25,9 @@ lies strictly inside triangle AKC. Suppose that
     ∠KBA = ∠ACL, ∠LBK = ∠LNC, and ∠LCK = ∠BMK.
 
 Let O be the circumcentre of triangle AKL. Prove that OM = ON.
+
+Statement formalization adapted from AxiomMath/IMO2026; proof adapted from
+Humanfia's Kimi-K3 solutions (https://github.com/humanfia/imo2026).
 -/
 
 open EuclideanGeometry

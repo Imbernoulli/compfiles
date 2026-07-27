@@ -8,7 +8,11 @@ import Mathlib
 
 import ProblemExtraction
 
-problem_file { tags := [.Combinatorics] }
+problem_file {
+  tags := [.Combinatorics]
+  problemImportedFrom :=
+    "https://github.com/humanfia/imo2026"
+}
 
 /-!
 # International Mathematical Olympiad 2026, Problem 4
@@ -27,6 +31,9 @@ measurements of his choice. Then, they repeatedly perform the following steps:
 
 For which real values of θ can Mulan guarantee her victory in finitely many
 steps, no matter how Shan-Yu plays?
+
+Statement formalization adapted from AxiomMath/IMO2026; proof adapted from
+Humanfia's Kimi-K3 solutions (https://github.com/humanfia/imo2026).
 -/
 
 namespace Imo2026P4

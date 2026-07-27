@@ -121,9 +121,81 @@ problem usa1992_p3 : IsLeast {x : ℕ | ∃ a : ℕ → ℕ, Good a ∧ x = a 9}
     · decide
     · decide
     · intro n hn1 hn2
+      -- Subset sums of the first `k` elements `1, 2, 4, …, 2^(k-1)` cover `[0, 2^k - 1]`.
+      have helper : ∀ k : ℕ, k ≤ 8 → ∀ m : ℕ, m ≤ 2 ^ k - 1 →
+          ∃ t : Finset ℕ, t ⊆ Finset.range k ∧
+            ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m := by
+        intro k
+        induction k with
+        | zero =>
+          intro _ m hm
+          have hm0 : m = 0 := by
+            norm_num at hm
+            omega
+          exact ⟨∅, by simp, by simp [hm0]⟩
+        | succ k ih =>
+          intro hk m hm
+          have hpow : (2 : ℕ) ^ (k + 1) = 2 * 2 ^ k := pow_succ' 2 k
+          have hpos : 0 < (2 : ℕ) ^ k := pow_pos (by norm_num) k
+          by_cases hcase : m ≤ 2 ^ k - 1
+          · obtain ⟨t, ht, htsum⟩ := ih (by omega) m hcase
+            exact ⟨t, ht.trans (Finset.range_subset_range.mpr (by omega)), htsum⟩
+          · push Not at hcase
+            have hk7 : k ≤ 7 := by omega
+            have hfk : List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] k 0
+                = 2 ^ k := by
+              interval_cases k <;> rfl
+            obtain ⟨t, ht, htsum⟩ := ih (by omega) (m - 2 ^ k) (by omega)
+            have hkt : k ∉ t := fun hmem ↦ by
+              have hlt := Finset.mem_range.mp (ht hmem)
+              omega
+            refine ⟨insert k t, ?_, ?_⟩
+            · rw [Finset.insert_subset_iff]
+              exact ⟨Finset.mem_range.mpr (by omega),
+                ht.trans (Finset.range_subset_range.mpr (by omega))⟩
+            · rw [Finset.sum_insert hkt, hfk, htsum]
+              omega
+      -- Adjoining an element `v ≤ B + 1` extends the covered range from `[0, B]` to
+      -- `[0, B + v]`.
+      have extend : ∀ (B v j : ℕ), v ≤ B + 1 →
+          List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] j 0 = v →
+          (∀ m : ℕ, m ≤ B → ∃ t : Finset ℕ, t ⊆ Finset.range j ∧
+            ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m) →
+          ∀ m : ℕ, m ≤ B + v → ∃ t : Finset ℕ, t ⊆ Finset.range (j + 1) ∧
+            ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m := by
+        intro B v j hv hfj cover m hm
+        by_cases h : m ≤ B
+        · obtain ⟨t, ht, htsum⟩ := cover m h
+          exact ⟨t, ht.trans (Finset.range_subset_range.mpr (by omega)), htsum⟩
+        · push Not at h
+          obtain ⟨t, ht, htsum⟩ := cover (m - v) (by omega)
+          have hjt : j ∉ t := fun hmem ↦ by
+            have hlt := Finset.mem_range.mp (ht hmem)
+            omega
+          refine ⟨insert j t, ?_, ?_⟩
+          · rw [Finset.insert_subset_iff]
+            exact ⟨Finset.mem_range.mpr (by omega),
+              ht.trans (Finset.range_subset_range.mpr (by omega))⟩
+          · rw [Finset.sum_insert hjt, hfj, htsum]
+            omega
+      have cover8 : ∀ m : ℕ, m ≤ 255 → ∃ t : Finset ℕ, t ⊆ Finset.range 8 ∧
+          ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m :=
+        fun m hm ↦ helper 8 (le_refl 8) m (by show m ≤ 255; exact hm)
+      have cover9 : ∀ m : ℕ, m ≤ 502 → ∃ t : Finset ℕ, t ⊆ Finset.range 9 ∧
+          ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m :=
+        fun m hm ↦ extend 255 247 8 (by norm_num) rfl cover8 m hm
+      have cover10 : ∀ m : ℕ, m ≤ 750 → ∃ t : Finset ℕ, t ⊆ Finset.range 10 ∧
+          ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m :=
+        fun m hm ↦ extend 502 248 9 (by norm_num) rfl cover9 m hm
+      have cover11 : ∀ m : ℕ, m ≤ 1500 → ∃ t : Finset ℕ, t ⊆ Finset.range 11 ∧
+          ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m :=
+        fun m hm ↦ extend 750 750 10 (by norm_num) rfl cover10 m hm
       have key : ∀ m ∈ Finset.Icc 1 1500, ∃ t ∈ (Finset.range 11).powerset,
           ∑ i ∈ t, List.getD [1, 2, 4, 8, 16, 32, 64, 128, 247, 248, 750] i 0 = m := by
-        native_decide
+        intro m hm
+        rw [Finset.mem_Icc] at hm
+        obtain ⟨t, ht, htsum⟩ := cover11 m hm.2
+        exact ⟨t, Finset.mem_powerset.mpr ht, htsum⟩
       obtain ⟨t, ht, htsum⟩ := key n (Finset.mem_Icc.mpr ⟨hn1, hn2⟩)
       exact ⟨t, Finset.mem_powerset.mp ht, htsum⟩
   · -- No smaller value of the second largest element is possible.
