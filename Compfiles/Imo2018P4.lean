@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Data.Fintype.Card
+import Mathlib.Data.Fintype.Prod
+import Mathlib.Data.Set.Operations
+import Mathlib.Order.Bounds.Defs
 
 import ProblemExtraction
 
@@ -123,7 +126,46 @@ The answer is K = 100.
 /-- The black squares of the checkerboard coloring. -/
 def blacks : Finset Site := Finset.univ.filter fun c => (c.1.val + c.2.val) % 2 = 0
 
-lemma blacks_card : blacks.card = 200 := by set_option maxRecDepth 10000 in decide
+lemma blacks_card : blacks.card = 200 := by
+  have h400 : (Finset.univ : Finset Site).card = 400 := by
+    rw [Finset.card_univ, Fintype.card_prod, Fintype.card_fin]
+  have hsum := Finset.card_filter_add_card_filter_not
+    (s := (Finset.univ : Finset Site)) (p := fun c : Site => (c.1.val + c.2.val) % 2 = 0)
+  rw [h400] at hsum
+  have hbij : (Finset.univ.filter fun c : Site => (c.1.val + c.2.val) % 2 = 0).card =
+      (Finset.univ.filter fun c : Site => ¬ (c.1.val + c.2.val) % 2 = 0).card := by
+    apply Finset.card_bij (fun c _ => (c.1, ⟨19 - c.2.val, by have := c.2.isLt; omega⟩))
+    · intro c hc
+      have hc' : (c.1.val + c.2.val) % 2 = 0 := by
+        simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hc
+        exact hc
+      have := c.2.isLt
+      simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+      show ¬ (c.1.val + (19 - c.2.val)) % 2 = 0
+      omega
+    · intro a _ b _ h
+      obtain ⟨h1, h2⟩ := Prod.ext_iff.mp h
+      have h2' : 19 - a.2.val = 19 - b.2.val := Fin.mk.inj_iff.mp h2
+      have := a.2.isLt
+      have := b.2.isLt
+      exact Prod.ext h1 (Fin.ext (by omega))
+    · intro d hd
+      have hd' : ¬ (d.1.val + d.2.val) % 2 = 0 := by
+        simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hd
+        exact hd
+      have := d.2.isLt
+      refine ⟨(d.1, ⟨19 - d.2.val, by omega⟩), ?_, ?_⟩
+      · simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+        show (d.1.val + (19 - d.2.val)) % 2 = 0
+        omega
+      · show (d.1, ⟨19 - (19 - d.2.val), by omega⟩) = d
+        apply Prod.ext
+        · rfl
+        · apply Fin.ext
+          show 19 - (19 - d.2.val) = d.2.val
+          omega
+  unfold blacks
+  omega
 
 /-- No two black squares are at knight's move distance. -/
 lemma not_knightAdj_of_black {a b : Site} (ha : a ∈ blacks) (hb : b ∈ blacks) :
@@ -158,12 +200,42 @@ def lab : ℕ → ℕ → ℕ
   | 3, 0 => 3 | 3, 1 => 2 | 3, 2 => 1 | 3, 3 => 0
   | _, _ => 0
 
+/-- Each label is at most `3`. -/
+lemma lab_le : ∀ i j : Fin 4, lab i.val j.val ≤ 3 := by decide
+
+/-- Opposite cells of a `4×4` block carry the same label. -/
+lemma lab_opp : ∀ i j : Fin 4, lab (3 - i.val) (3 - j.val) = lab i.val j.val := by
+  decide
+
+/-- Two cells of a `4×4` block with the same label are either equal,
+opposite, or a knight's move apart within the block. -/
+lemma lab_eq_cases : ∀ i j i' j' : Fin 4,
+    lab i.val j.val = lab i'.val j'.val →
+    (i = i' ∧ j = j') ∨ (i.val = 3 - i'.val ∧ j.val = 3 - j'.val) ∨
+    ((i.val + 1 = i'.val ∧ j.val + 2 = j'.val) ∨
+     (i.val + 2 = i'.val ∧ j.val + 1 = j'.val) ∨
+     (i.val + 1 = i'.val ∧ j'.val + 2 = j.val) ∨
+     (i.val + 2 = i'.val ∧ j'.val + 1 = j.val) ∨
+     (i'.val + 1 = i.val ∧ j.val + 2 = j'.val) ∨
+     (i'.val + 2 = i.val ∧ j.val + 1 = j'.val) ∨
+     (i'.val + 1 = i.val ∧ j'.val + 2 = j.val) ∨
+     (i'.val + 2 = i.val ∧ j'.val + 1 = j.val)) := by
+  decide
+
 /-- The 4-cycle (one of 100) that a site belongs to: its `4×4` block
 together with its label within the block. -/
 def cyc (c : Site) : ℕ :=
   (c.1.val / 4 * 5 + c.2.val / 4) * 4 + lab (c.1.val % 4) (c.2.val % 4)
 
-lemma cyc_lt_100 : ∀ c : Site, cyc c < 100 := by set_option maxRecDepth 10000 in decide
+lemma cyc_lt_100 : ∀ c : Site, cyc c < 100 := by
+  intro c
+  have := c.1.isLt
+  have := c.2.isLt
+  have hlab : lab (c.1.val % 4) (c.2.val % 4) ≤ 3 :=
+    lab_le ⟨c.1.val % 4, Nat.mod_lt _ (by omega)⟩
+      ⟨c.2.val % 4, Nat.mod_lt _ (by omega)⟩
+  unfold cyc
+  omega
 
 /-- The opposite coordinate within a `4×4` block: `i ↦ 3 − i` within
 the block. -/
@@ -177,17 +249,103 @@ cycle that are *not* a knight's move apart. -/
 def opp (c : Site) : Site :=
   (⟨oppCoord c.1.val, oppCoord_lt c.1.isLt⟩, ⟨oppCoord c.2.val, oppCoord_lt c.2.isLt⟩)
 
-lemma opp_ne : ∀ c : Site, opp c ≠ c := by set_option maxRecDepth 10000 in decide
+lemma opp_ne : ∀ c : Site, opp c ≠ c := by
+  intro c h
+  have h1 : c.1.val = (opp c).1.val := by rw [h]
+  have h2 : c.1.val = 4 * (c.1.val / 4) + (3 - c.1.val % 4) := h1
+  omega
 
-lemma opp_opp : ∀ c : Site, opp (opp c) = c := by set_option maxRecDepth 10000 in decide
+lemma opp_opp : ∀ c : Site, opp (opp c) = c := by
+  intro c
+  have key : ∀ x : ℕ, x < 20 → oppCoord (oppCoord x) = x := by
+    intro x hx
+    unfold oppCoord
+    omega
+  exact Prod.ext (Fin.ext (key c.1.val c.1.isLt)) (Fin.ext (key c.2.val c.2.isLt))
 
-lemma cyc_opp : ∀ c : Site, cyc (opp c) = cyc c := by set_option maxRecDepth 10000 in decide
+lemma cyc_opp : ∀ c : Site, cyc (opp c) = cyc c := by
+  intro c
+  have := c.1.isLt
+  have := c.2.isLt
+  have hd1 : (opp c).1.val / 4 = c.1.val / 4 ∧ (opp c).1.val % 4 = 3 - c.1.val % 4 := by
+    show (4 * (c.1.val / 4) + (3 - c.1.val % 4)) / 4 = c.1.val / 4 ∧
+      (4 * (c.1.val / 4) + (3 - c.1.val % 4)) % 4 = 3 - c.1.val % 4
+    omega
+  have hd2 : (opp c).2.val / 4 = c.2.val / 4 ∧ (opp c).2.val % 4 = 3 - c.2.val % 4 := by
+    show (4 * (c.2.val / 4) + (3 - c.2.val % 4)) / 4 = c.2.val / 4 ∧
+      (4 * (c.2.val / 4) + (3 - c.2.val % 4)) % 4 = 3 - c.2.val % 4
+    omega
+  have hlab : lab ((opp c).1.val % 4) ((opp c).2.val % 4) =
+      lab (c.1.val % 4) (c.2.val % 4) := by
+    rw [hd1.2, hd2.2]
+    exact lab_opp ⟨c.1.val % 4, Nat.mod_lt _ (by omega)⟩
+      ⟨c.2.val % 4, Nat.mod_lt _ (by omega)⟩
+  unfold cyc
+  rw [hd1.1, hd2.1, hlab]
 
 /-- Two sites in the same 4-cycle are either equal, opposite, or a
 knight's move apart. -/
 lemma eq_or_opp_or_adj_of_cyc_eq :
     ∀ a b : Site, cyc a = cyc b → a = b ∨ a = opp b ∨ KnightAdj a b := by
-  decide +kernel
+  intro a b h
+  have := a.1.isLt
+  have := a.2.isLt
+  have := b.1.isLt
+  have := b.2.isLt
+  have hla : lab (a.1.val % 4) (a.2.val % 4) ≤ 3 :=
+    lab_le ⟨a.1.val % 4, Nat.mod_lt _ (by omega)⟩
+      ⟨a.2.val % 4, Nat.mod_lt _ (by omega)⟩
+  have hlb : lab (b.1.val % 4) (b.2.val % 4) ≤ 3 :=
+    lab_le ⟨b.1.val % 4, Nat.mod_lt _ (by omega)⟩
+      ⟨b.2.val % 4, Nat.mod_lt _ (by omega)⟩
+  unfold cyc at h
+  have hblk : a.1.val / 4 = b.1.val / 4 ∧ a.2.val / 4 = b.2.val / 4 := by omega
+  have hlab : lab (a.1.val % 4) (a.2.val % 4) = lab (b.1.val % 4) (b.2.val % 4) := by
+    omega
+  rcases lab_eq_cases ⟨a.1.val % 4, Nat.mod_lt _ (by omega)⟩
+      ⟨a.2.val % 4, Nat.mod_lt _ (by omega)⟩ ⟨b.1.val % 4, Nat.mod_lt _ (by omega)⟩
+      ⟨b.2.val % 4, Nat.mod_lt _ (by omega)⟩ hlab with hc | hc | hc
+  · -- The in-block offsets agree, so the sites are equal.
+    obtain ⟨hi, hj⟩ := hc
+    have hi' : a.1.val % 4 = b.1.val % 4 := congrArg Fin.val hi
+    have hj' : a.2.val % 4 = b.2.val % 4 := congrArg Fin.val hj
+    exact Or.inl (Prod.ext (Fin.ext (by omega)) (Fin.ext (by omega)))
+  · -- The in-block offsets are opposite, so the sites are opposite.
+    obtain ⟨hi, hj⟩ := hc
+    have hi' : a.1.val % 4 = 3 - b.1.val % 4 := hi
+    have hj' : a.2.val % 4 = 3 - b.2.val % 4 := hj
+    have e1 : a.1.val = oppCoord b.1.val := by unfold oppCoord; omega
+    have e2 : a.2.val = oppCoord b.2.val := by unfold oppCoord; omega
+    exact Or.inr (Or.inl (Prod.ext (Fin.ext e1) (Fin.ext e2)))
+  · -- The in-block offsets are a knight's move apart, and so are the sites.
+    refine Or.inr (Or.inr ?_)
+    unfold KnightAdj
+    rcases hc with ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ |
+      ⟨h1, h2⟩ | ⟨h1, h2⟩
+    · have h1' : a.1.val % 4 + 1 = b.1.val % 4 := h1
+      have h2' : a.2.val % 4 + 2 = b.2.val % 4 := h2
+      exact Or.inl ⟨by omega, by omega⟩
+    · have h1' : a.1.val % 4 + 2 = b.1.val % 4 := h1
+      have h2' : a.2.val % 4 + 1 = b.2.val % 4 := h2
+      exact Or.inr (Or.inl ⟨by omega, by omega⟩)
+    · have h1' : a.1.val % 4 + 1 = b.1.val % 4 := h1
+      have h2' : b.2.val % 4 + 2 = a.2.val % 4 := h2
+      exact Or.inr (Or.inr (Or.inl ⟨by omega, by omega⟩))
+    · have h1' : a.1.val % 4 + 2 = b.1.val % 4 := h1
+      have h2' : b.2.val % 4 + 1 = a.2.val % 4 := h2
+      exact Or.inr (Or.inr (Or.inr (Or.inl ⟨by omega, by omega⟩)))
+    · have h1' : b.1.val % 4 + 1 = a.1.val % 4 := h1
+      have h2' : a.2.val % 4 + 2 = b.2.val % 4 := h2
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨by omega, by omega⟩))))
+    · have h1' : b.1.val % 4 + 2 = a.1.val % 4 := h1
+      have h2' : a.2.val % 4 + 1 = b.2.val % 4 := h2
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨by omega, by omega⟩)))))
+    · have h1' : b.1.val % 4 + 1 = a.1.val % 4 := h1
+      have h2' : b.2.val % 4 + 2 = a.2.val % 4 := h2
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨by omega, by omega⟩))))))
+    · have h1' : b.1.val % 4 + 2 = a.1.val % 4 := h1
+      have h2' : b.2.val % 4 + 1 = a.2.val % 4 := h2
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨by omega, by omega⟩))))))
 
 /-- Ben's invariant: every 4-cycle contains at most one red stone, and
 the blue stones are exactly the opposite sites of the red stones. -/

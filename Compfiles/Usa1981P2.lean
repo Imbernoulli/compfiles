@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Tactic
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }
@@ -533,10 +533,14 @@ theorem validB_iff (u : Fin 10 → Link) : validB u = true ↔ Valid (mkColor u)
 set_option maxHeartbeats 0 in
 /-- The finite check over all `3^10` assignments, evaluated by kernel
 reduction. The enumeration is stated as ten nested quantifiers over `Link` —
-three choices each — so that the reduction stays shallow. -/
+three choices each — so that the reduction stays shallow. The first four
+variables are case-split before the kernel reduction, so that the kernel only
+ever enumerates `3^6 = 729` assignments at a time; this keeps the peak
+elaboration memory low. -/
 theorem check5B : ∀ c₀ c₁ c₂ c₃ c₄ c₅ c₆ c₇ c₈ c₉ : Link,
     validB (mkU c₀ c₁ c₂ c₃ c₄ c₅ c₆ c₇ c₈ c₉) = false := by
-  decide +kernel
+  intro c₀ c₁ c₂ c₃
+  cases c₀ <;> cases c₁ <;> cases c₂ <;> cases c₃ <;> decide +kernel
 
 /-- A brute-force check: no link assignment on five towns satisfies all the
 criteria. (The conditions only involve the ten unordered pairs, so there are

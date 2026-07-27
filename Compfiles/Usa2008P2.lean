@@ -3,8 +3,13 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib.Tactic
-import Mathlib
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
+import Mathlib.Geometry.Euclidean.Sphere.Basic
 
 import ProblemExtraction
 
@@ -78,80 +83,92 @@ lemma core (b1 b2 c1 c2 d1 d2 e1 e2 f1 f2 t1 t2 : ℝ)
     (hL1 : (f1 - b1) * (d2 - b2) = (f2 - b2) * (d1 - b1))
     (hL2 : (f1 - c1) * (e2 - c2) = (f2 - c2) * (e1 - c1))
     (hbcpos : 0 < b1 * c1 + b2 * c2)
-    (hbbpos : 0 < b1^2 + b2^2)
-    (hccpos : 0 < c1^2 + c2^2)
+    (_hbbpos : 0 < b1^2 + b2^2)
+    (_hccpos : 0 < c1^2 + c2^2)
     (hdet : b1 * c2 - b2 * c1 ≠ 0)
     (hm : (b1 + c1)^2 + (b2 + c2)^2 ≠ 0) :
     2 * (b1 * c2 - b2 * c1) * (f1^2 + f2^2) =
       f1 * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) +
       f2 * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1) := by
-  have hden1 : (b1^2 + b2^2 + (b1 * c1 + b2 * c2)) ≠ 0 := ne_of_gt (add_pos hbbpos hbcpos)
-  have hden2 : (c1^2 + c2^2 + (b1 * c1 + b2 * c2)) ≠ 0 := ne_of_gt (add_pos hccpos hbcpos)
+  -- The ray relations `t1 * (b · (b + c)) = |b|^2`, `t2 * (c · (b + c)) = |c|^2`.
   have ht1 : t1 * ((b1 + c1) * b1 + (b2 + c2) * b2) = b1^2 + b2^2 := by
     linear_combination hdb - hd1 * b1 - hd2 * b2
   have ht2 : t2 * ((b1 + c1) * c1 + (b2 + c2) * c2) = c1^2 + c2^2 := by
     linear_combination hec - he1 * c1 - he2 * c2
-  have hd1v : d1 = t1 * (b1 + c1) / 2 := by linarith
-  have hd2v : d2 = t1 * (b2 + c2) / 2 := by linarith
-  have he1v : e1 = t2 * (b1 + c1) / 2 := by linarith
-  have he2v : e2 = t2 * (b2 + c2) / 2 := by linarith
-  -- The two line constraints on `F`, written as linear equations in `f`.
-  have hL1' : (d2 - b2) * f1 - (d1 - b1) * f2 = b1 * d2 - b2 * d1 := by
-    linear_combination hL1
-  have hL2' : (e2 - c2) * f1 - (e1 - c1) * f2 = c1 * e2 - c2 * e1 := by
-    linear_combination hL2
+  -- The two line constraints on `F`, with `d` and `e` eliminated via the ray
+  -- equations (and denominators cleared).
+  have g1 : (t1 * (b2 + c2) - 2 * b2) * f1 - (t1 * (b1 + c1) - 2 * b1) * f2 =
+      t1 * (b1 * c2 - b2 * c1) := by
+    linear_combination 2 * hL1 - (f1 - b1) * hd2 + (f2 - b2) * hd1
+  have g2 : (t2 * (b2 + c2) - 2 * c2) * f1 - (t2 * (b1 + c1) - 2 * c1) * f2 =
+      -t2 * (b1 * c2 - b2 * c1) := by
+    linear_combination 2 * hL2 - (f1 - c1) * he2 + (f2 - c2) * he1
   -- Cramer's rule: the determinant `DETF` times each coordinate of `f`.
-  have hf1 : ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) * f1 = ((-(e1 - c1)) * (b1 * d2 - b2 * d1) - (-(d1 - b1)) * (c1 * e2 - c2 * e1)) := by
-    linear_combination (-(e1 - c1)) * hL1' - (-(d1 - b1)) * hL2'
-  have hf2 : ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) * f2 = ((d2 - b2) * (c1 * e2 - c2 * e1) - (e2 - c2) * (b1 * d2 - b2 * d1)) := by
-    linear_combination (d2 - b2) * hL2' - (e2 - c2) * hL1'
-  -- The determinant is nonzero: after substituting `d`, `e` and using the two ray
-  -- relations, `2 * DEN1 * DEN2 * DETF = (b·c) * det(b,c) * |b+c|^2 ≠ 0`.
-  have hdetf0 : (b1^2 + b2^2 + (b1 * c1 + b2 * c2)) * (c1^2 + c2^2 + (b1 * c1 + b2 * c2)) * (2 * (b1^2 + b2^2 + (b1 * c1 + b2 * c2)) * (c1^2 + c2^2 + (b1 * c1 + b2 * c2)) * (((t1 * (b2 + c2) / 2) - b2) * (-((t2 * (b1 + c1) / 2) - c1)) - (-((t1 * (b1 + c1) / 2) - b1)) * ((t2 * (b2 + c2) / 2) - c2)) -
-      (b1 * c1 + b2 * c2) * (b1 * c2 - b2 * c1) * ((b1 + c1)^2 + (b2 + c2)^2)) = 0 := by
-    linear_combination (-(b1 * c2 - b2 * c1) * (b1^2 + b2^2 + (b1 * c1 + b2 * c2)) * (c1^2 + c2^2 + (b1 * c1 + b2 * c2))^2) * ht1 +
-      (-(b1 * c2 - b2 * c1) * (b1^2 + b2^2 + (b1 * c1 + b2 * c2))^2 * (c1^2 + c2^2 + (b1 * c1 + b2 * c2))) * ht2
-  have hdetfD : 2 * (b1^2 + b2^2 + (b1 * c1 + b2 * c2)) * (c1^2 + c2^2 + (b1 * c1 + b2 * c2)) * (((t1 * (b2 + c2) / 2) - b2) * (-((t2 * (b1 + c1) / 2) - c1)) - (-((t1 * (b1 + c1) / 2) - b1)) * ((t2 * (b2 + c2) / 2) - c2)) = (b1 * c1 + b2 * c2) * (b1 * c2 - b2 * c1) * ((b1 + c1)^2 + (b2 + c2)^2) := by
-    rcases mul_eq_zero.mp hdetf0 with hM | hD
-    · exact absurd hM (mul_ne_zero hden1 hden2)
-    · linear_combination hD
-  have hdetf : ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) ≠ 0 := by
-    rw [hd1v, hd2v, he1v, he2v]
-    intro hz
-    rw [hz] at hdetfD
-    exact (mul_ne_zero (mul_ne_zero (ne_of_gt hbcpos) hdet) hm) (by
-      linear_combination -hdetfD)
-  -- The key polynomial identity `2 det(b,c) (S1^2 + S2^2) = DETF * (S1*K1 + S2*K2)`,
-  -- certified modulo the two ray relations (certificates computed by pseudo-division).
-  have h1 : (b1^2 + b2^2 + (b1 * c1 + b2 * c2))^2 * (2 * (b1 * c2 - b2 * c1) * (((-((t2 * (b1 + c1) / 2) - c1)) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2)) - (-((t1 * (b1 + c1) / 2) - b1)) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2)))^2 + (((t1 * (b2 + c2) / 2) - b2) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2)) - ((t2 * (b2 + c2) / 2) - c2) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2)))^2) - (((t1 * (b2 + c2) / 2) - b2) * (-((t2 * (b1 + c1) / 2) - c1)) - (-((t1 * (b1 + c1) / 2) - b1)) * ((t2 * (b2 + c2) / 2) - c2)) * (((-((t2 * (b1 + c1) / 2) - c1)) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2)) - (-((t1 * (b1 + c1) / 2) - b1)) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2))) * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + (((t1 * (b2 + c2) / 2) - b2) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2)) - ((t2 * (b2 + c2) / 2) - c2) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2))) * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1))) = ((b1^2 + b2^2)*(b1*c2 - b2*c1)^3*(b1*c1*t2 + b2*c2*t2 + c1^2*t2 - c1^2 + c2^2*t2 - c2^2)*(b1^2*t2 - b1^2 - b1*c1*t2 + 2*b1*c1 + b2^2*t2 - b2^2 - b2*c2*t2 + 2*b2*c2)/4) := by
-    linear_combination ((b1*c2 - b2*c1)^3*(2*b1^4*t1*t2^2 - b1^4*t1*t2 - 3*b1^4*t2^2 + 2*b1^4*t2 + 6*b1^3*c1*t1*t2^2 - 5*b1^3*c1*t1*t2 - 5*b1^3*c1*t2^2 + 3*b1^3*c1*t2 + 4*b1^2*b2^2*t1*t2^2 - 2*b1^2*b2^2*t1*t2 - 6*b1^2*b2^2*t2^2 + 4*b1^2*b2^2*t2 + 6*b1^2*b2*c2*t1*t2^2 - 5*b1^2*b2*c2*t1*t2 - 5*b1^2*b2*c2*t2^2 + 3*b1^2*b2*c2*t2 + 6*b1^2*c1^2*t1*t2^2 - 9*b1^2*c1^2*t1*t2 + 3*b1^2*c1^2*t1 - 3*b1^2*c1^2*t2^2 + 2*b1^2*c1^2*t2 + b1^2*c1^2 + 2*b1^2*c2^2*t1*t2^2 - 5*b1^2*c2^2*t1*t2 + 3*b1^2*c2^2*t1 + b1^2*c2^2*t2^2 - 2*b1^2*c2^2*t2 + b1^2*c2^2 + 6*b1*b2^2*c1*t1*t2^2 - 5*b1*b2^2*c1*t1*t2 - 5*b1*b2^2*c1*t2^2 + 3*b1*b2^2*c1*t2 + 8*b1*b2*c1*c2*t1*t2^2 - 8*b1*b2*c1*c2*t1*t2 - 8*b1*b2*c1*c2*t2^2 + 8*b1*b2*c1*c2*t2 + 2*b1*c1^3*t1*t2^2 - 5*b1*c1^3*t1*t2 + 3*b1*c1^3*t1 - b1*c1^3*t2^2 + 3*b1*c1^3*t2 - 2*b1*c1^3 + 2*b1*c1*c2^2*t1*t2^2 - 5*b1*c1*c2^2*t1*t2 + 3*b1*c1*c2^2*t1 - b1*c1*c2^2*t2^2 + 3*b1*c1*c2^2*t2 - 2*b1*c1*c2^2 + 2*b2^4*t1*t2^2 - b2^4*t1*t2 - 3*b2^4*t2^2 + 2*b2^4*t2 + 6*b2^3*c2*t1*t2^2 - 5*b2^3*c2*t1*t2 - 5*b2^3*c2*t2^2 + 3*b2^3*c2*t2 + 2*b2^2*c1^2*t1*t2^2 - 5*b2^2*c1^2*t1*t2 + 3*b2^2*c1^2*t1 + b2^2*c1^2*t2^2 - 2*b2^2*c1^2*t2 + b2^2*c1^2 + 6*b2^2*c2^2*t1*t2^2 - 9*b2^2*c2^2*t1*t2 + 3*b2^2*c2^2*t1 - 3*b2^2*c2^2*t2^2 + 2*b2^2*c2^2*t2 + b2^2*c2^2 + 2*b2*c1^2*c2*t1*t2^2 - 5*b2*c1^2*c2*t1*t2 + 3*b2*c1^2*c2*t1 - b2*c1^2*c2*t2^2 + 3*b2*c1^2*c2*t2 - 2*b2*c1^2*c2 + 2*b2*c2^3*t1*t2^2 - 5*b2*c2^3*t1*t2 + 3*b2*c2^3*t1 - b2*c2^3*t2^2 + 3*b2*c2^3*t2 - 2*b2*c2^3)/4) * ht1
-  have h2 : (c1^2 + c2^2 + (b1 * c1 + b2 * c2))^2 * ((b1^2 + b2^2)*(b1*c2 - b2*c1)^3*(b1*c1*t2 + b2*c2*t2 + c1^2*t2 - c1^2 + c2^2*t2 - c2^2)*(b1^2*t2 - b1^2 - b1*c1*t2 + 2*b1*c1 + b2^2*t2 - b2^2 - b2*c2*t2 + 2*b2*c2)/4) = 0 := by
-    linear_combination ((b1^2 + b2^2)*(b1*c2 - b2*c1)^3*(b1*c1 + b2*c2 + c1^2 + c2^2)^2*(b1^2*t2 - b1^2 - b1*c1*t2 + 2*b1*c1 + b2^2*t2 - b2^2 - b2*c2*t2 + 2*b2*c2)/4) * ht2
-  have h12 : (c1^2 + c2^2 + (b1 * c1 + b2 * c2))^2 * (b1^2 + b2^2 + (b1 * c1 + b2 * c2))^2 * (2 * (b1 * c2 - b2 * c1) * (((-((t2 * (b1 + c1) / 2) - c1)) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2)) - (-((t1 * (b1 + c1) / 2) - b1)) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2)))^2 + (((t1 * (b2 + c2) / 2) - b2) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2)) - ((t2 * (b2 + c2) / 2) - c2) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2)))^2) - (((t1 * (b2 + c2) / 2) - b2) * (-((t2 * (b1 + c1) / 2) - c1)) - (-((t1 * (b1 + c1) / 2) - b1)) * ((t2 * (b2 + c2) / 2) - c2)) * (((-((t2 * (b1 + c1) / 2) - c1)) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2)) - (-((t1 * (b1 + c1) / 2) - b1)) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2))) * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + (((t1 * (b2 + c2) / 2) - b2) * (c1 * (t2 * (b2 + c2) / 2) - c2 * (t2 * (b1 + c1) / 2)) - ((t2 * (b2 + c2) / 2) - c2) * (b1 * (t1 * (b2 + c2) / 2) - b2 * (t1 * (b1 + c1) / 2))) * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1))) = 0 := by
-    linear_combination (c1^2 + c2^2 + (b1 * c1 + b2 * c2))^2 * h1 + h2
-  have hbigH : 2 * (b1 * c2 - b2 * c1) * (((-(e1 - c1)) * (b1 * d2 - b2 * d1) - (-(d1 - b1)) * (c1 * e2 - c2 * e1))^2 + ((d2 - b2) * (c1 * e2 - c2 * e1) - (e2 - c2) * (b1 * d2 - b2 * d1))^2) =
-      ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) * (((-(e1 - c1)) * (b1 * d2 - b2 * d1) - (-(d1 - b1)) * (c1 * e2 - c2 * e1)) * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + ((d2 - b2) * (c1 * e2 - c2 * e1) - (e2 - c2) * (b1 * d2 - b2 * d1)) * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1)) := by
-    rw [hd1v, hd2v, he1v, he2v]
-    rcases mul_eq_zero.mp h12 with hM | hG
-    · rcases mul_eq_zero.mp hM with hM2 | hM1
-      · exact absurd hM2 (pow_ne_zero 2 hden2)
-      · exact absurd hM1 (pow_ne_zero 2 hden1)
-    · linear_combination hG
-  -- Multiply the goal by `DETF^2`, rewrite `DETF * fi` as `Si`, and conclude.
-  have key : ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2))^2 * (2 * (b1 * c2 - b2 * c1) * (f1^2 + f2^2) -
-      (f1 * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + f2 * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1))) = 0 := by
-    have e1 : ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2))^2 * (2 * (b1 * c2 - b2 * c1) * (f1^2 + f2^2) -
-        (f1 * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + f2 * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1))) =
-        2 * (b1 * c2 - b2 * c1) * (((-(e1 - c1)) * (b1 * d2 - b2 * d1) - (-(d1 - b1)) * (c1 * e2 - c2 * e1))^2 + ((d2 - b2) * (c1 * e2 - c2 * e1) - (e2 - c2) * (b1 * d2 - b2 * d1))^2) - ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) * (((-(e1 - c1)) * (b1 * d2 - b2 * d1) - (-(d1 - b1)) * (c1 * e2 - c2 * e1)) * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + ((d2 - b2) * (c1 * e2 - c2 * e1) - (e2 - c2) * (b1 * d2 - b2 * d1)) * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1)) := by
-      linear_combination 2 * (b1 * c2 - b2 * c1) * ((((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) * f1 + ((-(e1 - c1)) * (b1 * d2 - b2 * d1) - (-(d1 - b1)) * (c1 * e2 - c2 * e1))) * hf1 +
-          (((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) * f2 + ((d2 - b2) * (c1 * e2 - c2 * e1) - (e2 - c2) * (b1 * d2 - b2 * d1))) * hf2) -
-        ((d2 - b2) * (-(e1 - c1)) - (-(d1 - b1)) * (e2 - c2)) * (((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) * hf1 + ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1) * hf2)
-    linear_combination e1 + hbigH
-  have hG : 2 * (b1 * c2 - b2 * c1) * (f1^2 + f2^2) - (f1 * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + f2 * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1)) = 0 := by
+  have hf1 : ((t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+        (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1)) * f1 =
+      -(b1 * c2 - b2 * c1) * (t1 * (t2 * (b1 + c1) - 2 * c1) + t2 * (t1 * (b1 + c1) - 2 * b1)) := by
+    linear_combination (-(t2 * (b1 + c1) - 2 * c1)) * g1 + (t1 * (b1 + c1) - 2 * b1) * g2
+  have hf2 : ((t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+        (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1)) * f2 =
+      -(b1 * c2 - b2 * c1) * (t2 * (t1 * (b2 + c2) - 2 * b2) + t1 * (t2 * (b2 + c2) - 2 * c2)) := by
+    linear_combination (-(t2 * (b2 + c2) - 2 * c2)) * g1 + (t1 * (b2 + c2) - 2 * b2) * g2
+  -- The determinant is `2 * det(b,c) * (2 - t1 - t2)`.
+  have hDETF : (t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+      (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1) =
+      2 * (b1 * c2 - b2 * c1) * (2 - t1 - t2) := by
+    ring
+  -- The ray relations give `DEN1 * DEN2 * (2 - t1 - t2) = (b · c) * |b + c|^2`.
+  have hDEN : (b1^2 + b2^2 + (b1 * c1 + b2 * c2)) * (c1^2 + c2^2 + (b1 * c1 + b2 * c2)) *
+        (2 - t1 - t2) = (b1 * c1 + b2 * c2) * ((b1 + c1)^2 + (b2 + c2)^2) := by
+    linear_combination (-(c1^2 + c2^2 + (b1 * c1 + b2 * c2))) * ht1 +
+      (-(b1^2 + b2^2 + (b1 * c1 + b2 * c2))) * ht2
+  -- Hence the determinant is nonzero.
+  have htt : (2 - t1 - t2) ≠ 0 := by
+    intro h
+    rw [h, mul_zero] at hDEN
+    exact (mul_ne_zero (ne_of_gt hbcpos) hm) hDEN.symm
+  have hDETFne : (t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+        (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1) ≠ 0 := by
+    rw [hDETF]
+    exact mul_ne_zero (mul_ne_zero two_ne_zero hdet) htt
+  -- The key polynomial identity `det * (W1^2 + W2^2) + (2 - t1 - t2) * (W · K) = 0`,
+  -- certified modulo the two ray relations.
+  have hBIG : (b1 * c2 - b2 * c1) * ((t1 * (t2 * (b1 + c1) - 2 * c1) +
+        t2 * (t1 * (b1 + c1) - 2 * b1))^2 + (t2 * (t1 * (b2 + c2) - 2 * b2) +
+        t1 * (t2 * (b2 + c2) - 2 * c2))^2) +
+      (2 - t1 - t2) * ((t1 * (t2 * (b1 + c1) - 2 * c1) + t2 * (t1 * (b1 + c1) - 2 * b1)) *
+        ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) + (t2 * (t1 * (b2 + c2) - 2 * b2) +
+        t1 * (t2 * (b2 + c2) - 2 * c2)) * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1)) = 0 := by
+    linear_combination (2 * t2 * (b1 * c2 - b2 * c1) * (2 * t1 * t2 - t1 - 3 * t2 + 2)) * ht1 +
+      (2 * t1 * (b1 * c2 - b2 * c1) * (2 * t1 * t2 - 3 * t1 - t2 + 2)) * ht2
+  -- Multiply the goal by `DETF^2`, rewrite `DETF * fi` as `-det * Wi`, and conclude.
+  have key : ((t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+        (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1))^2 *
+      (2 * (b1 * c2 - b2 * c1) * (f1^2 + f2^2) -
+        (f1 * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) +
+          f2 * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1))) = 0 := by
+    linear_combination (2 * (b1 * c2 - b2 * c1) * (((t1 * (b1 + c1) - 2 * b1) *
+          (t2 * (b2 + c2) - 2 * c2) - (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1)) * f1 -
+        (b1 * c2 - b2 * c1) * (t1 * (t2 * (b1 + c1) - 2 * c1) + t2 * (t1 * (b1 + c1) - 2 * b1))) -
+        ((t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+          (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1)) *
+          ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2)) * hf1 +
+      (2 * (b1 * c2 - b2 * c1) * (((t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+          (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1)) * f2 -
+        (b1 * c2 - b2 * c1) * (t2 * (t1 * (b2 + c2) - 2 * b2) + t1 * (t2 * (b2 + c2) - 2 * c2))) -
+        ((t1 * (b1 + c1) - 2 * b1) * (t2 * (b2 + c2) - 2 * c2) -
+          (t1 * (b2 + c2) - 2 * b2) * (t2 * (b1 + c1) - 2 * c1)) *
+          ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1)) * hf2 +
+      (2 * (b1 * c2 - b2 * c1)^2) * hBIG
+  have hG : 2 * (b1 * c2 - b2 * c1) * (f1^2 + f2^2) -
+      (f1 * ((b1^2 + b2^2) * c2 - (c1^2 + c2^2) * b2) +
+        f2 * ((c1^2 + c2^2) * b1 - (b1^2 + b2^2) * c1)) = 0 := by
     rcases mul_eq_zero.mp key with h | h
-    · exact absurd h (pow_ne_zero 2 hdetf)
+    · exact absurd h (pow_ne_zero 2 hDETFne)
     · exact h
   linear_combination hG
+
+
 
 
 snip end

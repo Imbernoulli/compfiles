@@ -4,7 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.EuclideanDomain.Basic
+import Mathlib.Algebra.EuclideanDomain.Int
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.Normed.Ring.Lemmas
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Int.SuccPred
+import Mathlib.Data.Sym.Sym2
+import Mathlib.Logic.Equiv.Fin.Rotate
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.LinearCombination.Lemmas
 
 import ProblemExtraction
 
@@ -4480,477 +4491,532 @@ theorem mid_cases (W : OrthoLoop) (k : Fin (W.n + 4)) (c : Cell) (h : W.mid k = 
   · exact Or.inr ⟨hy, by omega, Or.inl (by omega)⟩
   · exact Or.inr ⟨hy, by omega, Or.inr (by omega)⟩
 
-set_option maxHeartbeats 800000 in
-/-- Case (B): peel off a convex 2×2 block, deleting `v` and `r`. -/
-theorem peel_case (W : OrthoLoop) (x₀ ym : ℤ)
-    (h0 : W.v 0 = (x₀, ym)) (hmax : ∀ i, (W.v i).2 ≤ ym)
-    (hmin : ∀ i, (W.v i).2 = ym → x₀ ≤ (W.v i).1)
-    (h1 : W.v 1 = (x₀ + 2, ym)) (h2 : W.v 2 = (x₀ + 2, ym - 2))
-    (hn1 : W.v (-1) = (x₀, ym - 2)) (hn : 2 ≤ W.n)
-    (hd : W.v (-2) ≠ (x₀ + 2, ym - 2)) :
-    ∃ W' : OrthoLoop, W'.I + 2 = W.I ∧ W'.T = W.T + 4 ∧ W'.L + 2 = W.L := by
-  classical
+theorem peel_hpa (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    (x₀ : ZMod 2) = W.a := by
   have h0x : (W.v 0).1 = x₀ := congrArg Prod.fst h0
+  rw [← h0x]; exact W.parX 0
+
+theorem peel_hpb (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    (ym : ZMod 2) = W.b := by
   have h0y : (W.v 0).2 = ym := congrArg Prod.snd h0
-  have h2x : (W.v 2).1 = x₀ + 2 := congrArg Prod.fst h2
-  have h2y : (W.v 2).2 = ym - 2 := congrArg Prod.snd h2
-  have hpa : (x₀ : ZMod 2) = W.a := by rw [← h0x]; exact W.parX 0
-  have hpb : (ym : ZMod 2) = W.b := by rw [← h0y]; exact W.parY 0
-  have hn1' : W.v ⟨W.n + 3, by omega⟩ = (x₀, ym - 2) := by
-    have e : (⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) = (-1 : Fin (W.n + 4)) := by
-      apply Fin.ext
-      simp [val_neg_one_fin]
-    rw [e]
-    exact hn1
-  have hdx : (W.v ⟨W.n + 3, by omega⟩).1 = x₀ := congrArg Prod.fst hn1'
-  have hdy : (W.v ⟨W.n + 3, by omega⟩).2 = ym - 2 := congrArg Prod.snd hn1'
-  have hkey : ∀ z : ZMod 2, z = 0 ∨ z = 1 := by decide
-  have hparx1 : ((x₀ + 1 : ℤ) : ZMod 2) ≠ W.a := by
-    rw [← hpa]
-    push_cast
-    rcases hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
-  have hpary1 : ((ym - 1 : ℤ) : ZMod 2) ≠ W.b := by
-    rw [← hpb]
-    push_cast
-    rcases hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
-  have hpary3 : ((ym - 3 : ℤ) : ZMod 2) ≠ W.b := by
-    rw [← hpb]
-    push_cast
-    rcases hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
-  -- the wrap segment is {d, (x₀+1, ym-2), r'}
-  have hsegwrap : ({(x₀, ym - 2), midPt (x₀, ym - 2) (x₀ + 2, ym - 2),
-      (x₀ + 2, ym - 2)} : Finset Cell) =
-      {(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} := by
-    have hm : midPt (x₀, ym - 2) (x₀ + 2, ym - 2) = (x₀ + 1, ym - 2) := by
-      simp only [midPt, Prod.mk.injEq]
-      constructor <;> omega
-    rw [hm]
-  -- the wrap edge is disjoint from all W-edges with index in {3,…,n+1}
-  have hwrap_disjoint : ∀ (k : Fin (W.n + 4)), 3 ≤ (k : ℕ) → (k : ℕ) ≤ W.n + 1 →
+  rw [← h0y]; exact W.parY 0
+
+theorem peel_hn1' (W : OrthoLoop) (x₀ ym : ℤ) (hn1 : W.v (-1) = (x₀, ym - 2)) :
+    W.v ⟨W.n + 3, by omega⟩ = (x₀, ym - 2) := by
+  have e : (⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) = (-1 : Fin (W.n + 4)) := by
+    apply Fin.ext
+    simp [val_neg_one_fin]
+  rw [e]
+  exact hn1
+
+theorem peel_hkey : ∀ z : ZMod 2, z = 0 ∨ z = 1 := by decide
+
+theorem peel_hparx1 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((x₀ + 1 : ℤ) : ZMod 2) ≠ W.a := by
+  rw [← peel_hpa W x₀ ym h0]
+  push_cast
+  rcases peel_hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem peel_hparx2 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((x₀ - 1 : ℤ) : ZMod 2) ≠ W.a := by
+  rw [← peel_hpa W x₀ ym h0]
+  push_cast
+  rcases peel_hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem peel_hparx3 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((x₀ + 3 : ℤ) : ZMod 2) ≠ W.a := by
+  rw [← peel_hpa W x₀ ym h0]
+  push_cast
+  rcases peel_hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem peel_hpary1 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((ym - 1 : ℤ) : ZMod 2) ≠ W.b := by
+  rw [← peel_hpb W x₀ ym h0]
+  push_cast
+  rcases peel_hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem peel_hpary3 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((ym - 3 : ℤ) : ZMod 2) ≠ W.b := by
+  rw [← peel_hpb W x₀ ym h0]
+  push_cast
+  rcases peel_hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem peel_hwrap_disjoint (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (hn1 : W.v (-1) = (x₀, ym - 2)) (h2 : W.v 2 = (x₀ + 2, ym - 2)) :
+    ∀ (k : Fin (W.n + 4)), 3 ≤ (k : ℕ) → (k : ℕ) ≤ W.n + 1 →
       Disjoint ({(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} : Finset Cell)
         (W.edgePts k) := by
-    intro k hk3 hkn
-    rw [Finset.disjoint_left]
-    intro c hc hc'
-    simp only [Finset.mem_insert, Finset.mem_singleton] at hc
-    have hjd : ∀ (j : Fin (W.n + 4)), W.v j = (x₀, ym - 2) → (j : ℕ) = W.n + 3 := by
-      intro j hj
-      have hjk := W.inj (hj.trans hn1'.symm)
-      have hv := congrArg Fin.val hjk
-      have hvv : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
-      rw [hvv] at hv
-      exact hv
-    have hjr : ∀ (j : Fin (W.n + 4)), W.v j = (x₀ + 2, ym - 2) → (j : ℕ) = 2 := by
-      intro j hj
-      have hjk := W.inj (hj.trans h2.symm)
-      have hv := congrArg Fin.val hjk
-      rw [val_two_fin] at hv
-      exact hv
-    rcases hc with rfl | rfl | rfl
-    · -- c = (x₀, ym−2) = d
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · -- vertex: j = k = n+3 contradicts hkn
-        have hjk := hjd _ h.symm
-        omega
-      · -- midpoint
-        rcases W.mid_cases k _ h.symm with ⟨hx, h1, h2 | h2⟩ | ⟨hy, h1, h2 | h2⟩
-        · -- vertical: (W.v k).2 = ym−3, parity
-          have hyk : (W.v k).2 = ym - 3 := by
-            have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary3 (hyk ▸ W.parY k)
-        · -- vertical: (W.v k).2 = ym−1, parity
-          have hyk : (W.v k).2 = ym - 1 := by
-            have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary1 (hyk ▸ W.parY k)
-        · -- horizontal: (W.v k).1 = x₀−1, parity
-          have h1' : (W.v k).1 = x₀ - 1 := by
-            have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
-            omega
-          have hparx2 : ((x₀ - 1 : ℤ) : ZMod 2) ≠ W.a := by
-            rw [← hpa]
-            push_cast
-            rcases hkey (x₀ : ZMod 2) with h2' | h2' <;> rw [h2'] <;> decide
-          exact hparx2 (h1' ▸ W.parX k)
-        · -- horizontal: (W.v k).1 = x₀+1, parity
-          have h1' : (W.v k).1 = x₀ + 1 := by
-            have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
-            omega
-          exact hparx1 (h1' ▸ W.parX k)
-      · -- vertex k+1: k+1 = n+3 contradicts hkn
-        have hjk := hjd _ h.symm
-        have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
-          rw [Fin.val_add, Fin.val_one']
-          have h1 : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-          rw [h1, Nat.mod_eq_of_lt (by omega : (k:ℕ) + 1 < W.n + 4)]
-        have hjk2 := hjd (k + 1) h.symm
-        rw [h1m] at hjk2
-        omega
-    · -- c = (x₀+1, ym−2)
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · have hz : (W.v k).1 = x₀ + 1 := (congrArg Prod.fst h).symm
-        exact hparx1 (hz ▸ W.parX k)
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1, h2 | h2⟩ | ⟨hy, h1, h2 | h2⟩
-        · have h1x : (W.v k).1 = x₀ + 1 := h1.symm
-          exact hparx1 (h1x ▸ W.parX k)
-        · have h1x : (W.v k).1 = x₀ + 1 := h1.symm
-          exact hparx1 (h1x ▸ W.parX k)
-        · -- horizontal: (W.v k).1 = x₀ ⟹ d ⟹ k = n+3
-          have h1' : (W.v k).1 = x₀ := by
-            have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
-            omega
-          have h2' : (W.v k).2 = ym - 2 := h1.symm
-          have hkv : W.v k = (x₀, ym - 2) := Prod.ext h1' h2'
-          have hjk := hjd _ hkv
+  classical
+  have hpa := peel_hpa W x₀ ym h0
+  have hkey := peel_hkey
+  have hparx1 := peel_hparx1 W x₀ ym h0
+  have hparx2 := peel_hparx2 W x₀ ym h0
+  have hparx3 := peel_hparx3 W x₀ ym h0
+  have hpary1 := peel_hpary1 W x₀ ym h0
+  have hpary3 := peel_hpary3 W x₀ ym h0
+  have hn1' := peel_hn1' W x₀ ym hn1
+  intro k hk3 hkn
+  rw [Finset.disjoint_left]
+  intro c hc hc'
+  simp only [Finset.mem_insert, Finset.mem_singleton] at hc
+  have hjd : ∀ (j : Fin (W.n + 4)), W.v j = (x₀, ym - 2) → (j : ℕ) = W.n + 3 := by
+    intro j hj
+    have hjk := W.inj (hj.trans hn1'.symm)
+    have hv := congrArg Fin.val hjk
+    have hvv : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
+    rw [hvv] at hv
+    exact hv
+  have hjr : ∀ (j : Fin (W.n + 4)), W.v j = (x₀ + 2, ym - 2) → (j : ℕ) = 2 := by
+    intro j hj
+    have hjk := W.inj (hj.trans h2.symm)
+    have hv := congrArg Fin.val hjk
+    rw [val_two_fin] at hv
+    exact hv
+  rcases hc with rfl | rfl | rfl
+  · -- c = (x₀, ym−2) = d
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · -- vertex: j = k = n+3 contradicts hkn
+      have hjk := hjd _ h.symm
+      omega
+    · -- midpoint
+      rcases W.mid_cases k _ h.symm with ⟨hx, h1, h2 | h2⟩ | ⟨hy, h1, h2 | h2⟩
+      · -- vertical: (W.v k).2 = ym−3, parity
+        have hyk : (W.v k).2 = ym - 3 := by
+          have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
           omega
-        · -- horizontal: (W.v k).1 = x₀+2 ⟹ r′ ⟹ k = 2
-          have h1' : (W.v k).1 = x₀ + 2 := by
-            have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
-            omega
-          have h2' : (W.v k).2 = ym - 2 := h1.symm
-          have hkv : W.v k = (x₀ + 2, ym - 2) := Prod.ext h1' h2'
-          have hjk := hjr _ hkv
+        exact hpary3 (hyk ▸ W.parY k)
+      · -- vertical: (W.v k).2 = ym−1, parity
+        have hyk : (W.v k).2 = ym - 1 := by
+          have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
           omega
-      · have hz : (W.v (k + 1)).1 = x₀ + 1 := (congrArg Prod.fst h).symm
-        exact hparx1 (hz ▸ W.parX (k + 1))
-    · -- c = (x₀+2, ym−2) = r′
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · have hjk := hjr _ h.symm
+        exact hpary1 (hyk ▸ W.parY k)
+      · -- horizontal: (W.v k).1 = x₀−1, parity
+        have h1' : (W.v k).1 = x₀ - 1 := by
+          have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
+          omega
+        have hparx2 : ((x₀ - 1 : ℤ) : ZMod 2) ≠ W.a := by
+          rw [← hpa]
+          push_cast
+          rcases hkey (x₀ : ZMod 2) with h2' | h2' <;> rw [h2'] <;> decide
+        exact hparx2 (h1' ▸ W.parX k)
+      · -- horizontal: (W.v k).1 = x₀+1, parity
+        have h1' : (W.v k).1 = x₀ + 1 := by
+          have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
+          omega
+        exact hparx1 (h1' ▸ W.parX k)
+    · -- vertex k+1: k+1 = n+3 contradicts hkn
+      have hjk := hjd _ h.symm
+      have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
+        rw [Fin.val_add, Fin.val_one']
+        have h1 : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+        rw [h1, Nat.mod_eq_of_lt (by omega : (k:ℕ) + 1 < W.n + 4)]
+      have hjk2 := hjd (k + 1) h.symm
+      rw [h1m] at hjk2
+      omega
+  · -- c = (x₀+1, ym−2)
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · have hz : (W.v k).1 = x₀ + 1 := (congrArg Prod.fst h).symm
+      exact hparx1 (hz ▸ W.parX k)
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1, h2 | h2⟩ | ⟨hy, h1, h2 | h2⟩
+      · have h1x : (W.v k).1 = x₀ + 1 := h1.symm
+        exact hparx1 (h1x ▸ W.parX k)
+      · have h1x : (W.v k).1 = x₀ + 1 := h1.symm
+        exact hparx1 (h1x ▸ W.parX k)
+      · -- horizontal: (W.v k).1 = x₀ ⟹ d ⟹ k = n+3
+        have h1' : (W.v k).1 = x₀ := by
+          have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
+          omega
+        have h2' : (W.v k).2 = ym - 2 := h1.symm
+        have hkv : W.v k = (x₀, ym - 2) := Prod.ext h1' h2'
+        have hjk := hjd _ hkv
         omega
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1, h2 | h2⟩ | ⟨hy, h1, h2 | h2⟩
-        · have hyk : (W.v k).2 = ym - 3 := by
-            have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary3 (hyk ▸ W.parY k)
-        · have hyk : (W.v k).2 = ym - 1 := by
-            have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary1 (hyk ▸ W.parY k)
-        · have h1' : (W.v k).1 = x₀ + 1 := by
-            have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
-            omega
-          exact hparx1 (h1' ▸ W.parX k)
-        · have h1' : (W.v k).1 = x₀ + 3 := by
-            have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
-            omega
-          have hparx3 : ((x₀ + 3 : ℤ) : ZMod 2) ≠ W.a := by
-            rw [← hpa]
-            push_cast
-            rcases hkey (x₀ : ZMod 2) with h2' | h2' <;> rw [h2'] <;> decide
-          exact hparx3 (h1' ▸ W.parX k)
-      · have hjk2 := hjr (k + 1) h.symm
-        have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
-          rw [Fin.val_add, Fin.val_one']
-          have h1 : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-          rw [h1, Nat.mod_eq_of_lt (by omega : (k:ℕ) + 1 < W.n + 4)]
-        rw [h1m] at hjk2
+      · -- horizontal: (W.v k).1 = x₀+2 ⟹ r′ ⟹ k = 2
+        have h1' : (W.v k).1 = x₀ + 2 := by
+          have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
+          omega
+        have h2' : (W.v k).2 = ym - 2 := h1.symm
+        have hkv : W.v k = (x₀ + 2, ym - 2) := Prod.ext h1' h2'
+        have hjk := hjr _ hkv
         omega
+    · have hz : (W.v (k + 1)).1 = x₀ + 1 := (congrArg Prod.fst h).symm
+      exact hparx1 (hz ▸ W.parX (k + 1))
+  · -- c = (x₀+2, ym−2) = r′
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · have hjk := hjr _ h.symm
+      omega
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1, h2 | h2⟩ | ⟨hy, h1, h2 | h2⟩
+      · have hyk : (W.v k).2 = ym - 3 := by
+          have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary3 (hyk ▸ W.parY k)
+      · have hyk : (W.v k).2 = ym - 1 := by
+          have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary1 (hyk ▸ W.parY k)
+      · have h1' : (W.v k).1 = x₀ + 1 := by
+          have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
+          omega
+        exact hparx1 (h1' ▸ W.parX k)
+      · have h1' : (W.v k).1 = x₀ + 3 := by
+          have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
+          omega
+        have hparx3 : ((x₀ + 3 : ℤ) : ZMod 2) ≠ W.a := by
+          rw [← hpa]
+          push_cast
+          rcases hkey (x₀ : ZMod 2) with h2' | h2' <;> rw [h2'] <;> decide
+        exact hparx3 (h1' ▸ W.parX k)
+    · have hjk2 := hjr (k + 1) h.symm
+      have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
+        rw [Fin.val_add, Fin.val_one']
+        have h1 : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+        rw [h1, Nat.mod_eq_of_lt (by omega : (k:ℕ) + 1 < W.n + 4)]
+      rw [h1m] at hjk2
+      omega
 
-  -- segment of the `t`-th surgered edge (interior `t`), in W-terms
-  have hseg_of : ∀ (t : Fin (W.n - 2 + 4)), (t : ℕ) < W.n + 1 →
+theorem peel_hseg_of (W : OrthoLoop) (hn : 2 ≤ W.n) :
+    ∀ (t : Fin (W.n - 2 + 4)), (t : ℕ) < W.n + 1 →
       ({W.v ⟨↑t + 2, lt_of_isLt_add t (by omega)⟩, midPt (W.v ⟨↑t + 2, lt_of_isLt_add t (by omega)⟩)
         (W.v ⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, lt_of_isLt_add (t + 1) (by omega)⟩),
         W.v ⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, lt_of_isLt_add (t + 1) (by omega)⟩} : Finset Cell) =
       W.edgePts ⟨↑t + 2, lt_of_isLt_add t (by omega)⟩ := by
-    intro t ht
-    have e5 : ((t + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑t : ℕ) + 1 := by
-      have hv1 : ((t + 1 : Fin (W.n - 2 + 4)) : ℕ) = ((↑t : ℕ) + 1) % (W.n - 2 + 4) := by
-        rw [Fin.val_add, Fin.val_one']
-        have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-        rw [h1m]
-      rw [hv1, Nat.mod_eq_of_lt (by omega : (↑t : ℕ) + 1 < W.n - 2 + 4)]
-    have e6 : (⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, lt_of_isLt_add (t + 1) (by omega)⟩ : Fin (W.n + 4)) =
-        (⟨↑t + 2, lt_of_isLt_add t (by omega)⟩ : Fin (W.n + 4)) + 1 := by
-      apply Fin.ext
-      have hvL : ((⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, lt_of_isLt_add (t + 1) (by omega)⟩ : Fin (W.n + 4)) : ℕ) =
-          ((t + 1 : Fin (W.n - 2 + 4)) : ℕ) + 2 := rfl
-      rw [hvL, e5, Fin.val_add, Fin.val_one']
-      have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-      have h2m : (↑t + 2 + 1) % (W.n + 4) = ↑t + 2 + 1 := Nat.mod_eq_of_lt (by omega : ↑t + 3 < W.n + 4)
-      rw [h1m, h2m]
-    show ({W.v ⟨↑t + 2, by omega⟩, midPt (W.v ⟨↑t + 2, by omega⟩)
-        (W.v ⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, by omega⟩),
-        W.v ⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, by omega⟩} : Finset Cell) =
-      ({W.v ⟨↑t + 2, by omega⟩, midPt (W.v ⟨↑t + 2, by omega⟩) (W.v ((⟨↑t + 2, by omega⟩) + 1)),
-        W.v ((⟨↑t + 2, by omega⟩) + 1)} : Finset Cell)
-    rw [e6]
+  classical
+  intro t ht
+  have e5 : ((t + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑t : ℕ) + 1 := by
+    have hv1 : ((t + 1 : Fin (W.n - 2 + 4)) : ℕ) = ((↑t : ℕ) + 1) % (W.n - 2 + 4) := by
+      rw [Fin.val_add, Fin.val_one']
+      have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+      rw [h1m]
+    rw [hv1, Nat.mod_eq_of_lt (by omega : (↑t : ℕ) + 1 < W.n - 2 + 4)]
+  have e6 : (⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, lt_of_isLt_add (t + 1) (by omega)⟩ : Fin (W.n + 4)) =
+      (⟨↑t + 2, lt_of_isLt_add t (by omega)⟩ : Fin (W.n + 4)) + 1 := by
+    apply Fin.ext
+    have hvL : ((⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, lt_of_isLt_add (t + 1) (by omega)⟩ : Fin (W.n + 4)) : ℕ) =
+        ((t + 1 : Fin (W.n - 2 + 4)) : ℕ) + 2 := rfl
+    rw [hvL, e5, Fin.val_add, Fin.val_one']
+    have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+    have h2m : (↑t + 2 + 1) % (W.n + 4) = ↑t + 2 + 1 := Nat.mod_eq_of_lt (by omega : ↑t + 3 < W.n + 4)
+    rw [h1m, h2m]
+  show ({W.v ⟨↑t + 2, by omega⟩, midPt (W.v ⟨↑t + 2, by omega⟩)
+      (W.v ⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, by omega⟩),
+      W.v ⟨(((t + 1 : Fin (W.n - 2 + 4)) : ℕ)) + 2, by omega⟩} : Finset Cell) =
+    ({W.v ⟨↑t + 2, by omega⟩, midPt (W.v ⟨↑t + 2, by omega⟩) (W.v ((⟨↑t + 2, by omega⟩) + 1)),
+      W.v ((⟨↑t + 2, by omega⟩) + 1)} : Finset Cell)
+  rw [e6]
 
-  -- the surgered loop
-  let W' : OrthoLoop := {
-    a := W.a
-    b := W.b
-    n := W.n - 2
-    v := fun j => W.v ⟨j + 2, by omega⟩
-    inj := by
-      intro j j' h
-      have h2 : W.v ⟨j + 2, by omega⟩ = W.v ⟨j' + 2, by omega⟩ := h
-      have h3 := W.inj h2
-      have hv := congrArg Fin.val h3
+theorem peelLoop_inj (W : OrthoLoop) (hn : 2 ≤ W.n) :
+    Function.Injective (fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) := by
+  classical
+  intro j j' h
+  have h2 : W.v ⟨j + 2, by omega⟩ = W.v ⟨j' + 2, by omega⟩ := h
+  have h3 := W.inj h2
+  have hv := congrArg Fin.val h3
+  have hv1 : ((⟨j + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = j + 2 := rfl
+  have hv2 : ((⟨j' + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = j' + 2 := rfl
+  rw [hv1, hv2] at hv
+  have hjj : (j : ℕ) = (j' : ℕ) := by omega
+  exact Fin.ext hjj
+
+theorem peelLoop_step (W : OrthoLoop) (x₀ ym : ℤ)
+    (h2 : W.v 2 = (x₀ + 2, ym - 2)) (hn1 : W.v (-1) = (x₀, ym - 2)) (hn : 2 ≤ W.n) :
+    ∀ i : Fin (W.n - 2 + 4),
+      (((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).1 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).1 ∧ ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).2 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).2 + 2) ∨
+      (((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).1 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).1 ∧ ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).2 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).2 - 2) ∨
+      (((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).1 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).1 + 2 ∧ ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).2 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).2) ∨
+      (((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).1 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).1 - 2 ∧ ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)).2 = ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).2) := by
+  classical
+  have hn1' := peel_hn1' W x₀ ym hn1
+  beta_reduce
+  intro j
+  by_cases hj : (j : ℕ) + 1 < W.n - 2 + 4
+  · have hstep := W.step ⟨j + 2, by omega⟩
+    have e2 : (⟨j + 2, by omega⟩ : Fin (W.n + 4)) + 1 = ⟨j + 3, by omega⟩ := by
+      apply Fin.ext
+      rw [Fin.val_add, Fin.val_one']
       have hv1 : ((⟨j + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = j + 2 := rfl
-      have hv2 : ((⟨j' + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = j' + 2 := rfl
-      rw [hv1, hv2] at hv
-      have hjj : (j : ℕ) = (j' : ℕ) := by omega
-      exact Fin.ext hjj
-    step := by
-      intro j
-      by_cases hj : (j : ℕ) + 1 < W.n - 2 + 4
-      · have hstep := W.step ⟨j + 2, by omega⟩
-        have e2 : (⟨j + 2, by omega⟩ : Fin (W.n + 4)) + 1 = ⟨j + 3, by omega⟩ := by
-          apply Fin.ext
+      have hv2 : ((⟨j + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = j + 3 := rfl
+      rw [hv1, hv2]
+      have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+      have h2m : (j + 2 + 1) % (W.n + 4) = j + 2 + 1 := Nat.mod_eq_of_lt (by omega)
+      rw [h1m, h2m]
+    rw [e2] at hstep
+    have e : (j + 1 : Fin (W.n - 2 + 4)) = ⟨j + 1, by omega⟩ := by
+      apply Fin.ext
+      rw [Fin.val_add, Fin.val_one']
+      have hv1 : ((⟨j + 1, by omega⟩ : Fin (W.n - 2 + 4)) : ℕ) = j + 1 := rfl
+      rw [hv1]
+      have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+      have h2m : ((j : ℕ) + 1) % (W.n - 2 + 4) = (j : ℕ) + 1 := Nat.mod_eq_of_lt hj
+      rw [h1m, h2m]
+    rw [e]
+    exact hstep
+  · have hj2 : (j : ℕ) = W.n + 1 := by omega
+    have e0 : (j + 1 : Fin (W.n - 2 + 4)) = 0 := by
+      apply Fin.ext
+      rw [Fin.val_add, Fin.val_one', val_zero_fin]
+      have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+      rw [h1m, hj2]
+      have hself : (W.n + 1 + 1) % (W.n - 2 + 4) = 0 := by
+        have hm : W.n + 1 + 1 = W.n - 2 + 4 := by omega
+        rw [hm, Nat.mod_self]
+      exact hself
+    rw [e0]
+    have hjd : W.v ⟨j + 2, by omega⟩ = (x₀, ym - 2) := by
+      have hje : (⟨j + 2, by omega⟩ : Fin (W.n + 4)) = ⟨W.n + 3, by omega⟩ := by
+        apply Fin.ext
+        simp
+        omega
+      rw [hje]
+      exact hn1'
+    have e02 : (⟨(0 : Fin (W.n - 2 + 4)) + 2, by omega⟩ : Fin (W.n + 4)) = (2 : Fin (W.n + 4)) := by
+      apply Fin.ext
+      show ((⟨(0 : Fin (W.n - 2 + 4)) + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ((2 : Fin (W.n + 4)) : ℕ)
+      rw [val_two_fin]
+      show ((0 : Fin (W.n - 2 + 4)) + 2 : ℕ) = 2
+      rw [val_zero_fin]
+    rw [e02, hjd, h2]
+    exact Or.inr (Or.inr (Or.inl ⟨by simp, by simp⟩))
+
+theorem peelLoop_par (W : OrthoLoop) (hn : 2 ≤ W.n) :
+    ∀ i : Fin (W.n - 2 + 4), (((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).1 : ZMod 2) = W.a ∧ (((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i).2 : ZMod 2) = W.b := by
+  classical
+  beta_reduce
+  intro j
+  exact W.par ⟨j + 2, by omega⟩
+
+theorem peelLoop_simple (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (h2 : W.v 2 = (x₀ + 2, ym - 2)) (hn1 : W.v (-1) = (x₀, ym - 2)) (hn : 2 ≤ W.n) :
+    ∀ i j : Fin (W.n - 2 + 4), i ≠ j → i + 1 ≠ j → i ≠ j + 1 →
+      Disjoint ({(fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i, midPt ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) i) ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)), (fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (i + 1)} : Finset Cell)
+        ({(fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) j, midPt ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) j) ((fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (j + 1)), (fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩) (j + 1)} : Finset Cell) := by
+  classical
+  have hn1' := peel_hn1' W x₀ ym hn1
+  have hseg_of := peel_hseg_of W hn
+  have hwrap_disjoint := peel_hwrap_disjoint W x₀ ym h0 hn1 h2
+  beta_reduce
+  intro i j hij hi1j hij1
+  rw [Finset.disjoint_left]
+  intro c hci hcj
+  beta_reduce at hci hcj
+  -- wrap-edge successor value (used in both wrap cases)
+  by_cases hi : (i : ℕ) = W.n + 1
+  · -- i is the wrap edge
+    by_cases hj : (j : ℕ) = W.n + 1
+    · exact absurd (Fin.ext (by omega : (i : ℕ) = (j : ℕ))) hij
+    · -- i wrap, j interior
+      have hi1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = 0 := by
+        have hv1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑i + 1) % (W.n - 2 + 4) := by
           rw [Fin.val_add, Fin.val_one']
-          have hv1 : ((⟨j + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = j + 2 := rfl
-          have hv2 : ((⟨j + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = j + 3 := rfl
-          rw [hv1, hv2]
-          have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-          have h2m : (j + 2 + 1) % (W.n + 4) = j + 2 + 1 := Nat.mod_eq_of_lt (by omega)
-          rw [h1m, h2m]
-        rw [e2] at hstep
-        have e : (j + 1 : Fin (W.n - 2 + 4)) = ⟨j + 1, by omega⟩ := by
-          apply Fin.ext
-          rw [Fin.val_add, Fin.val_one']
-          have hv1 : ((⟨j + 1, by omega⟩ : Fin (W.n - 2 + 4)) : ℕ) = j + 1 := rfl
-          rw [hv1]
           have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-          have h2m : ((j : ℕ) + 1) % (W.n - 2 + 4) = (j : ℕ) + 1 := Nat.mod_eq_of_lt hj
-          rw [h1m, h2m]
-        rw [e]
-        exact hstep
-      · have hj2 : (j : ℕ) = W.n + 1 := by omega
-        have e0 : (j + 1 : Fin (W.n - 2 + 4)) = 0 := by
-          apply Fin.ext
-          rw [Fin.val_add, Fin.val_one', val_zero_fin]
-          have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-          rw [h1m, hj2]
-          have hself : (W.n + 1 + 1) % (W.n - 2 + 4) = 0 := by
-            have hm : W.n + 1 + 1 = W.n - 2 + 4 := by omega
-            rw [hm, Nat.mod_self]
-          exact hself
-        rw [e0]
-        have hjd : W.v ⟨j + 2, by omega⟩ = (x₀, ym - 2) := by
-          have hje : (⟨j + 2, by omega⟩ : Fin (W.n + 4)) = ⟨W.n + 3, by omega⟩ := by
+          rw [h1m]
+        rw [hv1, hi]
+        have hm : W.n + 1 + 1 = W.n - 2 + 4 := by omega
+        rw [hm, Nat.mod_self]
+      have hseg_i : ({W.v ⟨↑i + 2, by omega⟩, midPt (W.v ⟨↑i + 2, by omega⟩)
+          (W.v ⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩),
+          W.v ⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩} : Finset Cell) =
+          {(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} := by
+        have e1 : W.v ⟨↑i + 2, by omega⟩ = (x₀, ym - 2) := by
+          have e1a : (⟨↑i + 2, by omega⟩ : Fin (W.n + 4)) = ⟨W.n + 3, by omega⟩ := by
             apply Fin.ext
             simp
             omega
-          rw [hje]
+          rw [e1a]
           exact hn1'
-        have e02 : (⟨(0 : Fin (W.n - 2 + 4)) + 2, by omega⟩ : Fin (W.n + 4)) = (2 : Fin (W.n + 4)) := by
-          apply Fin.ext
-          show ((⟨(0 : Fin (W.n - 2 + 4)) + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ((2 : Fin (W.n + 4)) : ℕ)
-          rw [val_two_fin]
-          show ((0 : Fin (W.n - 2 + 4)) + 2 : ℕ) = 2
-          rw [val_zero_fin]
-        rw [e02, hjd, h2]
-        exact Or.inr (Or.inr (Or.inl ⟨by simp, by simp⟩))
-    par := by
-      intro j
-      exact W.par ⟨j + 2, by omega⟩
-    simple := by
-      intro i j hij hi1j hij1
-      rw [Finset.disjoint_left]
-      intro c hci hcj
-      beta_reduce at hci hcj
-      -- wrap-edge successor value (used in both wrap cases)
-      by_cases hi : (i : ℕ) = W.n + 1
-      · -- i is the wrap edge
-        by_cases hj : (j : ℕ) = W.n + 1
-        · exact absurd (Fin.ext (by omega : (i : ℕ) = (j : ℕ))) hij
-        · -- i wrap, j interior
-          have hi1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = 0 := by
-            have hv1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑i + 1) % (W.n - 2 + 4) := by
-              rw [Fin.val_add, Fin.val_one']
-              have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-              rw [h1m]
-            rw [hv1, hi]
-            have hm : W.n + 1 + 1 = W.n - 2 + 4 := by omega
-            rw [hm, Nat.mod_self]
-          have hseg_i : ({W.v ⟨↑i + 2, by omega⟩, midPt (W.v ⟨↑i + 2, by omega⟩)
-              (W.v ⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩),
-              W.v ⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩} : Finset Cell) =
-              {(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} := by
-            have e1 : W.v ⟨↑i + 2, by omega⟩ = (x₀, ym - 2) := by
-              have e1a : (⟨↑i + 2, by omega⟩ : Fin (W.n + 4)) = ⟨W.n + 3, by omega⟩ := by
-                apply Fin.ext
-                simp
-                omega
-              rw [e1a]
-              exact hn1'
-            have e2 : W.v ⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ = (x₀ + 2, ym - 2) := by
-              have e2a : (⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)) =
-                  (2 : Fin (W.n + 4)) := by
-                apply Fin.ext
-                show (⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)).val =
-                  ((2 : Fin (W.n + 4)) : ℕ)
-                show ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) + 2 = ((2 : Fin (W.n + 4)) : ℕ)
-                rw [hi1, val_two_fin]
-              rw [e2a, h2]
-            have e3 : midPt (x₀, ym - 2) (x₀ + 2, ym - 2) = (x₀ + 1, ym - 2) := by
-              simp only [midPt, Prod.mk.injEq]
-              constructor <;> omega
-            rw [e1, e2, e3]
-          rw [hseg_i] at hci
-          have hseg_j := hseg_of j (by omega)
-          rw [hseg_j] at hcj
-          have hjb : (j : ℕ) ≠ 0 ∧ (j : ℕ) ≤ W.n - 1 := by
-            constructor
-            · intro h0
-              have h10 : (i + 1 : Fin (W.n - 2 + 4)) = 0 := by
-                apply Fin.ext
-                rw [hi1, val_zero_fin]
-              exact hi1j (h10.trans (Fin.ext h0).symm)
-            · have hjn : (j : ℕ) ≠ W.n := by
-                intro h0
-                apply hij1
-                have e1 : (j + 1 : Fin (W.n - 2 + 4)) = i := by
-                  apply Fin.ext
-                  rw [hi]
-                  have hv1 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑j + 1) % (W.n - 2 + 4) := by
-                    rw [Fin.val_add, Fin.val_one']
-                    have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-                    rw [h1m]
-                  rw [hv1, h0]
-                  have hm : W.n - 2 + 4 = W.n + 2 := by omega
-                  rw [hm]
-                  exact Nat.mod_eq_of_lt (by omega)
-                exact e1.symm
-              have hjn1 : (j : ℕ) ≠ W.n + 1 := by
-                intro h0
-                exact hij (Fin.ext (by omega))
-              omega
-          have hk3 : (3 : ℕ) ≤ ↑j + 2 := by omega
-          have hkn : ↑j + 2 ≤ W.n + 1 := by omega
-          have hd := hwrap_disjoint ⟨↑j + 2, by omega⟩ hk3 hkn
-          rw [Finset.disjoint_left] at hd
-          exact hd hci hcj
-      · by_cases hj : (j : ℕ) = W.n + 1
-        · -- j wrap, i interior: symmetric
-          have hj1 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = 0 := by
-            have hv1 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑j + 1) % (W.n - 2 + 4) := by
-              rw [Fin.val_add, Fin.val_one']
-              have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-              rw [h1m]
-            rw [hv1, hj]
-            have hm : W.n + 1 + 1 = W.n - 2 + 4 := by omega
-            rw [hm, Nat.mod_self]
-          have hseg_j : ({W.v ⟨↑j + 2, by omega⟩, midPt (W.v ⟨↑j + 2, by omega⟩)
-              (W.v ⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩),
-              W.v ⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩} : Finset Cell) =
-              {(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} := by
-            have e1 : W.v ⟨↑j + 2, by omega⟩ = (x₀, ym - 2) := by
-              have e1a : (⟨↑j + 2, by omega⟩ : Fin (W.n + 4)) = ⟨W.n + 3, by omega⟩ := by
-                apply Fin.ext
-                simp
-                omega
-              rw [e1a]
-              exact hn1'
-            have e2 : W.v ⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ = (x₀ + 2, ym - 2) := by
-              have e2a : (⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)) =
-                  (2 : Fin (W.n + 4)) := by
-                apply Fin.ext
-                show (⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)).val =
-                  ((2 : Fin (W.n + 4)) : ℕ)
-                show ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) + 2 = ((2 : Fin (W.n + 4)) : ℕ)
-                rw [hj1, val_two_fin]
-              rw [e2a, h2]
-            have e3 : midPt (x₀, ym - 2) (x₀ + 2, ym - 2) = (x₀ + 1, ym - 2) := by
-              simp only [midPt, Prod.mk.injEq]
-              constructor <;> omega
-            rw [e1, e2, e3]
-          rw [hseg_j] at hcj
-          have hseg_i := hseg_of i (by omega)
-          rw [hseg_i] at hci
-          have hib : (i : ℕ) ≠ 0 ∧ (i : ℕ) ≤ W.n - 1 := by
-            constructor
-            · intro h0
-              have h10 : (j + 1 : Fin (W.n - 2 + 4)) = 0 := by
-                apply Fin.ext
-                rw [hj1, val_zero_fin]
-              exact hij1 ((Fin.ext h0).trans h10.symm)
-            · have hin : (i : ℕ) ≠ W.n := by
-                intro h0
-                apply hi1j
-                have e1 : (i + 1 : Fin (W.n - 2 + 4)) = j := by
-                  apply Fin.ext
-                  rw [hj]
-                  have hv1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑i + 1) % (W.n - 2 + 4) := by
-                    rw [Fin.val_add, Fin.val_one']
-                    have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-                    rw [h1m]
-                  rw [hv1, h0]
-                  have hm : W.n - 2 + 4 = W.n + 2 := by omega
-                  rw [hm]
-                  exact Nat.mod_eq_of_lt (by omega)
-                exact e1
-              omega
-          have hk3 : (3 : ℕ) ≤ ↑i + 2 := by omega
-          have hkn : ↑i + 2 ≤ W.n + 1 := by omega
-          have hd := hwrap_disjoint ⟨↑i + 2, by omega⟩ hk3 hkn
-          rw [Finset.disjoint_left] at hd
-          exact hd hcj hci
-        · -- both interior: W.simple applies
-          have hseg_i := hseg_of i (by omega)
-          have hseg_j := hseg_of j (by omega)
-          rw [hseg_i] at hci
-          rw [hseg_j] at hcj
-          have hiI : (i : ℕ) ≤ W.n := by omega
-          have hjI : (j : ℕ) ≤ W.n := by omega
-          have g1 : (⟨i + 2, by omega⟩ : Fin (W.n + 4)) ≠ ⟨j + 2, by omega⟩ := by
-            intro h
-            apply hij
-            have hv := congrArg Fin.val h
-            have hv1 : ((⟨i + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑i + 2 := rfl
-            have hv2 : ((⟨j + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑j + 2 := rfl
-            rw [hv1, hv2] at hv
-            exact Fin.ext (by omega)
-          have g2 : (⟨i + 2, by omega⟩ : Fin (W.n + 4)) + 1 ≠ ⟨j + 2, by omega⟩ := by
-            intro h
-            apply hi1j
-            have hv := congrArg Fin.val h
-            have hv2 : ((⟨j + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑j + 2 := rfl
-            rw [hv2] at hv
-            have hs1 : (((⟨i + 2, by omega⟩ : Fin (W.n + 4)) + 1 : Fin (W.n + 4)) : ℕ) = ↑i + 3 := by
-              rw [Fin.val_add, Fin.val_one']
-              have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-              have h2m : (↑i + 2 + 1) % (W.n + 4) = ↑i + 2 + 1 :=
-                Nat.mod_eq_of_lt (by omega : ↑i + 3 < W.n + 4)
-              rw [h1m, h2m]
-            rw [hs1] at hv
-            have e5 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = ↑i + 1 := by
-              have hv1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑i + 1) % (W.n - 2 + 4) := by
-                rw [Fin.val_add, Fin.val_one']
-                have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-                rw [h1m]
-              rw [hv1, Nat.mod_eq_of_lt (by omega : (↑i : ℕ) + 1 < W.n - 2 + 4)]
-            exact Fin.ext (by rw [e5]; omega)
-          have g3 : (⟨i + 2, by omega⟩ : Fin (W.n + 4)) ≠ ⟨j + 2, by omega⟩ + 1 := by
-            intro h
+        have e2 : W.v ⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ = (x₀ + 2, ym - 2) := by
+          have e2a : (⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)) =
+              (2 : Fin (W.n + 4)) := by
+            apply Fin.ext
+            show (⟨(↑(i + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)).val =
+              ((2 : Fin (W.n + 4)) : ℕ)
+            show ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) + 2 = ((2 : Fin (W.n + 4)) : ℕ)
+            rw [hi1, val_two_fin]
+          rw [e2a, h2]
+        have e3 : midPt (x₀, ym - 2) (x₀ + 2, ym - 2) = (x₀ + 1, ym - 2) := by
+          simp only [midPt, Prod.mk.injEq]
+          constructor <;> omega
+        rw [e1, e2, e3]
+      rw [hseg_i] at hci
+      have hseg_j := hseg_of j (by omega)
+      rw [hseg_j] at hcj
+      have hjb : (j : ℕ) ≠ 0 ∧ (j : ℕ) ≤ W.n - 1 := by
+        constructor
+        · intro h0
+          have h10 : (i + 1 : Fin (W.n - 2 + 4)) = 0 := by
+            apply Fin.ext
+            rw [hi1, val_zero_fin]
+          exact hi1j (h10.trans (Fin.ext h0).symm)
+        · have hjn : (j : ℕ) ≠ W.n := by
+            intro h0
             apply hij1
-            have hv := congrArg Fin.val h
-            have hv1 : ((⟨i + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑i + 2 := rfl
-            rw [hv1] at hv
-            have hs1 : (((⟨j + 2, by omega⟩ : Fin (W.n + 4)) + 1 : Fin (W.n + 4)) : ℕ) = ↑j + 3 := by
-              rw [Fin.val_add, Fin.val_one']
-              have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-              have h2m : (↑j + 2 + 1) % (W.n + 4) = ↑j + 2 + 1 :=
-                Nat.mod_eq_of_lt (by omega : ↑j + 3 < W.n + 4)
-              rw [h1m, h2m]
-            rw [hs1] at hv
-            have e5 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = ↑j + 1 := by
+            have e1 : (j + 1 : Fin (W.n - 2 + 4)) = i := by
+              apply Fin.ext
+              rw [hi]
               have hv1 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑j + 1) % (W.n - 2 + 4) := by
                 rw [Fin.val_add, Fin.val_one']
                 have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
                 rw [h1m]
-              rw [hv1, Nat.mod_eq_of_lt (by omega : (↑j : ℕ) + 1 < W.n - 2 + 4)]
-            exact Fin.ext (by rw [e5]; omega)
-          have hd := W.simple ⟨↑i + 2, by omega⟩ ⟨↑j + 2, by omega⟩ g1 g2 g3
-          rw [Finset.disjoint_left] at hd
-          exact hd hci hcj
-  }
+              rw [hv1, h0]
+              have hm : W.n - 2 + 4 = W.n + 2 := by omega
+              rw [hm]
+              exact Nat.mod_eq_of_lt (by omega)
+            exact e1.symm
+          have hjn1 : (j : ℕ) ≠ W.n + 1 := by
+            intro h0
+            exact hij (Fin.ext (by omega))
+          omega
+      have hk3 : (3 : ℕ) ≤ ↑j + 2 := by omega
+      have hkn : ↑j + 2 ≤ W.n + 1 := by omega
+      have hd := hwrap_disjoint ⟨↑j + 2, by omega⟩ hk3 hkn
+      rw [Finset.disjoint_left] at hd
+      exact hd hci hcj
+  · by_cases hj : (j : ℕ) = W.n + 1
+    · -- j wrap, i interior: symmetric
+      have hj1 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = 0 := by
+        have hv1 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑j + 1) % (W.n - 2 + 4) := by
+          rw [Fin.val_add, Fin.val_one']
+          have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+          rw [h1m]
+        rw [hv1, hj]
+        have hm : W.n + 1 + 1 = W.n - 2 + 4 := by omega
+        rw [hm, Nat.mod_self]
+      have hseg_j : ({W.v ⟨↑j + 2, by omega⟩, midPt (W.v ⟨↑j + 2, by omega⟩)
+          (W.v ⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩),
+          W.v ⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩} : Finset Cell) =
+          {(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} := by
+        have e1 : W.v ⟨↑j + 2, by omega⟩ = (x₀, ym - 2) := by
+          have e1a : (⟨↑j + 2, by omega⟩ : Fin (W.n + 4)) = ⟨W.n + 3, by omega⟩ := by
+            apply Fin.ext
+            simp
+            omega
+          rw [e1a]
+          exact hn1'
+        have e2 : W.v ⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ = (x₀ + 2, ym - 2) := by
+          have e2a : (⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)) =
+              (2 : Fin (W.n + 4)) := by
+            apply Fin.ext
+            show (⟨(↑(j + 1 : Fin (W.n - 2 + 4))) + 2, by omega⟩ : Fin (W.n + 4)).val =
+              ((2 : Fin (W.n + 4)) : ℕ)
+            show ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) + 2 = ((2 : Fin (W.n + 4)) : ℕ)
+            rw [hj1, val_two_fin]
+          rw [e2a, h2]
+        have e3 : midPt (x₀, ym - 2) (x₀ + 2, ym - 2) = (x₀ + 1, ym - 2) := by
+          simp only [midPt, Prod.mk.injEq]
+          constructor <;> omega
+        rw [e1, e2, e3]
+      rw [hseg_j] at hcj
+      have hseg_i := hseg_of i (by omega)
+      rw [hseg_i] at hci
+      have hib : (i : ℕ) ≠ 0 ∧ (i : ℕ) ≤ W.n - 1 := by
+        constructor
+        · intro h0
+          have h10 : (j + 1 : Fin (W.n - 2 + 4)) = 0 := by
+            apply Fin.ext
+            rw [hj1, val_zero_fin]
+          exact hij1 ((Fin.ext h0).trans h10.symm)
+        · have hin : (i : ℕ) ≠ W.n := by
+            intro h0
+            apply hi1j
+            have e1 : (i + 1 : Fin (W.n - 2 + 4)) = j := by
+              apply Fin.ext
+              rw [hj]
+              have hv1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑i + 1) % (W.n - 2 + 4) := by
+                rw [Fin.val_add, Fin.val_one']
+                have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+                rw [h1m]
+              rw [hv1, h0]
+              have hm : W.n - 2 + 4 = W.n + 2 := by omega
+              rw [hm]
+              exact Nat.mod_eq_of_lt (by omega)
+            exact e1
+          omega
+      have hk3 : (3 : ℕ) ≤ ↑i + 2 := by omega
+      have hkn : ↑i + 2 ≤ W.n + 1 := by omega
+      have hd := hwrap_disjoint ⟨↑i + 2, by omega⟩ hk3 hkn
+      rw [Finset.disjoint_left] at hd
+      exact hd hcj hci
+    · -- both interior: W.simple applies
+      have hseg_i := hseg_of i (by omega)
+      have hseg_j := hseg_of j (by omega)
+      rw [hseg_i] at hci
+      rw [hseg_j] at hcj
+      have hiI : (i : ℕ) ≤ W.n := by omega
+      have hjI : (j : ℕ) ≤ W.n := by omega
+      have g1 : (⟨i + 2, by omega⟩ : Fin (W.n + 4)) ≠ ⟨j + 2, by omega⟩ := by
+        intro h
+        apply hij
+        have hv := congrArg Fin.val h
+        have hv1 : ((⟨i + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑i + 2 := rfl
+        have hv2 : ((⟨j + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑j + 2 := rfl
+        rw [hv1, hv2] at hv
+        exact Fin.ext (by omega)
+      have g2 : (⟨i + 2, by omega⟩ : Fin (W.n + 4)) + 1 ≠ ⟨j + 2, by omega⟩ := by
+        intro h
+        apply hi1j
+        have hv := congrArg Fin.val h
+        have hv2 : ((⟨j + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑j + 2 := rfl
+        rw [hv2] at hv
+        have hs1 : (((⟨i + 2, by omega⟩ : Fin (W.n + 4)) + 1 : Fin (W.n + 4)) : ℕ) = ↑i + 3 := by
+          rw [Fin.val_add, Fin.val_one']
+          have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+          have h2m : (↑i + 2 + 1) % (W.n + 4) = ↑i + 2 + 1 :=
+            Nat.mod_eq_of_lt (by omega : ↑i + 3 < W.n + 4)
+          rw [h1m, h2m]
+        rw [hs1] at hv
+        have e5 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = ↑i + 1 := by
+          have hv1 : ((i + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑i + 1) % (W.n - 2 + 4) := by
+            rw [Fin.val_add, Fin.val_one']
+            have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+            rw [h1m]
+          rw [hv1, Nat.mod_eq_of_lt (by omega : (↑i : ℕ) + 1 < W.n - 2 + 4)]
+        exact Fin.ext (by rw [e5]; omega)
+      have g3 : (⟨i + 2, by omega⟩ : Fin (W.n + 4)) ≠ ⟨j + 2, by omega⟩ + 1 := by
+        intro h
+        apply hij1
+        have hv := congrArg Fin.val h
+        have hv1 : ((⟨i + 2, by omega⟩ : Fin (W.n + 4)) : ℕ) = ↑i + 2 := rfl
+        rw [hv1] at hv
+        have hs1 : (((⟨j + 2, by omega⟩ : Fin (W.n + 4)) + 1 : Fin (W.n + 4)) : ℕ) = ↑j + 3 := by
+          rw [Fin.val_add, Fin.val_one']
+          have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+          have h2m : (↑j + 2 + 1) % (W.n + 4) = ↑j + 2 + 1 :=
+            Nat.mod_eq_of_lt (by omega : ↑j + 3 < W.n + 4)
+          rw [h1m, h2m]
+        rw [hs1] at hv
+        have e5 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = ↑j + 1 := by
+          have hv1 : ((j + 1 : Fin (W.n - 2 + 4)) : ℕ) = (↑j + 1) % (W.n - 2 + 4) := by
+            rw [Fin.val_add, Fin.val_one']
+            have h1m : 1 % (W.n - 2 + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+            rw [h1m]
+          rw [hv1, Nat.mod_eq_of_lt (by omega : (↑j : ℕ) + 1 < W.n - 2 + 4)]
+        exact Fin.ext (by rw [e5]; omega)
+      have hd := W.simple ⟨↑i + 2, by omega⟩ ⟨↑j + 2, by omega⟩ g1 g2 g3
+      rw [Finset.disjoint_left] at hd
+      exact hd hci hcj
+
+set_option maxHeartbeats 800000 in
+theorem peelLoop_I (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (hmax : ∀ i, (W.v i).2 ≤ ym) (hmin : ∀ i, (W.v i).2 = ym → x₀ ≤ (W.v i).1)
+    (h1 : W.v 1 = (x₀ + 2, ym)) (h2 : W.v 2 = (x₀ + 2, ym - 2))
+    (hn1 : W.v (-1) = (x₀, ym - 2)) (hn : 2 ≤ W.n) :
+    ({ a := W.a, b := W.b, n := W.n - 2, v := fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩, inj := peelLoop_inj W hn, step := peelLoop_step W x₀ ym h2 hn1 hn, par := peelLoop_par W hn, simple := peelLoop_simple W x₀ ym h0 h2 hn1 hn } : OrthoLoop).I + 2 = W.I := by
+  classical
+  set W' := ({ a := W.a, b := W.b, n := W.n - 2, v := fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩, inj := peelLoop_inj W hn, step := peelLoop_step W x₀ ym h2 hn1 hn, par := peelLoop_par W hn, simple := peelLoop_simple W x₀ ym h0 h2 hn1 hn } : OrthoLoop)
   have hWn : W'.n = W.n - 2 := rfl
-  refine ⟨W', ?_, ?_, ?_⟩
+  have h0x : (W.v 0).1 = x₀ := congrArg Prod.fst h0
+  have h0y : (W.v 0).2 = ym := congrArg Prod.snd h0
+  have h2x : (W.v 2).1 = x₀ + 2 := congrArg Prod.fst h2
+  have h2y : (W.v 2).2 = ym - 2 := congrArg Prod.snd h2
+  have hn1' := peel_hn1' W x₀ ym hn1
+  have hdx : (W.v ⟨W.n + 3, by omega⟩).1 = x₀ := congrArg Prod.fst hn1'
+  have hdy : (W.v ⟨W.n + 3, by omega⟩).2 = ym - 2 := congrArg Prod.snd hn1'
+  have hpa := peel_hpa W x₀ ym h0
+  have hpb := peel_hpb W x₀ ym h0
+  have hkey := peel_hkey
+  have hparx1 := peel_hparx1 W x₀ ym h0
+  have hpary1 := peel_hpary1 W x₀ ym h0
   · -- I: W'.I + 2 = W.I
     have h1x : (W.v 1).1 = x₀ + 2 := congrArg Prod.fst h1
     have h1y : (W.v 1).2 = ym := congrArg Prod.snd h1
@@ -5919,6 +5985,16 @@ theorem peel_case (W : OrthoLoop) (x₀ ym : ℤ)
         (W'.box.filter fun c => W'.p2 c = 1 ∧ c ∉ W'.boundary).card + 2 := by
       rw [hset, Finset.card_union_of_disjoint hdisj, Finset.card_pair hne12]
     rw [W.I_eq, W'.I_eq, hcard]
+
+set_option maxHeartbeats 800000 in
+theorem peelLoop_T (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (h1 : W.v 1 = (x₀ + 2, ym)) (h2 : W.v 2 = (x₀ + 2, ym - 2))
+    (hn1 : W.v (-1) = (x₀, ym - 2)) (hn : 2 ≤ W.n) :
+    ({ a := W.a, b := W.b, n := W.n - 2, v := fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩, inj := peelLoop_inj W hn, step := peelLoop_step W x₀ ym h2 hn1 hn, par := peelLoop_par W hn, simple := peelLoop_simple W x₀ ym h0 h2 hn1 hn } : OrthoLoop).T = W.T + 4 := by
+  classical
+  set W' := ({ a := W.a, b := W.b, n := W.n - 2, v := fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩, inj := peelLoop_inj W hn, step := peelLoop_step W x₀ ym h2 hn1 hn, par := peelLoop_par W hn, simple := peelLoop_simple W x₀ ym h0 h2 hn1 hn } : OrthoLoop)
+  have hWn : W'.n = W.n - 2 := rfl
+  have hn1' := peel_hn1' W x₀ ym hn1
   · -- T: W'.T = W.T + 4
     -- natural-number indexed edge terms to ease sum manipulation
     let wW : ℕ → ℤ := fun i =>
@@ -6125,34 +6201,533 @@ theorem peel_case (W : OrthoLoop) (x₀ ym : ℤ)
       rw [hW'sum, hWsum, hmid, hwrap, hw0, hw1, hwlast]
       ring
     omega
-  · -- L: W'.L + 2 = W.L
-    show (W.n - 2 + 4) + 2 = W.n + 4
-    omega
 
 set_option maxHeartbeats 800000 in
-/-- Case (C1): push the corner in, replacing `v` by `r′`. -/
-theorem push_case (W : OrthoLoop) (x₀ ym : ℤ)
+/-- Case (B): peel off a convex 2×2 block, deleting `v` and `r`. -/
+theorem peel_case (W : OrthoLoop) (x₀ ym : ℤ)
     (h0 : W.v 0 = (x₀, ym)) (hmax : ∀ i, (W.v i).2 ≤ ym)
     (hmin : ∀ i, (W.v i).2 = ym → x₀ ≤ (W.v i).1)
-    (h1 : W.v 1 = (x₀ + 2, ym)) (h2 : W.v 2 = (x₀ + 4, ym))
+    (h1 : W.v 1 = (x₀ + 2, ym)) (h2 : W.v 2 = (x₀ + 2, ym - 2))
+    (hn1 : W.v (-1) = (x₀, ym - 2)) (hn : 2 ≤ W.n)
+    (hd : W.v (-2) ≠ (x₀ + 2, ym - 2)) :
+    ∃ W' : OrthoLoop, W'.I + 2 = W.I ∧ W'.T = W.T + 4 ∧ W'.L + 2 = W.L := by
+  classical
+  refine ⟨({ a := W.a, b := W.b, n := W.n - 2, v := fun j : Fin (W.n - 2 + 4) => W.v ⟨j + 2, by omega⟩, inj := peelLoop_inj W hn, step := peelLoop_step W x₀ ym h2 hn1 hn, par := peelLoop_par W hn, simple := peelLoop_simple W x₀ ym h0 h2 hn1 hn } : OrthoLoop), peelLoop_I W x₀ ym h0 hmax hmin h1 h2 hn1 hn,
+    peelLoop_T W x₀ ym h0 h1 h2 hn1 hn, ?_⟩
+  show (W.n - 2 + 4) + 2 = W.n + 4
+  omega
+
+theorem push_hpa (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    (x₀ : ZMod 2) = W.a := by
+  have h0x : (W.v 0).1 = x₀ := congrArg Prod.fst h0
+  rw [← h0x]; exact W.parX 0
+
+theorem push_hpb (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    (ym : ZMod 2) = W.b := by
+  have h0y : (W.v 0).2 = ym := congrArg Prod.snd h0
+  rw [← h0y]; exact W.parY 0
+
+theorem push_hn1' (W : OrthoLoop) (x₀ ym : ℤ) (hn1 : W.v (-1) = (x₀, ym - 2)) :
+    W.v ⟨W.n + 3, by omega⟩ = (x₀, ym - 2) := by
+  have e : (⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) = (-1 : Fin (W.n + 4)) := by
+    apply Fin.ext
+    simp [val_neg_one_fin]
+  rw [e]
+  exact hn1
+
+theorem push_hkey : ∀ z : ZMod 2, z = 0 ∨ z = 1 := by decide
+
+theorem push_hparx1 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((x₀ + 1 : ℤ) : ZMod 2) ≠ W.a := by
+  rw [← push_hpa W x₀ ym h0]
+  push_cast
+  rcases push_hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem push_hparx2 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((x₀ - 1 : ℤ) : ZMod 2) ≠ W.a := by
+  rw [← push_hpa W x₀ ym h0]
+  push_cast
+  rcases push_hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem push_hparx3 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((x₀ + 3 : ℤ) : ZMod 2) ≠ W.a := by
+  rw [← push_hpa W x₀ ym h0]
+  push_cast
+  rcases push_hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem push_hpary1 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((ym - 1 : ℤ) : ZMod 2) ≠ W.b := by
+  rw [← push_hpb W x₀ ym h0]
+  push_cast
+  rcases push_hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem push_hpary3 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((ym - 3 : ℤ) : ZMod 2) ≠ W.b := by
+  rw [← push_hpb W x₀ ym h0]
+  push_cast
+  rcases push_hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem push_hparyp1 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ((ym + 1 : ℤ) : ZMod 2) ≠ W.b := by
+  rw [← push_hpb W x₀ ym h0]
+  push_cast
+  rcases push_hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
+
+theorem push_eS_last (W : OrthoLoop) :
+    (⟨W.n + 3, by omega⟩ + 1 : Fin (W.n + 4)) = 0 := by
+  apply Fin.ext
+  rw [Fin.val_add, Fin.val_one']
+  have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+  rw [h1m, val_zero_fin]
+  have hm : W.n + 3 + 1 = W.n + 4 := by omega
+  rw [hm, Nat.mod_self]
+
+theorem push_h1ne0 (W : OrthoLoop) : (1 : Fin (W.n + 4)) ≠ 0 := by
+  intro h
+  have hv := congrArg Fin.val h
+  rw [val_one_fin, val_zero_fin] at hv
+  omega
+
+theorem push_hn3ne (W : OrthoLoop) : (⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) ≠ 0 := by
+  intro h
+  have hv := congrArg Fin.val h
+  have hvL : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
+  rw [hvL, val_zero_fin] at hv
+  omega
+
+theorem push_hsucc_ne (W : OrthoLoop) :
+    ∀ i : Fin (W.n + 4), i ≠ ⟨W.n + 3, by omega⟩ → i + 1 ≠ 0 := by
+  intro i hin h0'
+  have hi3 : (i : ℕ) = W.n + 3 := by
+    have hv := congrArg Fin.val h0'
+    rw [Fin.val_add, Fin.val_one'] at hv
+    have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+    rw [h1m, val_zero_fin] at hv
+    have hilt := i.isLt
+    by_cases hc : (i : ℕ) + 1 = W.n + 4
+    · omega
+    · rw [Nat.mod_eq_of_lt (by omega : (i : ℕ) + 1 < W.n + 4)] at hv
+      omega
+  exact hin (Fin.ext hi3)
+
+theorem push_hE0 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (h1 : W.v 1 = (x₀ + 2, ym)) (hr : ∀ i, W.v i ≠ (x₀ + 2, ym - 2)) :
+    ∀ (k : Fin (W.n + 4)), 2 ≤ (k : ℕ) → (k : ℕ) ≤ W.n + 2 →
+      Disjoint ({(x₀ + 2, ym - 2), (x₀ + 2, ym - 1), (x₀ + 2, ym)} : Finset Cell)
+        (W.edgePts k) := by
+  classical
+  have hparx1 := push_hparx1 W x₀ ym h0
+  have hparx3 := push_hparx3 W x₀ ym h0
+  have hpary1 := push_hpary1 W x₀ ym h0
+  have hpary3 := push_hpary3 W x₀ ym h0
+  have hparyp1 := push_hparyp1 W x₀ ym h0
+  have hjr1 : ∀ j : Fin (W.n + 4), W.v j = (x₀ + 2, ym) → j = 1 :=
+    fun j hj => W.inj (hj.trans h1.symm)
+  intro k hk2 hkn
+  rw [Finset.disjoint_left]
+  intro c hc hc'
+  simp only [Finset.mem_insert, Finset.mem_singleton] at hc
+  rcases hc with rfl | rfl | rfl
+  · -- c = r′
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · exact absurd h.symm (hr k)
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
+      · have hyk : (W.v k).2 = ym - 3 := by
+          have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary3 (hyk ▸ W.parY k)
+      · have hyk : (W.v k).2 = ym - 1 := by
+          have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary1 (hyk ▸ W.parY k)
+      · have h1' : (W.v k).1 = x₀ + 1 := by
+          have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
+          omega
+        exact hparx1 (h1' ▸ W.parX k)
+      · have h1' : (W.v k).1 = x₀ + 3 := by
+          have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
+          omega
+        exact hparx3 (h1' ▸ W.parX k)
+    · exact absurd h.symm (hr (k + 1))
+  · -- c = (x₀+2, ym-1)
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · have hyk : (W.v k).2 = ym - 1 := (congrArg Prod.snd h).symm
+      exact hpary1 (hyk ▸ W.parY k)
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
+      · have hvy : (W.v k).2 = ym - 2 := by
+          have hc2 : ((x₀ + 2, ym - 1) : Cell).2 = ym - 1 := rfl
+          omega
+        have hvx : (W.v k).1 = x₀ + 2 := h1c.symm
+        exact absurd (Prod.ext hvx hvy) (hr k)
+      · have hvy : (W.v k).2 = ym := by
+          have hc2 : ((x₀ + 2, ym - 1) : Cell).2 = ym - 1 := rfl
+          omega
+        have hvx : (W.v k).1 = x₀ + 2 := h1c.symm
+        have hk1 : k = 1 := hjr1 k (Prod.ext hvx hvy)
+        have hv := congrArg Fin.val hk1
+        rw [val_one_fin] at hv
+        omega
+      · have hyk : (W.v k).2 = ym - 1 := h1c.symm
+        exact hpary1 (hyk ▸ W.parY k)
+      · have hyk : (W.v k).2 = ym - 1 := h1c.symm
+        exact hpary1 (hyk ▸ W.parY k)
+    · have hyk : (W.v (k + 1)).2 = ym - 1 := (congrArg Prod.snd h).symm
+      exact hpary1 (hyk ▸ W.parY (k + 1))
+  · -- c = r
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · have hk1 : k = 1 := hjr1 k h.symm
+      have hv := congrArg Fin.val hk1
+      rw [val_one_fin] at hv
+      omega
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
+      · have hyk : (W.v k).2 = ym - 1 := by
+          have hc2 : ((x₀ + 2, ym) : Cell).2 = ym := rfl
+          omega
+        exact hpary1 (hyk ▸ W.parY k)
+      · have hyk : (W.v k).2 = ym + 1 := by
+          have hc2 : ((x₀ + 2, ym) : Cell).2 = ym := rfl
+          omega
+        exact hparyp1 (hyk ▸ W.parY k)
+      · have h1' : (W.v k).1 = x₀ + 1 := by
+          have hc1 : ((x₀ + 2, ym) : Cell).1 = x₀ + 2 := rfl
+          omega
+        exact hparx1 (h1' ▸ W.parX k)
+      · have h1' : (W.v k).1 = x₀ + 3 := by
+          have hc1 : ((x₀ + 2, ym) : Cell).1 = x₀ + 2 := rfl
+          omega
+        exact hparx3 (h1' ▸ W.parX k)
+    · have hk1 : k + 1 = 1 := hjr1 (k + 1) h.symm
+      have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
+        rw [Fin.val_add, Fin.val_one']
+        have h1p : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+        rw [h1p, Nat.mod_eq_of_lt (by omega : (k : ℕ) + 1 < W.n + 4)]
+      have hv := congrArg Fin.val hk1
+      rw [h1m, val_one_fin] at hv
+      omega
+
+theorem push_hEn3 (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
     (hn1 : W.v (-1) = (x₀, ym - 2))
     (hr : ∀ i, W.v i ≠ (x₀ + 2, ym - 2)) :
-    ∃ W' : OrthoLoop, W'.I + 4 = W.I ∧ W'.T = W.T + 4 ∧ W'.L = W.L := by
+    ∀ (k : Fin (W.n + 4)), 1 ≤ (k : ℕ) → (k : ℕ) ≤ W.n + 1 →
+      Disjoint ({(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} : Finset Cell)
+        (W.edgePts k) := by
   classical
+  have hparx1 := push_hparx1 W x₀ ym h0
+  have hparx2 := push_hparx2 W x₀ ym h0
+  have hparx3 := push_hparx3 W x₀ ym h0
+  have hpary1 := push_hpary1 W x₀ ym h0
+  have hpary3 := push_hpary3 W x₀ ym h0
+  have hjd : ∀ j : Fin (W.n + 4), W.v j = (x₀, ym - 2) → j = ⟨W.n + 3, by omega⟩ :=
+    fun j hj => W.inj (hj.trans (push_hn1' W x₀ ym hn1).symm)
+  intro k hk1 hkn
+  rw [Finset.disjoint_left]
+  intro c hc hc'
+  simp only [Finset.mem_insert, Finset.mem_singleton] at hc
+  rcases hc with rfl | rfl | rfl
+  · -- c = d
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · have hkn3 : k = ⟨W.n + 3, by omega⟩ := hjd k h.symm
+      have hv := congrArg Fin.val hkn3
+      have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
+      rw [hvR] at hv
+      omega
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
+      · have hyk : (W.v k).2 = ym - 3 := by
+          have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary3 (hyk ▸ W.parY k)
+      · have hyk : (W.v k).2 = ym - 1 := by
+          have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary1 (hyk ▸ W.parY k)
+      · have h1' : (W.v k).1 = x₀ - 1 := by
+          have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
+          omega
+        exact hparx2 (h1' ▸ W.parX k)
+      · have h1' : (W.v k).1 = x₀ + 1 := by
+          have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
+          omega
+        exact hparx1 (h1' ▸ W.parX k)
+    · have hkn3 : k + 1 = ⟨W.n + 3, by omega⟩ := hjd (k + 1) h.symm
+      have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
+        rw [Fin.val_add, Fin.val_one']
+        have h1p : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+        rw [h1p, Nat.mod_eq_of_lt (by omega : (k : ℕ) + 1 < W.n + 4)]
+      have hv := congrArg Fin.val hkn3
+      have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
+      rw [h1m, hvR] at hv
+      omega
+  · -- c = (x₀+1, ym-2)
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · have hxi : (W.v k).1 = x₀ + 1 := (congrArg Prod.fst h).symm
+      exact hparx1 (hxi ▸ W.parX k)
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
+      · have hxi : (W.v k).1 = x₀ + 1 := h1c.symm
+        exact hparx1 (hxi ▸ W.parX k)
+      · have hxi : (W.v k).1 = x₀ + 1 := h1c.symm
+        exact hparx1 (hxi ▸ W.parX k)
+      · have hvx : (W.v k).1 = x₀ := by
+          have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
+          omega
+        have hvy : (W.v k).2 = ym - 2 := h1c.symm
+        have hkn3 : k = ⟨W.n + 3, by omega⟩ := hjd k (Prod.ext hvx hvy)
+        have hv := congrArg Fin.val hkn3
+        have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
+        rw [hvR] at hv
+        omega
+      · have hvx : (W.v k).1 = x₀ + 2 := by
+          have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
+          omega
+        have hvy : (W.v k).2 = ym - 2 := h1c.symm
+        exact absurd (Prod.ext hvx hvy) (hr k)
+    · have hxi : (W.v (k + 1)).1 = x₀ + 1 := (congrArg Prod.fst h).symm
+      exact hparx1 (hxi ▸ W.parX (k + 1))
+  · -- c = r′
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
+    rcases hc' with h | h | h
+    · exact absurd h.symm (hr k)
+    · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
+      · have hyk : (W.v k).2 = ym - 3 := by
+          have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary3 (hyk ▸ W.parY k)
+      · have hyk : (W.v k).2 = ym - 1 := by
+          have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
+          omega
+        exact hpary1 (hyk ▸ W.parY k)
+      · have h1' : (W.v k).1 = x₀ + 1 := by
+          have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
+          omega
+        exact hparx1 (h1' ▸ W.parX k)
+      · have h1' : (W.v k).1 = x₀ + 3 := by
+          have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
+          omega
+        exact hparx3 (h1' ▸ W.parX k)
+    · exact absurd h.symm (hr (k + 1))
+
+theorem pushLoop_inj (W : OrthoLoop) (x₀ ym : ℤ)
+    (hr : ∀ i, W.v i ≠ (x₀ + 2, ym - 2)) :
+    Function.Injective (Function.update W.v 0 (x₀ + 2, ym - 2)) := by
+  classical
+  intro i j h
+  by_cases hi0 : i = 0
+  · by_cases hj0 : j = 0
+    · exact hi0.trans hj0.symm
+    · rw [hi0, Function.update_self, Function.update_of_ne hj0] at h
+      exact absurd h.symm (hr j)
+  · by_cases hj0 : j = 0
+    · rw [hj0, Function.update_self, Function.update_of_ne hi0] at h
+      exact absurd h (hr i)
+    · rw [Function.update_of_ne hi0, Function.update_of_ne hj0] at h
+      exact W.inj h
+
+theorem pushLoop_step (W : OrthoLoop) (x₀ ym : ℤ)
+    (h1 : W.v 1 = (x₀ + 2, ym)) (hn1 : W.v (-1) = (x₀, ym - 2)) :
+    ∀ i : Fin (W.n + 4),
+      (((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).1 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).1 ∧ ((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).2 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).2 + 2) ∨
+      (((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).1 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).1 ∧ ((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).2 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).2 - 2) ∨
+      (((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).1 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).1 + 2 ∧ ((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).2 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).2) ∨
+      (((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).1 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).1 - 2 ∧ ((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)).2 = ((Function.update W.v 0 (x₀ + 2, ym - 2)) i).2) := by
+  classical
+  have eS_last := push_eS_last W
+  have h1ne0 := push_h1ne0 W
+  have hn3ne := push_hn3ne W
+  have hn1' := push_hn1' W x₀ ym hn1
+  have hsucc_ne := push_hsucc_ne W
+  intro i
+  by_cases hi0 : i = 0
+  · rw [hi0]
+    have e1 : (0 + 1 : Fin (W.n + 4)) = 1 := zero_add 1
+    rw [e1, Function.update_self, Function.update_of_ne h1ne0, h1]
+    exact Or.inl ⟨by simp, by simp⟩
+  · by_cases hin : i = ⟨W.n + 3, by omega⟩
+    · rw [hin]
+      rw [eS_last, Function.update_of_ne hn3ne, hn1', Function.update_self]
+      exact Or.inr (Or.inr (Or.inl ⟨by simp, by simp⟩))
+    · have hi1 : i + 1 ≠ 0 := hsucc_ne i hin
+      rw [Function.update_of_ne hi0, Function.update_of_ne hi1]
+      exact W.step i
+
+theorem pushLoop_par (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym)) :
+    ∀ i : Fin (W.n + 4), (((Function.update W.v 0 (x₀ + 2, ym - 2)) i).1 : ZMod 2) = W.a ∧ (((Function.update W.v 0 (x₀ + 2, ym - 2)) i).2 : ZMod 2) = W.b := by
+  classical
+  have hpa := push_hpa W x₀ ym h0
+  have hpb := push_hpb W x₀ ym h0
+  intro i
+  by_cases hi0 : i = 0
+  · rw [hi0, Function.update_self]
+    constructor
+    · push_cast
+      rw [show (2 : ZMod 2) = 0 from by decide, add_zero]
+      exact hpa
+    · push_cast
+      rw [show (2 : ZMod 2) = 0 from by decide, sub_zero]
+      exact hpb
+  · rw [Function.update_of_ne hi0]
+    exact W.par i
+
+theorem pushLoop_simple (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (h1 : W.v 1 = (x₀ + 2, ym)) (hn1 : W.v (-1) = (x₀, ym - 2))
+    (hr : ∀ i, W.v i ≠ (x₀ + 2, ym - 2)) :
+    ∀ i j : Fin (W.n + 4), i ≠ j → i + 1 ≠ j → i ≠ j + 1 →
+      Disjoint ({(Function.update W.v 0 (x₀ + 2, ym - 2)) i, midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) i) ((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)), (Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)} : Finset Cell)
+        ({(Function.update W.v 0 (x₀ + 2, ym - 2)) j, midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) j) ((Function.update W.v 0 (x₀ + 2, ym - 2)) (j + 1)), (Function.update W.v 0 (x₀ + 2, ym - 2)) (j + 1)} : Finset Cell) := by
+  classical
+  have eS_last := push_eS_last W
+  have h1ne0 := push_h1ne0 W
+  have hn3ne := push_hn3ne W
+  have hn1' := push_hn1' W x₀ ym hn1
+  have hsucc_ne := push_hsucc_ne W
+  have hE0 := push_hE0 W x₀ ym h0 h1 hr
+  have hEn3 := push_hEn3 W x₀ ym h0 hn1 hr
+  intro i j hij hi1j hij1
+  rw [Finset.disjoint_left]
+  intro c hci hcj
+  beta_reduce at hci hcj
+  have he0set : ({(Function.update W.v 0 (x₀ + 2, ym - 2)) 0,
+      midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) 0)
+        ((Function.update W.v 0 (x₀ + 2, ym - 2)) (0 + 1)),
+      (Function.update W.v 0 (x₀ + 2, ym - 2)) (0 + 1)} : Finset Cell) =
+      {(x₀ + 2, ym - 2), (x₀ + 2, ym - 1), (x₀ + 2, ym)} := by
+    have e1 : (0 + 1 : Fin (W.n + 4)) = 1 := zero_add 1
+    rw [e1, Function.update_self, Function.update_of_ne h1ne0, h1]
+    rw [show midPt (x₀ + 2, ym - 2) (x₀ + 2, ym) = (x₀ + 2, ym - 1) from by
+      simp only [midPt, Prod.mk.injEq]
+      constructor <;> omega]
+  have hen3set : ({(Function.update W.v 0 (x₀ + 2, ym - 2)) ⟨W.n + 3, by omega⟩,
+      midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) ⟨W.n + 3, by omega⟩)
+        ((Function.update W.v 0 (x₀ + 2, ym - 2)) (⟨W.n + 3, by omega⟩ + 1)),
+      (Function.update W.v 0 (x₀ + 2, ym - 2)) (⟨W.n + 3, by omega⟩ + 1)} : Finset Cell) =
+      {(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} := by
+    rw [eS_last, Function.update_self, Function.update_of_ne hn3ne, hn1']
+    rw [show midPt (x₀, ym - 2) (x₀ + 2, ym - 2) = (x₀ + 1, ym - 2) from by
+      simp only [midPt, Prod.mk.injEq]
+      constructor <;> omega]
+  have hshset : ∀ i : Fin (W.n + 4), i ≠ 0 → i ≠ ⟨W.n + 3, by omega⟩ →
+      ({(Function.update W.v 0 (x₀ + 2, ym - 2)) i,
+        midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) i)
+          ((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)),
+        (Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)} : Finset Cell) = W.edgePts i := by
+    intro i hi0 hin
+    have hi1 : i + 1 ≠ 0 := hsucc_ne i hin
+    rw [Function.update_of_ne hi0, Function.update_of_ne hi1]
+  by_cases hi0 : i = 0
+  · rw [hi0] at hci
+    rw [he0set] at hci
+    by_cases hj0 : j = 0
+    · exact absurd (hi0.trans hj0.symm) hij
+    · by_cases hjn : j = ⟨W.n + 3, by omega⟩
+      · have hj1 : j + 1 = 0 := by rw [hjn]; exact eS_last
+        exact absurd (hi0.trans hj1.symm) hij1
+      · rw [hshset j hj0 hjn] at hcj
+        have hj1 : j ≠ 1 := by
+          intro h
+          exact hi1j (by rw [hi0, h]; exact zero_add 1)
+        have hj1' : (j : ℕ) ≠ 1 := by
+          intro h
+          exact hj1 (Fin.ext (by rw [h, val_one_fin]))
+        have hj2 : 2 ≤ (j : ℕ) := by
+          have hj0' : (j : ℕ) ≠ 0 := fun h => hj0 (Fin.ext h)
+          omega
+        have hj3 : (j : ℕ) ≤ W.n + 2 := by
+          have hlt := j.isLt
+          have hjn' : (j : ℕ) ≠ W.n + 3 := fun h => hjn (Fin.ext h)
+          omega
+        exact Finset.disjoint_left.mp (hE0 j hj2 hj3) hci hcj
+  · by_cases hin : i = ⟨W.n + 3, by omega⟩
+    · rw [hin] at hci
+      rw [hen3set] at hci
+      by_cases hj0 : j = 0
+      · have hi1 : i + 1 = 0 := by rw [hin]; exact eS_last
+        exact absurd (hi1.trans hj0.symm) hi1j
+      · by_cases hjn : j = ⟨W.n + 3, by omega⟩
+        · exact absurd (hin.trans hjn.symm) hij
+        · rw [hshset j hj0 hjn] at hcj
+          have hj2 : (j : ℕ) ≤ W.n + 1 := by
+            have hlt := j.isLt
+            have hjn' : (j : ℕ) ≠ W.n + 3 := fun h => hjn (Fin.ext h)
+            have hjn2 : (j : ℕ) ≠ W.n + 2 := by
+              intro h
+              have hjj : j + 1 = ⟨W.n + 3, by omega⟩ := by
+                apply Fin.ext
+                rw [Fin.val_add, Fin.val_one']
+                have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+                rw [h1m, h]
+                have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
+                rw [hvR]
+                exact Nat.mod_eq_of_lt (by omega : W.n + 2 + 1 < W.n + 4)
+              exact hij1 ((hjj.trans hin.symm).symm)
+            omega
+          have hj0' : 1 ≤ (j : ℕ) := by
+            have hj0'' : (j : ℕ) ≠ 0 := fun h => hj0 (Fin.ext h)
+            omega
+          exact Finset.disjoint_left.mp (hEn3 j hj0' hj2) hci hcj
+    · by_cases hj0 : j = 0
+      · rw [hj0] at hcj
+        rw [he0set] at hcj
+        rw [hshset i hi0 hin] at hci
+        have hi1 : i ≠ 1 := by
+          intro h
+          exact hij1 (by rw [h, hj0]; abel)
+        have hi1' : (i : ℕ) ≠ 1 := by
+          intro h
+          exact hi1 (Fin.ext (by rw [h, val_one_fin]))
+        have hi2 : 2 ≤ (i : ℕ) := by
+          have hi0' : (i : ℕ) ≠ 0 := fun h => hi0 (Fin.ext h)
+          omega
+        have hi3 : (i : ℕ) ≤ W.n + 2 := by
+          have hlt := i.isLt
+          have hin' : (i : ℕ) ≠ W.n + 3 := fun h => hin (Fin.ext h)
+          omega
+        exact Finset.disjoint_left.mp (hE0 i hi2 hi3) hcj hci
+      · by_cases hjn : j = ⟨W.n + 3, by omega⟩
+        · rw [hjn] at hcj
+          rw [hen3set] at hcj
+          rw [hshset i hi0 hin] at hci
+          have hi2 : (i : ℕ) ≤ W.n + 1 := by
+            have hlt := i.isLt
+            have hin' : (i : ℕ) ≠ W.n + 3 := fun h => hin (Fin.ext h)
+            have hin2 : (i : ℕ) ≠ W.n + 2 := by
+              intro h
+              have hii : i + 1 = ⟨W.n + 3, by omega⟩ := by
+                apply Fin.ext
+                rw [Fin.val_add, Fin.val_one']
+                have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
+                rw [h1m, h]
+                have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
+                rw [hvR]
+                exact Nat.mod_eq_of_lt (by omega : W.n + 2 + 1 < W.n + 4)
+              exact hi1j (hii.trans hjn.symm)
+            omega
+          have hi0' : 1 ≤ (i : ℕ) := by
+            have hi0'' : (i : ℕ) ≠ 0 := fun h => hi0 (Fin.ext h)
+            omega
+          exact Finset.disjoint_left.mp (hEn3 i hi0' hi2) hcj hci
+        · rw [hshset i hi0 hin] at hci
+          rw [hshset j hj0 hjn] at hcj
+          exact Finset.disjoint_left.mp (W.simple i j hij hi1j hij1) hci hcj
+
+set_option maxHeartbeats 800000 in
+theorem pushLoop_I (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (hmax : ∀ i, (W.v i).2 ≤ ym) (hmin : ∀ i, (W.v i).2 = ym → x₀ ≤ (W.v i).1)
+    (h1 : W.v 1 = (x₀ + 2, ym)) (h2 : W.v 2 = (x₀ + 4, ym))
+    (hn1 : W.v (-1) = (x₀, ym - 2)) (hr : ∀ i, W.v i ≠ (x₀ + 2, ym - 2)) :
+    ({ a := W.a, b := W.b, n := W.n, v := Function.update W.v 0 (x₀ + 2, ym - 2), inj := pushLoop_inj W x₀ ym hr, step := pushLoop_step W x₀ ym h1 hn1, par := pushLoop_par W x₀ ym h0, simple := pushLoop_simple W x₀ ym h0 h1 hn1 hr } : OrthoLoop).I + 4 = W.I := by
+  classical
+  set W' := ({ a := W.a, b := W.b, n := W.n, v := Function.update W.v 0 (x₀ + 2, ym - 2), inj := pushLoop_inj W x₀ ym hr, step := pushLoop_step W x₀ ym h1 hn1, par := pushLoop_par W x₀ ym h0, simple := pushLoop_simple W x₀ ym h0 h1 hn1 hr } : OrthoLoop)
+  have hWn : W'.n = W.n := rfl
   have h0x : (W.v 0).1 = x₀ := congrArg Prod.fst h0
   have h0y : (W.v 0).2 = ym := congrArg Prod.snd h0
   have h1x : (W.v 1).1 = x₀ + 2 := congrArg Prod.fst h1
   have h1y : (W.v 1).2 = ym := congrArg Prod.snd h1
   have h2x : (W.v 2).1 = x₀ + 4 := congrArg Prod.fst h2
   have h2y : (W.v 2).2 = ym := congrArg Prod.snd h2
-  have hpa : (x₀ : ZMod 2) = W.a := by rw [← h0x]; exact W.parX 0
-  have hpb : (ym : ZMod 2) = W.b := by rw [← h0y]; exact W.parY 0
-  have hn1' : W.v ⟨W.n + 3, by omega⟩ = (x₀, ym - 2) := by
-    have e : (⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) = (-1 : Fin (W.n + 4)) := by
-      apply Fin.ext
-      simp [val_neg_one_fin]
-    rw [e]
-    exact hn1
+  have hn1' := push_hn1' W x₀ ym hn1
   have hdx : (W.v ⟨W.n + 3, by omega⟩).1 = x₀ := congrArg Prod.fst hn1'
   have hdy : (W.v ⟨W.n + 3, by omega⟩).2 = ym - 2 := congrArg Prod.snd hn1'
   have h0xX : W.x 0 = x₀ := h0x
@@ -6160,425 +6735,25 @@ theorem push_case (W : OrthoLoop) (x₀ ym : ℤ)
   have h1xX : W.x 1 = x₀ + 2 := h1x
   have h1yX : W.y 1 = ym := h1y
   have h2xX : W.x 2 = x₀ + 4 := h2x
-  have h2yX : W.y 2 = ym := h2y
   have hdxX : W.x ⟨W.n + 3, by omega⟩ = x₀ := hdx
   have hdyX : W.y ⟨W.n + 3, by omega⟩ = ym - 2 := hdy
-  have hkey : ∀ z : ZMod 2, z = 0 ∨ z = 1 := by decide
-  have hparx1 : ((x₀ + 1 : ℤ) : ZMod 2) ≠ W.a := by
-    rw [← hpa]
-    push_cast
-    rcases hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
-  have hparx2 : ((x₀ - 1 : ℤ) : ZMod 2) ≠ W.a := by
-    rw [← hpa]
-    push_cast
-    rcases hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
-  have hparx3 : ((x₀ + 3 : ℤ) : ZMod 2) ≠ W.a := by
-    rw [← hpa]
-    push_cast
-    rcases hkey (x₀ : ZMod 2) with h | h <;> rw [h] <;> decide
-  have hpary1 : ((ym - 1 : ℤ) : ZMod 2) ≠ W.b := by
-    rw [← hpb]
-    push_cast
-    rcases hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
-  have hpary3 : ((ym - 3 : ℤ) : ZMod 2) ≠ W.b := by
-    rw [← hpb]
-    push_cast
-    rcases hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
-  have hparyp1 : ((ym + 1 : ℤ) : ZMod 2) ≠ W.b := by
-    rw [← hpb]
-    push_cast
-    rcases hkey (ym : ZMod 2) with h | h <;> rw [h] <;> decide
+  have hpa := push_hpa W x₀ ym h0
+  have hpb := push_hpb W x₀ ym h0
+  have hkey := push_hkey
+  have hparx1 := push_hparx1 W x₀ ym h0
+  have hparx3 := push_hparx3 W x₀ ym h0
+  have hpary1 := push_hpary1 W x₀ ym h0
+  have hpary3 := push_hpary3 W x₀ ym h0
   have hjd : ∀ j : Fin (W.n + 4), W.v j = (x₀, ym - 2) → j = ⟨W.n + 3, by omega⟩ :=
     fun j hj => W.inj (hj.trans hn1'.symm)
   have hj0 : ∀ j : Fin (W.n + 4), W.v j = (x₀, ym) → j = 0 :=
     fun j hj => W.inj (hj.trans h0.symm)
   have hjr1 : ∀ j : Fin (W.n + 4), W.v j = (x₀ + 2, ym) → j = 1 :=
     fun j hj => W.inj (hj.trans h1.symm)
-  have eS_last : (⟨W.n + 3, by omega⟩ + 1 : Fin (W.n + 4)) = 0 := by
-    apply Fin.ext
-    rw [Fin.val_add, Fin.val_one']
-    have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-    rw [h1m, val_zero_fin]
-    have hm : W.n + 3 + 1 = W.n + 4 := by omega
-    rw [hm, Nat.mod_self]
-  have h1ne0 : (1 : Fin (W.n + 4)) ≠ 0 := by
-    intro h
-    have hv := congrArg Fin.val h
-    rw [val_one_fin, val_zero_fin] at hv
-    omega
-  have hn3ne : (⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) ≠ 0 := by
-    intro h
-    have hv := congrArg Fin.val h
-    have hvL : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
-    rw [hvL, val_zero_fin] at hv
-    omega
-  have hsucc_ne : ∀ i : Fin (W.n + 4), i ≠ ⟨W.n + 3, by omega⟩ → i + 1 ≠ 0 := by
-    intro i hin h0'
-    have hi3 : (i : ℕ) = W.n + 3 := by
-      have hv := congrArg Fin.val h0'
-      rw [Fin.val_add, Fin.val_one'] at hv
-      have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-      rw [h1m, val_zero_fin] at hv
-      have hilt := i.isLt
-      by_cases hc : (i : ℕ) + 1 = W.n + 4
-      · omega
-      · rw [Nat.mod_eq_of_lt (by omega : (i : ℕ) + 1 < W.n + 4)] at hv
-        omega
-    exact hin (Fin.ext hi3)
-  -- new edge 0 is disjoint from W-edges with index in {2,…,n+2}
-  have hE0 : ∀ (k : Fin (W.n + 4)), 2 ≤ (k : ℕ) → (k : ℕ) ≤ W.n + 2 →
-      Disjoint ({(x₀ + 2, ym - 2), (x₀ + 2, ym - 1), (x₀ + 2, ym)} : Finset Cell)
-        (W.edgePts k) := by
-    intro k hk2 hkn
-    rw [Finset.disjoint_left]
-    intro c hc hc'
-    simp only [Finset.mem_insert, Finset.mem_singleton] at hc
-    rcases hc with rfl | rfl | rfl
-    · -- c = r′
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · exact absurd h.symm (hr k)
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
-        · have hyk : (W.v k).2 = ym - 3 := by
-            have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary3 (hyk ▸ W.parY k)
-        · have hyk : (W.v k).2 = ym - 1 := by
-            have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary1 (hyk ▸ W.parY k)
-        · have h1' : (W.v k).1 = x₀ + 1 := by
-            have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
-            omega
-          exact hparx1 (h1' ▸ W.parX k)
-        · have h1' : (W.v k).1 = x₀ + 3 := by
-            have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
-            omega
-          exact hparx3 (h1' ▸ W.parX k)
-      · exact absurd h.symm (hr (k + 1))
-    · -- c = (x₀+2, ym-1)
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · have hyk : (W.v k).2 = ym - 1 := (congrArg Prod.snd h).symm
-        exact hpary1 (hyk ▸ W.parY k)
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
-        · have hvy : (W.v k).2 = ym - 2 := by
-            have hc2 : ((x₀ + 2, ym - 1) : Cell).2 = ym - 1 := rfl
-            omega
-          have hvx : (W.v k).1 = x₀ + 2 := h1c.symm
-          exact absurd (Prod.ext hvx hvy) (hr k)
-        · have hvy : (W.v k).2 = ym := by
-            have hc2 : ((x₀ + 2, ym - 1) : Cell).2 = ym - 1 := rfl
-            omega
-          have hvx : (W.v k).1 = x₀ + 2 := h1c.symm
-          have hk1 : k = 1 := hjr1 k (Prod.ext hvx hvy)
-          have hv := congrArg Fin.val hk1
-          rw [val_one_fin] at hv
-          omega
-        · have hyk : (W.v k).2 = ym - 1 := h1c.symm
-          exact hpary1 (hyk ▸ W.parY k)
-        · have hyk : (W.v k).2 = ym - 1 := h1c.symm
-          exact hpary1 (hyk ▸ W.parY k)
-      · have hyk : (W.v (k + 1)).2 = ym - 1 := (congrArg Prod.snd h).symm
-        exact hpary1 (hyk ▸ W.parY (k + 1))
-    · -- c = r
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · have hk1 : k = 1 := hjr1 k h.symm
-        have hv := congrArg Fin.val hk1
-        rw [val_one_fin] at hv
-        omega
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
-        · have hyk : (W.v k).2 = ym - 1 := by
-            have hc2 : ((x₀ + 2, ym) : Cell).2 = ym := rfl
-            omega
-          exact hpary1 (hyk ▸ W.parY k)
-        · have hyk : (W.v k).2 = ym + 1 := by
-            have hc2 : ((x₀ + 2, ym) : Cell).2 = ym := rfl
-            omega
-          exact hparyp1 (hyk ▸ W.parY k)
-        · have h1' : (W.v k).1 = x₀ + 1 := by
-            have hc1 : ((x₀ + 2, ym) : Cell).1 = x₀ + 2 := rfl
-            omega
-          exact hparx1 (h1' ▸ W.parX k)
-        · have h1' : (W.v k).1 = x₀ + 3 := by
-            have hc1 : ((x₀ + 2, ym) : Cell).1 = x₀ + 2 := rfl
-            omega
-          exact hparx3 (h1' ▸ W.parX k)
-      · have hk1 : k + 1 = 1 := hjr1 (k + 1) h.symm
-        have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
-          rw [Fin.val_add, Fin.val_one']
-          have h1p : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-          rw [h1p, Nat.mod_eq_of_lt (by omega : (k : ℕ) + 1 < W.n + 4)]
-        have hv := congrArg Fin.val hk1
-        rw [h1m, val_one_fin] at hv
-        omega
-  -- new edge n+3 is disjoint from W-edges with index in {1,…,n+1}
-  have hEn3 : ∀ (k : Fin (W.n + 4)), 1 ≤ (k : ℕ) → (k : ℕ) ≤ W.n + 1 →
-      Disjoint ({(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} : Finset Cell)
-        (W.edgePts k) := by
-    intro k hk1 hkn
-    rw [Finset.disjoint_left]
-    intro c hc hc'
-    simp only [Finset.mem_insert, Finset.mem_singleton] at hc
-    rcases hc with rfl | rfl | rfl
-    · -- c = d
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · have hkn3 : k = ⟨W.n + 3, by omega⟩ := hjd k h.symm
-        have hv := congrArg Fin.val hkn3
-        have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
-        rw [hvR] at hv
-        omega
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
-        · have hyk : (W.v k).2 = ym - 3 := by
-            have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary3 (hyk ▸ W.parY k)
-        · have hyk : (W.v k).2 = ym - 1 := by
-            have hc2 : ((x₀, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary1 (hyk ▸ W.parY k)
-        · have h1' : (W.v k).1 = x₀ - 1 := by
-            have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
-            omega
-          exact hparx2 (h1' ▸ W.parX k)
-        · have h1' : (W.v k).1 = x₀ + 1 := by
-            have hc1 : ((x₀, ym - 2) : Cell).1 = x₀ := rfl
-            omega
-          exact hparx1 (h1' ▸ W.parX k)
-      · have hkn3 : k + 1 = ⟨W.n + 3, by omega⟩ := hjd (k + 1) h.symm
-        have h1m : ((k + 1 : Fin (W.n + 4)) : ℕ) = (k : ℕ) + 1 := by
-          rw [Fin.val_add, Fin.val_one']
-          have h1p : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-          rw [h1p, Nat.mod_eq_of_lt (by omega : (k : ℕ) + 1 < W.n + 4)]
-        have hv := congrArg Fin.val hkn3
-        have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
-        rw [h1m, hvR] at hv
-        omega
-    · -- c = (x₀+1, ym-2)
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · have hxi : (W.v k).1 = x₀ + 1 := (congrArg Prod.fst h).symm
-        exact hparx1 (hxi ▸ W.parX k)
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
-        · have hxi : (W.v k).1 = x₀ + 1 := h1c.symm
-          exact hparx1 (hxi ▸ W.parX k)
-        · have hxi : (W.v k).1 = x₀ + 1 := h1c.symm
-          exact hparx1 (hxi ▸ W.parX k)
-        · have hvx : (W.v k).1 = x₀ := by
-            have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
-            omega
-          have hvy : (W.v k).2 = ym - 2 := h1c.symm
-          have hkn3 : k = ⟨W.n + 3, by omega⟩ := hjd k (Prod.ext hvx hvy)
-          have hv := congrArg Fin.val hkn3
-          have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
-          rw [hvR] at hv
-          omega
-        · have hvx : (W.v k).1 = x₀ + 2 := by
-            have hc1 : ((x₀ + 1, ym - 2) : Cell).1 = x₀ + 1 := rfl
-            omega
-          have hvy : (W.v k).2 = ym - 2 := h1c.symm
-          exact absurd (Prod.ext hvx hvy) (hr k)
-      · have hxi : (W.v (k + 1)).1 = x₀ + 1 := (congrArg Prod.fst h).symm
-        exact hparx1 (hxi ▸ W.parX (k + 1))
-    · -- c = r′
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hc'
-      rcases hc' with h | h | h
-      · exact absurd h.symm (hr k)
-      · rcases W.mid_cases k _ h.symm with ⟨hx, h1c, h2c | h2c⟩ | ⟨hy, h1c, h2c | h2c⟩
-        · have hyk : (W.v k).2 = ym - 3 := by
-            have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary3 (hyk ▸ W.parY k)
-        · have hyk : (W.v k).2 = ym - 1 := by
-            have hc2 : ((x₀ + 2, ym - 2) : Cell).2 = ym - 2 := rfl
-            omega
-          exact hpary1 (hyk ▸ W.parY k)
-        · have h1' : (W.v k).1 = x₀ + 1 := by
-            have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
-            omega
-          exact hparx1 (h1' ▸ W.parX k)
-        · have h1' : (W.v k).1 = x₀ + 3 := by
-            have hc1 : ((x₀ + 2, ym - 2) : Cell).1 = x₀ + 2 := rfl
-            omega
-          exact hparx3 (h1' ▸ W.parX k)
-      · exact absurd h.symm (hr (k + 1))
-  -- the pushed loop
-  let W' : OrthoLoop := {
-    a := W.a
-    b := W.b
-    n := W.n
-    v := Function.update W.v 0 (x₀ + 2, ym - 2)
-    inj := by
-      intro i j h
-      by_cases hi0 : i = 0
-      · by_cases hj0 : j = 0
-        · exact hi0.trans hj0.symm
-        · rw [hi0, Function.update_self, Function.update_of_ne hj0] at h
-          exact absurd h.symm (hr j)
-      · by_cases hj0 : j = 0
-        · rw [hj0, Function.update_self, Function.update_of_ne hi0] at h
-          exact absurd h (hr i)
-        · rw [Function.update_of_ne hi0, Function.update_of_ne hj0] at h
-          exact W.inj h
-    step := by
-      intro i
-      by_cases hi0 : i = 0
-      · rw [hi0]
-        have e1 : (0 + 1 : Fin (W.n + 4)) = 1 := zero_add 1
-        rw [e1, Function.update_self, Function.update_of_ne h1ne0, h1]
-        exact Or.inl ⟨by simp, by simp⟩
-      · by_cases hin : i = ⟨W.n + 3, by omega⟩
-        · rw [hin]
-          rw [eS_last, Function.update_of_ne hn3ne, hn1', Function.update_self]
-          exact Or.inr (Or.inr (Or.inl ⟨by simp, by simp⟩))
-        · have hi1 : i + 1 ≠ 0 := hsucc_ne i hin
-          rw [Function.update_of_ne hi0, Function.update_of_ne hi1]
-          exact W.step i
-    par := by
-      intro i
-      by_cases hi0 : i = 0
-      · rw [hi0, Function.update_self]
-        constructor
-        · push_cast
-          rw [show (2 : ZMod 2) = 0 from by decide, add_zero]
-          exact hpa
-        · push_cast
-          rw [show (2 : ZMod 2) = 0 from by decide, sub_zero]
-          exact hpb
-      · rw [Function.update_of_ne hi0]
-        exact W.par i
-    simple := by
-      intro i j hij hi1j hij1
-      rw [Finset.disjoint_left]
-      intro c hci hcj
-      beta_reduce at hci hcj
-      have he0set : ({(Function.update W.v 0 (x₀ + 2, ym - 2)) 0,
-          midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) 0)
-            ((Function.update W.v 0 (x₀ + 2, ym - 2)) (0 + 1)),
-          (Function.update W.v 0 (x₀ + 2, ym - 2)) (0 + 1)} : Finset Cell) =
-          {(x₀ + 2, ym - 2), (x₀ + 2, ym - 1), (x₀ + 2, ym)} := by
-        have e1 : (0 + 1 : Fin (W.n + 4)) = 1 := zero_add 1
-        rw [e1, Function.update_self, Function.update_of_ne h1ne0, h1]
-        rw [show midPt (x₀ + 2, ym - 2) (x₀ + 2, ym) = (x₀ + 2, ym - 1) from by
-          simp only [midPt, Prod.mk.injEq]
-          constructor <;> omega]
-      have hen3set : ({(Function.update W.v 0 (x₀ + 2, ym - 2)) ⟨W.n + 3, by omega⟩,
-          midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) ⟨W.n + 3, by omega⟩)
-            ((Function.update W.v 0 (x₀ + 2, ym - 2)) (⟨W.n + 3, by omega⟩ + 1)),
-          (Function.update W.v 0 (x₀ + 2, ym - 2)) (⟨W.n + 3, by omega⟩ + 1)} : Finset Cell) =
-          {(x₀, ym - 2), (x₀ + 1, ym - 2), (x₀ + 2, ym - 2)} := by
-        rw [eS_last, Function.update_self, Function.update_of_ne hn3ne, hn1']
-        rw [show midPt (x₀, ym - 2) (x₀ + 2, ym - 2) = (x₀ + 1, ym - 2) from by
-          simp only [midPt, Prod.mk.injEq]
-          constructor <;> omega]
-      have hshset : ∀ i : Fin (W.n + 4), i ≠ 0 → i ≠ ⟨W.n + 3, by omega⟩ →
-          ({(Function.update W.v 0 (x₀ + 2, ym - 2)) i,
-            midPt ((Function.update W.v 0 (x₀ + 2, ym - 2)) i)
-              ((Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)),
-            (Function.update W.v 0 (x₀ + 2, ym - 2)) (i + 1)} : Finset Cell) = W.edgePts i := by
-        intro i hi0 hin
-        have hi1 : i + 1 ≠ 0 := hsucc_ne i hin
-        rw [Function.update_of_ne hi0, Function.update_of_ne hi1]
-      by_cases hi0 : i = 0
-      · rw [hi0] at hci
-        rw [he0set] at hci
-        by_cases hj0 : j = 0
-        · exact absurd (hi0.trans hj0.symm) hij
-        · by_cases hjn : j = ⟨W.n + 3, by omega⟩
-          · have hj1 : j + 1 = 0 := by rw [hjn]; exact eS_last
-            exact absurd (hi0.trans hj1.symm) hij1
-          · rw [hshset j hj0 hjn] at hcj
-            have hj1 : j ≠ 1 := by
-              intro h
-              exact hi1j (by rw [hi0, h]; exact zero_add 1)
-            have hj1' : (j : ℕ) ≠ 1 := by
-              intro h
-              exact hj1 (Fin.ext (by rw [h, val_one_fin]))
-            have hj2 : 2 ≤ (j : ℕ) := by
-              have hj0' : (j : ℕ) ≠ 0 := fun h => hj0 (Fin.ext h)
-              omega
-            have hj3 : (j : ℕ) ≤ W.n + 2 := by
-              have hlt := j.isLt
-              have hjn' : (j : ℕ) ≠ W.n + 3 := fun h => hjn (Fin.ext h)
-              omega
-            exact Finset.disjoint_left.mp (hE0 j hj2 hj3) hci hcj
-      · by_cases hin : i = ⟨W.n + 3, by omega⟩
-        · rw [hin] at hci
-          rw [hen3set] at hci
-          by_cases hj0 : j = 0
-          · have hi1 : i + 1 = 0 := by rw [hin]; exact eS_last
-            exact absurd (hi1.trans hj0.symm) hi1j
-          · by_cases hjn : j = ⟨W.n + 3, by omega⟩
-            · exact absurd (hin.trans hjn.symm) hij
-            · rw [hshset j hj0 hjn] at hcj
-              have hj2 : (j : ℕ) ≤ W.n + 1 := by
-                have hlt := j.isLt
-                have hjn' : (j : ℕ) ≠ W.n + 3 := fun h => hjn (Fin.ext h)
-                have hjn2 : (j : ℕ) ≠ W.n + 2 := by
-                  intro h
-                  have hjj : j + 1 = ⟨W.n + 3, by omega⟩ := by
-                    apply Fin.ext
-                    rw [Fin.val_add, Fin.val_one']
-                    have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-                    rw [h1m, h]
-                    have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
-                    rw [hvR]
-                    exact Nat.mod_eq_of_lt (by omega : W.n + 2 + 1 < W.n + 4)
-                  exact hij1 ((hjj.trans hin.symm).symm)
-                omega
-              have hj0' : 1 ≤ (j : ℕ) := by
-                have hj0'' : (j : ℕ) ≠ 0 := fun h => hj0 (Fin.ext h)
-                omega
-              exact Finset.disjoint_left.mp (hEn3 j hj0' hj2) hci hcj
-        · by_cases hj0 : j = 0
-          · rw [hj0] at hcj
-            rw [he0set] at hcj
-            rw [hshset i hi0 hin] at hci
-            have hi1 : i ≠ 1 := by
-              intro h
-              exact hij1 (by rw [h, hj0]; abel)
-            have hi1' : (i : ℕ) ≠ 1 := by
-              intro h
-              exact hi1 (Fin.ext (by rw [h, val_one_fin]))
-            have hi2 : 2 ≤ (i : ℕ) := by
-              have hi0' : (i : ℕ) ≠ 0 := fun h => hi0 (Fin.ext h)
-              omega
-            have hi3 : (i : ℕ) ≤ W.n + 2 := by
-              have hlt := i.isLt
-              have hin' : (i : ℕ) ≠ W.n + 3 := fun h => hin (Fin.ext h)
-              omega
-            exact Finset.disjoint_left.mp (hE0 i hi2 hi3) hcj hci
-          · by_cases hjn : j = ⟨W.n + 3, by omega⟩
-            · rw [hjn] at hcj
-              rw [hen3set] at hcj
-              rw [hshset i hi0 hin] at hci
-              have hi2 : (i : ℕ) ≤ W.n + 1 := by
-                have hlt := i.isLt
-                have hin' : (i : ℕ) ≠ W.n + 3 := fun h => hin (Fin.ext h)
-                have hin2 : (i : ℕ) ≠ W.n + 2 := by
-                  intro h
-                  have hii : i + 1 = ⟨W.n + 3, by omega⟩ := by
-                    apply Fin.ext
-                    rw [Fin.val_add, Fin.val_one']
-                    have h1m : 1 % (W.n + 4) = 1 := Nat.mod_eq_of_lt (by omega)
-                    rw [h1m, h]
-                    have hvR : ((⟨W.n + 3, by omega⟩ : Fin (W.n + 4)) : ℕ) = W.n + 3 := rfl
-                    rw [hvR]
-                    exact Nat.mod_eq_of_lt (by omega : W.n + 2 + 1 < W.n + 4)
-                  exact hi1j (hii.trans hjn.symm)
-                omega
-              have hi0' : 1 ≤ (i : ℕ) := by
-                have hi0'' : (i : ℕ) ≠ 0 := fun h => hi0 (Fin.ext h)
-                omega
-              exact Finset.disjoint_left.mp (hEn3 i hi0' hi2) hcj hci
-            · rw [hshset i hi0 hin] at hci
-              rw [hshset j hj0 hjn] at hcj
-              exact Finset.disjoint_left.mp (W.simple i j hij hi1j hij1) hci hcj
-  }
-  have hWn : W'.n = W.n := rfl
-  refine ⟨W', ?_, ?_, ?_⟩
+  have eS_last := push_eS_last W
+  have h1ne0 := push_h1ne0 W
+  have hn3ne := push_hn3ne W
+  have hsucc_ne := push_hsucc_ne W
   · -- I: W'.I + 4 = W.I
     -- flip formula
     have hflip : ∀ c : Cell, W.p2 c + W'.p2 c =
@@ -7500,6 +7675,18 @@ theorem push_case (W : OrthoLoop) (x₀ ym : ℤ)
         Finset.card_insert_of_notMem hne2e, Finset.card_insert_of_notMem hne3e,
         Finset.card_singleton]
     rw [W.I_eq, W'.I_eq, hcard]
+
+set_option maxHeartbeats 800000 in
+theorem pushLoop_T (W : OrthoLoop) (x₀ ym : ℤ) (h0 : W.v 0 = (x₀, ym))
+    (h1 : W.v 1 = (x₀ + 2, ym)) (hn1 : W.v (-1) = (x₀, ym - 2))
+    (hr : ∀ i, W.v i ≠ (x₀ + 2, ym - 2)) :
+    ({ a := W.a, b := W.b, n := W.n, v := Function.update W.v 0 (x₀ + 2, ym - 2), inj := pushLoop_inj W x₀ ym hr, step := pushLoop_step W x₀ ym h1 hn1, par := pushLoop_par W x₀ ym h0, simple := pushLoop_simple W x₀ ym h0 h1 hn1 hr } : OrthoLoop).T = W.T + 4 := by
+  classical
+  set W' := ({ a := W.a, b := W.b, n := W.n, v := Function.update W.v 0 (x₀ + 2, ym - 2), inj := pushLoop_inj W x₀ ym hr, step := pushLoop_step W x₀ ym h1 hn1, par := pushLoop_par W x₀ ym h0, simple := pushLoop_simple W x₀ ym h0 h1 hn1 hr } : OrthoLoop)
+  have hWn : W'.n = W.n := rfl
+  have h1ne0 := push_h1ne0 W
+  have hn3ne := push_hn3ne W
+  have hn1' := push_hn1' W x₀ ym hn1
   · -- T: W'.T = W.T + 4
     let wW : ℕ → ℤ := fun i =>
       if h : i < W.n + 4 then (W.v ⟨i, h⟩).1 * (W.v ⟨(i + 1) % (W.n + 4), Nat.mod_lt _ (by omega)⟩).2 -
@@ -7663,8 +7850,19 @@ theorem push_case (W : OrthoLoop) (x₀ ym : ℤ)
       rw [hW'2, hW2, hmid, hw0, hw0', hwlast, hwlast']
       ring
     omega
-  · -- L: W'.L = W.L
-    rfl
+
+set_option maxHeartbeats 800000 in
+/-- Case (C1): push the corner in, replacing `v` by `r′`. -/
+theorem push_case (W : OrthoLoop) (x₀ ym : ℤ)
+    (h0 : W.v 0 = (x₀, ym)) (hmax : ∀ i, (W.v i).2 ≤ ym)
+    (hmin : ∀ i, (W.v i).2 = ym → x₀ ≤ (W.v i).1)
+    (h1 : W.v 1 = (x₀ + 2, ym)) (h2 : W.v 2 = (x₀ + 4, ym))
+    (hn1 : W.v (-1) = (x₀, ym - 2))
+    (hr : ∀ i, W.v i ≠ (x₀ + 2, ym - 2)) :
+    ∃ W' : OrthoLoop, W'.I + 4 = W.I ∧ W'.T = W.T + 4 ∧ W'.L = W.L := by
+  classical
+  exact ⟨({ a := W.a, b := W.b, n := W.n, v := Function.update W.v 0 (x₀ + 2, ym - 2), inj := pushLoop_inj W x₀ ym hr, step := pushLoop_step W x₀ ym h1 hn1, par := pushLoop_par W x₀ ym h0, simple := pushLoop_simple W x₀ ym h0 h1 hn1 hr } : OrthoLoop), pushLoop_I W x₀ ym h0 hmax hmin h1 h2 hn1 hr,
+    pushLoop_T W x₀ ym h0 h1 hn1 hr, rfl⟩
 
 
 /-! ## Glue lemmas: invariance of the crossing parity under safe steps -/

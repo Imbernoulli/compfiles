@@ -4,7 +4,30 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Analysis.Convex.StrictConvexBetween
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Analysis.Real.Sqrt
+import Mathlib.Data.Fin.VecNotation
+import Mathlib.Data.Fintype.Card
+import Mathlib.Data.Real.Basic
+import Mathlib.Geometry.Euclidean.Sphere.Basic
+import Mathlib.Geometry.Euclidean.Sphere.OrthRadius
+import Mathlib.Geometry.Euclidean.Sphere.Tangent
+import Mathlib.LinearAlgebra.AffineSpace.AffineSubspace.Defs
+import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
+import Mathlib.LinearAlgebra.AffineSpace.Independent
+import Mathlib.Logic.Equiv.Fin.Basic
+import Mathlib.Tactic.Abel
+import Mathlib.Tactic.Choose
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.Linarith.Frontend
+import Mathlib.Tactic.Module
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Push
+import Mathlib.Tactic.Ring.Basic
+import Mathlib.Tactic.SplitIfs
+import Mathlib.Topology.MetricSpace.Pseudo.Defs
 
 import ProblemExtraction
 

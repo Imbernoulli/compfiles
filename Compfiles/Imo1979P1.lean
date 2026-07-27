@@ -216,7 +216,9 @@ problem imo1979_p1 (p q : ℤ) (hp : 0 < p) (hq : 0 < q)
      (1979 * ∑ i ∈ Finset.range 330, 1 / ((660 + (i:ℚ)) * (1319 - (i:ℚ)))) * (q':ℚ) * sq
      = 1979 * (q':ℚ) *
         ((∑ i ∈ Finset.range 330, 1 / ((660 + (i:ℚ)) * (1319 - (i:ℚ)))) * sq) := by
-   ring
+   set S := ∑ i ∈ Finset.range 330, 1 / ((660 + (i:ℚ)) * (1319 - (i:ℚ)))
+   rw [mul_right_comm (1979 * S) q' sq, mul_assoc 1979 S sq,
+     mul_right_comm 1979 (S * sq) q']
   rw [h41] at h; clear h41
   rw [lemma9] at h
   rw [← Nat.cast_mul, show (1979:ℚ) = ((1979:ℕ):ℚ) by rfl,

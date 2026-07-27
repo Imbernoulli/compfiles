@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw, Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.InnerProductSpace.OfNorm
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
+import Mathlib.Geometry.Euclidean.Circumcenter
 
 import ProblemExtraction
 
@@ -191,43 +196,46 @@ def polyN0 (x y z q : ℝ) : ℝ := 2 * q * z * (x + y)^2 * (x + z)^2 * polyM0 x
 /-- Numerator of the `w1` coordinate: `polyDD * w1 = polyN1`. -/
 def polyN1 (x y z q : ℝ) : ℝ := 2 * (x + y) * (x + z)^2 * polyM1 x y z q
 
-/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2`. -/
-def polyC0 (x y z : ℝ) : ℝ := 4 * x^20 * y^6 + 8 * z * x^20 * y^5 - 4 * x^20 * y^4 * z^2 - 16 * x^20 * y^3 * z^3 - 4 * x^20 * y^2 * z^4 + 8 * y * x^20 * z^5 + 4 * x^20 * z^6 + 40 * x^19 * y^7 + 104 * z * x^19 * y^6 + 24 * x^19 * y^5 * z^2 - 168 * x^19 * y^4 * z^3 - 168 * x^19 * y^3 * z^4 + 24 * x^19 * y^2 * z^5 + 104 * y * x^19 * z^6 + 40 * x^19 * z^7 + 180 * x^18 * y^8 + 600 * z * x^18 * y^7 + 464 * x^18 * y^6 * z^2 - 648 * x^18 * y^5 * z^3 - 1288 * x^18 * y^4 * z^4 - 504 * x^18 * y^3 * z^5 + 464 * x^18 * y^2 * z^6 + 552 * y * x^18 * z^7 + 180 * x^18 * z^8 + 480 * x^17 * y^9 + 2040 * z * x^17 * y^8 + 2536 * x^17 * y^7 * z^2 - 888 * x^17 * y^6 * z^3 - 4840 * x^17 * y^5 * z^4 - 3928 * x^17 * y^4 * z^5 + 216 * x^17 * y^3 * z^6 + 2296 * x^17 * y^2 * z^7 + 1608 * y * x^17 * z^8 + 480 * x^17 * z^9 + 840 * x^16 * y^10 + 4560 * z * x^16 * y^9 + 7836 * x^16 * y^8 * z^2 + 1592 * x^16 * y^7 * z^3 - 11044 * x^16 * y^6 * z^4 - 14096 * x^16 * y^5 * z^5 - 4388 * x^16 * y^4 * z^6 + 4856 * x^16 * y^3 * z^7 + 5916 * x^16 * y^2 * z^8 + 2832 * y * x^16 * z^9 + 840 * x^16 * z^10 + 1008 * x^15 * y^11 + 7056 * z * x^15 * y^10 + 15984 * x^15 * y^9 * z^2 + 9744 * x^15 * y^8 * z^3 - 16448 * x^15 * y^7 * z^4 - 32832 * x^15 * y^6 * z^5 - 19520 * x^15 * y^5 * z^6 + 4480 * x^15 * y^4 * z^7 + 13648 * x^15 * y^3 * z^8 + 9264 * x^15 * y^2 * z^9 + 3024 * y * x^15 * z^10 + 1008 * x^15 * z^11 + 840 * x^14 * y^12 + 7728 * z * x^14 * y^11 + 22848 * x^14 * y^10 * z^2 + 22320 * x^14 * y^9 * z^3 - 15816 * x^14 * y^8 * z^4 - 56128 * x^14 * y^7 * z^5 - 49856 * x^14 * y^6 * z^6 - 8320 * x^14 * y^5 * z^7 + 20728 * x^14 * y^4 * z^8 + 20688 * x^14 * y^3 * z^9 + 9408 * x^14 * y^2 * z^10 + 1680 * y * x^14 * z^11 + 840 * x^14 * z^12 + 480 * x^13 * y^13 + 6000 * z * x^13 * y^12 + 23376 * x^13 * y^11 * z^2 + 32016 * x^13 * y^10 * z^3 - 8272 * x^13 * y^9 * z^4 - 74272 * x^13 * y^8 * z^5 - 91520 * x^13 * y^7 * z^6 - 44864 * x^13 * y^6 * z^7 + 11808 * x^13 * y^5 * z^8 + 29008 * x^13 * y^4 * z^9 + 20144 * x^13 * y^3 * z^10 + 6576 * x^13 * y^2 * z^11 - 48 * y * x^13 * z^12 + 480 * x^13 * z^13 + 180 * x^12 * y^14 + 3240 * z * x^12 * y^13 + 17076 * x^12 * y^12 * z^2 + 31584 * x^12 * y^11 * z^3 + 372 * x^12 * y^10 * z^4 - 78296 * x^12 * y^9 * z^5 - 126364 * x^12 * y^8 * z^6 - 99232 * x^12 * y^7 * z^7 - 30172 * x^12 * y^6 * z^8 + 17064 * x^12 * y^5 * z^9 + 19764 * x^12 * y^4 * z^10 + 13664 * x^12 * y^3 * z^11 + 3636 * x^12 * y^2 * z^12 - 792 * y * x^12 * z^13 + 180 * x^12 * z^14 + 40 * x^11 * y^15 + 1160 * z * x^11 * y^14 + 8696 * x^11 * y^13 * z^2 + 21752 * x^11 * y^12 * z^3 + 3800 * x^11 * y^11 * z^4 - 68008 * x^11 * y^10 * z^5 - 133272 * x^11 * y^9 * z^6 - 137208 * x^11 * y^8 * z^7 - 90104 * x^11 * y^7 * z^8 - 24216 * x^11 * y^6 * z^9 + 3928 * x^11 * y^5 * z^10 + 2776 * x^11 * y^4 * z^11 + 6776 * x^11 * y^3 * z^12 + 1976 * x^11 * y^2 * z^13 - 568 * y * x^11 * z^14 + 40 * x^11 * z^15 + 4 * x^10 * y^16 + 248 * z * x^10 * y^15 + 2928 * x^10 * y^14 * z^2 + 10200 * x^10 * y^13 * z^3 + 2056 * x^10 * y^12 * z^4 - 50552 * x^10 * y^11 * z^5 - 110992 * x^10 * y^10 * z^6 - 128792 * x^10 * y^9 * z^7 - 116824 * x^10 * y^8 * z^8 - 74408 * x^10 * y^7 * z^9 - 18384 * x^10 * y^6 * z^10 - 7176 * x^10 * y^5 * z^11 - 7096 * x^10 * y^4 * z^12 + 2344 * x^10 * y^3 * z^13 + 1008 * x^10 * y^2 * z^14 - 184 * y * x^10 * z^15 + 4 * x^10 * z^16 + 24 * z * x^9 * y^16 + 584 * x^9 * y^15 * z^2 + 3048 * x^9 * y^14 * z^3 - 328 * x^9 * y^13 * z^4 - 32152 * x^9 * y^12 * z^5 - 76776 * x^9 * y^11 * z^6 - 87176 * x^9 * y^10 * z^7 - 83832 * x^9 * y^9 * z^8 - 85128 * x^9 * y^8 * z^9 - 46680 * x^9 * y^7 * z^10 - 3256 * x^9 * y^6 * z^11 - 5544 * x^9 * y^5 * z^12 - 6904 * x^9 * y^4 * z^13 + 376 * x^9 * y^3 * z^14 + 344 * x^9 * y^2 * z^15 - 24 * y * x^9 * z^16 + 52 * x^8 * y^16 * z^2 + 504 * x^8 * y^15 * z^3 - 844 * x^8 * y^14 * z^4 - 16288 * x^8 * y^13 * z^5 - 44684 * x^8 * y^12 * z^6 - 47304 * x^8 * y^11 * z^7 - 28700 * x^8 * y^10 * z^8 - 39648 * x^8 * y^9 * z^9 - 51612 * x^8 * y^8 * z^10 - 17992 * x^8 * y^7 * z^11 + 8372 * x^8 * y^6 * z^12 + 96 * x^8 * y^5 * z^13 - 3084 * x^8 * y^4 * z^14 - 72 * x^8 * y^3 * z^15 + 52 * x^8 * y^2 * z^16 + 32 * x^7 * y^16 * z^3 - 368 * x^7 * y^15 * z^4 - 5808 * x^7 * y^14 * z^5 - 20240 * x^7 * y^13 * z^6 - 22608 * x^7 * y^12 * z^7 + 2144 * x^7 * y^11 * z^8 + 11968 * x^7 * y^10 * z^9 - 14016 * x^7 * y^9 * z^10 - 26528 * x^7 * y^8 * z^11 - 5328 * x^7 * y^7 * z^12 + 7536 * x^7 * y^6 * z^13 + 1744 * x^7 * y^5 * z^14 - 688 * x^7 * y^4 * z^15 - 32 * x^7 * y^3 * z^16 - 56 * x^6 * y^16 * z^4 - 1232 * x^6 * y^15 * z^5 - 6144 * x^6 * y^14 * z^6 - 8464 * x^6 * y^13 * z^7 + 7288 * x^6 * y^12 * z^8 + 27264 * x^6 * y^11 * z^9 + 20608 * x^6 * y^10 * z^10 - 3136 * x^6 * y^9 * z^11 - 12488 * x^6 * y^8 * z^12 - 3696 * x^6 * y^7 * z^13 + 2368 * x^6 * y^6 * z^14 + 784 * x^6 * y^5 * z^15 - 56 * x^6 * y^4 * z^16 - 112 * x^5 * y^16 * z^5 - 1008 * x^5 * y^15 * z^6 - 1712 * x^5 * y^14 * z^7 + 4880 * x^5 * y^13 * z^8 + 18880 * x^5 * y^12 * z^9 + 23424 * x^5 * y^11 * z^10 + 13248 * x^5 * y^10 * z^11 + 1024 * x^5 * y^9 * z^12 - 4304 * x^5 * y^8 * z^13 - 2320 * x^5 * y^7 * z^14 + 112 * x^5 * y^6 * z^15 + 112 * x^5 * y^5 * z^16 - 56 * x^4 * y^16 * z^6 - 16 * x^4 * y^15 * z^7 + 2268 * x^4 * y^14 * z^8 + 8872 * x^4 * y^13 * z^9 + 13724 * x^4 * y^12 * z^10 + 10576 * x^4 * y^11 * z^11 + 5084 * x^4 * y^10 * z^12 + 1768 * x^4 * y^9 * z^13 - 356 * x^4 * y^8 * z^14 - 592 * x^4 * y^7 * z^15 - 56 * x^4 * y^6 * z^16 + 32 * x^3 * y^16 * z^7 + 584 * x^3 * y^15 * z^8 + 2856 * x^3 * y^14 * z^9 + 5912 * x^3 * y^13 * z^10 + 5720 * x^3 * y^12 * z^11 + 2520 * x^3 * y^11 * z^12 + 856 * x^3 * y^10 * z^13 + 744 * x^3 * y^9 * z^14 + 264 * x^3 * y^8 * z^15 - 32 * x^3 * y^7 * z^16 + 52 * x^2 * y^16 * z^8 + 472 * x^2 * y^15 * z^9 + 1552 * x^2 * y^14 * z^10 + 2360 * x^2 * y^13 * z^11 + 1592 * x^2 * y^12 * z^12 + 200 * x^2 * y^11 * z^13 - 176 * x^2 * y^10 * z^14 + 40 * x^2 * y^9 * z^15 + 52 * x^2 * y^8 * z^16 + 24 * x * y^16 * z^9 + 168 * x * y^15 * z^10 + 456 * x * y^14 * z^11 + 600 * x * y^13 * z^12 + 360 * x * y^12 * z^13 + 24 * x * y^11 * z^14 - 72 * x * y^10 * z^15 - 24 * x * y^9 * z^16 + 4 * y^16 * z^10 + 24 * y^15 * z^11 + 60 * y^14 * z^12 + 80 * y^13 * z^13 + 60 * y^12 * z^14 + 24 * y^11 * z^15 + 4 * y^10 * z^16
+/-- The `q²`-part of `polyM0`; it factors as `z²(x+y)²(x-y)`. -/
+def polyM0a (x y z : ℝ) : ℝ := z^2 * (x + y)^2 * (x - y)
+/-- The `q⁰`-part of `polyM0`. -/
+def polyM0b (x y z : ℝ) : ℝ := x^5 * y^2 + 2 * y * z * x^5 + x^5 * z^2 + 5 * x^4 * y^3 + 8 * z * x^4 * y^2 + 5 * y * x^4 * z^2 + 2 * x^4 * z^3 + 7 * x^3 * y^4 + 12 * z * x^3 * y^3 + 8 * x^3 * y^2 * z^2 + x^3 * z^4 + 3 * x^2 * y^5 + 8 * z * x^2 * y^4 + 4 * x^2 * y^3 * z^2 - 3 * y * x^2 * z^4 + 2 * x * z * y^5 - x * y^4 * z^2 + 3 * x * y^2 * z^4 - y^5 * z^2 - 2 * y^4 * z^3 - y^3 * z^4
+/-- The `q²`-part of `polyM1`. -/
+def polyM1a (x y z : ℝ) : ℝ := y * x^5 * z^2 - x^5 * z^3 + 4 * x^4 * y^2 * z^2 + y * x^4 * z^3 - x^4 * z^4 + 6 * x^3 * y^3 * z^2 + 8 * x^3 * y^2 * z^3 + 4 * x^2 * y^4 * z^2 + 8 * x^2 * y^3 * z^3 + 2 * x^2 * y^2 * z^4 + x * y^5 * z^2 + x * y^4 * z^3 - y^5 * z^3 - y^4 * z^4
+/-- The `q⁰`-part of `polyM1`. -/
+def polyM1b (x y z : ℝ) : ℝ := x^7 * y^3 + z * x^7 * y^2 - y * x^7 * z^2 - x^7 * z^3 + 4 * x^6 * y^4 + 3 * z * x^6 * y^3 - x^6 * y^2 * z^2 - 3 * y * x^6 * z^3 - 3 * x^6 * z^4 + 6 * x^5 * y^5 + 4 * z * x^5 * y^4 + x^5 * y^3 * z^2 - x^5 * y^2 * z^3 + y * x^5 * z^4 - 3 * x^5 * z^5 + 4 * x^4 * y^6 + 4 * z * x^4 * y^5 + 2 * x^4 * y^4 * z^2 + 5 * x^4 * y^3 * z^3 + 3 * x^4 * y^2 * z^4 + 7 * y * x^4 * z^5 - x^4 * z^6 + x^3 * y^7 + 3 * z * x^3 * y^6 + x^3 * y^5 * z^2 + 5 * x^3 * y^4 * z^3 - 2 * x^3 * y^3 * z^4 - 4 * x^3 * y^2 * z^5 + 4 * y * x^3 * z^6 + z * x^2 * y^7 - x^2 * y^6 * z^2 - x^2 * y^5 * z^3 + 3 * x^2 * y^4 * z^4 - 4 * x^2 * y^3 * z^5 - 6 * x^2 * y^2 * z^6 - x * y^7 * z^2 - 3 * x * y^6 * z^3 + x * y^5 * z^4 + 7 * x * y^4 * z^5 + 4 * x * y^3 * z^6 - y^7 * z^3 - 3 * y^6 * z^4 - 3 * y^5 * z^5 - y^4 * z^6
 
-/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2`. -/
-def polyC1 (x y z : ℝ) : ℝ := - 4 * x^18 * y^4 * z^2 - 32 * x^18 * y^3 * z^3 - 40 * x^18 * y^2 * z^4 + 12 * x^18 * z^6 - 56 * x^17 * y^5 * z^2 - 320 * x^17 * y^4 * z^3 - 528 * x^17 * y^3 * z^4 - 288 * x^17 * y^2 * z^5 + 72 * y * x^17 * z^6 + 96 * x^17 * z^7 - 308 * x^16 * y^6 * z^2 - 1552 * x^16 * y^5 * z^3 - 3080 * x^16 * y^4 * z^4 - 2800 * x^16 * y^3 * z^5 - 692 * x^16 * y^2 * z^6 + 480 * y * x^16 * z^7 + 336 * x^16 * z^8 - 928 * x^15 * y^7 * z^2 - 4784 * x^15 * y^6 * z^3 - 10848 * x^15 * y^5 * z^4 - 12960 * x^15 * y^4 * z^5 - 7296 * x^15 * y^3 * z^6 - 400 * x^15 * y^2 * z^7 + 1344 * y * x^15 * z^8 + 672 * x^15 * z^9 - 1736 * x^14 * y^8 * z^2 - 10240 * x^14 * y^7 * z^3 - 26256 * x^14 * y^6 * z^4 - 37952 * x^14 * y^5 * z^5 - 31008 * x^14 * y^4 * z^6 - 10656 * x^14 * y^3 * z^7 + 1008 * x^14 * y^2 * z^8 + 2016 * y * x^14 * z^9 + 840 * x^14 * z^10 - 2128 * x^13 * y^9 * z^2 - 15680 * x^13 * y^8 * z^3 - 46560 * x^13 * y^7 * z^4 - 78704 * x^13 * y^6 * z^5 - 82144 * x^13 * y^5 * z^6 - 47008 * x^13 * y^4 * z^7 - 8768 * x^13 * y^3 * z^8 + 1904 * x^13 * y^2 * z^9 + 1680 * y * x^13 * z^10 + 672 * x^13 * z^11 - 1736 * x^12 * y^10 * z^2 - 17248 * x^12 * y^9 * z^3 - 62160 * x^12 * y^8 * z^4 - 122336 * x^12 * y^7 * z^5 - 154000 * x^12 * y^6 * z^6 - 121696 * x^12 * y^5 * z^7 - 47008 * x^12 * y^4 * z^8 - 3072 * x^12 * y^3 * z^9 + 952 * x^12 * y^2 * z^10 + 672 * y * x^12 * z^11 + 336 * x^12 * z^12 - 928 * x^11 * y^11 * z^2 - 13472 * x^11 * y^10 * z^3 - 62592 * x^11 * y^9 * z^4 - 146496 * x^11 * y^8 * z^5 - 216224 * x^11 * y^7 * z^6 - 216048 * x^11 * y^6 * z^7 - 129312 * x^11 * y^5 * z^8 - 30240 * x^11 * y^4 * z^9 + 1440 * x^11 * y^3 * z^10 - 432 * x^11 * y^2 * z^11 + 96 * x^11 * z^13 - 308 * x^10 * y^12 * z^2 - 7264 * x^10 * y^11 * z^3 - 46728 * x^10 * y^10 * z^4 - 135808 * x^10 * y^9 * z^5 - 234068 * x^10 * y^8 * z^6 - 278464 * x^10 * y^7 * z^7 - 225536 * x^10 * y^6 * z^8 - 99200 * x^10 * y^5 * z^9 - 10516 * x^10 * y^4 * z^10 + 2624 * x^10 * y^3 * z^11 - 680 * x^10 * y^2 * z^12 - 96 * y * x^10 * z^13 + 12 * x^10 * z^14 - 56 * x^9 * y^13 * z^2 - 2560 * x^9 * y^12 * z^3 - 24976 * x^9 * y^11 * z^4 - 95872 * x^9 * y^10 * z^5 - 197528 * x^9 * y^9 * z^6 - 269792 * x^9 * y^8 * z^7 - 266624 * x^9 * y^7 * z^8 - 172976 * x^9 * y^6 * z^9 - 53784 * x^9 * y^5 * z^10 - 32 * x^9 * y^4 * z^11 + 1744 * x^9 * y^3 * z^12 - 272 * x^9 * y^2 * z^13 - 24 * y * x^9 * z^14 - 4 * x^8 * y^14 * z^2 - 528 * x^8 * y^13 * z^3 - 9000 * x^8 * y^12 * z^4 - 49584 * x^8 * y^11 * z^5 - 128596 * x^8 * y^10 * z^6 - 201312 * x^8 * y^9 * z^7 - 225136 * x^8 * y^8 * z^8 - 182784 * x^8 * y^7 * z^9 - 92660 * x^8 * y^6 * z^10 - 20112 * x^8 * y^5 * z^11 + 1480 * x^8 * y^4 * z^12 + 624 * x^8 * y^3 * z^13 - 36 * x^8 * y^2 * z^14 - 48 * x^7 * y^14 * z^3 - 1952 * x^7 * y^13 * z^4 - 17568 * x^7 * y^12 * z^5 - 62112 * x^7 * y^11 * z^6 - 115952 * x^7 * y^10 * z^7 - 142336 * x^7 * y^9 * z^8 - 128544 * x^7 * y^8 * z^9 - 81696 * x^7 * y^7 * z^10 - 31904 * x^7 * y^6 * z^11 - 5312 * x^7 * y^5 * z^12 + 448 * x^7 * y^4 * z^13 + 96 * x^7 * y^3 * z^14 - 192 * x^6 * y^14 * z^4 - 3776 * x^6 * y^13 * z^5 - 20632 * x^6 * y^12 * z^6 - 49568 * x^6 * y^11 * z^7 - 68368 * x^6 * y^10 * z^8 - 65312 * x^6 * y^9 * z^9 - 43808 * x^6 * y^8 * z^10 - 19264 * x^6 * y^7 * z^11 - 6096 * x^6 * y^6 * z^12 - 1088 * x^6 * y^5 * z^13 + 24 * x^6 * y^4 * z^14 - 368 * x^5 * y^14 * z^5 - 4112 * x^5 * y^13 * z^6 - 14304 * x^5 * y^12 * z^7 - 23360 * x^5 * y^11 * z^8 - 23792 * x^5 * y^10 * z^9 - 16832 * x^5 * y^9 * z^10 - 5856 * x^5 * y^8 * z^11 - 416 * x^5 * y^7 * z^12 - 416 * x^5 * y^6 * z^13 - 144 * x^5 * y^5 * z^14 - 360 * x^4 * y^14 * z^6 - 2336 * x^4 * y^13 * z^7 - 4672 * x^4 * y^12 * z^8 - 4352 * x^4 * y^11 * z^9 - 3536 * x^4 * y^10 * z^10 - 1984 * x^4 * y^9 * z^11 + 672 * x^4 * y^8 * z^12 + 736 * x^4 * y^7 * z^13 + 24 * x^4 * y^6 * z^14 - 144 * x^3 * y^14 * z^7 - 288 * x^3 * y^13 * z^8 + 672 * x^3 * y^12 * z^9 + 1472 * x^3 * y^11 * z^10 + 208 * x^3 * y^10 * z^11 - 448 * x^3 * y^9 * z^12 + 96 * x^3 * y^8 * z^13 + 96 * x^3 * y^7 * z^14 + 32 * x^2 * y^14 * z^8 + 448 * x^2 * y^13 * z^9 + 1260 * x^2 * y^12 * z^10 + 1152 * x^2 * y^11 * z^11 + 120 * x^2 * y^10 * z^12 - 224 * x^2 * y^9 * z^13 - 36 * x^2 * y^8 * z^14 + 48 * x * y^14 * z^9 + 264 * x * y^13 * z^10 + 480 * x * y^12 * z^11 + 336 * x * y^11 * z^12 + 48 * x * y^10 * z^13 - 24 * x * y^9 * z^14 + 12 * y^14 * z^10 + 48 * y^13 * z^11 + 72 * y^12 * z^12 + 48 * y^11 * z^13 + 12 * y^10 * z^14
+/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2` (factored form). -/
+def polyC0 (x y z : ℝ) : ℝ := 4 * (x + y)^2 * (x + z)^4 * (polyM1b x y z)^2
+    - 16 * x * y * z * (x + y)^5 * (x + z)^5 * (y + z)
+      * (z * (x + y + z) - x * y) * polyM1b x y z
 
-/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2`. -/
-def polyC2 (x y z : ℝ) : ℝ := - 4 * x^16 * y^2 * z^4 - 8 * y * x^16 * z^5 + 12 * x^16 * z^6 - 8 * x^15 * y^3 * z^4 - 56 * x^15 * y^2 * z^5 + 24 * y * x^15 * z^6 + 72 * x^15 * z^7 + 76 * x^14 * y^4 * z^4 - 40 * x^14 * y^3 * z^5 - 96 * x^14 * y^2 * z^6 + 264 * y * x^14 * z^7 + 180 * x^14 * z^8 + 416 * x^13 * y^5 * z^4 + 712 * x^13 * y^4 * z^5 + 8 * x^13 * y^3 * z^6 + 152 * x^13 * y^2 * z^7 + 680 * y * x^13 * z^8 + 240 * x^13 * z^9 + 952 * x^12 * y^6 * z^4 + 3056 * x^12 * y^5 * z^5 + 2396 * x^12 * y^4 * z^6 + 136 * x^12 * y^3 * z^7 + 552 * x^12 * y^2 * z^8 + 840 * y * x^12 * z^9 + 180 * x^12 * z^10 + 1232 * x^11 * y^7 * z^4 + 6160 * x^11 * y^6 * z^5 + 8944 * x^11 * y^5 * z^6 + 3840 * x^11 * y^4 * z^7 - 152 * x^11 * y^3 * z^8 + 504 * x^11 * y^2 * z^9 + 552 * y * x^11 * z^10 + 72 * x^11 * z^11 + 952 * x^10 * y^8 * z^4 + 7280 * x^10 * y^7 * z^5 + 16352 * x^10 * y^6 * z^6 + 13648 * x^10 * y^5 * z^7 + 3004 * x^10 * y^4 * z^8 - 856 * x^10 * y^3 * z^9 + 96 * x^10 * y^2 * z^10 + 184 * y * x^10 * z^11 + 12 * x^10 * z^12 + 416 * x^9 * y^9 * z^4 + 5200 * x^9 * y^8 * z^5 + 17680 * x^9 * y^7 * z^6 + 22960 * x^9 * y^6 * z^7 + 11856 * x^9 * y^5 * z^8 + 872 * x^9 * y^4 * z^9 - 1032 * x^9 * y^3 * z^10 - 88 * x^9 * y^2 * z^11 + 24 * y * x^9 * z^12 + 76 * x^8 * y^10 * z^4 + 2072 * x^8 * y^9 * z^5 + 11588 * x^8 * y^8 * z^6 + 22416 * x^8 * y^7 * z^7 + 18224 * x^8 * y^6 * z^8 + 6160 * x^8 * y^5 * z^9 - 124 * x^8 * y^4 * z^10 - 520 * x^8 * y^3 * z^11 - 36 * x^8 * y^2 * z^12 - 8 * x^7 * y^11 * z^4 + 296 * x^7 * y^10 * z^5 + 4216 * x^7 * y^9 * z^6 + 13256 * x^7 * y^8 * z^7 + 15248 * x^7 * y^7 * z^8 + 8048 * x^7 * y^6 * z^9 + 2192 * x^7 * y^5 * z^10 - 48 * x^7 * y^4 * z^11 - 96 * x^7 * y^3 * z^12 - 4 * x^6 * y^12 * z^4 - 72 * x^6 * y^11 * z^5 + 512 * x^6 * y^10 * z^6 + 4520 * x^6 * y^9 * z^7 + 7788 * x^6 * y^8 * z^8 + 4624 * x^6 * y^7 * z^9 + 1824 * x^6 * y^6 * z^10 + 688 * x^6 * y^5 * z^11 + 24 * x^6 * y^4 * z^12 - 24 * x^5 * y^12 * z^5 - 152 * x^5 * y^11 * z^6 + 696 * x^5 * y^10 * z^7 + 2824 * x^5 * y^9 * z^8 + 1664 * x^5 * y^8 * z^9 - 272 * x^5 * y^7 * z^10 + 208 * x^5 * y^6 * z^11 + 144 * x^5 * y^5 * z^12 - 44 * x^4 * y^12 * z^6 - 24 * x^4 * y^11 * z^7 + 936 * x^4 * y^10 * z^8 + 1192 * x^4 * y^9 * z^9 - 452 * x^4 * y^8 * z^10 - 528 * x^4 * y^7 * z^11 + 24 * x^4 * y^6 * z^12 - 16 * x^3 * y^12 * z^7 + 264 * x^3 * y^11 * z^8 + 920 * x^3 * y^10 * z^9 + 456 * x^3 * y^9 * z^10 - 280 * x^3 * y^8 * z^11 - 96 * x^3 * y^7 * z^12 + 36 * x^2 * y^12 * z^8 + 328 * x^2 * y^11 * z^9 + 512 * x^2 * y^10 * z^10 + 152 * x^2 * y^9 * z^11 - 36 * x^2 * y^8 * z^12 + 40 * x * y^12 * z^9 + 152 * x * y^11 * z^10 + 136 * x * y^10 * z^11 + 24 * x * y^9 * z^12 + 12 * y^12 * z^10 + 24 * y^11 * z^11 + 12 * y^10 * z^12
+/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2` (factored form). -/
+def polyC1 (x y z : ℝ) : ℝ := 4 * z^2 * (x + y)^4 * (x + z)^4 * (polyM0b x y z)^2
+    - 16 * x * y * z^2 * (x + y)^7 * (x + z)^5 * (y + z) * polyM0b x y z
+    + 8 * (x + y)^2 * (x + z)^4 * polyM1a x y z * polyM1b x y z
+    - 16 * x * y * z * (x + y)^5 * (x + z)^5 * (y + z)
+      * (z * (x + y + z) - x * y) * polyM1a x y z
 
-/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2`. -/
-def polyC3 (x y z : ℝ) : ℝ := 4 * x^14 * z^6 + 24 * y * x^13 * z^6 + 16 * x^13 * z^7 + 52 * x^12 * y^2 * z^6 + 96 * y * x^12 * z^7 + 24 * x^12 * z^8 + 32 * x^11 * y^3 * z^6 + 208 * x^11 * y^2 * z^7 + 144 * y * x^11 * z^8 + 16 * x^11 * z^9 - 56 * x^10 * y^4 * z^6 + 128 * x^10 * y^3 * z^7 + 312 * x^10 * y^2 * z^8 + 96 * y * x^10 * z^9 + 4 * x^10 * z^10 - 112 * x^9 * y^5 * z^6 - 224 * x^9 * y^4 * z^7 + 192 * x^9 * y^3 * z^8 + 208 * x^9 * y^2 * z^9 + 24 * y * x^9 * z^10 - 56 * x^8 * y^6 * z^6 - 448 * x^8 * y^5 * z^7 - 336 * x^8 * y^4 * z^8 + 128 * x^8 * y^3 * z^9 + 52 * x^8 * y^2 * z^10 + 32 * x^7 * y^7 * z^6 - 224 * x^7 * y^6 * z^7 - 672 * x^7 * y^5 * z^8 - 224 * x^7 * y^4 * z^9 + 32 * x^7 * y^3 * z^10 + 52 * x^6 * y^8 * z^6 + 128 * x^6 * y^7 * z^7 - 336 * x^6 * y^6 * z^8 - 448 * x^6 * y^5 * z^9 - 56 * x^6 * y^4 * z^10 + 24 * x^5 * y^9 * z^6 + 208 * x^5 * y^8 * z^7 + 192 * x^5 * y^7 * z^8 - 224 * x^5 * y^6 * z^9 - 112 * x^5 * y^5 * z^10 + 4 * x^4 * y^10 * z^6 + 96 * x^4 * y^9 * z^7 + 312 * x^4 * y^8 * z^8 + 128 * x^4 * y^7 * z^9 - 56 * x^4 * y^6 * z^10 + 16 * x^3 * y^10 * z^7 + 144 * x^3 * y^9 * z^8 + 208 * x^3 * y^8 * z^9 + 32 * x^3 * y^7 * z^10 + 24 * x^2 * y^10 * z^8 + 96 * x^2 * y^9 * z^9 + 52 * x^2 * y^8 * z^10 + 16 * x * y^10 * z^9 + 24 * x * y^9 * z^10 + 4 * y^10 * z^10
+/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2` (factored form). -/
+def polyC2 (x y z : ℝ) : ℝ := 8 * z^2 * (x + y)^4 * (x + z)^4 * polyM0a x y z * polyM0b x y z
+    - 16 * x * y * z^2 * (x + y)^7 * (x + z)^5 * (y + z) * polyM0a x y z
+    + 4 * (x + y)^2 * (x + z)^4 * (polyM1a x y z)^2
+
+/-- Coefficients of the eliminated polynomial `A₀` in `u = q^2` (factored form). -/
+def polyC3 (x y z : ℝ) : ℝ := 4 * z^2 * (x + y)^4 * (x + z)^4 * (polyM0a x y z)^2
 
 /-- The eliminated condition `A₀` with the circumcircle condition
 reduced to a polynomial in `x, y, z, q^2`. -/
 def polyA0 (x y z q : ℝ) : ℝ :=
   polyC0 x y z + polyC1 x y z * q^2 + polyC2 x y z * (q^2)^2 + polyC3 x y z * (q^2)^3
 
-/- The big elimination identity `T = q * A₀` (lemma `coreC`) used to be
-checked by a single `ring` call on the fully expanded polynomials, which
-needed an excessive amount of memory (the squares `polyM1²` expand to tens
-of thousands of monomials).  To keep every `ring` call small we split
-`polyM0` and `polyM1` by powers of `q` as `Mᵢ = q²·Mᵢₐ + Mᵢ_b`, and verify
-the four coefficients of `q²` in `A₀` independently (`polyC0_eq` …
-`polyC3_eq`).  All of these identities were produced by the same computer
-algebra elimination and are merely *verified* here. -/
-
-/-- The `q²`-part of `polyM0`; it factors as `z²(x+y)²(x-y)`. -/
-def polyM0a (x y z : ℝ) : ℝ := z^2 * (x + y)^2 * (x - y)
-
-/-- The `q⁰`-part of `polyM0`. -/
-def polyM0b (x y z : ℝ) : ℝ := x^5 * y^2 + 2 * y * z * x^5 + x^5 * z^2 + 5 * x^4 * y^3 + 8 * z * x^4 * y^2 + 5 * y * x^4 * z^2 + 2 * x^4 * z^3 + 7 * x^3 * y^4 + 12 * z * x^3 * y^3 + 8 * x^3 * y^2 * z^2 + x^3 * z^4 + 3 * x^2 * y^5 + 8 * z * x^2 * y^4 + 4 * x^2 * y^3 * z^2 - 3 * y * x^2 * z^4 + 2 * x * z * y^5 - x * y^4 * z^2 + 3 * x * y^2 * z^4 - y^5 * z^2 - 2 * y^4 * z^3 - y^3 * z^4
-
-/-- The `q²`-part of `polyM1`. -/
-def polyM1a (x y z : ℝ) : ℝ := y * x^5 * z^2 - x^5 * z^3 + 4 * x^4 * y^2 * z^2 + y * x^4 * z^3 - x^4 * z^4 + 6 * x^3 * y^3 * z^2 + 8 * x^3 * y^2 * z^3 + 4 * x^2 * y^4 * z^2 + 8 * x^2 * y^3 * z^3 + 2 * x^2 * y^2 * z^4 + x * y^5 * z^2 + x * y^4 * z^3 - y^5 * z^3 - y^4 * z^4
-
-/-- The `q⁰`-part of `polyM1`. -/
-def polyM1b (x y z : ℝ) : ℝ := x^7 * y^3 + z * x^7 * y^2 - y * x^7 * z^2 - x^7 * z^3 + 4 * x^6 * y^4 + 3 * z * x^6 * y^3 - x^6 * y^2 * z^2 - 3 * y * x^6 * z^3 - 3 * x^6 * z^4 + 6 * x^5 * y^5 + 4 * z * x^5 * y^4 + x^5 * y^3 * z^2 - x^5 * y^2 * z^3 + y * x^5 * z^4 - 3 * x^5 * z^5 + 4 * x^4 * y^6 + 4 * z * x^4 * y^5 + 2 * x^4 * y^4 * z^2 + 5 * x^4 * y^3 * z^3 + 3 * x^4 * y^2 * z^4 + 7 * y * x^4 * z^5 - x^4 * z^6 + x^3 * y^7 + 3 * z * x^3 * y^6 + x^3 * y^5 * z^2 + 5 * x^3 * y^4 * z^3 - 2 * x^3 * y^3 * z^4 - 4 * x^3 * y^2 * z^5 + 4 * y * x^3 * z^6 + z * x^2 * y^7 - x^2 * y^6 * z^2 - x^2 * y^5 * z^3 + 3 * x^2 * y^4 * z^4 - 4 * x^2 * y^3 * z^5 - 6 * x^2 * y^2 * z^6 - x * y^7 * z^2 - 3 * x * y^6 * z^3 + x * y^5 * z^4 + 7 * x * y^4 * z^5 + 4 * x * y^3 * z^6 - y^7 * z^3 - 3 * y^6 * z^4 - 3 * y^5 * z^5 - y^4 * z^6
+/- The big elimination identity `T = q * A₀` (lemma `coreC`) is checked by
+`ring` calls on *factored* forms of the polynomials, to keep every
+normalization small.  We split `polyM0` and `polyM1` by powers of `q` as
+`Mᵢ = q²·Mᵢₐ + Mᵢ_b`, and store the four coefficients of `q²` in `A₀`
+(`polyC0` … `polyC3`) directly in factored form.  All of these factored
+forms were produced by the same computer algebra elimination. -/
 
 /-- Split of `polyM0` by powers of `q`. -/
 lemma polyM0_split (x y z q : ℝ) :
@@ -239,41 +247,6 @@ lemma polyM0_split (x y z q : ℝ) :
 lemma polyM1_split (x y z q : ℝ) :
     polyM1 x y z q = q^2 * polyM1a x y z + polyM1b x y z := by
   simp only [polyM1, polyM1a, polyM1b]
-  ring
-
-/-- The `(q²)³`-coefficient of `polyA0`, as a small product. -/
-lemma polyC3_eq (x y z : ℝ) :
-    polyC3 x y z = 4 * z^2 * (x + y)^4 * (x + z)^4 * (polyM0a x y z)^2 := by
-  simp only [polyC3, polyM0a]
-  ring
-
-/-- The `(q²)²`-coefficient of `polyA0`, as a small product. -/
-lemma polyC2_eq (x y z : ℝ) :
-    polyC2 x y z
-      = 8 * z^2 * (x + y)^4 * (x + z)^4 * polyM0a x y z * polyM0b x y z
-        - 16 * x * y * z^2 * (x + y)^7 * (x + z)^5 * (y + z) * polyM0a x y z
-        + 4 * (x + y)^2 * (x + z)^4 * (polyM1a x y z)^2 := by
-  simp only [polyC2, polyM0a, polyM0b, polyM1a]
-  ring
-
-/-- The `q²`-coefficient of `polyA0`, as a small product. -/
-lemma polyC1_eq (x y z : ℝ) :
-    polyC1 x y z
-      = 4 * z^2 * (x + y)^4 * (x + z)^4 * (polyM0b x y z)^2
-        - 16 * x * y * z^2 * (x + y)^7 * (x + z)^5 * (y + z) * polyM0b x y z
-        + 8 * (x + y)^2 * (x + z)^4 * polyM1a x y z * polyM1b x y z
-        - 16 * x * y * z * (x + y)^5 * (x + z)^5 * (y + z)
-          * (z * (x + y + z) - x * y) * polyM1a x y z := by
-  simp only [polyC1, polyM0b, polyM1a, polyM1b]
-  ring
-
-/-- The `(q²)⁰`-coefficient of `polyA0`, as a small product. -/
-lemma polyC0_eq (x y z : ℝ) :
-    polyC0 x y z
-      = 4 * (x + y)^2 * (x + z)^4 * (polyM1b x y z)^2
-        - 16 * x * y * z * (x + y)^5 * (x + z)^5 * (y + z)
-          * (z * (x + y + z) - x * y) * polyM1b x y z := by
-  simp only [polyC0, polyM1b]
   ring
 
 /-- First elimination step: Cramer's rule on the equidistance equations. -/
@@ -360,6 +333,77 @@ lemma coreB
     + (polyDD x y z q^2 * w1) * hO1
     + (polyDD x y z q * (z * (x + y + z) - x * y)) * cramer1
 
+/-- The `q²`-free factor in the extouch elimination; see `coreC_factor`. -/
+def polyT0 (x y z : ℝ) : ℝ := x^2 * y + x^2 * z + 3 * x * y^2 + x * z^2 - y^2 * z - y * z^2
+
+/-- The degree-6 factor in the extouch elimination; see `coreC_factor`. -/
+def polyT1 (x y z : ℝ) : ℝ := x^4 * y^2 - x^4 * z^2 + 2 * x^3 * y^3 - 2 * x^3 * y^2 * z
+    + 2 * x^3 * y * z^2 - 2 * x^3 * z^3 + x^2 * y^4 - 2 * x^2 * y^3 * z
+    + 2 * x^2 * y^2 * z^2 + 4 * x^2 * y * z^3 - x^2 * z^4 + 2 * x * y^3 * z^2
+    + 4 * x * y^2 * z^3 + 2 * x * y * z^4 - y^4 * z^2 - 2 * y^3 * z^3 - y^2 * z^4
+
+/-- Factorization of `polyM1b·(x+y)² + polyM1a·K`, with `K = 4xyz(x+y+z)`. -/
+lemma coreC_S1 (x y z : ℝ) :
+    polyM1b x y z * (x + y)^2 + polyM1a x y z * (4 * x * y * z * (x + y + z))
+      = (x + y)^4 * (x + z) * (y + z) * polyT1 x y z := by
+  simp only [polyT1, polyM1a, polyM1b]
+  ring
+
+/-- Factorization of `polyM0b·(x+y)² + polyM0a·K`, with `K = 4xyz(x+y+z)`. -/
+lemma coreC_S0 (x y z : ℝ) :
+    polyM0b x y z * (x + y)^2 + polyM0a x y z * (4 * x * y * z * (x + y + z))
+      = (x + y)^4 * (x + z) * (y + z) * polyT0 x y z := by
+  simp only [polyT0, polyM0a, polyM0b]
+  ring
+
+/-- The degree-12 eliminated condition in the factors `polyT0`, `polyT1`. -/
+lemma coreC_E2 (x y z : ℝ) :
+    (polyT1 x y z)^2 + z^2 * (4 * x * y * z * (x + y + z)) * (polyT0 x y z)^2
+      - 4 * x * y * z * (x + y) * (z * (x + y + z) - x * y) * polyT1 x y z
+      - 4 * x * y * z^2 * (x + y) * (4 * x * y * z * (x + y + z)) * polyT0 x y z
+      = -((x + y) * (x + z) * (y + z)
+        * ((x * (x + y + z) - y * z) * (y * (x + y + z) - x * z)
+          * (z * (x + y + z) - x * y))
+        * ((x + y) * (x * y + z^2) + z * (x - y)^2)) := by
+  simp only [polyT0, polyT1]
+  ring
+
+/-- The `polyC`-combination, regrouped over the `Sᵢ` expressions. -/
+lemma coreC_fin1 (x y z : ℝ) :
+    polyC0 x y z * (x + y)^6
+      + polyC1 x y z * (4 * x * y * z * (x + y + z)) * (x + y)^4
+      + polyC2 x y z * (4 * x * y * z * (x + y + z))^2 * (x + y)^2
+      + polyC3 x y z * (4 * x * y * z * (x + y + z))^3
+      = 4 * (x + y)^4 * (x + z)^4
+        * ((polyM1b x y z * (x + y)^2 + polyM1a x y z * (4 * x * y * z * (x + y + z)))^2
+          + z^2 * (4 * x * y * z * (x + y + z))
+            * (polyM0b x y z * (x + y)^2 + polyM0a x y z * (4 * x * y * z * (x + y + z)))^2)
+        - 16 * x * y * z * (x + y)^9 * (x + z)^5 * (y + z)
+          * ((z * (x + y + z) - x * y)
+            * (polyM1b x y z * (x + y)^2 + polyM1a x y z * (4 * x * y * z * (x + y + z)))
+            + z * (4 * x * y * z * (x + y + z))
+              * (polyM0b x y z * (x + y)^2 + polyM0a x y z * (4 * x * y * z * (x + y + z)))) := by
+  simp only [polyC0, polyC1, polyC2, polyC3]
+  generalize _ha : x + y = a
+  ring
+
+/-- Factoring out `4·(x+y)¹²(x+z)⁶(y+z)²` after the `Sᵢ = (x+y)⁴(x+z)(y+z)·Tᵢ`
+substitution. -/
+lemma coreC_factor (x y z : ℝ) :
+    4 * (x + y)^4 * (x + z)^4
+      * (((x + y)^4 * (x + z) * (y + z) * polyT1 x y z)^2
+        + z^2 * (4 * x * y * z * (x + y + z))
+          * ((x + y)^4 * (x + z) * (y + z) * polyT0 x y z)^2)
+      - 16 * x * y * z * (x + y)^9 * (x + z)^5 * (y + z)
+        * ((z * (x + y + z) - x * y) * ((x + y)^4 * (x + z) * (y + z) * polyT1 x y z)
+          + z * (4 * x * y * z * (x + y + z)) * ((x + y)^4 * (x + z) * (y + z) * polyT0 x y z))
+    = 4 * (x + y)^12 * (x + z)^6 * (y + z)^2
+      * ((polyT1 x y z)^2 + z^2 * (4 * x * y * z * (x + y + z)) * (polyT0 x y z)^2
+        - 4 * x * y * z * (x + y) * (z * (x + y + z) - x * y) * polyT1 x y z
+        - 4 * x * y * z^2 * (x + y) * (4 * x * y * z * (x + y + z)) * polyT0 x y z) := by
+  generalize _ha : x + y = a
+  ring
+
 /-- Final elimination step: the result is `q` times a polynomial in `q^2`,
 which yields the right-angle factorization. -/
 lemma coreC
@@ -385,7 +429,7 @@ lemma coreC
     simp only [polyN0, polyN1, polyDD]
     ring
   -- Collecting by powers of `q²` gives `polyA0`: the coefficients are exactly
-  -- the small products of `polyC0_eq` … `polyC3_eq`.  With the splits
+  -- the factored `polyC0` … `polyC3`.  With the splits
   -- `Mᵢ = q²·Mᵢₐ + Mᵢ_b` this `ring` only handles folded atoms, so it is small.
   have hT2 : 4 * z^2 * (x + y)^4 * (x + z)^4 * q^2 * (polyM0 x y z q)^2
       - 16 * x * y * z^2 * (x + y)^7 * (x + z)^5 * (y + z) * q^2 * polyM0 x y z q
@@ -394,7 +438,7 @@ lemma coreC
         * polyM1 x y z q
       = polyA0 x y z q := by
     rw [polyM0_split, polyM1_split]
-    simp only [polyA0, polyC0_eq, polyC1_eq, polyC2_eq, polyC3_eq]
+    simp only [polyA0, polyC0, polyC1, polyC2, polyC3]
     ring
   have hTform : q * (polyN0 x y z q^2 - (x + y) * polyN0 x y z q * polyDD x y z q
         + polyN1 x y z q^2)
@@ -414,28 +458,23 @@ lemma coreC
     ring
   rw [hQ] at hstep
   rw [hA0, mul_zero] at hstep
-  -- The eliminated condition: the `polyC`-part plus the factored big term
-  -- vanishes.  This is the one remaining sizable `ring` of the proof.
-  have hfin : polyC0 x y z * (x + y)^6
-      + polyC1 x y z * (4 * x * y * z * (x + y + z)) * (x + y)^4
-      + polyC2 x y z * (4 * x * y * z * (x + y + z))^2 * (x + y)^2
-      + polyC3 x y z * (4 * x * y * z * (x + y + z))^3
-      + 4 * (x + y)^13 * (x + z)^7 * (y + z)^3
-        * ((x * (x + y + z) - y * z) * (y * (x + y + z) - x * z)
-          * (z * (x + y + z) - x * y))
-        * ((x + y) * (x * y + z^2) + z * (x - y)^2) = 0 := by
-    simp only [polyC0, polyC1, polyC2, polyC3]
-    ring
-  -- `hfin` contains `hstep`'s (vanishing) right side as a subterm; rewriting
-  -- with it leaves only `big · K · SOS = 0` — no further normalization needed.
-  rw [← hstep, zero_add] at hfin
-  have hposP : 0 < 4 * (x + y)^13 * (x + z)^7 * (y + z)^3 := by positivity
+  -- The eliminated condition: the `polyC`-combination factors as
+  -- `4·(x+y)¹²(x+z)⁶(y+z)²` times a degree-12 polynomial in the factors
+  -- `polyT0`, `polyT1` (identities found by computer algebra and verified
+  -- here).  Keeping everything factored avoids the degree-32 normalization
+  -- that a direct `ring` on the expanded polynomials would need.
+  rw [coreC_fin1, coreC_S1, coreC_S0, coreC_factor, coreC_E2, mul_neg, eq_comm,
+    neg_eq_zero] at hstep
+  have hposG : 0 < 4 * (x + y)^12 * (x + z)^6 * (y + z)^2 := by positivity
+  have hposF : 0 < (x + y) * (x + z) * (y + z) := by positivity
   have hposS : 0 < (x + y) * (x * y + z^2) + z * (x - y)^2 := by positivity
-  rcases mul_eq_zero.mp hfin with hPK | hS
-  · rcases mul_eq_zero.mp hPK with hP | hprod
-    · exact absurd hP (ne_of_gt hposP)
-    · exact hprod
-  · exact absurd hS (ne_of_gt hposS)
+  rcases mul_eq_zero.mp hstep with hG | hrest
+  · exact absurd hG (ne_of_gt hposG)
+  · rcases mul_eq_zero.mp hrest with hFPS | hS
+    · rcases mul_eq_zero.mp hFPS with hF | hP
+      · exact absurd hF (ne_of_gt hposF)
+      · exact hP
+    · exact absurd hS (ne_of_gt hposS)
 
 theorem core
     (x y z q w0 w1 o0 o1 : ℝ)
