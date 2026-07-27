@@ -3,7 +3,14 @@ Copyright (c) 2025 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers, Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.Convex.BetweenList
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Geometry.Euclidean.MongePoint
+import Mathlib.Geometry.Euclidean.Sphere.Tangent
 
 import ProblemExtraction
 
@@ -256,15 +263,58 @@ theorem algebra_core {a b c e mx nx : ℝ}
     field_simp [hb, hac', hae']
     ring
   · -- `dist E O = dist B O`.
-    unfold coordEx coordEy coordOx coordOy coordTE coordUx coordUy
-    rw [hmx, hu2e_id]
-    field_simp [hb, hac', hae', hsq1, hsq2]
-    ring
+    -- Factor the quadratic in `coordTE` first: with `K = (a - mx) * ux + b * uy`,
+    -- `G = ux * (a - Ox) + uy * (b - Oy)` and `D = ux ^ 2 + uy ^ 2`, the identity
+    -- is `t * (t * D + 2 * G) = 4 * b * Oy` at `t = -2 * K / D`, i.e. `K * (K - G) =
+    -- b * Oy * D`.  Proving that crux directly keeps `ring` off the huge
+    -- denominator-clearing normal form.
+    have hcrux : ((a - mx) * coordUx a c e + b * coordUy a b c e) *
+          (coordUx a c e * (coordOx a b c e - mx) + coordUy a b c e * coordOy a b c e)
+        = b * coordOy a b c e * (coordUx a c e ^ 2 + coordUy a b c e ^ 2) := by
+      unfold coordUx coordUy coordOx coordOy
+      rw [hmx]
+      field_simp [hb, hac', hae']
+      ring
+    have hfac : (coordEx a b c e mx - coordOx a b c e) ^ 2 +
+          (coordEy a b c e mx - coordOy a b c e) ^ 2 -
+          ((a - coordOx a b c e) ^ 2 + (-b - coordOy a b c e) ^ 2)
+        = coordTE a b c e mx * (coordTE a b c e mx * (coordUx a c e ^ 2 + coordUy a b c e ^ 2)
+            + 2 * (coordUx a c e * (a - coordOx a b c e) +
+              coordUy a b c e * (b - coordOy a b c e)))
+          - 4 * b * coordOy a b c e := by
+      unfold coordEx coordEy
+      ring
+    have hexp : coordTE a b c e mx * (coordTE a b c e mx * (coordUx a c e ^ 2 + coordUy a b c e ^ 2)
+          + 2 * (coordUx a c e * (a - coordOx a b c e) + coordUy a b c e * (b - coordOy a b c e)))
+        - 4 * b * coordOy a b c e = 0 := by
+      unfold coordTE
+      field_simp [hu2]
+      linear_combination 4 * hcrux
+    linear_combination hfac + hexp
   · -- `dist F O = dist B O`.
-    unfold coordFx coordFy coordOx coordOy coordTF coordUx coordUy
-    rw [hnx, hu2e_id]
-    field_simp [hb, hac', hae', hsq1, hsq2]
-    ring
+    have hcrux : ((a - nx) * coordUx a c e + b * coordUy a b c e) *
+          (coordUx a c e * (coordOx a b c e - nx) + coordUy a b c e * coordOy a b c e)
+        = b * coordOy a b c e * (coordUx a c e ^ 2 + coordUy a b c e ^ 2) := by
+      unfold coordUx coordUy coordOx coordOy
+      rw [hnx]
+      field_simp [hb, hac', hae']
+      ring
+    have hfac : (coordFx a b c e nx - coordOx a b c e) ^ 2 +
+          (coordFy a b c e nx - coordOy a b c e) ^ 2 -
+          ((a - coordOx a b c e) ^ 2 + (-b - coordOy a b c e) ^ 2)
+        = coordTF a b c e nx * (coordTF a b c e nx * (coordUx a c e ^ 2 + coordUy a b c e ^ 2)
+            + 2 * (coordUx a c e * (a - coordOx a b c e) +
+              coordUy a b c e * (b - coordOy a b c e)))
+          - 4 * b * coordOy a b c e := by
+      unfold coordFx coordFy
+      ring
+    have hexp : coordTF a b c e nx * (coordTF a b c e nx * (coordUx a c e ^ 2 + coordUy a b c e ^ 2)
+          + 2 * (coordUx a c e * (a - coordOx a b c e) + coordUy a b c e * (b - coordOy a b c e)))
+        - 4 * b * coordOy a b c e = 0 := by
+      unfold coordTF
+      field_simp [hu2]
+      linear_combination 4 * hcrux
+    linear_combination hfac + hexp
 
 /-- The nonzero root of the quadratic giving the second intersection of a line
 through a circle point with the circle. -/
