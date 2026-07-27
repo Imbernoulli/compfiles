@@ -58,17 +58,17 @@ jobs:
           FREE_GB=$(( FREE_KB / 1024 / 1024 ))
           SIZE_GB=$(( FREE_GB > 30 ? 20 : (FREE_GB > 14 ? FREE_GB - 10 : 4) ))
           echo "Available disk: ${FREE_GB}G; trying ${SIZE_GB}G swap"
-          if sudo fallocate -l ${SIZE_GB}G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SIZE_GB * 1024)); then
-            sudo chmod 600 /swapfile
-            if sudo mkswap /swapfile && sudo swapon /swapfile; then
+          if sudo fallocate -l ${SIZE_GB}G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=$((SIZE_GB * 1024)); then
+            sudo chmod 600 /swapfile2
+            if sudo mkswap /swapfile2 && sudo swapon /swapfile2; then
               echo "swap enabled: ${SIZE_GB}G"
             else
               echo "WARNING: mkswap/swapon failed; continuing without swap"
-              sudo rm -f /swapfile || true
+              sudo rm -f /swapfile2 || true
             fi
           else
             echo "WARNING: could not allocate swapfile; continuing without swap"
-            sudo rm -f /swapfile || true
+            sudo rm -f /swapfile2 || true
           fi
           sudo sysctl vm.swappiness=10 2>/dev/null || true
           free -h
