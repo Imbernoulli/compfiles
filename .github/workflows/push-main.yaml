@@ -73,6 +73,16 @@ jobs:
           sudo sysctl vm.swappiness=10 2>/dev/null || true
           free -h
           } 2>&1 | tee /tmp/build.log
+          # Push the setup log immediately so it survives a later hard kill.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin build-log || true
+          git checkout -b build-log origin/build-log || git checkout -b build-log
+          cp /tmp/build.log build-log.txt || echo "no build log" > build-log.txt
+          git add build-log.txt
+          git commit -q -m "setup log (run ${{ github.run_number }})" || true
+          git push -f -q origin build-log || true
+          git checkout - || true
           true
 
       - name: lake build
