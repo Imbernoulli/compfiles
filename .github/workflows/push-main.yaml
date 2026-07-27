@@ -40,7 +40,10 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: .lake
-          key: build-${{ hashFiles('lakefile.toml', 'lake-manifest.json', 'lean-toolchain') }}
+          key: build-${{ hashFiles('lakefile.toml', 'lake-manifest.json', 'lean-toolchain') }}-${{ github.sha }}
+          restore-keys: |
+            build-${{ hashFiles('lakefile.toml', 'lake-manifest.json', 'lean-toolchain') }}-
+            build-${{ hashFiles('lakefile.toml', 'lake-manifest.json', 'lean-toolchain') }}
 
       - name: get mathlib cache
         if: steps.restore-build-cache.outputs.cache-hit != 'true'
