@@ -1832,3 +1832,2002 @@ macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
   `(tactic| push $cfg:optConfig Not $[$loc]?)
 ```
 Build completed successfully (1079 jobs).
+⚠ [1833/1833] Built Compfiles.Usa2023P3 (545s)
+warning: Compfiles/Usa2023P3.lean:411:27: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:411:41: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:413:27: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:413:41: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:415:27: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:415:41: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:411:58: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:415:58: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:411:58: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:415:58: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:520:50: Variable name `he` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:521:5: Variable name `heb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:531:60: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:531:74: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:542:62: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:542:76: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:531:91: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:531:91: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:559:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:559:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:562:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:562:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:575:36: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  simp only [arrow, hupd, slideFun,̵ ̵i̵f̵_̵p̵o̵s̵ ̵r̵f̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:576:16: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:576:30: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:576:47: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:576:47: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:597:60: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:597:74: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:603:58: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:603:72: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:617:18: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:617:32: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:620:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:620:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:623:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:623:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:591:53: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:603:89: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:591:53: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:603:89: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:728:18: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:728:32: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:730:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:730:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:733:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:733:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:743:58: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:743:72: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:743:89: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:743:89: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:860:29: Variable name `hs` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:919:22: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:919:36: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:924:22: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:924:36: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:929:22: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:929:36: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:934:22: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:934:36: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:988:59: This simp argument is unused:
+  Finset.mem_coe
+
+Hint: Omit it from the simp argument list.
+  simp only [compA, Finset.coe_filter, Set.mem_setOf_eq,̵ ̵F̵i̵n̵s̵e̵t̵.̵m̵e̵m̵_̵c̵o̵e̵] at hs ht
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1051:33: `Set.mem_diff` has been deprecated: Use `Set.mem_sdiff` instead
+warning: Compfiles/Usa2023P3.lean:1099:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:1218:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:1199:12: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵]̵ ̵at h8 h9
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1330:34: Variable name `hs` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:1509:18: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1509:32: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1511:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1511:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1514:56: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1514:70: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1524:58: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1524:72: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1524:89: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:1524:89: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:1597:38: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  simp only [slideFun, if_neg hn,̵ ̵i̵f̵_̵p̵o̵s̵ ̵r̵f̵l̵] at hfc
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1702:57: Variable name `hm` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:1729:17: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [arrow, P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul] at h5 h6
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1729:31: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [arrow, Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵] at h5 h6
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1734:10: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul] at h5 h6
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1734:24: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵] at h5 h6
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1739:10: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul] at h5 h6
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:1739:24: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵] at h5 h6
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2078:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:2298:20: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2298:34: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2317:20: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2317:34: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2336:20: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2336:34: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2355:20: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2355:34: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2298:56: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:2336:56: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:2298:56: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:2336:56: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:2317:52: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:2355:52: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:2384:10: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul] at h8 h9
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2384:24: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵] at h8 h9
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2482:19: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [arrow, P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2482:33: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [arrow, Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:2571:14: This simp argument is unused:
+  Fin.val_last
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵F̵i̵n̵.̵v̵a̵l̵_̵l̵a̵s̵t̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:3019:56: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:3194:81: This simp argument is unused:
+  hy
+
+Hint: Omit it from the simp argument list.
+  simp [hx,̵ ̵h̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:3200:77: This simp argument is unused:
+  hx
+
+Hint: Omit it from the simp argument list.
+  simp [hx̵,̵ ̵h̵y]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:3567:41: This simp argument is unused:
+  reverse_v
+
+Hint: Omit it from the simp argument list.
+  simp only [OrthoLoop.x, OrthoLoop.y, r̵e̵v̵e̵r̵s̵e̵_̵v̵,̵ ̵e1 i, e2 i]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:3738:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:3745:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:3748:19: This simp argument is unused:
+  val_zero_fin
+
+Hint: Omit it from the simp argument list.
+  simp only [̵v̵a̵l̵_̵z̵e̵r̵o̵_̵f̵i̵n̵,̵ ̵v̵a̵l̵_̵o̵n̵e̵_̵f̵i̵n̵,̵[̲v̲a̲l̲_̲o̲n̲e̲_̲f̲i̲n̲,̲ val_two_fin, val_three_fin] at hv
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:3753:15: This simp argument is unused:
+  val_zero_fin
+
+Hint: Omit it from the simp argument list.
+  simp only [̵v̵a̵l̵_̵z̵e̵r̵o̵_̵f̵i̵n̵,̵ ̵v̵a̵l̵_̵o̵n̵e̵_̵f̵i̵n̵,̵[̲v̲a̲l̲_̲o̲n̲e̲_̲f̲i̲n̲,̲ val_two_fin, val_three_fin] at hv
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:3753:29: This simp argument is unused:
+  val_one_fin
+
+Hint: Omit it from the simp argument list.
+  simp only [val_zero_fin, val_o̵n̵e̵_̵f̵i̵n̵,̵ ̵v̵a̵l̵_̵two_fin, val_three_fin] at hv
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:4093:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:4046:6: This simp argument is unused:
+  Prod.mk.injEq
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_product, Finset.mem_Icc, Finset.mem_insert, Finset.mem_singleton,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵P̵r̵o̵d̵.̵m̵k̵.̵i̵n̵j̵E̵q̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:4060:6: This simp argument is unused:
+  Prod.mk.injEq
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_filter, Finset.mem_product, Finset.mem_insert, Finset.mem_singleton,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵P̵r̵o̵d̵.̵m̵k̵.̵i̵n̵j̵E̵q̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:4103:33: This simp argument is unused:
+  Prod.mk.injEq
+
+Hint: Omit it from the simp argument list.
+  simp only [hsx, hsy,̵ ̵P̵r̵o̵d̵.̵m̵k̵.̵i̵n̵j̵E̵q̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:4387:15: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:4513:10: This simp argument is unused:
+  val_neg_one_fin
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵v̵a̵l̵_̵n̵e̵g̵_̵o̵n̵e̵_̵f̵i̵n̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:4807:2: 'beta_reduce  at hci hcj' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:5491:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:5539:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:5850:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:5885:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:5889:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:5894:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:5898:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:6110:16: This simp argument is unused:
+  val_zero_fin
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵v̵a̵l̵_̵z̵e̵r̵o̵_̵f̵i̵n̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:6136:16: This simp argument is unused:
+  val_one_fin
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵v̵a̵l̵_̵o̵n̵e̵_̵f̵i̵n̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:6217:5: Variable name `hd` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:6239:10: This simp argument is unused:
+  val_neg_one_fin
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵v̵a̵l̵_̵n̵e̵g̵_̵o̵n̵e̵_̵f̵i̵n̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:6596:2: 'beta_reduce  at hci hcj' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:7188:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7220:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7241:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7265:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7515:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7554:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7558:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7563:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7567:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7664:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7669:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:7927:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:8848:25: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:8848:25: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:9429:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9434:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9441:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9696:16: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9702:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9710:16: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9744:16: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9750:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9758:16: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9800:16: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9806:14: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:9814:16: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:10292:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:10353:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:10424:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:10882:16: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:10965:18: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:11574:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:11603:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:11605:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:11732:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:11771:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:11793:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:11803:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12012:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12055:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12123:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12187:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:8897:12: This simp argument is unused:
+  val_neg_one_fin
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵v̵a̵l̵_̵n̵e̵g̵_̵o̵n̵e̵_̵f̵i̵n̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:9141:6: 'beta_reduce  at hci hcj' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:9518:6: 'beta_reduce  at hci hcj' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:11818:73: 'decide' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:11861:75: 'decide' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:11871:75: 'decide' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:11920:67: 'decide' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:11818:73: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:11861:75: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:11871:75: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:11920:67: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:12652:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12711:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12889:16: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵Int.zsmul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:12889:30: This simp argument is unused:
+  Int.zsmul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵I̵n̵t̵.̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:12910:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12925:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12940:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12955:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:13203:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:13208:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:13213:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:13218:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:12994:40: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:13004:40: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:12994:40: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:13004:40: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:12999:36: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13009:36: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13316:51: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13325:59: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13334:76: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13343:76: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13451:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2023P3.lean:13590:25: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:13598:25: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:13590:25: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:13598:25: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:13575:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13583:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13696:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13705:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:13867:51: Variable name `hj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:14350:35: unused name: g4
+warning: Compfiles/Usa2023P3.lean:16172:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:16383:5: Variable name `ht` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2023P3.lean:16427:17: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:16473:22: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16473:36: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16497:24: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16497:38: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16510:24: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16510:38: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16527:22: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16527:36: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16562:24: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16562:38: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16575:24: This simp argument is unused:
+  Prod.smul_mk
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵r̵o̵d̵.̵s̵m̵u̵l̵_̵m̵k̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16575:38: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [Prod.smul_mk,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2023P3.lean:16497:55: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:16527:53: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:16575:55: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2023P3.lean:16497:55: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:16527:53: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:16575:55: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2023P3.lean:16473:49: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:16510:51: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2023P3.lean:16562:51: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Build completed successfully (1833 jobs).
+Huge modules done at 06:26:59
+✔ [2400/2400] Built Compfiles.Imo1962P7 (57s)
+Build completed successfully (2400 jobs).
+⚠ [2789/2789] Built Compfiles.Imo1967P4 (57s)
+warning: Compfiles/Imo1967P4.lean:365:30: This simp argument is unused:
+  vrot_one
+
+Hint: Omit it from the simp argument list.
+  simp only [octr, vrot_zero, v̵r̵o̵t̵_̵o̵n̵e̵,̵ ̵PiLp.add_apply, PiLp.sub_apply, PiLp.smul_apply,
+  ̵  ̵ ̵ ̵smul_eq_mul,
+  ̲  ̲ ̲ ̲PiLp.neg_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:366:17: This simp argument is unused:
+  PiLp.neg_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [octr, vrot_zero, vrot_one, PiLp.add_apply, PiLp.sub_apply, PiLp.smul_apply,
+      smul_eq_mul,̵ ̵P̵i̵L̵p̵.̵n̵e̵g̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:371:19: This simp argument is unused:
+  vrot_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [octr, v̵r̵o̵t̵_̵z̵e̵r̵o̵,̵ ̵vrot_one, PiLp.add_apply, PiLp.sub_apply, PiLp.smul_apply, smul_eq_mul,
+  ̲  ̲ ̲ ̲PiLp.neg_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:372:17: This simp argument is unused:
+  PiLp.neg_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [octr, vrot_zero, vrot_one, PiLp.add_apply, PiLp.sub_apply, PiLp.smul_apply,
+      smul_eq_mul,̵ ̵P̵i̵L̵p̵.̵n̵e̵g̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:390:24: Variable name `A₀` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1967P4.lean:392:27: Variable name `B₀` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1967P4.lean:394:30: Variable name `C₀` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1967P4.lean:466:6: This simp argument is unused:
+  pt_smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [cenA, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_z̵e̵r̵o,̵ ̵p̵t̵_̵s̵m̵u̵l̵_̵o̵ne, octr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:466:20: This simp argument is unused:
+  pt_smul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [cenA, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_zero, p̵t̵_̵s̵m̵u̵l̵_̵on̵e̵,̵ ̵o̵ctr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:473:6: This simp argument is unused:
+  pt_smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [cenA, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_z̵e̵r̵o,̵ ̵p̵t̵_̵s̵m̵u̵l̵_̵o̵ne, octr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:473:20: This simp argument is unused:
+  pt_smul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [cenA, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_zero, p̵t̵_̵s̵m̵u̵l̵_̵on̵e̵,̵ ̵o̵ctr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:481:6: This simp argument is unused:
+  pt_smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [cenB, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_z̵e̵r̵o,̵ ̵p̵t̵_̵s̵m̵u̵l̵_̵o̵ne, octr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:481:20: This simp argument is unused:
+  pt_smul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [cenB, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_zero, p̵t̵_̵s̵m̵u̵l̵_̵on̵e̵,̵ ̵o̵ctr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:488:6: This simp argument is unused:
+  pt_smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [cenB, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_z̵e̵r̵o,̵ ̵p̵t̵_̵s̵m̵u̵l̵_̵o̵ne, octr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:488:20: This simp argument is unused:
+  pt_smul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [cenB, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_zero, p̵t̵_̵s̵m̵u̵l̵_̵on̵e̵,̵ ̵o̵ctr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:496:6: This simp argument is unused:
+  pt_smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [cenC, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_z̵e̵r̵o,̵ ̵p̵t̵_̵s̵m̵u̵l̵_̵o̵ne, octr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:496:20: This simp argument is unused:
+  pt_smul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [cenC, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_zero, p̵t̵_̵s̵m̵u̵l̵_̵on̵e̵,̵ ̵o̵ctr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:503:6: This simp argument is unused:
+  pt_smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [cenC, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_z̵e̵r̵o,̵ ̵p̵t̵_̵s̵m̵u̵l̵_̵o̵ne, octr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:503:20: This simp argument is unused:
+  pt_smul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [cenC, offp, vdotE, vcrE, pt_add_zero, pt_add_one, pt_sub_zero, pt_sub_one,
+        pt_smul_zero, p̵t̵_̵s̵m̵u̵l̵_̵on̵e̵,̵ ̵o̵ctr_zero, octr_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:551:70: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:563:70: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:575:70: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:585:70: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:595:70: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:657:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:662:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:668:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:668:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:684:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:689:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:695:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:695:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:711:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:716:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:722:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:722:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:739:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:743:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:748:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:754:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:754:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:771:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:776:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:782:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:782:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:799:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:803:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:808:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:814:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:814:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:831:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:835:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:840:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:846:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:846:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:863:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:868:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:874:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:874:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:891:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:895:47: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:900:53: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one,̵ ̵P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:906:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:906:74: This simp argument is unused:
+  PiLp.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, P̵i̵L̵p̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵ ̵vdotE, vcrE,
+  ̵  ̵ ̵ ̵pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:1110:13: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [̵W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵,̵[̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲,̲ Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE, pt_sub_zero,
+  ̲  ̲ ̲ ̲pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:1150:6: This simp argument is unused:
+  WithLp.ofLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp only [vdotE, vcrE, vrot, pt_sub_zero, pt_sub_one, pt_smul_zero, pt_smul_one,
+        W̵i̵t̵h̵L̵p̵.̵o̵f̵L̵p̵_̵t̵o̵L̵p̵,̵ ̵Matrix.cons_val_zero, Matrix.cons_val_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:1198:41: This simp argument is unused:
+  vcrE
+
+Hint: Omit it from the simp argument list.
+  simp only [octr_zero, octr_one, vdotE, v̵c̵r̵E̵,̵ ̵pt_sub_zero, pt_sub_one, pt_smul_zero, pt_smul_one,
+  ̲  ̲ ̲ ̲PiLp.zero_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1967P4.lean:1250:41: This simp argument is unused:
+  vcrE
+
+Hint: Omit it from the simp argument list.
+  simp only [octr_zero, octr_one, vdotE, v̵c̵r̵E̵,̵ ̵pt_sub_zero, pt_sub_one, pt_smul_zero, pt_smul_one,
+  ̲  ̲ ̲ ̲PiLp.zero_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (2789 jobs).
+⚠ [3177/3177] Built Compfiles.Imo1971P4 (65s)
+warning: Compfiles/Imo1971P4.lean:538:20: Variable name `hx2` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:539:5: Variable name `hy1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:560:20: Variable name `hy2` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:561:5: Variable name `hz1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:581:20: Variable name `hz2` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:582:5: Variable name `ht1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:602:20: Variable name `ht2` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:603:5: Variable name `hx1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:1369:5: Variable name `hABC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:1369:34: Variable name `hBCD` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:1440:29: Variable name `D` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:1468:34: Variable name `hABD` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:1469:5: Variable name `hcond` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1971P4.lean:1636:24: Variable name `A` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (3177 jobs).
+✔ [3065/3065] Built Compfiles.Imo1995P3 (92s)
+Build completed successfully (3065 jobs).
