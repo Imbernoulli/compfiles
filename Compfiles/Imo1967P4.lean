@@ -4,7 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Data.Real.Sign
+import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
 
 import ProblemExtraction
 
@@ -634,296 +642,271 @@ lemma esqC2_inv (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) :
     esqC2 A₀ B₀ C₀ A₁ B₁ C₁ sig = esqC2 0 (B₀ - A₀) (C₀ - A₀) 0 (B₁ - A₁) (C₁ - A₁) sig := by
   simp only [esqC2, rasq_inv A₀ B₀ C₀ A₁ B₁ C₁ sig, dca2_inv A₀ B₀ C₀ A₁ B₁ C₁ sig, rcsq_inv A₀ B₀ C₀ A₁ B₁ C₁ sig]
 
-set_option maxHeartbeats 3200000 in
-lemma dab2_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    4 * (vcr (B₁ - 0) (C₁ - 0))^2 * dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (B₁ - 0) (B₁ - 0)) * kval (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold dab2 kval cenA cenB offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold dab2 kval cenA cenB offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma dbc2_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    4 * (vcr (B₁ - 0) (C₁ - 0))^2 * dbc2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (C₁ - B₁) (C₁ - B₁)) * kval (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold dbc2 kval cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold dbc2 kval cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma dca2_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    4 * (vcr (B₁ - 0) (C₁ - 0))^2 * dca2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (C₁ - 0) (C₁ - 0)) * kval (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold dca2 kval cenA cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold dca2 kval cenA cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma eA1_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    2 * (vcr (B₁ - 0) (C₁ - 0))^2 * esqA1 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (B₁ - 0) (B₁ - 0)) * ((vdot (0 - B₀) (C₀ - B₀)) * (vdot (C₁ - 0) (C₁ - 0)) + (vdot (0 - C₀) (B₀ - C₀)) * (vdot (B₁ - 0) (C₁ - 0)) + sig * (vcr (B₀ - 0) (C₀ - 0)) * (vcr (B₁ - 0) (C₁ - 0))) := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold esqA1 rasq dab2 rbsq cenA cenB offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold esqA1 rasq dab2 rbsq cenA cenB offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma eA2_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    2 * (vcr (B₁ - 0) (C₁ - 0))^2 * esqA2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (B₁ - 0) (B₁ - 0)) * ((vdot (B₀ - 0) (C₀ - 0)) * (vdot (0 - C₁) (B₁ - C₁)) + ((vdot (B₀ - 0) (C₀ - 0)) + (vdot (0 - C₀) (B₀ - C₀))) * (vdot (0 - B₁) (C₁ - B₁)) + sig * (vcr (B₀ - 0) (C₀ - 0)) * (vcr (B₁ - 0) (C₁ - 0))) := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold esqA2 rasq dab2 rbsq cenA cenB offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold esqA2 rasq dab2 rbsq cenA cenB offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma eB1_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    2 * (vcr (B₁ - 0) (C₁ - 0))^2 * esqB1 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (C₁ - B₁) (C₁ - B₁)) * ((vdot (B₀ - 0) (C₀ - 0)) * (vdot (0 - B₁) (C₁ - B₁)) + (vdot (0 - C₀) (B₀ - C₀)) * (vdot (B₁ - 0) (B₁ - 0)) + sig * (vcr (B₀ - 0) (C₀ - 0)) * (vcr (B₁ - 0) (C₁ - 0))) := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold esqB1 rbsq dbc2 rcsq cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold esqB1 rbsq dbc2 rcsq cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma eB2_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    2 * (vcr (B₁ - 0) (C₁ - 0))^2 * esqB2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (C₁ - B₁) (C₁ - B₁)) * ((vdot (B₀ - 0) (C₀ - 0)) * (vdot (0 - C₁) (B₁ - C₁)) + (vdot (0 - B₀) (C₀ - B₀)) * (vdot (C₁ - 0) (C₁ - 0)) + sig * (vcr (B₀ - 0) (C₀ - 0)) * (vcr (B₁ - 0) (C₁ - 0))) := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold esqB2 rbsq dbc2 rcsq cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold esqB2 rbsq dbc2 rcsq cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma eC1_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    2 * (vcr (B₁ - 0) (C₁ - 0))^2 * esqC1 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (C₁ - 0) (C₁ - 0)) * (((vdot (B₀ - 0) (C₀ - 0)) + (vdot (0 - B₀) (C₀ - B₀))) * (vdot (0 - C₁) (B₁ - C₁)) + (vdot (B₀ - 0) (C₀ - 0)) * (vdot (0 - B₁) (C₁ - B₁)) + sig * (vcr (B₀ - 0) (C₀ - 0)) * (vcr (B₁ - 0) (C₁ - 0))) := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold esqC1 rcsq dca2 rasq cenA cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold esqC1 rcsq dca2 rasq cenA cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
-set_option maxHeartbeats 3200000 in
-lemma eC2_eq0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
-    2 * (vcr (B₁ - 0) (C₁ - 0))^2 * esqC2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig = (vdot (C₁ - 0) (C₁ - 0)) * ((vdot (0 - B₀) (C₀ - B₀)) * (vdot (B₁ - 0) (C₁ - 0)) + (vdot (0 - C₀) (B₀ - C₀)) * (vdot (B₁ - 0) (B₁ - 0)) + sig * (vcr (B₀ - 0) (C₀ - 0)) * (vcr (B₁ - 0) (C₁ - 0))) := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold esqC2 rcsq dca2 rasq cenA cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold esqC2 rcsq dca2 rasq cenA cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-
 set_option maxRecDepth 8000 in
 lemma dab2_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     4 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * dab2 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (B₁ - A₁) (B₁ - A₁)) * kval A₀ B₀ C₀ A₁ B₁ C₁ sig := by
-  rw [dab2_inv, kval_inv]
-  convert dab2_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-
-
+  unfold dab2 kval cenA cenB offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huB : vdot (B₁ - A₁) (B₁ - A₁) = qA + qB := by
+    rw [hqA, hqB]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  rw [huB]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (- 4 * (A₀ 0) ^ 2 + 8 * (A₀ 0) * (B₀ 0) - 4 * (A₀ 1) ^ 2 + 8 * (A₀ 1) * (B₀ 1) - 4 * (B₀ 0) ^ 2 - 4 * (B₀ 1) ^ 2) * hR
 set_option maxRecDepth 8000 in
 lemma dbc2_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     4 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * dbc2 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (C₁ - B₁) (C₁ - B₁)) * kval A₀ B₀ C₀ A₁ B₁ C₁ sig := by
-  rw [dbc2_inv, kval_inv]
-  convert dbc2_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-
-
+  unfold dbc2 kval cenB cenC offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huBC : vdot (C₁ - B₁) (C₁ - B₁) = qB + qC := by
+    rw [hqB, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  rw [huBC]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (- 4 * (B₀ 0) ^ 2 + 8 * (B₀ 0) * (C₀ 0) - 4 * (B₀ 1) ^ 2 + 8 * (B₀ 1) * (C₀ 1) - 4 * (C₀ 0) ^ 2 - 4 * (C₀ 1) ^ 2) * hR
 set_option maxRecDepth 8000 in
 lemma dca2_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     4 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * dca2 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (C₁ - A₁) (C₁ - A₁)) * kval A₀ B₀ C₀ A₁ B₁ C₁ sig := by
-  rw [dca2_inv, kval_inv]
-  convert dca2_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-
-
+  unfold dca2 kval cenA cenC offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huC : vdot (C₁ - A₁) (C₁ - A₁) = qA + qC := by
+    rw [hqA, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  rw [huC]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (- 4 * (A₀ 0) ^ 2 + 8 * (A₀ 0) * (C₀ 0) - 4 * (A₀ 1) ^ 2 + 8 * (A₀ 1) * (C₀ 1) - 4 * (C₀ 0) ^ 2 - 4 * (C₀ 1) ^ 2) * hR
 set_option maxRecDepth 8000 in
 set_option maxHeartbeats 3200000 in
 lemma eA1_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     2 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * esqA1 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (B₁ - A₁) (B₁ - A₁)) * ((vdot (A₀ - B₀) (C₀ - B₀)) * (vdot (C₁ - A₁) (C₁ - A₁)) + (vdot (A₀ - C₀) (B₀ - C₀)) * (vdot (B₁ - A₁) (C₁ - A₁)) + sig * (vcr (B₀ - A₀) (C₀ - A₀)) * (vcr (B₁ - A₁) (C₁ - A₁))) := by
-  rw [esqA1_inv]
-  convert eA1_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, sub_zero, PiLp.zero_apply]
+  unfold esqA1 rasq dab2 rbsq cenA cenB offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huB : vdot (B₁ - A₁) (B₁ - A₁) = qA + qB := by
+    rw [hqA, hqB]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
     ring
-
-
+  have huC : vdot (C₁ - A₁) (C₁ - A₁) = qA + qC := by
+    rw [hqA, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  rw [huB, huC]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (2 * (A₀ 0) * (B₀ 0) - 2 * (A₀ 0) * (C₀ 0) + 2 * (A₀ 1) * (B₀ 1) - 2 * (A₀ 1) * (C₀ 1) - 2 * (B₀ 0) ^ 2 + 2 * (B₀ 0) * (C₀ 0) - 2 * (B₀ 1) ^ 2 + 2 * (B₀ 1) * (C₀ 1)) * hR
 set_option maxRecDepth 8000 in
 set_option maxHeartbeats 3200000 in
 lemma eA2_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     2 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * esqA2 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (B₁ - A₁) (B₁ - A₁)) * ((vdot (B₀ - A₀) (C₀ - A₀)) * (vdot (A₁ - C₁) (B₁ - C₁)) + ((vdot (B₀ - A₀) (C₀ - A₀)) + (vdot (A₀ - C₀) (B₀ - C₀))) * (vdot (A₁ - B₁) (C₁ - B₁)) + sig * (vcr (B₀ - A₀) (C₀ - A₀)) * (vcr (B₁ - A₁) (C₁ - A₁))) := by
-  rw [esqA2_inv]
-  convert eA2_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, sub_zero, PiLp.zero_apply]
+  unfold esqA2 rasq dab2 rbsq cenA cenB offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huB : vdot (B₁ - A₁) (B₁ - A₁) = qA + qB := by
+    rw [hqA, hqB]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
     ring
-
-
+  rw [huB]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (- 2 * (A₀ 0) ^ 2 + 2 * (A₀ 0) * (B₀ 0) + 2 * (A₀ 0) * (C₀ 0) - 2 * (A₀ 1) ^ 2 + 2 * (A₀ 1) * (B₀ 1) + 2 * (A₀ 1) * (C₀ 1) - 2 * (B₀ 0) * (C₀ 0) - 2 * (B₀ 1) * (C₀ 1)) * hR
 set_option maxRecDepth 8000 in
 set_option maxHeartbeats 3200000 in
 lemma eB1_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     2 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * esqB1 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (C₁ - B₁) (C₁ - B₁)) * ((vdot (B₀ - A₀) (C₀ - A₀)) * (vdot (A₁ - B₁) (C₁ - B₁)) + (vdot (A₀ - C₀) (B₀ - C₀)) * (vdot (B₁ - A₁) (B₁ - A₁)) + sig * (vcr (B₀ - A₀) (C₀ - A₀)) * (vcr (B₁ - A₁) (C₁ - A₁))) := by
-  rw [esqB1_inv]
-  convert eB1_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, sub_zero, PiLp.zero_apply]
+  unfold esqB1 rbsq dbc2 rcsq cenB cenC offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huBC : vdot (C₁ - B₁) (C₁ - B₁) = qB + qC := by
+    rw [hqB, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
     ring
-
-
+  have huB : vdot (B₁ - A₁) (B₁ - A₁) = qA + qB := by
+    rw [hqA, hqB]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  rw [huBC, huB]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (- 2 * (A₀ 0) * (B₀ 0) + 2 * (A₀ 0) * (C₀ 0) - 2 * (A₀ 1) * (B₀ 1) + 2 * (A₀ 1) * (C₀ 1) + 2 * (B₀ 0) * (C₀ 0) + 2 * (B₀ 1) * (C₀ 1) - 2 * (C₀ 0) ^ 2 - 2 * (C₀ 1) ^ 2) * hR
 set_option maxRecDepth 8000 in
 set_option maxHeartbeats 3200000 in
 lemma eB2_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     2 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * esqB2 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (C₁ - B₁) (C₁ - B₁)) * ((vdot (B₀ - A₀) (C₀ - A₀)) * (vdot (A₁ - C₁) (B₁ - C₁)) + (vdot (A₀ - B₀) (C₀ - B₀)) * (vdot (C₁ - A₁) (C₁ - A₁)) + sig * (vcr (B₀ - A₀) (C₀ - A₀)) * (vcr (B₁ - A₁) (C₁ - A₁))) := by
-  rw [esqB2_inv]
-  convert eB2_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, sub_zero, PiLp.zero_apply]
+  unfold esqB2 rbsq dbc2 rcsq cenB cenC offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huBC : vdot (C₁ - B₁) (C₁ - B₁) = qB + qC := by
+    rw [hqB, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
     ring
-
-
+  have huC : vdot (C₁ - A₁) (C₁ - A₁) = qA + qC := by
+    rw [hqA, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  rw [huBC, huC]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (2 * (A₀ 0) * (B₀ 0) - 2 * (A₀ 0) * (C₀ 0) + 2 * (A₀ 1) * (B₀ 1) - 2 * (A₀ 1) * (C₀ 1) - 2 * (B₀ 0) ^ 2 + 2 * (B₀ 0) * (C₀ 0) - 2 * (B₀ 1) ^ 2 + 2 * (B₀ 1) * (C₀ 1)) * hR
 set_option maxRecDepth 8000 in
 set_option maxHeartbeats 3200000 in
 lemma eC1_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     2 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * esqC1 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (C₁ - A₁) (C₁ - A₁)) * (((vdot (B₀ - A₀) (C₀ - A₀)) + (vdot (A₀ - B₀) (C₀ - B₀))) * (vdot (A₁ - C₁) (B₁ - C₁)) + (vdot (B₀ - A₀) (C₀ - A₀)) * (vdot (A₁ - B₁) (C₁ - B₁)) + sig * (vcr (B₀ - A₀) (C₀ - A₀)) * (vcr (B₁ - A₁) (C₁ - A₁))) := by
-  rw [esqC1_inv]
-  convert eC1_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, sub_zero, PiLp.zero_apply]
+  unfold esqC1 rcsq dca2 rasq cenA cenC offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huC : vdot (C₁ - A₁) (C₁ - A₁) = qA + qC := by
+    rw [hqA, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
     ring
-
-
+  rw [huC]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (- 2 * (A₀ 0) ^ 2 + 2 * (A₀ 0) * (B₀ 0) + 2 * (A₀ 0) * (C₀ 0) - 2 * (A₀ 1) ^ 2 + 2 * (A₀ 1) * (B₀ 1) + 2 * (A₀ 1) * (C₀ 1) - 2 * (B₀ 0) * (C₀ 0) - 2 * (B₀ 1) * (C₀ 1)) * hR
 set_option maxRecDepth 8000 in
 set_option maxHeartbeats 3200000 in
 lemma eC2_eq
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     2 * (vcr (B₁ - A₁) (C₁ - A₁))^2 * esqC2 A₀ B₀ C₀ A₁ B₁ C₁ sig = (vdot (C₁ - A₁) (C₁ - A₁)) * ((vdot (A₀ - B₀) (C₀ - B₀)) * (vdot (B₁ - A₁) (C₁ - A₁)) + (vdot (A₀ - C₀) (B₀ - C₀)) * (vdot (B₁ - A₁) (B₁ - A₁)) + sig * (vcr (B₀ - A₀) (C₀ - A₀)) * (vcr (B₁ - A₁) (C₁ - A₁))) := by
-  rw [esqC2_inv]
-  convert eC2_eq0 (B₀ - A₀) (C₀ - A₀) (B₁ - A₁) (C₁ - A₁) sig hsig (by simpa only [sub_zero] using hcr1) using 1
-  · simp only [sub_zero, sub_sub, add_sub_cancel]
-  · simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, sub_zero, PiLp.zero_apply]
+  unfold esqC2 rcsq dca2 rasq cenA cenC offp
+  set qA := vdot (B₁ - A₁) (C₁ - A₁) with hqA
+  set qB := vdot (A₁ - B₁) (C₁ - B₁) with hqB
+  set qC := vdot (A₁ - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - A₁) (C₁ - A₁) with hcr1d
+  have huC : vdot (C₁ - A₁) (C₁ - A₁) = qA + qC := by
+    rw [hqA, hqC]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
     ring
-
+  have huB : vdot (B₁ - A₁) (B₁ - A₁) = qA + qB := by
+    rw [hqA, hqB]
+    simp only [vdotE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  rw [huC, huB]
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
+    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (- 2 * (A₀ 0) * (B₀ 0) + 2 * (A₀ 0) * (C₀ 0) - 2 * (A₀ 1) * (B₀ 1) + 2 * (A₀ 1) * (C₀ 1) + 2 * (B₀ 0) * (C₀ 0) + 2 * (B₀ 1) * (C₀ 1) - 2 * (C₀ 0) ^ 2 - 2 * (C₀ 1) ^ 2) * hR
 lemma ne_zero_of_vdot_pos_left {u v : Pt} (h : 0 < vdot u v) : u ≠ 0 := by
   intro hh
   rw [hh, vdot_zero_left] at h
@@ -1095,23 +1078,13 @@ lemma ptC_inv (A₀ B₀ C₀ A₁ B₁ C₁ : Pt) (sig : ℝ) :
 
 set_option maxHeartbeats 3200000 in
 lemma cenA_through0
-    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
-    (hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
+    (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (_hsig : sig = 1 ∨ sig = -1)
+    (_hcr1 : vcr (B₁ - 0) (C₁ - 0) ≠ 0) :
     vdot (C₀ - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) (C₀ - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) = vdot (B₀ - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) (B₀ - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold cenA offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
-  · unfold cenA offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
+  unfold cenA
+  set sA := offp sig (vdot (B₁ - (0 : Pt)) (C₁ - (0 : Pt))) (vcr (B₁ - (0 : Pt)) (C₁ - (0 : Pt)))
+  simp only [octr_zero, octr_one, vdotE, pt_sub_zero, pt_sub_one]
+  ring
 
 
 set_option maxHeartbeats 3200000 in
@@ -1121,20 +1094,23 @@ lemma vcr_cen_eq0
     4 * (vcr (B₁ - 0) (C₁ - 0)) *
         vcr (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) (cenC (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) =
       sig * kval (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig := by
-  have hcr1' : (B₁ 0 - 0) * (C₁ 1 - 0) - (B₁ 1 - 0) * (C₁ 0 - 0) ≠ 0 := hcr1
-  rcases hsig with rfl | rfl
-  · unfold kval cenA cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
+  unfold kval cenA cenB cenC offp
+  set qA := vdot (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) with hqA
+  set qB := vdot ((0 : Pt) - B₁) (C₁ - B₁) with hqB
+  set qC := vdot ((0 : Pt) - C₁) (B₁ - C₁) with hqC
+  set cr1 := vcr (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) with hcr1d
+  have hR : (qA + qB) * (qA + qC) = qA ^ 2 + cr1 ^ 2 := by
+    rw [hqA, hqB, hqC, hcr1d]
+    simp only [vdotE, vcrE, pt_sub_zero, pt_sub_one, PiLp.zero_apply]
     ring
-  · unfold kval cenA cenB cenC offp
-    unfold octr vrot
-    simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
-      pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-    field_simp [hcr1']
-    ring
+  have hcr1'' : cr1 ≠ 0 := by
+    rw [hcr1d]
+    exact hcr1
+  unfold octr vrot
+  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply, vdotE, vcrE,
+    pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
+  field_simp [hcr1'']
+  rcases hsig with rfl | rfl <;> linear_combination (4 * ((B₀ 0) * (C₀ 1) - (B₀ 1) * (C₀ 0))) * hR
 
 
 lemma C₀_sub_ptA0
@@ -1180,8 +1156,6 @@ lemma auxB_vcr
     (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) ≠ 0) :
     vcr (dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig • ((0 : Pt) - C₀) - (2 * vdot (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - C₀) (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) • (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) (cenC (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) = 0 := by
-  have hG : sig ^ 2 = 1 := by
-    rcases hsig with rfl | rfl <;> norm_num
   unfold dab2 cenA cenB cenC
   set qA := vdot (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) with hqA
   set qB := vdot ((0 : Pt) - B₁) (C₁ - B₁) with hqB
@@ -1195,14 +1169,12 @@ lemma auxB_vcr
     rw [hcr1d]
     exact hcr1
   unfold offp
-  simp only [div_eq_mul_inv, mul_inv]
-  set wi := cr1⁻¹ with hwi
-  have hW : cr1 * wi = 1 := by
-    rw [hwi, mul_inv_cancel₀ hcr1']
-  unfold octr vrot
-  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply,
-    vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-  linear_combination (1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/4 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * wi ^ 3 * sig ^ 3) * hR + (1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/4 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 - 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * cr1 ^ 2 * wi ^ 3 * sig) * hG + (1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * wi * sig - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * cr1 * wi - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * cr1 * wi + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * wi * sig - 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * wi * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * wi * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 * wi + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * wi * sig - 1/4 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * cr1 * wi ^ 2 * sig - 1/4 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * wi * sig + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * wi * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * cr1 * wi - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 * wi - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * wi * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * cr1 * wi ^ 2 * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * wi * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 * wi + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * wi * sig + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * wi * sig + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB ^ 2 * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * wi * sig + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * wi * sig + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB ^ 2 * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * cr1 * wi + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * wi * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * wi * sig - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * cr1 * wi ^ 2 * sig - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * wi * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 * wi - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) - 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * wi * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * wi * sig - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB ^ 2 * cr1 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * wi * sig + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * wi * sig - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB ^ 2 * cr1 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * wi * sig + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * wi * sig) * hW
+  simp only [octr_zero, octr_one, vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_smul_zero,
+    pt_smul_one, PiLp.zero_apply]
+  field_simp [hcr1']
+  rcases hsig with rfl | rfl
+  · linear_combination (((B₀ 0) ^ 2 * cr1 - (B₀ 0) * (C₀ 0) * cr1 + (B₀ 0) * (C₀ 1) * qB + (B₀ 1) ^ 2 * cr1 - (B₀ 1) * (C₀ 0) * qB - (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) * (C₀ 0) * qA - (B₀ 0) * (C₀ 1) * cr1 + (B₀ 1) * (C₀ 0) * cr1 + (B₀ 1) * (C₀ 1) * qA - (C₀ 0) ^ 2 * qA - (C₀ 0) ^ 2 * qB - (C₀ 1) ^ 2 * qA - (C₀ 1) ^ 2 * qB)) * hR
+  · linear_combination (- ((B₀ 0) ^ 2 * cr1 - (B₀ 0) * (C₀ 0) * cr1 - (B₀ 0) * (C₀ 1) * qB + (B₀ 1) ^ 2 * cr1 + (B₀ 1) * (C₀ 0) * qB - (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) * (C₀ 0) * qA + (B₀ 0) * (C₀ 1) * cr1 - (B₀ 1) * (C₀ 0) * cr1 + (B₀ 1) * (C₀ 1) * qA - (C₀ 0) ^ 2 * qA - (C₀ 0) ^ 2 * qB - (C₀ 1) ^ 2 * qA - (C₀ 1) ^ 2 * qB)) * hR
 
 set_option maxHeartbeats 3200000 in
 set_option maxRecDepth 16000 in
@@ -1210,8 +1182,6 @@ lemma auxB_vdot
     (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) ≠ 0) :
     vdot (dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig • ((0 : Pt) - C₀) - (2 * vdot (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - C₀) (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) • (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) (cenC (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) = dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig * esqB1 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig := by
-  have hG : sig ^ 2 = 1 := by
-    rcases hsig with rfl | rfl <;> norm_num
   unfold esqB1 dab2 dbc2 rbsq rcsq cenA cenB cenC
   set qA := vdot (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) with hqA
   set qB := vdot ((0 : Pt) - B₁) (C₁ - B₁) with hqB
@@ -1225,14 +1195,12 @@ lemma auxB_vdot
     rw [hcr1d]
     exact hcr1
   unfold offp
-  simp only [div_eq_mul_inv, mul_inv]
-  set wi := cr1⁻¹ with hwi
-  have hW : cr1 * wi = 1 := by
-    rw [hwi, mul_inv_cancel₀ hcr1']
-  unfold octr vrot
-  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply,
-    vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-  linear_combination (-1/8 * (B₀ 0) ^ 3 * (C₀ 0) * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * wi ^ 3 * sig ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * wi ^ 2 * sig ^ 2) * hR + (-1/8 * (B₀ 0) ^ 3 * (C₀ 0) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2) * hG + (-1/8 * (B₀ 0) ^ 3 * (C₀ 0) * cr1 * wi - 1/8 * (B₀ 0) ^ 3 * (C₀ 0) - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * wi * sig + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * wi * sig - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * cr1 * wi - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * cr1 * wi + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * cr1 * wi - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * wi * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * wi * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * wi * sig - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * cr1 * wi ^ 3 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * cr1 * wi ^ 3 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 3 * wi ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 * wi + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * wi * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * wi * sig + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * wi * sig - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * cr1 * wi - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * cr1 * wi + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2) * hW
+  simp only [octr_zero, octr_one, vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_smul_zero,
+    pt_smul_one, PiLp.zero_apply]
+  field_simp [hcr1']
+  rcases hsig with rfl | rfl
+  · linear_combination (-2 * ((B₀ 0) * (C₀ 0) * cr1 + (B₀ 0) * (C₀ 1) * qA - (B₀ 1) * (C₀ 0) * qA + (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) ^ 2 * cr1 - (B₀ 0) * (C₀ 0) * cr1 + (B₀ 0) * (C₀ 1) * qB + (B₀ 1) ^ 2 * cr1 - (B₀ 1) * (C₀ 0) * qB - (B₀ 1) * (C₀ 1) * cr1)) * hR
+  · linear_combination (-2 * ((B₀ 0) * (C₀ 0) * cr1 - (B₀ 0) * (C₀ 1) * qA + (B₀ 1) * (C₀ 0) * qA + (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) ^ 2 * cr1 - (B₀ 0) * (C₀ 0) * cr1 - (B₀ 0) * (C₀ 1) * qB + (B₀ 1) ^ 2 * cr1 + (B₀ 1) * (C₀ 0) * qB - (B₀ 1) * (C₀ 1) * cr1)) * hR
 
 set_option maxHeartbeats 3200000 in
 set_option maxRecDepth 16000 in
@@ -1240,8 +1208,6 @@ lemma auxC_vcr
     (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) ≠ 0) :
     vcr (dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig • (B₀ - C₀) - (2 * vdot (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - C₀) (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) • (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) - (2 * dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) • (cenC (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) (cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenC (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) = 0 := by
-  have hG : sig ^ 2 = 1 := by
-    rcases hsig with rfl | rfl <;> norm_num
   unfold dab2 cenA cenB cenC
   set qA := vdot (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) with hqA
   set qB := vdot ((0 : Pt) - B₁) (C₁ - B₁) with hqB
@@ -1255,14 +1221,12 @@ lemma auxC_vcr
     rw [hcr1d]
     exact hcr1
   unfold offp
-  simp only [div_eq_mul_inv, mul_inv]
-  set wi := cr1⁻¹ with hwi
-  have hW : cr1 * wi = 1 := by
-    rw [hwi, mul_inv_cancel₀ hcr1']
-  unfold octr vrot
-  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply,
-    vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-  linear_combination (-1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * wi ^ 3 * sig ^ 3 + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA ^ 2 * wi ^ 4 * sig ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * wi ^ 2 * sig ^ 2 + 3/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 + 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * wi ^ 2 * sig ^ 2 + 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA ^ 2 * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * wi ^ 3 * sig ^ 3) * hR + (-1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 - 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA ^ 2 * wi ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 + 3/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 4 * wi ^ 4 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * cr1 ^ 2 * wi ^ 4 + 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 + 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA ^ 2 * cr1 ^ 2 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * cr1 ^ 2 * wi ^ 3 * sig) * hG + (-1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 3 * (C₀ 0) * qA * wi * sig - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA ^ 2 * cr1 * wi ^ 3 - 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA ^ 2 * cr1 * wi ^ 3 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * qA * wi * sig + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 * wi ^ 2 * sig + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qA * wi * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * qB * wi * sig + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * cr1 * wi ^ 3 + 1/4 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 * wi - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * wi * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * qA * wi * sig - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA ^ 2 * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA ^ 2 * wi ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA ^ 2 * cr1 * wi ^ 3 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * cr1 * wi + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 + 3/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 3/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * wi * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * cr1 * wi ^ 2 * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * wi * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA ^ 2 * cr1 * wi ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * cr1 * wi - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qA * wi * sig - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (C₀ 0) ^ 3 * qB * wi * sig - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA ^ 2 * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 0) ^ 2 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qA * wi * sig - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (C₀ 0) * (C₀ 1) ^ 2 * qB * wi * sig - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA ^ 2 * cr1 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qA * qC * wi ^ 2 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * qB * qC * wi ^ 2 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 0) * (C₀ 1) ^ 3 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA ^ 2 * cr1 * wi ^ 3 + 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * qA * wi * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * wi * sig - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * cr1 * wi ^ 3 - 1/4 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * cr1 * wi ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 3 * wi ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * cr1 * wi + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) + 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig + 1/4 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qA * wi * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * qB * wi * sig + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA ^ 2 * cr1 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qA * qC * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) ^ 3 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qA * wi * sig - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) * (C₀ 0) ^ 2 * (C₀ 1) * qB * wi * sig + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA ^ 2 * cr1 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 1) * (C₀ 0) * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qA * wi * sig - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) * (C₀ 1) ^ 3 * qB * wi * sig) * hW
+  simp only [octr_zero, octr_one, vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_smul_zero,
+    pt_smul_one, PiLp.zero_apply]
+  field_simp [hcr1']
+  rcases hsig with rfl | rfl
+  · linear_combination (- ((B₀ 0) * (C₀ 0) * cr1 + (B₀ 0) * (C₀ 1) * qA - (B₀ 1) * (C₀ 0) * qA + (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) ^ 2 * qA - 2 * (B₀ 0) * (C₀ 0) * qA - (B₀ 0) * (C₀ 0) * qB + (B₀ 0) * (C₀ 1) * cr1 + (B₀ 1) ^ 2 * qA - (B₀ 1) * (C₀ 0) * cr1 - 2 * (B₀ 1) * (C₀ 1) * qA - (B₀ 1) * (C₀ 1) * qB + (C₀ 0) ^ 2 * qA + (C₀ 0) ^ 2 * qB + (C₀ 1) ^ 2 * qA + (C₀ 1) ^ 2 * qB)) * hR
+  · linear_combination (((B₀ 0) * (C₀ 0) * cr1 - (B₀ 0) * (C₀ 1) * qA + (B₀ 1) * (C₀ 0) * qA + (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) ^ 2 * qA - 2 * (B₀ 0) * (C₀ 0) * qA - (B₀ 0) * (C₀ 0) * qB - (B₀ 0) * (C₀ 1) * cr1 + (B₀ 1) ^ 2 * qA + (B₀ 1) * (C₀ 0) * cr1 - 2 * (B₀ 1) * (C₀ 1) * qA - (B₀ 1) * (C₀ 1) * qB + (C₀ 0) ^ 2 * qA + (C₀ 0) ^ 2 * qB + (C₀ 1) ^ 2 * qA + (C₀ 1) ^ 2 * qB)) * hR
 
 set_option maxHeartbeats 3200000 in
 set_option maxRecDepth 16000 in
@@ -1270,8 +1234,6 @@ lemma auxC_vdot
     (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
     (hcr1 : vcr (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) ≠ 0) :
     vdot (dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig • (B₀ - C₀) - (2 * vdot (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - C₀) (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) • (cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) - (2 * dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) • (cenC (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenB (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig)) (cenA (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig - cenC (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig) = dab2 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig * esqC1 (0 : Pt) B₀ C₀ (0 : Pt) B₁ C₁ sig := by
-  have hG : sig ^ 2 = 1 := by
-    rcases hsig with rfl | rfl <;> norm_num
   unfold esqC1 dab2 dca2 rcsq rasq cenA cenB cenC
   set qA := vdot (B₁ - (0 : Pt)) (C₁ - (0 : Pt)) with hqA
   set qB := vdot ((0 : Pt) - B₁) (C₁ - B₁) with hqB
@@ -1285,14 +1247,12 @@ lemma auxC_vdot
     rw [hcr1d]
     exact hcr1
   unfold offp
-  simp only [div_eq_mul_inv, mul_inv]
-  set wi := cr1⁻¹ with hwi
-  have hW : cr1 * wi = 1 := by
-    rw [hwi, mul_inv_cancel₀ hcr1']
-  unfold octr vrot
-  simp only [WithLp.ofLp_toLp, Matrix.cons_val_zero, Matrix.cons_val_one, PiLp.zero_apply,
-    vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero, pt_smul_one]
-  linear_combination (1/8 * (B₀ 0) ^ 3 * (C₀ 0) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * wi ^ 2 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * wi ^ 3 * sig ^ 3 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qB * wi ^ 4 * sig ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * wi ^ 3 * sig ^ 3 + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qB * wi ^ 4 * sig ^ 4 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 4 * sig ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * wi ^ 2 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi ^ 3 * sig ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * wi ^ 2 * sig ^ 2) * hR + (1/8 * (B₀ 0) ^ 3 * (C₀ 0) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * cr1 ^ 2 * wi ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * cr1 ^ 2 * wi ^ 4 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 * sig ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * cr1 ^ 2 * wi ^ 3 * sig + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 * sig ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * cr1 ^ 2 * wi ^ 4 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 * sig ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 4 * wi ^ 4 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 ^ 2 * wi ^ 3 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2) * hG + (1/8 * (B₀ 0) ^ 3 * (C₀ 0) * cr1 * wi + 1/8 * (B₀ 0) ^ 3 * (C₀ 0) + 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) ^ 3 * (C₀ 1) * qA * wi * sig - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 0) * qA * wi * sig + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) * cr1 * wi + 1/8 * (B₀ 0) ^ 2 * (B₀ 1) * (C₀ 1) - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 * cr1 * wi - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi * sig - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 0) ^ 2 * (C₀ 1) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) * cr1 * wi + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 0) + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (B₀ 1) ^ 2 * (C₀ 1) * qA * wi * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qA * wi * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 0) ^ 2 * qB * wi * sig + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * cr1 * wi ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qA * qC * wi ^ 2 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * cr1 * wi ^ 3 + 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * qB * qC * wi ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 3 * wi ^ 3 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 ^ 2 * wi ^ 2 - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) * cr1 * wi - 1/4 * (B₀ 0) * (B₀ 1) * (C₀ 0) * (C₀ 1) - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qA * wi * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 0) * (B₀ 1) * (C₀ 1) ^ 2 * qB * wi * sig - 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) ^ 3 * (C₀ 0) * qA * wi * sig + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) * cr1 * wi + 1/8 * (B₀ 1) ^ 3 * (C₀ 1) - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qA * qC * wi ^ 2 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * cr1 * wi ^ 3 - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * qB * qC * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 3 * wi ^ 3 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) ^ 2 * cr1 ^ 2 * wi ^ 2 + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * cr1 * wi ^ 2 * sig + 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qA * wi * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * cr1 * wi ^ 2 * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 0) * (C₀ 1) * qB * wi * sig - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2 * cr1 * wi - 1/8 * (B₀ 1) ^ 2 * (C₀ 1) ^ 2) * hW
+  simp only [octr_zero, octr_one, vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_smul_zero,
+    pt_smul_one, PiLp.zero_apply]
+  field_simp [hcr1']
+  rcases hsig with rfl | rfl
+  · linear_combination (2 * ((B₀ 0) * (C₀ 0) * cr1 + (B₀ 0) * (C₀ 1) * qA - (B₀ 1) * (C₀ 0) * qA + (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) ^ 2 * cr1 - (B₀ 0) * (C₀ 0) * cr1 + (B₀ 0) * (C₀ 1) * qB + (B₀ 1) ^ 2 * cr1 - (B₀ 1) * (C₀ 0) * qB - (B₀ 1) * (C₀ 1) * cr1)) * hR
+  · linear_combination (2 * ((B₀ 0) * (C₀ 0) * cr1 - (B₀ 0) * (C₀ 1) * qA + (B₀ 1) * (C₀ 0) * qA + (B₀ 1) * (C₀ 1) * cr1) * ((B₀ 0) ^ 2 * cr1 - (B₀ 0) * (C₀ 0) * cr1 - (B₀ 0) * (C₀ 1) * qB + (B₀ 1) ^ 2 * cr1 + (B₀ 1) * (C₀ 0) * qB - (B₀ 1) * (C₀ 1) * cr1)) * hR
 
 lemma A₀_sub_ptB0
     (B₀ C₀ B₁ C₁ : Pt) (sig : ℝ) (hsig : sig = 1 ∨ sig = -1)
@@ -1434,32 +1394,27 @@ set_option maxHeartbeats 3200000 in
 set_option maxRecDepth 16000 in
 lemma locus_key
     (A₀ B₀ C₀ A₁ B₁ C₁ X : Pt) (sig : ℝ)
-    (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
+    (_hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     vdot (X - cenA A₀ B₀ C₀ A₁ B₁ C₁ sig) (X - cenA A₀ B₀ C₀ A₁ B₁ C₁ sig) - vdot (B₀ - cenA A₀ B₀ C₀ A₁ B₁ C₁ sig) (B₀ - cenA A₀ B₀ C₀ A₁ B₁ C₁ sig) =
       vdot (B₀ - X) (C₀ - X) -
         2 * offp sig (vdot (B₁ - A₁) (C₁ - A₁)) (vcr (B₁ - A₁) (C₁ - A₁)) *
           vcr (C₀ - B₀) (X - B₀) := by
-  have hcr1' : (B₁ 0 - A₁ 0) * (C₁ 1 - A₁ 1) - (B₁ 1 - A₁ 1) * (C₁ 0 - A₁ 0) ≠ 0 := hcr1
-  simp only [dab2, dbc2, dca2, rasq, rbsq, rcsq, kval, cenA, cenB, cenC, offp, ptA, ptB, ptC,
-      esqA1, esqA2, esqB1, esqB2, esqC1, esqC2,
-      vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero,
-      pt_smul_one, octr_zero, octr_one]
-  field_simp [hcr1']
+  simp only [cenA]
+  set sA := offp sig (vdot (B₁ - A₁) (C₁ - A₁)) (vcr (B₁ - A₁) (C₁ - A₁))
+  simp only [octr_zero, octr_one, vdotE, vcrE, pt_sub_zero, pt_sub_one]
   ring
 
 lemma locus_keyB
     (A₀ B₀ C₀ A₁ B₁ C₁ X : Pt) (sig : ℝ)
-    (hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
+    (_hcr1 : vcr (B₁ - A₁) (C₁ - A₁) ≠ 0) :
     vdot (X - cenB A₀ B₀ C₀ A₁ B₁ C₁ sig) (X - cenB A₀ B₀ C₀ A₁ B₁ C₁ sig) -
         vdot (C₀ - cenB A₀ B₀ C₀ A₁ B₁ C₁ sig) (C₀ - cenB A₀ B₀ C₀ A₁ B₁ C₁ sig) =
       vdot (C₀ - X) (A₀ - X) -
         2 * offp sig (vdot (A₁ - B₁) (C₁ - B₁)) (vcr (B₁ - A₁) (C₁ - A₁)) *
           vcr (A₀ - C₀) (X - C₀) := by
-  have hcr1' : (B₁ 0 - A₁ 0) * (C₁ 1 - A₁ 1) - (B₁ 1 - A₁ 1) * (C₁ 0 - A₁ 0) ≠ 0 := hcr1
-  simp only [dab2, dbc2, dca2, rasq, rbsq, rcsq, kval, cenA, cenB, cenC, offp,
-      vdotE, vcrE, pt_sub_zero, pt_sub_one, pt_add_zero, pt_add_one, pt_smul_zero,
-      pt_smul_one, octr_zero, octr_one]
-  field_simp [hcr1']
+  simp only [cenB]
+  set sB := offp sig (vdot (A₁ - B₁) (C₁ - B₁)) (vcr (B₁ - A₁) (C₁ - A₁))
+  simp only [octr_zero, octr_one, vdotE, vcrE, pt_sub_zero, pt_sub_one]
   ring
 lemma upper_bound
     (A₀ B₀ C₀ A₁ B₁ C₁ : Pt)
