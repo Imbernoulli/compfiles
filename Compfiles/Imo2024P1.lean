@@ -4,8 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers
 -/
 
-import Mathlib.Algebra.Order.BigOperators.Group.LocallyFinite
-import Mathlib.Tactic
+import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.Order.Archimedean.Real.Basic
+import Mathlib.Algebra.Order.ToIntervalMod
+import Mathlib.Tactic.Cases
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.GCongr
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Peel
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 

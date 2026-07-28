@@ -4,9 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Data.Fintype.Perm
 import Mathlib.Probability.Distributions.Uniform
-import Mathlib.Tactic
+import Mathlib.Tactic.NormNum
 
 import ProblemExtraction
 

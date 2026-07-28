@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw, Markus Rydh
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.NumberTheory.SiegelsLemma
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
 
 import ProblemExtraction
 

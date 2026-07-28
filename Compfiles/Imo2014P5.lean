@@ -4,7 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Algebra.Order.Field.Basic
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Fintype.BigOperators
+import Mathlib.Data.Rat.Star
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.FieldSimp.Lemmas
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Preprocessing
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

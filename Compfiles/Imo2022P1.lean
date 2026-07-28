@@ -3,7 +3,21 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers, Benpigchu, Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.Order.BigOperators.Group.List
+import Mathlib.Algebra.Order.Floor.Div
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.List.SplitBy
+import Mathlib.Data.Nat.SuccPred
+import Mathlib.GroupTheory.GroupAction.Ring
+import Mathlib.Order.Interval.Finset.Fin
+import Mathlib.Tactic.Abel
+import Mathlib.Tactic.Cases
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.NormNum.Parity
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Ring
 import ProblemExtraction
 
 problem_file {

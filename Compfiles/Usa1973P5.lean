@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Positivity.Core
+import Mathlib.Tactic.Ring
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

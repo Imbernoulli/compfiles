@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Tactic
+import Mathlib.Analysis.Normed.Ring.Lemmas
+import Mathlib.RingTheory.Polynomial.Vieta
+import Mathlib.Tactic.GCongr
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 

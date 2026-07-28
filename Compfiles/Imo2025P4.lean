@@ -3,7 +3,12 @@ Copyright (c) 2025 Joseph Myers. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers, Markus Rydh, Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Abs
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Finset.Sort
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 import ProblemExtraction
 

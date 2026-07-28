@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers, Kimi K3
 -/
 
-import Mathlib.Tactic
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Analysis.Normed.Ring.Lemmas
+import Mathlib.Logic.Equiv.Fin.Rotate
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 

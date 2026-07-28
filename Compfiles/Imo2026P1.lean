@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.GCDMonoid.Multiset
+import Mathlib.Algebra.GCDMonoid.Nat
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Prod.Lex
+import Mathlib.NumberTheory.Padics.PadicVal.Basic
 import ProblemExtraction
 
 set_option backward.isDefEq.respectTransparency false

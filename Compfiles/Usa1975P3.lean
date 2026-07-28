@@ -3,7 +3,16 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.EuclideanDomain.Basic
+import Mathlib.Algebra.EuclideanDomain.Field
+import Mathlib.Algebra.Polynomial.BigOperators
+import Mathlib.Algebra.Polynomial.RingDivision
+import Mathlib.Analysis.Normed.Field.Basic
+import Mathlib.Data.Nat.Factorial.BigOperators
+import Mathlib.RingTheory.Coprime.Lemmas
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 

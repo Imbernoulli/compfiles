@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Combinatorics.SimpleGraph.Basic
+import Mathlib.Tactic.NormNum
 
 import ProblemExtraction
 

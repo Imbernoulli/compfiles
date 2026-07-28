@@ -4,7 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Clayton Knittel
 -/
 
-import Mathlib.Tactic
+import Mathlib.Algebra.IsPrimePow
+import Mathlib.Algebra.Order.Ring.Int
+import Mathlib.Algebra.Order.Star.Basic
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Nat.Factorization.Basic
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.Ring.Basic
+import Mathlib.Tactic.Zify
 
 import ProblemExtraction
 

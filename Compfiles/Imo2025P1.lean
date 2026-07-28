@@ -3,7 +3,13 @@ Copyright (c) 2025 Joseph Myers. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers (Problem statement), Yizheng Zhu (Solution)
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
 
 import ProblemExtraction
 

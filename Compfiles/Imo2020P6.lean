@@ -3,7 +3,28 @@ Copyright (c) 2025 The Compfiles Authors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jovan Gerbscheid
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.Convex.Side
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Combinatorics.Enumerative.DoubleCounting
+import Mathlib.Data.Int.Star
+import Mathlib.LinearAlgebra.AffineSpace.Ordered
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
+import Mathlib.RingTheory.TotallySplit
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.GCongr
+import Mathlib.Tactic.GRewrite
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Positivity.Basic
 
 import ProblemExtraction
 

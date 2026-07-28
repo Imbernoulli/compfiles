@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Basic
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Nat.Factorization.Defs
+import Mathlib.GroupTheory.GroupAction.Ring
+import Mathlib.Order.Interval.Finset.Nat
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

@@ -4,7 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Roozbeh Yousefzadeh, David Renshaw
 -/
 
-import Mathlib.Tactic
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.ModEq
+import Mathlib.Data.Nat.Choose.Sum
+import Mathlib.Data.Nat.Factorial.BigOperators
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.NormNum.BigOperators
+import Mathlib.Tactic.NormNum.NatFactorial
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 

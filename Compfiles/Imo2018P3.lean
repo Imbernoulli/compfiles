@@ -4,8 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw
 -/
 
-import Mathlib.Tactic
+import Mathlib.Algebra.Group.Action.Defs
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Algebra.Order.Ring.Nat
+import Mathlib.Data.Finset.Max
 import Mathlib.Data.Nat.Dist
+import Mathlib.Data.Nat.SuccPred
+import Mathlib.Order.Interval.Finset.Nat
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

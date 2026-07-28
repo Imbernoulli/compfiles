@@ -4,7 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Roozbeh Yousefzadeh, David Renshaw
 -/
 
-import Mathlib.Tactic
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Nat.Prime.Defs
+import Mathlib.Order.Lattice.Nat
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
+import Mathlib.Tactic.Zify
 
 import ProblemExtraction
 

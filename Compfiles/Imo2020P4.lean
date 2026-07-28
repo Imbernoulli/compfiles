@@ -3,7 +3,13 @@ Copyright (c) 2025 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers, Benpigchu
 -/
-import Mathlib
+import Mathlib.Combinatorics.Pigeonhole
+import Mathlib.Combinatorics.SimpleGraph.Acyclic
+import Mathlib.Data.Set.Card.Arithmetic
+import Mathlib.Data.SetLike.Fintype
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.Order.Monotone.Monovary
+import Mathlib.Tactic.Cases
 
 import ProblemExtraction
 

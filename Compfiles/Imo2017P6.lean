@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw, Kimi K3
 -/
 
-import Mathlib.Tactic
+import Mathlib.Analysis.Normed.Ring.Lemmas
+import Mathlib.FieldTheory.Finite.Basic
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 
