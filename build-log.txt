@@ -14064,3 +14064,90 @@ Build completed successfully (8656 jobs).
 Build completed successfully (8656 jobs).
 ✔ [8656/8656] Built Compfiles.Usa1980P1 (10s)
 Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1979P4 (20s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa1980P2 (9.8s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1981P1 (8.4s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa1980P4 (23s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1982P1 (8.6s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1981P3 (30s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa1982P2 (14s)
+Build completed successfully (8656 jobs).
+⚠ [3079/3079] Built Compfiles.Usa1982P5 (14s)
+warning: Compfiles/Usa1982P5.lean:162:5: Variable name `hR` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa1982P5.lean:163:25: Variable name `hB` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa1982P5.lean:163:45: Variable name `hC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (3079 jobs).
+✔ [8656/8656] Built Compfiles.Usa1982P3 (19s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1983P2 (9.1s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1983P3 (7.6s)
+Build completed successfully (8656 jobs).
+Build completed successfully (1150 jobs).
+✔ [3260/3260] Built Compfiles.Usa1983P1 (35s)
+Build completed successfully (3260 jobs).
+✔ [8656/8656] Built Compfiles.Usa1983P4 (11s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1984P1 (12s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1984P2 (7.0s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa1984P4 (7.2s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa1984P3 (13s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa1984P5 (21s)
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa1985P3 (13s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1985P4 (9.6s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1985P2 (31s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1985P5 (9.0s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1986P2 (9.7s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1986P1 (16s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa1981P2 (182s)
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa1986P3 (9.4s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa1986P5 (11s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1987P3 (8.4s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1987P2 (13s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1986P4 (27s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1988P1 (10s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1987P5 (16s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa1987P4 (24s)
+Build completed successfully (8656 jobs).
