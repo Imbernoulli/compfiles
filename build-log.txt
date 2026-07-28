@@ -13582,3 +13582,386 @@ Build completed successfully (8656 jobs).
 Build completed successfully (2998 jobs).
 Build completed successfully (2999 jobs).
 Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+✔ [2821/2821] Built Compfiles.Imo2015P3 (40s)
+Build completed successfully (2821 jobs).
+Build completed successfully (2998 jobs).
+✔ [2531/2531] Built Compfiles.Imo2013P3 (121s)
+Build completed successfully (2531 jobs).
+✔ [2998/2998] Built Compfiles.Imo2016P5 (15s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo2016P1 (45s)
+Build completed successfully (8656 jobs).
+✔ [2450/2450] Built Compfiles.Imo2017P4 (11s)
+Build completed successfully (2450 jobs).
+✔ [8656/8656] Built Compfiles.Imo2017P5 (14s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo2017P6 (13s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2999 jobs).
+✔ [690/690] Built Compfiles.Imo2018P4 (8.0s)
+Build completed successfully (690 jobs).
+✔ [2998/2998] Built Compfiles.Imo2018P5 (8.6s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2445 jobs).
+⚠ [8656/8656] Built Compfiles.Imo2017P3 (43s)
+warning: Compfiles/Imo2017P3.lean:110:26: Variable name `hs'` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2017P3.lean:345:5: Variable name `h` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo2018P1 (38s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2019P3 (14s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2045 jobs).
+✔ [8656/8656] Built Compfiles.Imo2019P5 (16s)
+Build completed successfully (8656 jobs).
+ℹ [8656/8656] Built Compfiles.Imo2018P6 (39s)
+info: Compfiles/Imo2018P6.lean:182:74: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2020P1 (22s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo2020P5 (6.6s)
+Build completed successfully (2998 jobs).
+Build completed successfully (939 jobs).
+Build completed successfully (8656 jobs).
+⚠ [2998/2998] Built Compfiles.Imo2020P3 (26s)
+warning: Compfiles/Imo2020P3.lean:49:0: automatically included section variable(s) unused in theorem `Imo2020P3.mult_conn`:
+  [Fintype V]
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:59:0: automatically included section variable(s) unused in theorem `Imo2020P3.IsWalk.vs_ne_nil`:
+  [Fintype V]
+  [DecidableEq V]
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:80:17: This simp argument is unused:
+  beq_iff_eq
+
+Hint: Omit it from the simp argument list.
+  simp only [b̵e̵q̵_̵i̵f̵f̵_̵e̵q̵,̵ ̵Option.some.injEq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:117:35: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2020P3.lean:117:35: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Imo2020P3.lean:141:40: This simp argument is unused:
+  Nat.reduceMod
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, List.dropLast_singleton, List.count_nil,
+          List.head?_cons, List.getLast?_cons_cons, List.getLast?_singleton, List.length_cons,
+          List.length_nil, Nat.reduceSub, Nat.r̵e̵d̵u̵c̵e̵M̵o̵d̵,̵ ̵N̵a̵t̵.̵zero_mod, zero_add, beq_iff_eq,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵Option.some.injEq,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲eq_self_iff_true, and_true, and_false]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:141:79: This simp argument is unused:
+  beq_iff_eq
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, List.dropLast_singleton, List.count_nil,
+          List.head?_cons, List.getLast?_cons_cons, List.getLast?_singleton, List.length_cons,
+          List.length_nil, Nat.reduceSub, Nat.reduceMod, Nat.zero_mod, zero_add, b̵e̵q̵_̵i̵f̵f̵_̵e̵q̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵Option.some.injEq,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲eq_self_iff_true, and_true, and_false]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:142:27: This simp argument is unused:
+  eq_self_iff_true
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, List.dropLast_singleton, List.count_nil,
+          List.head?_cons, List.getLast?_cons_cons, List.getLast?_singleton, List.length_cons,
+          List.length_nil, Nat.reduceSub, Nat.reduceMod, Nat.zero_mod, zero_add, beq_iff_eq,
+          Option.some.injEq, e̵q̵_̵s̵e̵l̵f̵_̵i̵f̵f̵_̵t̵r̵u̵e̵,̵ ̵and_true, and_false]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:142:45: This simp argument is unused:
+  and_true
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, List.dropLast_singleton, List.count_nil,
+          List.head?_cons, List.getLast?_cons_cons, List.getLast?_singleton, List.length_cons,
+          List.length_nil, Nat.reduceSub, Nat.reduceMod, Nat.zero_mod, zero_add, beq_iff_eq,
+          Option.some.injEq, eq_self_iff_true, and_t̵r̵u̵e̵,̵ ̵a̵n̵d̵_̵false]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:142:55: This simp argument is unused:
+  and_false
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, List.dropLast_singleton, List.count_nil,
+          List.head?_cons, List.getLast?_cons_cons, List.getLast?_singleton, List.length_cons,
+          List.length_nil, Nat.reduceSub, Nat.reduceMod, Nat.zero_mod, zero_add, beq_iff_eq,
+          Option.some.injEq, eq_self_iff_true, and_true,̵ ̵a̵n̵d̵_̵f̵a̵l̵s̵e̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:156:85: This simp argument is unused:
+  zero_add
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, hd, List.count_cons, List.head?_cons,
+          List.getLast?_cons_cons, List.length_cons, Nat.add_sub_cancel, Nat.zero_mod, z̵e̵r̵o̵_̵a̵d̵d̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵beq_iff_eq,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Option.some.injEq, eq_self_iff_true, and_true, and_false]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:157:39: This simp argument is unused:
+  eq_self_iff_true
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, hd, List.count_cons, List.head?_cons,
+          List.getLast?_cons_cons, List.length_cons, Nat.add_sub_cancel, Nat.zero_mod, zero_add,
+          beq_iff_eq, Option.some.injEq, e̵q̵_̵s̵e̵l̵f̵_̵i̵f̵f̵_̵t̵r̵u̵e̵,̵ ̵and_true, and_false]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:157:57: This simp argument is unused:
+  and_true
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, hd, List.count_cons, List.head?_cons,
+          List.getLast?_cons_cons, List.length_cons, Nat.add_sub_cancel, Nat.zero_mod, zero_add,
+          beq_iff_eq, Option.some.injEq, eq_self_iff_true, and_t̵r̵u̵e̵,̵ ̵a̵n̵d̵_̵false]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:157:67: This simp argument is unused:
+  and_false
+
+Hint: Omit it from the simp argument list.
+  simp only [List.drop_succ_cons, List.drop_zero, hd, List.count_cons, List.head?_cons,
+          List.getLast?_cons_cons, List.length_cons, Nat.add_sub_cancel, Nat.zero_mod, zero_add,
+          beq_iff_eq, Option.some.injEq, eq_self_iff_true, and_true,̵ ̵a̵n̵d̵_̵f̵a̵l̵s̵e̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:144:21: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2020P3.lean:144:21: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Imo2020P3.lean:200:8: This simp argument is unused:
+  eq_self_iff_true
+
+Hint: Omit it from the simp argument list.
+  simp only [hd, List.count_cons, List.drop_succ_cons, List.drop_zero, List.head?_cons,
+          e̵q̵_̵s̵e̵l̵f̵_̵i̵f̵f̵_̵t̵r̵u̵e̵,̵ ̵and_true, beq_iff_eq, Option.some.injEq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:201:11: '(by_cases hv : v = x) <;> simp_all' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2020P3.lean:201:48: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2020P3.lean:201:11: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Imo2020P3.lean:201:48: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Imo2020P3.lean:203:0: automatically included section variable(s) unused in theorem `Imo2020P3.IsWalk.length`:
+  [Fintype V]
+  [DecidableEq V]
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:209:0: automatically included section variable(s) unused in theorem `Imo2020P3.IsWalk.append`:
+  [Fintype V]
+  [DecidableEq V]
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:229:0: automatically included section variable(s) unused in theorem `Imo2020P3.IsWalk.take`:
+  [Fintype V]
+  [DecidableEq V]
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:247:0: automatically included section variable(s) unused in theorem `Imo2020P3.IsWalk.drop`:
+  [Fintype V]
+  [DecidableEq V]
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:269:0: automatically included section variable(s) unused in theorem `Imo2020P3.getLast?_drop_of_lt`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:278:0: automatically included section variable(s) unused in theorem `Imo2020P3.head?_take_of_pos`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:286:0: automatically included section variable(s) unused in theorem `Imo2020P3.getLast?_take_succ`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:301:6: `List.head?_eq_head` has been deprecated: Use `List.head?_eq_some_head` instead
+warning: Compfiles/Imo2020P3.lean:298:0: automatically included section variable(s) unused in theorem `Imo2020P3.head?_drop_of_lt`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:303:0: automatically included section variable(s) unused in theorem `Imo2020P3.getLast?_tail_of_ne`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:724:0: automatically included section variable(s) unused in theorem `Imo2020P3.mult_sum`:
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:726:38: This simp argument is unused:
+  Finset.sum_ite_eq'
+
+Hint: Omit it from the simp argument list.
+  simp [mult, Finset.sum_add_distrib, Finset.sum_ite_eq'̵,̵ ̵F̵i̵n̵s̵e̵t̵.̵s̵u̵m̵_̵i̵t̵e̵_̵e̵q̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:728:0: automatically included section variable(s) unused in theorem `Imo2020P3.IsWalk.mem_vs_of_mem_es`:
+  [Fintype V]
+  [DecidableEq V]
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:771:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2020P3.lean:786:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2020P3.lean:812:0: automatically included section variable(s) unused in theorem `Imo2020P3.mapIdx_eq_map_idxOf`:
+  [Fintype E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2020P3.lean:851:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2020P3.lean:1038:16: Variable name `h` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2020P3.lean:1062:8: This simp argument is unused:
+  Finset.mem_compl
+
+Hint: Omit it from the simp argument list.
+  simp [Finset.mem_c̵o̵m̵p̵l̵,̵ ̵F̵i̵n̵s̵e̵t̵.̵m̵e̵m̵_̵filter, Bool.not_eq_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2020P3.lean:1099:59: This simp argument is unused:
+  ite_true
+
+Hint: Omit it from the simp argument list.
+  simp only [hr, true_and, pairOf_apeb, pairOf_bpeb, i̵t̵e̵_̵t̵r̵u̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵Function.Embedding.coeFn_mk]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2999 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo2021P5 (9.4s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo2021P4 (15s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+⚠ [2998/2998] Built Compfiles.Imo2022P3 (12s)
+warning: Compfiles/Imo2022P3.lean:1111:13: Variable name `hk` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (3001 jobs).
+Build completed successfully (931 jobs).
+Build completed successfully (1039 jobs).
+✔ [2998/2998] Built Compfiles.Imo2023P5 (11s)
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (3808 jobs).
+✔ [8656/8656] Built Compfiles.Imo2024P4 (22s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo2023P3 (50s)
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2026P1 (14s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2025P4 (32s)
+Build completed successfully (8656 jobs).
