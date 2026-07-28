@@ -5148,3 +5148,394 @@ Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 Build completed successfully (2846 jobs).
 Build completed successfully (8656 jobs).
 Build completed successfully (2046 jobs).
+⚠ [2455/2455] Built Compfiles.Imo2026P3 (60s)
+warning: Compfiles/Imo2026P3.lean:88:41: Variable name `hS` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2026P3.lean:256:41: This simp argument is unused:
+  List.tail_cons
+
+Hint: Omit it from the simp argument list.
+  simp only [List.zipWith_cons_cons, L̵i̵s̵t̵.̵t̵a̵i̵l̵_̵c̵o̵n̵s̵,̵ ̵List.cons.injEq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2026P3.lean:342:6: 'congr 1' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2026P3.lean:486:31: This simp argument is unused:
+  List.map_cons
+
+Hint: Omit it from the simp argument list.
+  simp only [List.filter_cons, L̵i̵s̵t̵.̵m̵a̵p̵_̵c̵o̵n̵s̵,̵ ̵List.sum_cons]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2026P3.lean:486:46: This simp argument is unused:
+  List.sum_cons
+
+Hint: Omit it from the simp argument list.
+  simp only [List.filter_cons, List.map_cons,̵ ̵L̵i̵s̵t̵.̵s̵u̵m̵_̵c̵o̵n̵s̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2026P3.lean:489:8: This simp argument is unused:
+  h0
+
+Hint: Omit it from the simp argument list.
+  simp [h0̵,̵ ̵h̵1]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2026P3.lean:608:21: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Compfiles/Imo2026P3.lean:846:19: This simp argument is unused:
+  h0
+
+Hint: Omit it from the simp argument list.
+  simp [sign3, h0̵,̵ ̵h̵1]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2026P3.lean:1070:14: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Compfiles/Imo2026P3.lean:1423:16: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Compfiles/Imo2026P3.lean:1426:62: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo2026P3.lean:1523:19: Variable name `hS` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2026P3.lean:1662:44: Variable name `hn` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2026P3.lean:1810:5: Variable name `hpos` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2026P3.lean:1939:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Compfiles/Imo2026P3.lean:2569:39: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Compfiles/Imo2026P3.lean:2492:26: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo2026P3.lean:2498:26: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo2026P3.lean:2694:17: This simp argument is unused:
+  halfBlockAt
+
+Hint: Omit it from the simp argument list.
+  simp [h̵a̵l̵f̵B̵l̵o̵c̵k̵A̵t̵,̵ ̵bisectLengths, pairDup]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2026P3.lean:2810:35: Variable name `hIJ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2026P3.lean:3166:21: Variable name `t` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2026P3.lean:3195:71: This simp argument is unused:
+  hpre
+
+Hint: Omit it from the simp argument list.
+  simp [prefixRefinementBlocks, prefixFlattenBlocks, appendToLast, hp̵r̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵h̵cross, Fin.append,
+  ̲  ̲ ̲ ̲ ̲ ̲Fin.addCases]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2026P3.lean:3894:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Compfiles/Imo2026P3.lean:3988:39: Variable name `hn` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (2455 jobs).
+⚠ [2562/2562] Built Compfiles.Usa1981P4 (26s)
+warning: Compfiles/Usa1981P4.lean:655:0: automatically included section variable(s) unused in theorem `Usa1981P4.corner_coeff_gt_one`:
+  hplane
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hplane in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:947:0: automatically included section variable(s) unused in theorem `Usa1981P4.Vc_val`:
+  [NormedAddCommGroup E]
+  [InnerProductSpace ℝ E]
+  hNz
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup E] [InnerProductSpace ℝ E] hNz in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:950:0: automatically included section variable(s) unused in theorem `Usa1981P4.Vc_zero`:
+  [NormedAddCommGroup E]
+  [InnerProductSpace ℝ E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup E] [InnerProductSpace ℝ E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:952:0: automatically included section variable(s) unused in theorem `Usa1981P4.Vc_add_one`:
+  [NormedAddCommGroup E]
+  [InnerProductSpace ℝ E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup E] [InnerProductSpace ℝ E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:957:0: automatically included section variable(s) unused in theorem `Usa1981P4.Vc_sub_one`:
+  [NormedAddCommGroup E]
+  [InnerProductSpace ℝ E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup E] [InnerProductSpace ℝ E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:976:0: automatically included section variable(s) unused in theorem `Usa1981P4.angle_telescope`:
+  hNz
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hNz in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:1080:0: automatically included section variable(s) unused in theorem `Usa1981P4.Vc_n`:
+  [NormedAddCommGroup E]
+  [InnerProductSpace ℝ E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup E] [InnerProductSpace ℝ E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:1088:0: automatically included section variable(s) unused in theorem `Usa1981P4.interior_angle_sum`:
+  hcopl
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hcopl in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:1313:0: automatically included section variable(s) unused in theorem `Usa1981P4.ray_not_mem_span`:
+  hplane
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hplane in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:1423:0: automatically included section variable(s) unused in theorem `Usa1981P4.dproj_vertex_P_at`:
+  hNz
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hNz in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:1428:0: automatically included section variable(s) unused in theorem `Usa1981P4.dproj_vertex_P_sub`:
+  hNz
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hNz in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa1981P4.lean:1441:0: automatically included section variable(s) unused in theorem `Usa1981P4.fan_cone_dproj`:
+  hcopl
+  hP
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hcopl hP in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Build completed successfully (2562 jobs).
+ℹ [2517/2517] Built Compfiles.Usa1997P4 (46s)
+info: Compfiles/Usa1997P4.lean:387:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Build completed successfully (2517 jobs).
+⚠ [1963/1963] Built Compfiles.Usa2004P3 (26s)
+warning: Compfiles/Usa2004P3.lean:326:54: This simp argument is unused:
+  getLast!_cons_cons
+
+Hint: Omit it from the simp argument list.
+  simp [chainEdges, List.cons_append,̵ ̵g̵e̵t̵L̵a̵s̵t̵!̵_̵c̵o̵n̵s̵_̵c̵o̵n̵s̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1573:6: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2004P3.lean:1596:23: Variable name `hr` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2004P3.lean:1611:2: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2004P3.lean:1620:10: This simp argument is unused:
+  map_add
+
+Hint: Omit it from the simp argument list.
+  simp [map_a̵d̵d̵,̵ ̵ma̵p̵_̵m̵ul, Complex.conj_I, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1620:19: This simp argument is unused:
+  map_mul
+
+Hint: Omit it from the simp argument list.
+  simp [map_add, m̵a̵p̵_̵m̵u̵l̵,̵ ̵Complex.conj_I, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1630:8: This simp argument is unused:
+  map_add
+
+Hint: Omit it from the simp argument list.
+  simp [map_a̵d̵d̵,̵ ̵m̵a̵p̵_̵sub, map_mul, map_neg, Complex.conj_I, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1630:17: This simp argument is unused:
+  map_sub
+
+Hint: Omit it from the simp argument list.
+  simp [map_add, map_s̵u̵b̵,̵ ̵ma̵p̵_̵m̵ul, map_neg, Complex.conj_I, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1630:26: This simp argument is unused:
+  map_mul
+
+Hint: Omit it from the simp argument list.
+  simp [map_add, map_sub, map_m̵u̵l̵,̵ ̵m̵a̵p̵_̵neg, Complex.conj_I, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1630:35: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp [map_add, map_sub, map_mul, m̵a̵p̵_̵n̵e̵g̵,̵ ̵Complex.conj_I, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1631:2: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2004P3.lean:1645:14: This simp argument is unused:
+  map_sub
+
+Hint: Omit it from the simp argument list.
+  simp [simT,̵ ̵m̵a̵p̵_̵s̵u̵b̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1838:16: This simp argument is unused:
+  h4
+
+Hint: Omit it from the simp argument list.
+  simp [corner, h4̵,̵ ̵h̵5]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1838:20: This simp argument is unused:
+  h5
+
+Hint: Omit it from the simp argument list.
+  simp [corner, h4,̵ ̵h̵5̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1844:20: This simp argument is unused:
+  h6
+
+Hint: Omit it from the simp argument list.
+  simp [corner, h5,̵ ̵h̵6̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1883:20: This simp argument is unused:
+  h
+
+Hint: Omit it from the simp argument list.
+  simp [corner,̵ ̵h̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:1957:56: This simp argument is unused:
+  div_ofReal_re
+
+Hint: Omit it from the simp argument list.
+  simp [Complex.mul_im, Complex.I_re, Complex.I_im, d̵i̵v̵_̵o̵f̵R̵e̵a̵l̵_̵r̵e̵,̵ ̵← ofReal_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:2728:34: This simp argument is unused:
+  Complex.conj_re
+
+Hint: Omit it from the simp argument list.
+  simp [Tsim, TsimInv, Complex.mul_re, Complex.mul_im, Complex.div_re, Complex.div_im,
+        Complex.I_re, Complex.I_im, Complex.conj_r̵e̵i̲m̲, Complex.c̵on̵j̵f̲R̲e̲a̲l̲_i̵m̵r̲e̲, Complex.ofReal_r̵e̵i̲m̲,
+        Complex.o̵f̵R̵e̵a̵l̵_̵i̵m̵,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵neg_re, Complex.neg_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:2728:51: This simp argument is unused:
+  Complex.conj_im
+
+Hint: Omit it from the simp argument list.
+  simp [Tsim, TsimInv, Complex.mul_re, Complex.mul_im, Complex.div_re, Complex.div_im,
+        Complex.I_re, Complex.I_im, Complex.conj_re, Complex.c̵on̵j̵f̲R̲e̲a̲l̲_i̵m̵r̲e̲, Complex.ofReal_r̵e̵i̲m̲,
+        Complex.o̵f̵R̵e̵a̵l̵_̵i̵m̵,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵neg_re, Complex.neg_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:2731:4: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2004P3.lean:2731:4: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2004P3.lean:2738:34: This simp argument is unused:
+  Complex.conj_re
+
+Hint: Omit it from the simp argument list.
+  simp [Tsim, TsimInv, Complex.mul_re, Complex.mul_im, Complex.div_re, Complex.div_im,
+        Complex.I_re, Complex.I_im, Complex.conj_r̵e̵i̲m̲, Complex.c̵on̵j̵f̲R̲e̲a̲l̲_i̵m̵r̲e̲, Complex.ofReal_r̵e̵i̲m̲,
+        Complex.o̵f̵R̵e̵a̵l̵_̵i̵m̵,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵neg_re, Complex.neg_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:2738:51: This simp argument is unused:
+  Complex.conj_im
+
+Hint: Omit it from the simp argument list.
+  simp [Tsim, TsimInv, Complex.mul_re, Complex.mul_im, Complex.div_re, Complex.div_im,
+        Complex.I_re, Complex.I_im, Complex.conj_re, Complex.c̵on̵j̵f̲R̲e̲a̲l̲_i̵m̵r̲e̲, Complex.ofReal_r̵e̵i̲m̲,
+        Complex.o̵f̵R̵e̵a̵l̵_̵i̵m̵,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵neg_re, Complex.neg_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:2741:4: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2004P3.lean:2741:4: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2004P3.lean:2762:30: This simp argument is unused:
+  Complex.mul_im
+
+Hint: Omit it from the simp argument list.
+  simp [Tsim, Complex.mul_re, C̵o̵m̵p̵l̵e̵x̵.̵m̵u̵l̵_̵i̵m̵,̵ ̵Complex.div_re, Complex.div_im, Complex.I_re, Complex.I_im,
+  ̲  ̲ ̲ ̲Complex.conj_re, Complex.conj_im, Complex.ofReal_re, Complex.ofReal_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:2767:14: This simp argument is unused:
+  Complex.mul_re
+
+Hint: Omit it from the simp argument list.
+  simp [Tsim, C̵o̵m̵p̵l̵e̵x̵.̵m̵u̵l̵_̵r̵e̵,̵ ̵Complex.mul_im, Complex.div_re, Complex.div_im, Complex.I_re, Complex.I_im,
+  ̲  ̲ ̲ ̲Complex.conj_re, Complex.conj_im, Complex.ofReal_re, Complex.ofReal_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2004P3.lean:2777:58: This simp argument is unused:
+  ← Complex.ofReal_mul
+
+Hint: Omit it from the simp argument list.
+  simp [star_mul', Complex.conj_ofReal, Complex.conj_I,̵ ̵←̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵m̵u̵l̵]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (1963 jobs).
+✔ [3073/3073] Built Compfiles.Usa2007P2 (58s)
+Build completed successfully (3073 jobs).
+✔ [2819/2819] Built Compfiles.Usa2013P6 (43s)
+Build completed successfully (2819 jobs).
