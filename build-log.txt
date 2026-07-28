@@ -6858,3 +6858,112 @@ The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 Build completed successfully (3019 jobs).
+✔ [8656/8656] Built Compfiles.Usa2014P4 (249s)
+Build completed successfully (8656 jobs).
+✔ [2866/2866] Built Compfiles.Usa2026P5 (26s)
+Build completed successfully (2866 jobs).
+Big modules done at 06:42:11
+Build completed successfully (1665 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (726 jobs).
+Build completed successfully (2998 jobs).
+✔ [3000/3000] Built Compfiles.Bulgaria1998P6 (13s)
+Build completed successfully (3000 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.CIIM2022P6 (18s)
+✔ [2998/2998] Built Compfiles.Canada1998P5 (13s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (734 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+✔ [3069/3069] Built Compfiles.Imo1959P5 (8.5s)
+Build completed successfully (3069 jobs).
+Build completed successfully (1025 jobs).
+✔ [3114/3114] Built Compfiles.Imo1959P4 (20s)
+Build completed successfully (3114 jobs).
+Build completed successfully (8656 jobs).
+✔ [3073/3073] Built Compfiles.Imo1960P3 (5.9s)
+Build completed successfully (3073 jobs).
+✔ [2427/2427] Built Compfiles.Bulgaria1998P2 (56s)
+Build completed successfully (2427 jobs).
+✔ [2998/2998] Built Compfiles.Imo1960P6 (5.7s)
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo1959P6 (25s)
+Build completed successfully (8656 jobs).
+✔ [3065/3065] Built Compfiles.Imo1960P5 (10s)
+Build completed successfully (3065 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (3070 jobs).
+Build completed successfully (2999 jobs).
+✔ [3076/3076] Built Compfiles.Imo1960P7 (6.9s)
+Build completed successfully (3076 jobs).
+✔ [3074/3074] Built Compfiles.Imo1960P4 (31s)
+Build completed successfully (3074 jobs).
+Build completed successfully (1025 jobs).
+✔ [3069/3069] Built Compfiles.Imo1961P6 (7.1s)
+Build completed successfully (3069 jobs).
+✔ [2998/2998] Built Compfiles.Imo1961P5 (10s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2005 jobs).
+✔ [8656/8656] Built Compfiles.Imo1961P4 (11s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo1962P3 (5.5s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [3065/3065] Built Compfiles.Imo1962P6 (6.1s)
+Build completed successfully (3065 jobs).
+✔ [3065/3065] Built Compfiles.Imo1962P5 (9.2s)
+Build completed successfully (3065 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (3115 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (3111 jobs).
+✔ [8656/8656] Built Compfiles.Imo1963P2 (8.4s)
+Build completed successfully (8656 jobs).
+Build completed successfully (1039 jobs).
+✔ [8656/8656] Built Compfiles.Imo1963P3 (10s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo1963P6 (10s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo1964P6 (16s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo1964P3 (28s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo1965P3 (15s)
+Build completed successfully (8656 jobs).
+Build completed successfully (947 jobs).
+✔ [8656/8656] Built Compfiles.Imo1965P5 (10s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1966P2 (6.6s)
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo1966P3 (26s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo1966P6 (23s)
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+⚠ [8656/8656] Built Compfiles.Imo1967P1 (41s)
+warning: Compfiles/Imo1967P1.lean:172:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1967P1.lean:263:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+Build completed successfully (8656 jobs).
