@@ -4,7 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Interval
+import Mathlib.Order.ConditionallyCompleteLattice.Basic
+import Mathlib.Tactic.NormNum.Ineq
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

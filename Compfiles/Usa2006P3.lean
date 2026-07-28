@@ -3,7 +3,13 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.Analysis.Normed.Field.Lemmas
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Rat.Star
+import Mathlib.RingTheory.Int.Basic
+import Mathlib.RingTheory.Polynomial.GaussLemma
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Archimedean.Real.Basic
+import Mathlib.Data.Finset.Max
+import Mathlib.Order.Interval.Finset.Nat
 
 import ProblemExtraction
 

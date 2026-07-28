@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Geometry.Euclidean.Sphere.Tangent
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
 import ProblemExtraction
 
 problem_file {

@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Tactic
+import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.Data.Finset.NatAntidiagonal
+import Mathlib.Data.Set.Card
+import Mathlib.Tactic.NormNum.BigOperators
+import Mathlib.Tactic.Ring
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

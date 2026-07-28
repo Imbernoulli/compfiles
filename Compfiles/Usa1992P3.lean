@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Finset.Powerset
+import Mathlib.Order.Interval.Finset.Nat
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 

@@ -3,7 +3,14 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.CharP.Defs
+import Mathlib.Algebra.EuclideanDomain.Basic
+import Mathlib.Algebra.EuclideanDomain.Field
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.LinearCombination.Lemmas
+import Mathlib.Tactic.Linarith
 
 import ProblemExtraction
 
@@ -239,8 +246,10 @@ problem imo2003_p5_equality (n : ℕ) (hn : 2 < n) (x : ℕ → ℝ) (hx : Monot
     have hn3 : (3 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
     have hDpos : 0 < D := by
       rw [hDval]
-      have h1 : (0 : ℝ) < (n : ℝ) ^ 2 - 1 := by nlinarith [hn3]
-      have h2 : (0 : ℝ) < (n : ℝ) := by linarith
+      have h1 : (0 : ℝ) < (n : ℝ) ^ 2 - 1 := by
+        rw [sub_pos, one_lt_sq_iff₀ (Nat.cast_nonneg n)]
+        exact_mod_cast (show 1 < n by omega)
+      have h2 : (0 : ℝ) < (n : ℝ) := three_pos.trans_le hn3
       exact div_pos (mul_pos h2 h1) three_pos
     have hDne : D ≠ 0 := ne_of_gt hDpos
     set t : ℝ := C / D with ht
@@ -265,7 +274,7 @@ problem imo2003_p5_equality (n : ℕ) (hn : 2 < n) (x : ℕ → ℝ) (hx : Monot
     have hform : ∀ i ∈ range n, y i = t * (2 * (i : ℝ) + 1 - (n : ℝ)) := fun i hi => by
       have h := hall i hi
       rw [sq_eq_zero_iff] at h
-      linarith
+      exact (sub_eq_zero.mp h).symm
     refine ⟨m + t * (1 - (n : ℝ)), 2 * t, fun i hi => ?_⟩
     have h1 : x i = y i + m := by rw [yeq i]; ring
     rw [h1, hform i hi]

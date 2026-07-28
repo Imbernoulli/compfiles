@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.LinearAlgebra.Lagrange
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.LinearCombination.Lemmas
+import Mathlib.Tactic.Ring.Compare
 
 import ProblemExtraction
 

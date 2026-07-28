@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Tactic
-import Mathlib.Geometry.Euclidean.Basic
 import Mathlib.Analysis.InnerProductSpace.PiL2
 import ProblemExtraction
 

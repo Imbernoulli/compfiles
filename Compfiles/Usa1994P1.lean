@@ -4,7 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.Order.ConditionallyCompleteLattice.Basic
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum.Ineq
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Zify
 
 import ProblemExtraction
 

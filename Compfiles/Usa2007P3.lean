@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Data.Finset.Card
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

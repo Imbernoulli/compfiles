@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.Algebra.Group.Action.Defs
+import Mathlib.Algebra.Ring.Parity
+import Mathlib.Tactic.DeriveFintype
 
 import ProblemExtraction
 

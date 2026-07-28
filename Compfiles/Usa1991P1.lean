@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Tactic
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 

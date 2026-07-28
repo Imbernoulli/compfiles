@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Geometry.Euclidean.Sphere.Basic
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Ring
 
 import ProblemExtraction
 
@@ -118,49 +125,64 @@ lemma cospherical_of_dist_eq {O W X Y Z : EuclideanSpace ℝ (Fin 2)}
   · exact hY
   · exact hZ
 
+/-- Equality of squared distances to a common center `O = (o₁, o₂)`, rewritten
+to a form that is linear in the center coordinates (the `o₁² + o₂²` terms
+cancel). Checking the equation in this form keeps the polynomials that
+`field_simp` and `ring` produce much smaller than for the raw form. -/
+lemma sq_dist_eq_iff (x1 x2 w1 w2 o1 o2 : ℝ) :
+    (x1 - o1) ^ 2 + (x2 - o2) ^ 2 = (w1 - o1) ^ 2 + (w2 - o2) ^ 2 ↔
+    x1 ^ 2 + x2 ^ 2 - (w1 ^ 2 + w2 ^ 2) = 2 * (o1 * (x1 - w1) + o2 * (x2 - w2)) := by
+  constructor <;> intro h <;> linear_combination h
+
 lemma dist_ptM_ctrBMR {p q b c : ℝ} (hp : p ≠ 0) (hq : q ≠ 0) (hn : p ^ 2 + q ^ 2 ≠ 0)
     (hbc : b + c ≠ 0) :
     dist (ptM p q b) (ctrBMR p q b c) = dist (ptB p q c) (ctrBMR p q b c) := by
   simp only [ptM, ptB, ctrBMR, dist2]
   congr 1
+  rw [sq_dist_eq_iff]
   field_simp [hp, hq, hn, hbc]
-  ring_nf
+  ring
 
 lemma dist_ptR_ctrBMR {p q b c : ℝ} (hp : p ≠ 0) (hq : q ≠ 0) (hbc : b + c ≠ 0) :
     dist (ptR p q b c) (ctrBMR p q b c) = dist (ptB p q c) (ctrBMR p q b c) := by
   simp only [ptR, ptB, ctrBMR, dist2]
   congr 1
+  rw [sq_dist_eq_iff]
   field_simp [hp, hq, hbc]
-  ring_nf
+  ring
 
 lemma dist_ptK_ctrBMR {p q b c : ℝ} (hp : p ≠ 0) (hq : q ≠ 0) (hbc : b + c ≠ 0) :
     dist (ptK p q b c) (ctrBMR p q b c) = dist (ptB p q c) (ctrBMR p q b c) := by
   simp only [ptK, ptB, ctrBMR, dist2]
   congr 1
+  rw [sq_dist_eq_iff]
   field_simp [hp, hq, hbc]
-  ring_nf
+  ring
 
 lemma dist_ptN_ctrCNR {p q b c : ℝ} (hp : p ≠ 0) (hq : q ≠ 0) (hn : p ^ 2 + q ^ 2 ≠ 0)
     (hbc : b + c ≠ 0) :
     dist (ptN p q c) (ctrCNR p q b c) = dist (ptC p q b) (ctrCNR p q b c) := by
   simp only [ptN, ptC, ctrCNR, dist2]
   congr 1
+  rw [sq_dist_eq_iff]
   field_simp [hp, hq, hn, hbc]
-  ring_nf
+  ring
 
 lemma dist_ptR_ctrCNR {p q b c : ℝ} (hp : p ≠ 0) (hq : q ≠ 0) (hbc : b + c ≠ 0) :
     dist (ptR p q b c) (ctrCNR p q b c) = dist (ptC p q b) (ctrCNR p q b c) := by
   simp only [ptR, ptC, ctrCNR, dist2]
   congr 1
+  rw [sq_dist_eq_iff]
   field_simp [hp, hq, hbc]
-  ring_nf
+  ring
 
 lemma dist_ptK_ctrCNR {p q b c : ℝ} (hp : p ≠ 0) (hq : q ≠ 0) (hbc : b + c ≠ 0) :
     dist (ptK p q b c) (ctrCNR p q b c) = dist (ptC p q b) (ctrCNR p q b c) := by
   simp only [ptK, ptC, ctrCNR, dist2]
   congr 1
+  rw [sq_dist_eq_iff]
   field_simp [hp, hq, hbc]
-  ring_nf
+  ring
 
 /-- The points `B`, `M`, `R`, `K` are concyclic. -/
 lemma cospherical_BMRK {p q b c : ℝ} (hp : p ≠ 0) (hq : q ≠ 0) (hn : p ^ 2 + q ^ 2 ≠ 0)
@@ -190,7 +212,7 @@ lemma wbtw_BKC {p q b c : ℝ} (hb : 0 < b) (hc : 0 < c) :
   fin_cases i <;>
     simp [PiLp.smul_apply, PiLp.add_apply, PiLp.sub_apply, smul_eq_mul] <;>
     field_simp [ne_of_gt hbc] <;>
-    ring_nf
+    ring
 
 snip end
 

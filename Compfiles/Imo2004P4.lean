@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors:
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Analysis.Normed.Affine.Convex
 
 import ProblemExtraction
 

@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw, Kimi K3
 -/
 
-import Mathlib.Tactic
+import Mathlib.Algebra.BigOperators.Ring.List
+import Mathlib.Algebra.Order.BigOperators.Group.List
+import Mathlib.Tactic.NormNum.Ineq
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

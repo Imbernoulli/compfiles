@@ -4,13 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Analysis.Convex.Between
-import Mathlib.Analysis.Convex.StrictConvexBetween
 import Mathlib.Analysis.InnerProductSpace.TwoDim
 import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
 import Mathlib.Geometry.Euclidean.Circumcenter
 import Mathlib.Geometry.Euclidean.Incenter
-import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
 
 import ProblemExtraction
 

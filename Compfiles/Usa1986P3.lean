@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.GCDMonoid.Nat
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Nat.Prime.Defs
+import Mathlib.Data.ZMod.Defs
+import Mathlib.RingTheory.Coprime.Lemmas
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.LinearCombination
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

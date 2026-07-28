@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.Algebra.Order.Group.Nat
+import Mathlib.Order.Lattice.Nat
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

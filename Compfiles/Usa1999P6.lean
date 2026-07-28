@@ -4,11 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Analysis.Convex.Segment
 import Mathlib.Analysis.InnerProductSpace.PiL2
 import Mathlib.Geometry.Euclidean.Sphere.Basic
-import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
-import Mathlib.Tactic
 
 import ProblemExtraction
 

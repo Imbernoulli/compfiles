@@ -4,7 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.CharP.Defs
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Nat.Factorization.Defs
+import Mathlib.Order.Lattice.Nat
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.NormNum.DivMod
+import Mathlib.Tactic.Positivity.Core
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
+import Mathlib.Tactic.Zify
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics, .NumberTheory] }
