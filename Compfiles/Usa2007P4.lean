@@ -598,7 +598,7 @@ be unfolded in the auxiliary lemmas `mem_aux` and `card_aux`. (In this
 environment, `Finset.Icc` on `ℤ` records a `Preorder ℤ` instance whose term
 contains the noncomputable `Int.instConditionallyCompleteLinearOrder`, hence
 the `noncomputable` keyword.) -/
-private noncomputable def crossAux : Finset (ℤ × ℤ) :=
+noncomputable def crossAux : Finset (ℤ × ℤ) :=
   (Finset.Icc (-2006) 2006).product {(0 : ℤ)} ∪
     Finset.product {(0 : ℤ)} (Finset.Icc (-2006) 2006)
 

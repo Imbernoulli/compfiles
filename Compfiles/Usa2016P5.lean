@@ -358,10 +358,12 @@ private lemma star_ofReal' (r : ℝ) : star (r : ℂ) = (r : ℂ) := by
 private lemma ofReal_mul_div_real (w : ℂ) {r : ℝ} (hr : r ≠ 0) : (r : ℂ) * (w / r) = w := by
   rw [Complex.div_ofReal, Complex.ext_iff]
   constructor
-  · show r * (w.re / r) - 0 * (w.im / r) = w.re
+  · rw [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im]
+    show r * (w.re / r) - 0 * (w.im / r) = w.re
     field_simp
     ring
-  · show r * (w.im / r) + 0 * (w.re / r) = w.im
+  · rw [Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]
+    show r * (w.im / r) + 0 * (w.re / r) = w.im
     field_simp
     ring
 

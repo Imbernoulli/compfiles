@@ -17,10 +17,12 @@ public import Mathlib.Geometry.Euclidean.Inversion.Basic
 public import Mathlib.Geometry.Euclidean.Simplex
 public import Mathlib.Geometry.Euclidean.Sphere.Power
 public import Mathlib.Geometry.Euclidean.Sphere.SecondInter
+public import Mathlib.Geometry.Euclidean.Similarity
 public import Mathlib.LinearAlgebra.FreeModule.PID
 public import Mathlib.RingTheory.Flat.TorsionFree
 public import Mathlib.RingTheory.SimpleRing.Principal
 public import Mathlib.Geometry.Euclidean.Triangle
+public import Mathlib.Topology.MetricSpace.Similarity
 public import ProblemExtraction
 
 @[expose] public section

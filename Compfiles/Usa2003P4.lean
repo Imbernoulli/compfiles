@@ -9,6 +9,7 @@ module
 public import Mathlib.Algebra.Order.Star.Real
 public import Mathlib.Algebra.Ring.IsFormallyReal
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.PiL2
 public import Mathlib.Geometry.Euclidean.Sphere.Power
 public import Mathlib.Tactic.Positivity.Finset
 public import ProblemExtraction
