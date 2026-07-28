@@ -5539,3 +5539,1322 @@ Build completed successfully (1963 jobs).
 Build completed successfully (3073 jobs).
 ✔ [2819/2819] Built Compfiles.Usa2013P6 (43s)
 Build completed successfully (2819 jobs).
+⚠ [2383/2383] Built Compfiles.Imo2023P6 (453s)
+warning: Compfiles/Imo2023P6.lean:92:0: automatically included section variable(s) unused in theorem `Imo2023P6.coord_dist_sq`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2023P6.lean:420:0: automatically included section variable(s) unused in theorem `Imo2023P6.angle_at_median_A`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2023P6.lean:420:25: Variable name `A` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:496:0: automatically included section variable(s) unused in theorem `Imo2023P6.angle_at_median_B`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2023P6.lean:500:5: Variable name `hB` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:573:0: automatically included section variable(s) unused in theorem `Imo2023P6.angle_at_median_C`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2023P6.lean:578:5: Variable name `hC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:791:0: automatically included section variable(s) unused in theorem `Imo2023P6.a2b2c2_coords`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2023P6.lean:793:5: Variable name `equilateral_ABC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:806:5: Variable name `hrel` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:807:5: Variable name `hscal` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1048:5: Variable name `equilateral_ABC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1052:5: Variable name `hR` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1053:5: Variable name `hA` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1054:5: Variable name `hB` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1055:5: Variable name `hC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1184:26: Variable name `v` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1268:5: Variable name `hrel` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1296:17: Variable name `R` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1318:16: Variable name `R` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1527:31: Variable name `hR` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1527:58: Variable name `hu1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1653:31: Variable name `hR` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1653:58: Variable name `hu1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1738:32: Variable name `hR` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2023P6.lean:1738:59: Variable name `hu1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (2383 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2018P6 (12s)
+warning: Compfiles/Usa2018P6.lean:2404:28: Variable name `hn` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2022P6 (14s)
+warning: Compfiles/Usa2022P6.lean:52:0: automatically included section variable(s) unused in theorem `Usa2022P6.reachable_trans`:
+  [DecidableEq V]
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2022P6.lean:58:0: automatically included section variable(s) unused in theorem `Usa2022P6.reachable_le`:
+  [DecidableEq V]
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2022P6.lean:63:0: automatically included section variable(s) unused in theorem `Usa2022P6.reachable_sup_left`:
+  [DecidableEq V]
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2022P6.lean:88:0: automatically included section variable(s) unused in theorem `Usa2022P6.reachable_eq_of_no_canAdd`:
+  [DecidableEq V]
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2022P6.lean:98:0: automatically included section variable(s) unused in theorem `Usa2022P6.reachable_add_edge_of_common`:
+  [DecidableEq V]
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2022P6.lean:113:8: automatically included section variable(s) unused in theorem `Usa2022P6.Sym2.toFinsetV_mk`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2022P6.lean:115:0: automatically included section variable(s) unused in theorem `Usa2022P6.Sym2.mem_toFinsetV`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2022P6.lean:240:43: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵hab', hbc', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:68: This simp argument is unused:
+  hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hc̵d̵'̵,̵ ̵h̵ad, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:74: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had̵,̵ ̵h̵a̵c, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:84: This simp argument is unused:
+  hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, h̵b̵d̵,̵ ̵Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:89: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲ N̵e̵.̵s̵y̵m̵m̵ h̵a̵b̵'̵,̵  ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:103: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hb̵c'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵c̵d', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:117: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hc̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵ad, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:131: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:144: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm ha̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵bd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:240:157: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:43: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵hab', hbc', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:56: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, ha̵b'̵,̵ ̵h̵b̵c', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:68: This simp argument is unused:
+  hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hc̵d̵'̵,̵ ̵h̵ad, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:89: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲ N̵e̵.̵s̵y̵m̵m̵ h̵a̵b̵'̵,̵  ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:103: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hb̵c'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵c̵d', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:117: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hc̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵ad, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:131: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:144: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm ha̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵bd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:241:157: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:43: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵hab', hbc', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:56: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, ha̵b'̵,̵ ̵h̵b̵c', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:62: This simp argument is unused:
+  hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hb̵c'̵,̵ ̵h̵c̵d', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:68: This simp argument is unused:
+  hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hc̵d̵'̵,̵ ̵h̵ad, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:79: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:103: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hb̵c'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵c̵d', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:117: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hc̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵ad, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:131: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:144: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm ha̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵bd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:242:157: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:43: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵hab', hbc', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:56: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, ha̵b'̵,̵ ̵h̵b̵c', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:74: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had̵,̵ ̵h̵a̵c, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:79: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:89: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲ N̵e̵.̵s̵y̵m̵m̵ h̵a̵b̵'̵,̵  ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:103: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hb̵c'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵c̵d', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:117: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hc̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵ad, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:131: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:144: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm ha̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵bd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:243:157: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:43: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵hab', hbc', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:56: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, ha̵b'̵,̵ ̵h̵b̵c', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:62: This simp argument is unused:
+  hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hb̵c'̵,̵ ̵h̵c̵d', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:74: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had̵,̵ ̵h̵a̵c, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:79: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:103: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hb̵c'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵c̵d', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:117: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hc̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵ad, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:131: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:244:157: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:43: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵hab', hbc', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:56: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, ha̵b'̵,̵ ̵h̵b̵c', hcd', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:62: This simp argument is unused:
+  hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hb̵c'̵,̵ ̵h̵c̵d', had, hac, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:74: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had̵,̵ ̵h̵a̵c, hbd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:79: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd, Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:84: This simp argument is unused:
+  hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, h̵b̵d̵,̵ ̵Ne.symm hab',
+  ̲  ̲ ̲ ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:89: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲ N̵e̵.̵s̵y̵m̵m̵ h̵a̵b̵'̵,̵  ̲Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:103: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hb̵c'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵c̵d', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:117: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hc̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵ad, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:245:157: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd,
+  ̲  ̲ ̲ ̲Ne.symm hab', Ne.symm hbc', Ne.symm hcd', Ne.symm had, Ne.symm hac,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:266:12: This simp argument is unused:
+  hc1
+
+Hint: Omit it from the simp argument list.
+  simp [h̵c̵1̵,̵ ̵Finset.card_singleton, Finset.card_pair hab']
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:267:12: This simp argument is unused:
+  hc2
+
+Hint: Omit it from the simp argument list.
+  simp [h̵c̵2̵,̵ ̵Finset.card_singleton, Finset.card_pair hbc']
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:268:12: This simp argument is unused:
+  hc3
+
+Hint: Omit it from the simp argument list.
+  simp [h̵c̵3̵,̵ ̵Finset.card_singleton, Finset.card_pair hcd']
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:269:12: This simp argument is unused:
+  hc4
+
+Hint: Omit it from the simp argument list.
+  simp [h̵c̵4̵,̵ ̵Finset.card_singleton, Finset.card_pair (Ne.symm had)]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:481:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2022P6.lean:506:27: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [̵S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵h̵a̵b̵'̵,̵[̲h̲a̲b̲'̲,̲ hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:506:52: This simp argument is unused:
+  hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', h̵c̵d̵'̵,̵ ̵had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:506:58: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', h̵a̵d̵,̵ ̵hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:506:68: This simp argument is unused:
+  hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, h̵b̵d̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:507:8: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm h̵a̵b̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbc', Ne.symm hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:507:22: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm h̵b̵c̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:507:36: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm h̵c̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:507:50: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:507:63: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:507:76: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]̵h̲a̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:509:27: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [̵S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵h̵a̵b̵'̵,̵[̲h̲a̲b̲'̲,̲ hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:509:40: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, h̵a̵b̵'̵,̵ ̵hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:509:52: This simp argument is unused:
+  hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', h̵c̵d̵'̵,̵ ̵had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:510:8: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm h̵a̵b̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbc', Ne.symm hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:510:22: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm h̵b̵c̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:510:36: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm h̵c̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:510:50: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:510:63: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:510:76: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]̵h̲a̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:512:27: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [̵S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵h̵a̵b̵'̵,̵[̲h̲a̲b̲'̲,̲ hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:512:40: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, h̵a̵b̵'̵,̵ ̵hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:512:46: This simp argument is unused:
+  hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', h̵b̵c̵'̵,̵ ̵hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:512:52: This simp argument is unused:
+  hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', h̵c̵d̵'̵,̵ ̵had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:512:63: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:513:22: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm h̵b̵c̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:513:36: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm h̵c̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:513:50: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:513:63: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:513:76: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]̵h̲a̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:515:27: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [̵S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵h̵a̵b̵'̵,̵[̲h̲a̲b̲'̲,̲ hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:515:40: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, h̵a̵b̵'̵,̵ ̵hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:515:58: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', h̵a̵d̵,̵ ̵hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:515:63: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:516:8: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm h̵a̵b̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbc', Ne.symm hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:516:22: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm h̵b̵c̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:516:36: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm h̵c̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:516:50: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:516:63: This simp argument is unused:
+  Ne.symm hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:516:76: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]̵h̲a̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:518:27: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [̵S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵h̵a̵b̵'̵,̵[̲h̲a̲b̲'̲,̲ hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:518:40: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, h̵a̵b̵'̵,̵ ̵hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:518:46: This simp argument is unused:
+  hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', h̵b̵c̵'̵,̵ ̵hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:518:58: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', h̵a̵d̵,̵ ̵hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:518:63: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:519:22: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm h̵b̵c̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:519:36: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm h̵c̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:519:50: This simp argument is unused:
+  Ne.symm had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm h̵a̵d̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:519:76: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]̵h̲a̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:521:27: This simp argument is unused:
+  Sym2.eq_iff
+
+Hint: Omit it from the simp argument list.
+  simp [̵S̵y̵m̵2̵.̵e̵q̵_̵i̵f̵f̵,̵ ̵h̵a̵b̵'̵,̵[̲h̲a̲b̲'̲,̲ hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:521:40: This simp argument is unused:
+  hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, h̵a̵b̵'̵,̵ ̵hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:521:46: This simp argument is unused:
+  hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', h̵b̵c̵'̵,̵ ̵hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:521:58: This simp argument is unused:
+  had
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', h̵a̵d̵,̵ ̵hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:521:63: This simp argument is unused:
+  hac
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, ha̵c̵,̵ ̵h̵bd,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:521:68: This simp argument is unused:
+  hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, h̵b̵d̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:522:8: This simp argument is unused:
+  Ne.symm hab'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm h̵a̵b̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hbc', Ne.symm hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:522:22: This simp argument is unused:
+  Ne.symm hbc'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm h̵b̵c̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵hcd',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:522:36: This simp argument is unused:
+  Ne.symm hcd'
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm h̵c̵d̵'̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵had, Ne.symm hac, Ne.symm hbd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:522:76: This simp argument is unused:
+  Ne.symm hbd
+
+Hint: Omit it from the simp argument list.
+  simp [Sym2.eq_iff, hab', hbc', hcd', had, hac, hbd, Ne.symm hab', Ne.symm hbc',
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Ne.symm hcd', Ne.symm had, Ne.symm h̵a̵c̵,̵ ̵N̵e̵.̵s̵y̵m̵m̵ ̵h̵b̵d̵]̵h̲a̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2022P6.lean:862:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2022P6.lean:875:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2022P6.lean:921:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2022P6.lean:1206:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+Build completed successfully (8656 jobs).
+Build completed successfully (1087 jobs).
+⚠ [3019/3019] Built Compfiles.Usa2025P6 (16s)
+warning: Compfiles/Usa2025P6.lean:499:0: automatically included section variable(s) unused in theorem `Usa2025P6.CirclePartition.skipMap_add`:
+  [NeZero m]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NeZero m] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2025P6.lean:504:0: automatically included section variable(s) unused in theorem `Usa2025P6.CirclePartition.skipMap_eq`:
+  [NeZero m]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NeZero m] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2025P6.lean:508:0: automatically included section variable(s) unused in theorem `Usa2025P6.CirclePartition.mem_arcSet_iff`:
+  [NeZero m]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NeZero m] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2025P6.lean:855:5: Variable name `hla1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:855:28: Variable name `hlam` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:856:5: Variable name `hdij` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:967:27: This simp argument is unused:
+  Fin.val_mk
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.lt_def,̵ ̵F̵i̵n̵.̵v̵a̵l̵_̵m̵k̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2025P6.lean:975:40: This simp argument is unused:
+  Fin.val_mk
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_union, Finset.mem_singleton,
+  ̲  ̲ ̲ ̲ ̲ ̲F̵i̵n̵.̵l̵t̵_̵d̵e̵f̵,̵ ̵F̵i̵n̵.̵v̵a̵l̵_̵m̵k̵]̵F̲i̲n̲.̲l̲t̲_̲d̲e̲f̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2025P6.lean:988:18: This simp argument is unused:
+  Fin.val_mk
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_singleton,
+        Fin.lt_def,̵ ̵F̵i̵n̵.̵v̵a̵l̵_̵m̵k̵] at hx hx2
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2025P6.lean:1374:4: The namespace `CirclePartition` is duplicated in the declaration `Usa2025P6.CirclePartition.CirclePartition.cast`.
+
+Note: This linter can be disabled with `set_option linter.dupNamespace false`
+info: Compfiles/Usa2025P6.lean:1488:6: Try this:
+  [apply] abel_nf
+warning: Compfiles/Usa2025P6.lean:1406:54: Variable name `hk` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1408:5: Variable name `hnn` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1408:26: Variable name `hval` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1409:5: Variable name `hla1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1409:28: Variable name `hlam` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1410:5: Variable name `hdij` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1411:5: Variable name `harcval` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1412:5: Variable name `htk` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1415:5: Variable name `hφ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1751:69: Variable name `hmn` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1752:33: Variable name `hnn` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:1753:5: Variable name `hpart` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2025P6.lean:2050:41: Variable name `hm` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (3019 jobs).
