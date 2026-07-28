@@ -6967,3 +6967,327 @@ macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
   `(tactic| push $cfg:optConfig Not $[$loc]?)
 ```
 Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Imo1965P6 (70s)
+warning: Compfiles/Imo1965P6.lean:241:26: Variable name `hCD` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:242:47: Variable name `hBC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:242:68: Variable name `hBD` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:294:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:345:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:353:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:323:22: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo1965P6.lean:328:22: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo1965P6.lean:333:22: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo1965P6.lean:338:22: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo1965P6.lean:437:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:451:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:364:20: Variable name `hAD'` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:364:50: Variable name `hBD'` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:468:5: Variable name `hAC'` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:468:20: Variable name `hAD'` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:468:35: Variable name `hBC'` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:468:50: Variable name `hBD'` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:602:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:611:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:635:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:656:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:703:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:711:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:840:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:845:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:721:5: Variable name `hdXY` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:721:27: Variable name `hdYZ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:726:5: Variable name `hTY` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1965P6.lean:806:69: This simp argument is unused:
+  add_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [crsp_add_right, crsp_smul_right, crsp_self, mul_zero, a̵d̵d̵_̵zero,̵ ̵z̵e̵r̵o̵_add] at h
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1965P6.lean:810:77: This simp argument is unused:
+  zero_add
+
+Hint: Omit it from the simp argument list.
+  simp only [crsp_add_left, crsp_smul_left, crsp_self, mul_zero, add_zero,̵ ̵z̵e̵r̵o̵_̵a̵d̵d̵] at h
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo1965P6.lean:955:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:967:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo1965P6.lean:980:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo1967P2 (30s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo1967P6 (10s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (906 jobs).
+Build completed successfully (2998 jobs).
+✔ [3010/3010] Built Compfiles.Imo1968P4 (5.2s)
+Build completed successfully (3010 jobs).
+Build completed successfully (2999 jobs).
+✔ [3071/3071] Built Compfiles.Imo1969P5 (15s)
+Build completed successfully (3071 jobs).
+⚠ [3081/3081] Built Compfiles.Imo1969P4 (18s)
+warning: Compfiles/Imo1969P4.lean:197:50: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo1969P4.lean:215:50: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Imo1969P4.lean:265:73: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Build completed successfully (3081 jobs).
+✔ [3112/3112] Built Compfiles.Imo1968P1 (55s)
+Build completed successfully (3112 jobs).
+✔ [2998/2998] Built Compfiles.Imo1969P6 (12s)
+Build completed successfully (2998 jobs).
+✔ [3112/3112] Built Compfiles.Imo1970P1 (13s)
+Build completed successfully (3112 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1970P2 (5.1s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2999 jobs).
+Build completed successfully (8656 jobs).
+✔ [3072/3072] Built Compfiles.Imo1969P3 (54s)
+Build completed successfully (3072 jobs).
+✔ [3072/3072] Built Compfiles.Imo1970P5 (10s)
+Build completed successfully (3072 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [3163/3163] Built Compfiles.Imo1971P2 (6.2s)
+Build completed successfully (3163 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (1668 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [3065/3065] Built Compfiles.Imo1973P1 (9.1s)
+Build completed successfully (3065 jobs).
+✔ [3065/3065] Built Compfiles.Imo1972P6 (9.9s)
+Build completed successfully (3065 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2999 jobs).
+✔ [8656/8656] Built Compfiles.Imo1974P2 (18s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1973P2 (50s)
+Build completed successfully (2998 jobs).
+Build completed successfully (957 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1974P6 (4.4s)
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1974P4 (27s)
+Build completed successfully (2998 jobs).
+✔ [3065/3065] Built Compfiles.Imo1975P3 (4.8s)
+Build completed successfully (3065 jobs).
+Build completed successfully (8656 jobs).
+✔ [3066/3066] Built Compfiles.Imo1973P4 (61s)
+Build completed successfully (3066 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo1976P1 (8.9s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1976P5 (5.2s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1977P3 (4.7s)
+Build completed successfully (2998 jobs).
+Build completed successfully (675 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1977P1 (16s)
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo1978P2 (11s)
+Build completed successfully (2998 jobs).
+✔ [3065/3065] Built Compfiles.Imo1978P4 (11s)
+Build completed successfully (3065 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo1976P3 (45s)
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1979P3 (4.0s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1979P1 (14s)
+Build completed successfully (2998 jobs).
+✔ [3073/3073] Built Compfiles.Imo1979P4 (10s)
+Build completed successfully (3073 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (984 jobs).
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo1981P1 (8.9s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo1979P2 (30s)
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+✔ [3002/3002] Built Compfiles.Imo1981P5 (5.9s)
+Build completed successfully (3002 jobs).
+Build completed successfully (2999 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2999 jobs).
