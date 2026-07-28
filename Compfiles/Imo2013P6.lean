@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Data.Fintype.Perm
+import Mathlib.Data.Nat.Totient
+import Mathlib.GroupTheory.DedekindFinite
+import Mathlib.Order.Circular
+import Mathlib.Tactic.Abel
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.LinearCombination.Lemmas
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }
@@ -149,6 +156,52 @@ theorem sbtw_val {N : ℕ} [NeZero N] {a b c : ZMod N} (hab : a ≠ b) :
   rw [key b, key c]
   have hb := ZMod.val_lt b; have hc := ZMod.val_lt c
   by_cases h1 : a.val ≤ b.val <;> by_cases h2 : a.val ≤ c.val <;> simp [h1, h2] <;> omega
+
+/-- If `a.val ≤ c.val`, strict betweenness from `a` to `c` is the plain value
+interval: a single conjunction, avoiding the disjunction blowup in `omega`. -/
+theorem sbtw_of_val_le {N : ℕ} [NeZero N] {a b c : ZMod N} (hac : a.val ≤ c.val) :
+    sbtw a b c ↔ a.val < b.val ∧ b.val < c.val := by
+  rw [sbtw_zmod_def]; omega
+
+/-- If both `b.val` and `c.val` are at most `a.val`, strict betweenness from `a`
+wraps around to below `c`: again a single conjunction. -/
+theorem sbtw_of_val_ge {N : ℕ} [NeZero N] {a b c : ZMod N} (hb : b.val ≤ a.val)
+    (hc : c.val ≤ a.val) : sbtw a b c ↔ b.val < c.val ∧ c.val < a.val := by
+  rw [sbtw_zmod_def]; omega
+
+/-- If `b.val` exceeds both `a.val` and `c.val`, `b` is the top point and strict
+betweenness from `a` to `c` through `b` collapses to one comparison. -/
+theorem sbtw_of_lt_max {N : ℕ} [NeZero N] {a b c : ZMod N} (ha : a.val < b.val)
+    (hc : c.val < b.val) : sbtw a b c ↔ c.val < a.val := by
+  rw [sbtw_zmod_def]; omega
+
+/-- If `b.val` is below both `a.val` and `c.val`, `b` is the bottom point and strict
+betweenness from `a` to `c` through `b` collapses to one comparison. -/
+theorem sbtw_of_gt_min {N : ℕ} [NeZero N] {a b c : ZMod N} (ha : b.val < a.val)
+    (hc : b.val < c.val) : sbtw a b c ↔ b.val < c.val ∧ c.val < a.val := by
+  rw [sbtw_zmod_def]; omega
+
+/-- Strict betweenness with left endpoint `0` is the plain value interval: a single
+conjunction, much cheaper for `omega` than the three-way disjunction. -/
+theorem sbtw_zero_left {N : ℕ} [NeZero N] (u v : ZMod N) :
+    sbtw 0 u v ↔ 0 < u.val ∧ u.val < v.val := by
+  rw [sbtw_zmod_def, ZMod.val_zero]; omega
+
+/-- Strict betweenness with right endpoint `0` collapses to a single conjunction. -/
+theorem sbtw_zero_right {N : ℕ} [NeZero N] (a u : ZMod N) :
+    sbtw a u 0 ↔ 0 < a.val ∧ a.val < u.val := by
+  rw [sbtw_zmod_def, ZMod.val_zero]; omega
+
+/-- Strict betweenness with middle point `0` collapses to a single conjunction. -/
+theorem sbtw_zero_mid {N : ℕ} [NeZero N] (a b : ZMod N) :
+    sbtw a 0 b ↔ 0 < b.val ∧ b.val < a.val := by
+  rw [sbtw_zmod_def, ZMod.val_zero]; omega
+
+/-- If `c.val < a.val`, strict betweenness from `a` wraps around, giving a two-way
+disjunction (cheaper for `omega` than the three-way one). -/
+theorem sbtw_of_val_gt {N : ℕ} [NeZero N] {a b c : ZMod N} (hac : c.val < a.val) :
+    sbtw a b c ↔ b.val < c.val ∨ a.val < b.val := by
+  rw [sbtw_zmod_def]; omega
 
 /-- Translation by `t` preserves strict betweenness. -/
 theorem sbtw_add {N : ℕ} [NeZero N] {a b c : ZMod N} (t : ZMod N) (hab : a ≠ b) :
@@ -382,10 +435,6 @@ theorem circleIncl_cutCircle {n : ℕ} (q : ZMod (n + 2)) (y : {z : ZMod (n + 2)
   have h := (circleIso q).right_inv y
   exact Subtype.ext_iff.mp h
 
-theorem cutCircle_circleIncl {n : ℕ} (q : ZMod (n + 2)) (x : ZMod (n + 1))
-    {h : circleIncl q x ≠ q} : cutCircle q ⟨circleIncl q x, h⟩ = x :=
-  (circleIso q).left_inv x
-
 /-- Strict betweenness preservation of `cutCircle`. -/
 theorem cutCircle_sbtw {n : ℕ} {q : ZMod (n + 2)} (a b c : {z : ZMod (n + 2) // z ≠ q})
     (hab : a.1 ≠ b.1) :
@@ -404,11 +453,6 @@ def labelIncl {n : ℕ} (x : ZMod (n + 1)) : ZMod (n + 2) :=
 
 theorem labelIncl_val {n : ℕ} (x : ZMod (n + 1)) : (labelIncl x).val = x.val :=
   ZMod.val_cast_of_lt (by have := ZMod.val_lt x; omega)
-
-theorem labelIncl_injective {n : ℕ} : Function.Injective (labelIncl : ZMod (n + 1) → ZMod (n + 2)) := by
-  intro x y h
-  apply ZMod.val_injective (n + 1)
-  rw [← labelIncl_val x, ← labelIncl_val y, h]
 
 /-- The largest label `n + 1` as an element of `ZMod (n + 2)`. -/
 def topLabel {n : ℕ} : ZMod (n + 2) :=
@@ -2406,97 +2450,6 @@ theorem linear_count {n : ℕ} (_hn : 2 ≤ n) :
     exact ⟨s, Finset.mem_univ s, Equiv.ext fun x => (hs x).symm⟩
 
 
-/-- Crossing of chords `{q, q + 1 + A}` and `{q + 1 + B, q + 1 + C}` on the circle
-`ZMod (n + 2)` (with `A, B, C` in the lower range) is exactly the condition that
-precisely one of `B, C` is val-below `A`. -/
-theorem crossing_top {n : ℕ} (q A B C : ZMod (n + 2)) (hA : A.val < n + 1)
-    (hB : B.val < n + 1) (hC : C.val < n + 1) :
-    Crossing q (q + 1 + A) (q + 1 + B) (q + 1 + C) ↔
-      ¬ ((B.val < A.val) ↔ (C.val < A.val)) := by
-  unfold Crossing
-  have hqB : q ≠ q + 1 + B := by
-    intro h
-    have h1 : (1 : ZMod (n + 2)) + B = 0 := by linear_combination -h
-    have h2 : ((1 : ZMod (n + 2)) + B).val = (0 : ZMod (n + 2)).val := by rw [h1]
-    have h3 : ((1 : ZMod (n + 2)) + B).val = 1 + B.val := by
-      have e : (1 : ZMod (n + 2)) + B = ((1 + B.val : ℕ) : ZMod (n + 2)) := by
-        conv_lhs => rw [← Nat.cast_one, ← ZMod.natCast_zmod_val B, ← Nat.cast_add]
-      rw [e, ZMod.val_natCast, Nat.mod_eq_of_lt (by omega : 1 + B.val < n + 2)]
-    rw [h3, ZMod.val_zero] at h2
-    omega
-  have hqC : q ≠ q + 1 + C := by
-    intro h
-    have h1 : (1 : ZMod (n + 2)) + C = 0 := by linear_combination -h
-    have h2 : ((1 : ZMod (n + 2)) + C).val = (0 : ZMod (n + 2)).val := by rw [h1]
-    have h3 : ((1 : ZMod (n + 2)) + C).val = 1 + C.val := by
-      have e : (1 : ZMod (n + 2)) + C = ((1 + C.val : ℕ) : ZMod (n + 2)) := by
-        conv_lhs => rw [← Nat.cast_one, ← ZMod.natCast_zmod_val C, ← Nat.cast_add]
-      rw [e, ZMod.val_natCast, Nat.mod_eq_of_lt (by omega : 1 + C.val < n + 2)]
-    rw [h3, ZMod.val_zero] at h2
-    omega
-  have hst1 : sbtw q (q + 1 + B) (q + 1 + A) ↔ sbtw (-1) B A := by
-    rw [← sbtw_add (-(q + 1)) hqB]
-    have e1 : q + 1 + B + -(q + 1) = B := by ring
-    have e2 : q + 1 + A + -(q + 1) = A := by ring
-    have e4 : q + -(q + 1) = -1 := by ring
-    rw [e1, e2, e4]
-  have hst2 : sbtw q (q + 1 + C) (q + 1 + A) ↔ sbtw (-1) C A := by
-    rw [← sbtw_add (-(q + 1)) hqC]
-    have e1 : q + 1 + C + -(q + 1) = C := by ring
-    have e2 : q + 1 + A + -(q + 1) = A := by ring
-    have e4 : q + -(q + 1) = -1 := by ring
-    rw [e1, e2, e4]
-  rw [hst1, hst2]
-  have hnegB : (-1 : ZMod (n + 2)) ≠ B := by
-    intro h
-    have h1 : ((-1 : ZMod (n + 2))).val = B.val := by rw [h]
-    have h5 : ((-1 : ZMod (n + 2))).val = n + 1 := by
-      have h6 : ((-1 : ZMod (n + 2))) = ((n + 1 : ℕ) : ZMod (n + 2)) := by
-        rw [neg_eq_iff_add_eq_zero, ← Nat.cast_one, ← Nat.cast_add]
-        have : 1 + (n + 1) = n + 2 := by omega
-        rw [this, ZMod.natCast_self]
-      rw [h6, ZMod.val_cast_of_lt (by omega : n + 1 < n + 2)]
-    rw [h5] at h1
-    omega
-  have hnegC : (-1 : ZMod (n + 2)) ≠ C := by
-    intro h
-    have h1 : ((-1 : ZMod (n + 2))).val = C.val := by rw [h]
-    have h5 : ((-1 : ZMod (n + 2))).val = n + 1 := by
-      have h6 : ((-1 : ZMod (n + 2))) = ((n + 1 : ℕ) : ZMod (n + 2)) := by
-        rw [neg_eq_iff_add_eq_zero, ← Nat.cast_one, ← Nat.cast_add]
-        have : 1 + (n + 1) = n + 2 := by omega
-        rw [this, ZMod.natCast_self]
-      rw [h6, ZMod.val_cast_of_lt (by omega : n + 1 < n + 2)]
-    rw [h5] at h1
-    omega
-  rw [sbtw_val hnegB, sbtw_val hnegC]
-  have e5 : ∀ X : ZMod (n + 2), X.val < n + 1 → (X - (-1 : ZMod (n + 2))).val = X.val + 1 := by
-    intro X hX
-    have e : X - (-1 : ZMod (n + 2)) = X + 1 := by ring
-    rw [e]
-    have e2 : (X + 1 : ZMod (n + 2)) = ((X.val + 1 : ℕ) : ZMod (n + 2)) := by
-      conv_lhs => rw [← Nat.cast_one, ← ZMod.natCast_zmod_val X, ← Nat.cast_add]
-    rw [e2, ZMod.val_natCast, Nat.mod_eq_of_lt (by omega : X.val + 1 < n + 2)]
-  rw [e5 B hB, e5 A hA, e5 C hC]
-  constructor
-  · intro h1 h2
-    exact h1 (propext (by omega : (B.val + 1 < A.val + 1) ↔ (C.val + 1 < A.val + 1)))
-  · intro h1 h2
-    have h2' : (B.val + 1 < A.val + 1) ↔ (C.val + 1 < A.val + 1) := by
-      rw [h2]
-    exact h1 (by omega)
-
-/-- The insertion validity condition: the rotated arrangement `rot c τ` accepts the
-new label `n + 1` without crossings iff for all labels `a < b < c'` with
-`a + (n + 1) = b + c'`, the position of `a` is not val-strictly between the
-positions of `b` and `c'`. -/
-def ValidInsert {n : ℕ} (τ : ZMod (n + 1) ≃ ZMod (n + 1)) (c : ZMod (n + 1)) : Prop :=
-  ∀ a b c' : ZMod (n + 1), a.val < b.val → b.val < c'.val →
-    a.val + (n + 1) = b.val + c'.val →
-    (((rot c τ) b).val < ((rot c τ) a).val ↔ ((rot c τ) c').val < ((rot c τ) a).val)
-
-
-
 /-! ## N-generic circle machinery (for the aligned-chords claim) -/
 
 def circleInclN {N : ℕ} [NeZero N] [NeZero (N - 1)] (q : ZMod N) (x : ZMod (N - 1)) : ZMod N :=
@@ -2651,10 +2604,6 @@ theorem circleInclN_cutCircleN {N : ℕ} [NeZero N] [NeZero (N - 1)] (q : ZMod N
   have h := (circleIsoN q).right_inv y
   exact Subtype.ext_iff.mp h
 
-theorem cutCircleN_circleInclN {N : ℕ} [NeZero N] [NeZero (N - 1)] (q : ZMod N) (x : ZMod (N - 1))
-    {h : circleInclN q x ≠ q} : cutCircleN q ⟨circleInclN q x, h⟩ = x :=
-  (circleIsoN q).left_inv x
-
 /-- Strict betweenness preservation of `cutCircleN`. -/
 theorem cutCircleN_sbtw {N : ℕ} [NeZero N] [NeZero (N - 1)] {q : ZMod N} (a b c : {z : ZMod N // z ≠ q})
     (hab : a.1 ≠ b.1) :
@@ -2677,25 +2626,12 @@ theorem ChordSep.circleInclN {N : ℕ} [NeZero N] [NeZero (N - 1)] {q : ZMod N}
   unfold ChordSep
   rw [circleInclN_sbtw h1, circleInclN_sbtw h2, circleInclN_sbtw h3, circleInclN_sbtw h4]
 
-/-- `circleInclN` preserves the non-crossing predicate. -/
-theorem ChordNonCross.circleInclN {N : ℕ} [NeZero N] [NeZero (N - 1)] {q : ZMod N}
-    {A B : Chord (N - 1)} (h1 : A.1 ≠ B.1) (h2 : A.1 ≠ B.2) :
-    (sbtw (circleInclN q A.1) (circleInclN q B.1) (circleInclN q A.2) ↔
-      sbtw (circleInclN q A.1) (circleInclN q B.2) (circleInclN q A.2)) ↔
-    (sbtw A.1 B.1 A.2 ↔ sbtw A.1 B.2 A.2) := by
-  rw [circleInclN_sbtw h1, circleInclN_sbtw h2]
-
 /-- Inclusion of labels `[0, n]` into `[0, N - 1]`. -/
 def labelInclN {N : ℕ} [NeZero N] [NeZero (N - 1)] (x : ZMod (N - 1)) : ZMod N :=
   ((x.val : ℕ) : ZMod N)
 
 theorem labelInclN_val {N : ℕ} [NeZero N] [NeZero (N - 1)] (x : ZMod (N - 1)) : (labelInclN x).val = x.val :=
   ZMod.val_cast_of_lt (by have := ZMod.val_lt x; omega)
-
-theorem labelInclN_injective {N : ℕ} [NeZero N] [NeZero (N - 1)] : Function.Injective (labelInclN : ZMod (N - 1) → ZMod N) := by
-  intro x y h
-  apply ZMod.val_injective (N - 1)
-  rw [← labelInclN_val x, ← labelInclN_val y, h]
 
 /-- The largest label `N - 1` as an element of `ZMod N`. -/
 def topLabelN {N : ℕ} [NeZero N] [NeZero (N - 1)] : ZMod N :=
@@ -2719,10 +2655,6 @@ theorem val_lt_of_ne_topN {N : ℕ} [NeZero N] [NeZero (N - 1)] {x : ZMod N} (h 
     rfl
   have := ZMod.val_lt x
   omega
-
-theorem labelInclN_zero {N : ℕ} [NeZero N] [NeZero (N - 1)] : labelInclN (0 : ZMod (N - 1)) = 0 := by
-  unfold labelInclN
-  rw [ZMod.val_zero, Nat.cast_zero]
 
 /-- The equivalence between labels `[0, n]` and non-top labels of `[0, N - 1]`. -/
 def labelInclEquivN {N : ℕ} [NeZero N] [NeZero (N - 1)] : ZMod (N - 1) ≃ {z : ZMod N // z ≠ topLabelN} where
@@ -3137,77 +3069,6 @@ theorem aligned_step_delzero {N : ℕ} [NeZero N] [NeZero (N - 1)] {σ : ZMod N 
   · exact hnal (Or.inr (Or.inl (htr2.mpr h2)))
   · exact hnal (Or.inr (Or.inr (htr3.mpr h3)))
 
-def succLabelEquiv {n : ℕ} : ZMod (n + 1) ≃ {z : ZMod (n + 2) // z ≠ 0} where
-  toFun x := ⟨((x.val + 1 : ℕ) : ZMod (n + 2)), by
-    intro h
-    have h1 : (((x.val + 1 : ℕ) : ZMod (n + 2))).val = (0 : ZMod (n + 2)).val := by rw [h]
-    rw [ZMod.val_natCast, Nat.mod_eq_of_lt (by have := ZMod.val_lt x; omega : x.val + 1 < n + 2),
-      ZMod.val_zero] at h1
-    omega⟩
-  invFun y := ((y.1.val - 1 : ℕ) : ZMod (n + 1))
-  left_inv x := by
-    show ((((x.val + 1 : ℕ) : ZMod (n + 2))).val - 1 : ℕ) = x
-    rw [ZMod.val_natCast, Nat.mod_eq_of_lt (by have := ZMod.val_lt x; omega : x.val + 1 < n + 2)]
-    have := ZMod.val_lt x
-    rw [show x.val + 1 - 1 = x.val from by omega, ZMod.natCast_zmod_val]
-  right_inv y := by
-    apply Subtype.ext
-    show (((y.1.val - 1 : ℕ) : ZMod (n + 1)).val + 1 : ℕ) = y.1
-    have hy : 1 ≤ y.1.val := by
-      have h1 : y.1.val ≠ 0 := by
-        intro he
-        apply y.2
-        apply ZMod.val_injective (n + 2)
-        rw [he, ZMod.val_zero]
-      have := ZMod.val_lt y.1
-      omega
-    rw [ZMod.val_natCast, Nat.mod_eq_of_lt (by have := ZMod.val_lt y.1; omega :
-      y.1.val - 1 < n + 1)]
-    rw [show y.1.val - 1 + 1 = y.1.val from by omega, ZMod.natCast_zmod_val]
-
-/-- Deletion of the label `0` from an arrangement of `[0, n + 1]`, with all other
-labels decreased by `1`, producing an arrangement of `[0, n]`. -/
-def DelZero {n : ℕ} (σ : ZMod (n + 2) ≃ ZMod (n + 2)) : ZMod (n + 1) ≃ ZMod (n + 1) :=
-  succLabelEquiv.trans
-    ((Equiv.subtypeEquiv σ fun _ => not_congr (Equiv.apply_eq_iff_eq σ).symm).trans
-      (circleIso (σ 0)).symm)
-
-
-theorem DelZero_apply {n : ℕ} (σ : ZMod (n + 2) ≃ ZMod (n + 2)) (x : ZMod (n + 1)) :
-    DelZero σ x = cutCircle (σ 0) ⟨σ ((x.val + 1 : ℕ) : ZMod (n + 2)),
-      mt (Equiv.apply_eq_iff_eq σ).mp (by
-        intro h
-        have h1 : (((x.val + 1 : ℕ) : ZMod (n + 2))).val = (0 : ZMod (n + 2)).val := by rw [h]
-        rw [ZMod.val_natCast, Nat.mod_eq_of_lt (by have := ZMod.val_lt x; omega : x.val + 1 < n + 2),
-          ZMod.val_zero] at h1
-        omega)⟩ := by
-  apply ZMod.val_injective (n + 1)
-  rfl
-
-/-- `DelZero` preserves beauty. -/
-theorem DelZero_beautiful {n : ℕ} {σ : ZMod (n + 2) ≃ ZMod (n + 2)} (h : Beautiful σ) :
-    Beautiful (DelZero σ) := by
-  intro a b c d hab hbc hcd hsum hcDel
-  have hv : ∀ x : ZMod (n + 1), (((x.val + 1 : ℕ) : ZMod (n + 2))).val = x.val + 1 := by
-    intro x
-    rw [ZMod.val_natCast, Nat.mod_eq_of_lt (by have := ZMod.val_lt x; omega : x.val + 1 < n + 2)]
-  apply h (((a.val + 1 : ℕ) : ZMod (n + 2))) (((b.val + 1 : ℕ) : ZMod (n + 2)))
-    (((c.val + 1 : ℕ) : ZMod (n + 2))) (((d.val + 1 : ℕ) : ZMod (n + 2)))
-    (by rw [hv, hv]; omega) (by rw [hv, hv]; omega) (by rw [hv, hv]; omega)
-    (by rw [hv, hv, hv, hv]; omega)
-  rw [DelZero_apply, DelZero_apply, DelZero_apply, DelZero_apply] at hcDel
-  unfold Crossing at hcDel ⊢
-  have inj : ∀ x y : ZMod (n + 1), x.val < y.val →
-      σ (((x.val + 1 : ℕ) : ZMod (n + 2))) ≠ σ (((y.val + 1 : ℕ) : ZMod (n + 2))) := by
-    intro x y hxy he
-    have h1 : ((x.val + 1 : ℕ) : ZMod (n + 2)) = ((y.val + 1 : ℕ) : ZMod (n + 2)) := σ.injective he
-    have h2 : (((x.val + 1 : ℕ) : ZMod (n + 2))).val = (((y.val + 1 : ℕ) : ZMod (n + 2))).val := by
-      rw [h1]
-    rw [hv, hv] at h2
-    omega
-  rw [cutCircle_sbtw _ _ _ (inj a b hab), cutCircle_sbtw _ _ _ (inj a c (hab.trans hbc))] at hcDel
-  exact hcDel
-
 /-- The number of canonical `k`-chords is at most the number of possible smaller
 endpoints. -/
 theorem kChords_card_le {N : ℕ} [NeZero N] (σ : ZMod N ≃ ZMod N) (k : ℕ) :
@@ -3345,35 +3206,6 @@ theorem Crossing.swap {N : ℕ} [NeZero N] {p q r s : ZMod N} (hpr : p ≠ r) (h
   · intro h1 h2
     apply h1
     by_cases hX : sbtw q r p <;> by_cases hY : sbtw q s p <;> simp [hX, hY] at h2 ⊢
-
-theorem ne_q_add_one {n : ℕ} (q B : ZMod (n + 2)) (hB : B.val < n + 1) :
-    q + 1 + B ≠ q := by
-  intro h
-  have h1 : (1 : ZMod (n + 2)) + B = 0 := by linear_combination h
-  have h2 : ((1 : ZMod (n + 2)) + B).val = (0 : ZMod (n + 2)).val := by rw [h1]
-  have h3 : ((1 : ZMod (n + 2)) + B).val = 1 + B.val := by
-    have e : (1 : ZMod (n + 2)) + B = ((1 + B.val : ℕ) : ZMod (n + 2)) := by
-      conv_lhs => rw [← Nat.cast_one, ← ZMod.natCast_zmod_val B, ← Nat.cast_add]
-    rw [e, ZMod.val_natCast, Nat.mod_eq_of_lt (by omega : 1 + B.val < n + 2)]
-  rw [h3, ZMod.val_zero] at h2
-  omega
-
-
-/-- `crossing_top` with the arguments of the first chord swapped. -/
-theorem crossing_top' {n : ℕ} (q A B C : ZMod (n + 2)) (hA : A.val < n + 1)
-    (hB : B.val < n + 1) (hC : C.val < n + 1) (hAB : A ≠ B) (hAC : A ≠ C) :
-    Crossing (q + 1 + A) q (q + 1 + B) (q + 1 + C) ↔
-      ¬ ((B.val < A.val) ↔ (C.val < A.val)) := by
-  have hq1 : q + 1 + A ≠ q := ne_q_add_one q A hA
-  have hq2 : q + 1 + B ≠ q := ne_q_add_one q B hB
-  have hq3 : q + 1 + C ≠ q := ne_q_add_one q C hC
-  have hpr : q + 1 + A ≠ q + 1 + B := by
-    intro he
-    exact hAB (add_left_cancel_iff.mp he)
-  have hps : q + 1 + A ≠ q + 1 + C := by
-    intro he
-    exact hAC (add_left_cancel_iff.mp he)
-  rw [Crossing.swap hpr hq2 hq1.symm hps hq3, crossing_top q A B C hA hB hC]
 
 /-- The label-reversing involution `x ↦ m - x` on `[0, m]`, used to reduce the
 `t > m` case of the main claim to the `t < m` case. -/
@@ -4979,190 +4811,6 @@ theorem aligned_kChords : ∀ N : ℕ, ∀ [NeZero N], ∀ σ : ZMod N ≃ ZMod 
           ⟨fun h => htop (Or.inl h), fun h => htop (Or.inr (Or.inl h)),
             fun h => htop (Or.inr (Or.inr h))⟩ hnal
 
-/-- `ChordSep` is preserved (both ways) by the order-embedding `circleIncl`. -/
-theorem ChordSep.circleIncl {n : ℕ} {q : ZMod (n + 2)} {A B C : Chord (n + 1)}
-    (h1 : A.1 ≠ B.1) (h2 : A.1 ≠ B.2) (h3 : A.1 ≠ C.1) (h4 : A.1 ≠ C.2) :
-    ChordSep (circleIncl q A.1, circleIncl q A.2) (circleIncl q B.1, circleIncl q B.2)
-      (circleIncl q C.1, circleIncl q C.2) ↔ ChordSep A B C := by
-  unfold ChordSep
-  rw [circleIncl_sbtw h1, circleIncl_sbtw h2, circleIncl_sbtw h3, circleIncl_sbtw h4]
-
-/-- `ChordNonCrossing`-style non-crossing is preserved by `circleIncl`. -/
-theorem ChordNonCross.circleIncl {n : ℕ} {q : ZMod (n + 2)} {A B : Chord (n + 1)}
-    (h1 : A.1 ≠ B.1) (h2 : A.1 ≠ B.2) :
-    (sbtw (circleIncl q A.1) (circleIncl q B.1) (circleIncl q A.2) ↔
-      sbtw (circleIncl q A.1) (circleIncl q B.2) (circleIncl q A.2)) ↔
-    (sbtw A.1 B.1 A.2 ↔ sbtw A.1 B.2 A.2) := by
-  rw [circleIncl_sbtw h1, circleIncl_sbtw h2]
-
-
-
-
-
-/-- The normalized insertion is beautiful iff the insertion parameter satisfies the
-validity condition. -/
-theorem beautiful_InsertNorm_iff {n : ℕ} (τ : ZMod (n + 1) ≃ ZMod (n + 1))
-    (hτ : Beautiful τ) (c : ZMod (n + 1)) :
-    Beautiful (InsertNorm τ c) ↔ ValidInsert τ c := by
-  have hτ' : Beautiful (rot c τ) := hτ.rot c
-  set q : ZMod (n + 2) := (((n + 1) - ((rot c τ) 0).val : ℕ) : ZMod (n + 2)) with hq
-  have hS : InsertNorm τ c = Insert (rot c τ) q := rfl
-  have eS : ∀ x : ZMod (n + 2), x.val < n + 1 →
-      (Insert (rot c τ) q) x =
-        q + 1 + (((rot c τ) ((x.val : ℕ) : ZMod (n + 1))).val : ZMod (n + 2)) := by
-    intro x hx
-    have hxt : x ≠ topLabel := by
-      intro he
-      rw [he, topLabel_val] at hx
-      omega
-    rw [Insert_apply_ne_top (rot c τ) q hxt]
-    show circleIncl q ((rot c τ) ((labelInclEquiv).symm ⟨x, hxt⟩)) = q + 1 + _
-    rw [show (labelInclEquiv).symm ⟨x, hxt⟩ = ((x.val : ℕ) : ZMod (n + 1)) from rfl]
-    rfl
-  have eS0 : ∀ x : ZMod (n + 1),
-      (Insert (rot c τ) q) ((x.val : ℕ) : ZMod (n + 2)) =
-        q + 1 + (((rot c τ) x).val : ZMod (n + 2)) := by
-    intro x
-    rw [eS ((x.val : ℕ) : ZMod (n + 2)) (by
-      rw [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt x))]
-      exact ZMod.val_lt x)]
-    have e1 : (((x.val : ℕ) : ZMod (n + 2))).val = x.val :=
-      ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt x))
-    rw [e1, ZMod.natCast_zmod_val x]
-  have hval : ∀ y : ZMod (n + 1), ((rot c τ) y).val < n + 2 := by
-    intro y
-    have := ZMod.val_lt ((rot c τ) y)
-    omega
-  have hne : ∀ x y : ZMod (n + 1), x.val < y.val →
-      (((rot c τ) x).val : ZMod (n + 2)) ≠ (((rot c τ) y).val : ZMod (n + 2)) := by
-    intro x y hxy he
-    have h1 : (rot c τ) x = (rot c τ) y := by
-      apply ZMod.val_injective (n + 1)
-      have h2 : (((rot c τ) x).val : ZMod (n + 2)).val =
-          (((rot c τ) y).val : ZMod (n + 2)).val := by rw [he]
-      rwa [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt ((rot c τ) x))),
-        ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt ((rot c τ) y)))] at h2
-    have h3 : x = y := (rot c τ).injective h1
-    rw [h3] at hxy
-    exact absurd hxy (lt_irrefl _)
-  constructor
-  · intro h a b c' hab hbc' hsum
-    have hlt1 : (((a.val : ℕ) : ZMod (n + 2))).val < (((b.val : ℕ) : ZMod (n + 2))).val := by
-      rw [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt a)),
-        ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt b))]
-      exact hab
-    have hlt2 : (((b.val : ℕ) : ZMod (n + 2))).val < (((c'.val : ℕ) : ZMod (n + 2))).val := by
-      rw [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt b)),
-        ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt c'))]
-      exact hbc'
-    have hlt3 : (((c'.val : ℕ) : ZMod (n + 2))).val < (topLabel : ZMod (n + 2)).val := by
-      rw [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt c')), topLabel_val]
-      exact ZMod.val_lt c'
-    have hsum4 : (((a.val : ℕ) : ZMod (n + 2))).val + (topLabel : ZMod (n + 2)).val =
-        (((b.val : ℕ) : ZMod (n + 2))).val + (((c'.val : ℕ) : ZMod (n + 2))).val := by
-      rw [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt a)),
-        ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt b)),
-        ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt c')), topLabel_val]
-      exact hsum
-    have hc := h ((a.val : ℕ) : ZMod (n + 2)) ((b.val : ℕ) : ZMod (n + 2))
-      ((c'.val : ℕ) : ZMod (n + 2)) topLabel hlt1 hlt2 hlt3 hsum4
-    rw [hS, Insert_top, eS0 a, eS0 b, eS0 c'] at hc
-    have hct := crossing_top' q (((rot c τ) a).val : ZMod (n + 2)) (((rot c τ) b).val : ZMod (n + 2))
-      (((rot c τ) c').val : ZMod (n + 2))
-      (by rw [ZMod.val_cast_of_lt (hval a)]; exact ZMod.val_lt _)
-      (by rw [ZMod.val_cast_of_lt (hval b)]; exact ZMod.val_lt _)
-      (by rw [ZMod.val_cast_of_lt (hval c')]; exact ZMod.val_lt _)
-      (hne a b hab) (hne a c' (hab.trans hbc'))
-    rw [ZMod.val_cast_of_lt (hval a), ZMod.val_cast_of_lt (hval b),
-      ZMod.val_cast_of_lt (hval c')] at hct
-    rw [hct] at hc
-    exact not_not.mp hc
-  · intro hV a b c' d' hab hbc' hcd' hsum
-    by_cases hdt : d' = topLabel
-    · subst hdt
-      have hc0 : c'.val < n + 1 := by
-        rw [topLabel_val] at hcd'
-        exact hcd'
-      have hb0 : b.val < n + 1 := by omega
-      have ha0 : a.val < n + 1 := by omega
-      have hlt1 : (((a.val : ℕ) : ZMod (n + 1))).val < (((b.val : ℕ) : ZMod (n + 1))).val := by
-        rw [ZMod.val_cast_of_lt ha0, ZMod.val_cast_of_lt hb0]
-        exact hab
-      have hlt2 : (((b.val : ℕ) : ZMod (n + 1))).val < (((c'.val : ℕ) : ZMod (n + 1))).val := by
-        rw [ZMod.val_cast_of_lt hb0, ZMod.val_cast_of_lt hc0]
-        exact hbc'
-      have hsum' : (((a.val : ℕ) : ZMod (n + 1))).val + (n + 1) =
-          (((b.val : ℕ) : ZMod (n + 1))).val + (((c'.val : ℕ) : ZMod (n + 1))).val := by
-        rw [ZMod.val_cast_of_lt ha0, ZMod.val_cast_of_lt hb0, ZMod.val_cast_of_lt hc0]
-        rw [topLabel_val] at hsum
-        exact hsum
-      have hv := hV ((a.val : ℕ) : ZMod (n + 1)) ((b.val : ℕ) : ZMod (n + 1))
-        ((c'.val : ℕ) : ZMod (n + 1)) hlt1 hlt2 hsum'
-      rw [hS, Insert_top, eS a ha0, eS b hb0, eS c' hc0]
-      have hval0 : ∀ x : ZMod (n + 2), x.val < n + 1 →
-          (((rot c τ) ((x.val : ℕ) : ZMod (n + 1))).val : ZMod (n + 2)).val < n + 1 := by
-        intro x hx
-        rw [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt ((rot c τ) ((x.val : ℕ) : ZMod (n + 1)))))]
-        exact ZMod.val_lt _
-      have hct := crossing_top' q (((rot c τ) ((a.val : ℕ) : ZMod (n + 1))).val : ZMod (n + 2))
-        (((rot c τ) ((b.val : ℕ) : ZMod (n + 1))).val : ZMod (n + 2))
-        (((rot c τ) ((c'.val : ℕ) : ZMod (n + 1))).val : ZMod (n + 2))
-        (hval0 a ha0) (hval0 b hb0) (hval0 c' hc0)
-        (hne ((a.val : ℕ) : ZMod (n + 1)) ((b.val : ℕ) : ZMod (n + 1)) (by
-          rwa [ZMod.val_cast_of_lt ha0, ZMod.val_cast_of_lt hb0]))
-        (hne ((a.val : ℕ) : ZMod (n + 1)) ((c'.val : ℕ) : ZMod (n + 1)) (by
-          rw [ZMod.val_cast_of_lt ha0, ZMod.val_cast_of_lt hc0]
-          exact hab.trans hbc'))
-      rw [ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt ((rot c τ) ((a.val : ℕ) : ZMod (n + 1))))),
-        ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt ((rot c τ) ((b.val : ℕ) : ZMod (n + 1))))),
-        ZMod.val_cast_of_lt (Nat.lt_succ_of_lt (ZMod.val_lt ((rot c τ) ((c'.val : ℕ) : ZMod (n + 1)))))] at hct
-      rw [hct]
-      exact fun h => h hv
-    · have hd0 : d'.val < n + 1 := val_lt_of_ne_top hdt
-      have ha0 : a.val < n + 1 := by have := ZMod.val_lt a; omega
-      have hb0 : b.val < n + 1 := by have := ZMod.val_lt b; omega
-      have hc0 : c'.val < n + 1 := by have := ZMod.val_lt c'; omega
-      have hlt1 : (((a.val : ℕ) : ZMod (n + 1))).val < (((b.val : ℕ) : ZMod (n + 1))).val := by
-        rw [ZMod.val_cast_of_lt (by have := ZMod.val_lt a; omega : a.val < n + 1),
-          ZMod.val_cast_of_lt (by have := ZMod.val_lt b; omega : b.val < n + 1)]
-        exact hab
-      have hlt2 : (((b.val : ℕ) : ZMod (n + 1))).val < (((c'.val : ℕ) : ZMod (n + 1))).val := by
-        rw [ZMod.val_cast_of_lt (by have := ZMod.val_lt b; omega : b.val < n + 1),
-          ZMod.val_cast_of_lt (by have := ZMod.val_lt c'; omega : c'.val < n + 1)]
-        exact hbc'
-      have hlt3 : (((c'.val : ℕ) : ZMod (n + 1))).val < (((d'.val : ℕ) : ZMod (n + 1))).val := by
-        rw [ZMod.val_cast_of_lt (by have := ZMod.val_lt c'; omega : c'.val < n + 1),
-          ZMod.val_cast_of_lt (by have := ZMod.val_lt d'; omega : d'.val < n + 1)]
-        exact hcd'
-      have hsum' : (((a.val : ℕ) : ZMod (n + 1))).val + (((d'.val : ℕ) : ZMod (n + 1))).val =
-          (((b.val : ℕ) : ZMod (n + 1))).val + (((c'.val : ℕ) : ZMod (n + 1))).val := by
-        rw [ZMod.val_cast_of_lt (by have := ZMod.val_lt a; omega : a.val < n + 1),
-          ZMod.val_cast_of_lt (by have := ZMod.val_lt b; omega : b.val < n + 1),
-          ZMod.val_cast_of_lt (by have := ZMod.val_lt c'; omega : c'.val < n + 1),
-          ZMod.val_cast_of_lt (by have := ZMod.val_lt d'; omega : d'.val < n + 1)]
-        exact hsum
-      have hc := hτ' ((a.val : ℕ) : ZMod (n + 1)) ((b.val : ℕ) : ZMod (n + 1))
-        ((c'.val : ℕ) : ZMod (n + 1)) ((d'.val : ℕ) : ZMod (n + 1)) hlt1 hlt2 hlt3 hsum'
-      have hdi : ∀ x y : ZMod (n + 1), x.val < y.val → (rot c τ) x ≠ (rot c τ) y := by
-        intro x y hxy he
-        have h2 : x = y := (rot c τ).injective he
-        rw [h2] at hxy
-        exact absurd hxy (lt_irrefl _)
-      have eS'' : ∀ x : ZMod (n + 2), x.val < n + 1 →
-          (Insert (rot c τ) q) x = circleIncl q ((rot c τ) ((x.val : ℕ) : ZMod (n + 1))) := by
-        intro x hx
-        have hxt : x ≠ topLabel := by
-          intro he
-          rw [he, topLabel_val] at hx
-          omega
-        rw [Insert_apply_ne_top (rot c τ) q hxt]
-        rfl
-      unfold Crossing at hc ⊢
-      rw [hS, eS'' a ha0, eS'' d' hd0, eS'' b hb0, eS'' c' hc0]
-      rw [circleIncl_sbtw (hdi ((a.val : ℕ) : ZMod (n + 1)) ((b.val : ℕ) : ZMod (n + 1)) hlt1),
-        circleIncl_sbtw (hdi ((a.val : ℕ) : ZMod (n + 1)) ((c'.val : ℕ) : ZMod (n + 1)) (hlt1.trans hlt2))]
-      exact hc
-
 /-! ## The parallel extension condition -/
 
 /-- Beauty is equivalent to pairwise non-crossing of every chord family. -/
@@ -5259,8 +4907,18 @@ theorem chordSep_of_sum_zero {N : ℕ} [NeZero N] {b₁ b₂ c₁ c₂ : ZMod N}
   -- the point `0` lies on exactly one of the two `sbtw`-arcs
   have key : ¬ (sbtw b₁ 0 b₂ ↔ sbtw b₁ c₁ b₂) ∨
       ¬ (sbtw c₁ 0 c₂ ↔ sbtw c₁ b₁ c₂) := by
-    simp only [sbtw_zmod_def, ZMod.val_zero]
-    omega
+    by_cases hb : b₁.val ≤ b₂.val <;> by_cases hc : c₁.val ≤ c₂.val
+    · simp only [sbtw_of_val_le hb, sbtw_of_val_le hc, ZMod.val_zero]
+      omega
+    · simp only [sbtw_of_val_le hb,
+        sbtw_of_val_gt (by omega : c₂.val < c₁.val), ZMod.val_zero]
+      omega
+    · simp only [sbtw_of_val_gt (by omega : b₂.val < b₁.val),
+        sbtw_of_val_le hc, ZMod.val_zero]
+      omega
+    · simp only [sbtw_of_val_gt (by omega : b₂.val < b₁.val),
+        sbtw_of_val_gt (by omega : c₂.val < c₁.val), ZMod.val_zero]
+      omega
   rcases key with hkk | hkk
   · refine Or.inl ?_
     by_cases hp : sbtw b₁ 0 b₂ <;> by_cases hq : sbtw b₁ c₁ b₂
@@ -5298,24 +4956,24 @@ theorem chordSep_zero_nested {N : ℕ} [NeZero N] {a : ZMod N} (x₁ x₂ y₁ y
   by_cases hx : x₁.val ≤ x₂.val <;> by_cases hy : y₁.val ≤ y₂.val
   · by_cases hm : x₁.val < y₁.val
     · refine Or.inl (Or.inr ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_le hx, ZMod.val_zero] <;> omega
     · refine Or.inr (Or.inr ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_le hy, ZMod.val_zero] <;> omega
   · by_cases hm : x₁.val < y₂.val
     · refine Or.inl (Or.inr ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_le hx, ZMod.val_zero] <;> omega
     · refine Or.inr (Or.inl ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_gt (by omega : y₂.val < y₁.val), ZMod.val_zero] <;> omega
   · by_cases hm : x₂.val < y₁.val
     · refine Or.inl (Or.inl ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_gt (by omega : x₂.val < x₁.val), ZMod.val_zero] <;> omega
     · refine Or.inr (Or.inr ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_le hy, ZMod.val_zero] <;> omega
   · by_cases hm : x₂.val < y₂.val
     · refine Or.inl (Or.inl ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_gt (by omega : x₂.val < x₁.val), ZMod.val_zero] <;> omega
     · refine Or.inr (Or.inl ⟨?_, ?_, ?_, ?_⟩) <;>
-        simp only [sbtw_zmod_def, ZMod.val_zero] <;> omega
+        simp only [sbtw_of_val_gt (by omega : y₂.val < y₁.val), ZMod.val_zero] <;> omega
 
 /-- Normalized triple lemma: for the chord `A = (0, a)` and two further chords
 `(b₁, b₂)`, `(c₁, c₂)` with the same endpoint-sum `a`, all pairwise disjoint, with
@@ -8034,110 +7692,6 @@ theorem lin_unique {n : ℕ} (hn : 2 ≤ n) {τ : ZMod (n + 1) ≃ ZMod (n + 1)}
       rcases hstar with h1 | ⟨h1, h2⟩
       · omega
       · omega
-/-- A linear labelling is of Type 2: its `(n+1)`-chords have constant endpoint
-position-sum `0`, hence are aligned together with the degenerate chord `{0, 0}`. -/
-theorem lin_type2 {n : ℕ} (hn : 2 ≤ n) {τ : ZMod (n + 1) ≃ ZMod (n + 1)}
-    (hτ : Linear τ) : Type2 τ := by
-  obtain ⟨s, hs⟩ := hτ
-  have hτ0 : τ 0 = 0 := by rw [hs 0, mul_zero]
-  have hsum0 : ∀ A ∈ kChords τ (n + 1), A.1 + A.2 = 0 := by
-    intro A hA
-    obtain ⟨x, y, hsum, hle, hAe⟩ := mem_kChords.mp hA
-    rw [hAe]
-    show (τ x + τ y : ZMod (n + 1)) = 0
-    rw [hs, hs, ← mul_add, show x + y = ((n + 1 : ℕ) : ZMod (n + 1)) from by
-      conv_lhs => rw [← ZMod.natCast_zmod_val x, ← ZMod.natCast_zmod_val y, ← Nat.cast_add]
-      rw [hsum], ZMod.natCast_self, mul_zero]
-  have hsum1 : ∀ A ∈ insert (0, 0) (kChords τ (n + 1)), A.1 + A.2 = 0 := by
-    intro A hA
-    rw [Finset.mem_insert] at hA
-    rcases hA with rfl | hA
-    · show (0 : ZMod (n + 1)) + 0 = 0
-      rw [add_zero]
-    · exact hsum0 A hA
-  have hnc : ChordNonCrossing (insert (0, 0) (kChords τ (n + 1))) := by
-    intro A hA B hB hne
-    rw [Finset.mem_insert] at hA hB
-    rcases hA with rfl | hA
-    · exact ⟨fun h => absurd h sbtw_irrefl_left_right,
-        fun h => absurd h sbtw_irrefl_left_right⟩
-    · rcases hB with rfl | hB
-      · exact Iff.rfl
-      · obtain ⟨x, y, hsumx, hlex, hAe⟩ := mem_kChords.mp hA
-        obtain ⟨u, v, hsumu, hleu, hBe⟩ := mem_kChords.mp hB
-        rw [hAe, hBe]
-        have dAB := kChords_disjoint A hA B hB hne
-        rw [hAe, hBe] at dAB
-        obtain ⟨d1, d2, d3, d4⟩ := dAB
-        have e1 : (0 : ZMod (n + 1)) - τ x = τ y := by
-          have h1 := hsum0 A hA
-          rw [hAe] at h1
-          linear_combination -h1
-        have e2 : (0 : ZMod (n + 1)) - τ u = τ v := by
-          have h1 := hsum0 B hB
-          rw [hBe] at h1
-          linear_combination -h1
-        rw [← e1, ← e2]
-        exact sbtw_sum_const d1 (show (0 : ZMod (n + 1)) - τ u ≠ τ x from by
-          rw [e2]
-          exact d2.symm)
-  have hdj : ChordDisjoint (insert (0, 0) (kChords τ (n + 1))) := by
-    intro A hA B hB hne
-    rw [Finset.mem_insert] at hA hB
-    rcases hA with rfl | hA
-    · rcases hB with rfl | hB
-      · exact absurd rfl hne
-      · obtain ⟨u, v, hsumu, hleu, hBe⟩ := mem_kChords.mp hB
-        rw [hBe]
-        have huv : u ≠ 0 := by
-          intro he
-          have h1 : u.val = 0 := by rw [he, ZMod.val_zero]
-          have h2 := ZMod.val_lt v
-          omega
-        have hvv : v ≠ 0 := by
-          intro he
-          have h1 : v.val = 0 := by rw [he, ZMod.val_zero]
-          have h2 := ZMod.val_lt u
-          omega
-        have hu0 : τ u ≠ 0 := by
-          intro he
-          apply huv
-          have h3 : u = 0 := τ.injective (by rw [he, hτ0])
-          exact h3
-        have hv0 : τ v ≠ 0 := by
-          intro he
-          apply hvv
-          have h3 : v = 0 := τ.injective (by rw [he, hτ0])
-          exact h3
-        exact ⟨fun h => hu0 h.symm, fun h => hv0 h.symm,
-          fun h => hu0 h.symm, fun h => hv0 h.symm⟩
-    · rcases hB with rfl | hB
-      · obtain ⟨u, v, hsumu, hleu, hAe⟩ := mem_kChords.mp hA
-        rw [hAe]
-        have huv : u ≠ 0 := by
-          intro he
-          have h1 : u.val = 0 := by rw [he, ZMod.val_zero]
-          have h2 := ZMod.val_lt v
-          omega
-        have hvv : v ≠ 0 := by
-          intro he
-          have h1 : v.val = 0 := by rw [he, ZMod.val_zero]
-          have h2 := ZMod.val_lt u
-          omega
-        have hu0 : τ u ≠ 0 := by
-          intro he
-          apply huv
-          have h3 : u = 0 := τ.injective (by rw [he, hτ0])
-          exact h3
-        have hv0 : τ v ≠ 0 := by
-          intro he
-          apply hvv
-          have h3 : v = 0 := τ.injective (by rw [he, hτ0])
-          exact h3
-        exact ⟨hu0, hu0, fun h => hv0 h, fun h => hv0 h⟩
-      · exact kChords_disjoint A hA B hB hne
-  exact ChordAligned_of_const_sum hnc hdj hsum1
-
 /-- In a beautiful labelling with `0` fixed, the `n`-chords have constant endpoint
 sum `τ n`: for every label `x`, `τ x + τ (n - x) = τ n`. This is the "second
 parallel family" of the official solution's Type 2 analysis; it needs only beauty,
@@ -8571,8 +8125,17 @@ theorem ExtParallel.sidesAux {n : ℕ} (hn : 2 ≤ n) {τ : ZMod (n + 1) ≃ ZMo
   have hXB3 : X.2.val ≠ B.1.val := fun h => hd.2.2.1 (ZMod.val_injective _ h)
   have hXB4 : X.2.val ≠ B.2.val := fun h => hd.2.2.2 (ZMod.val_injective _ h)
   have hnc := Beautiful.kChords_nonCrossing hτ (n + 1) B hB X hX (Ne.symm hXB)
-  simp only [sbtw_zmod_def] at hnc
-  rcases hBw with ⟨hb1, hb2⟩ | ⟨hb1, hb2⟩ <;> omega
+  rcases hBw with ⟨hb1, hb2⟩ | ⟨hb1, hb2⟩
+  · -- `B.1.val = n`, `B.2.val = w`: both betweennesses wrap to below `w`
+    have hc : B.2.val ≤ B.1.val := by omega
+    have h1 : X.1.val ≤ B.1.val := by omega
+    have h2 : X.2.val ≤ B.1.val := by omega
+    rw [sbtw_of_val_ge h1 hc, sbtw_of_val_ge h2 hc] at hnc
+    omega
+  · -- `B.1.val = w`, `B.2.val = n`: both betweennesses are the plain interval `(w, n)`
+    have hac : B.1.val ≤ B.2.val := by omega
+    rw [sbtw_of_val_le hac, sbtw_of_val_le hac] at hnc
+    omega
 
 /-- The nested lemma: two distinct `(n+1)`-chords on the same side of `B` are
 strictly nested (otherwise `{B, X, Y}` would not be aligned). -/
@@ -8604,23 +8167,180 @@ theorem ExtParallel.nestAux {n : ℕ} (hn : 2 ≤ n) {τ : ZMod (n + 1) ≃ ZMod
   have hXY2 : X.1.val ≠ Y.2.val := fun h => hdXY.2.1 (ZMod.val_injective _ h)
   have hXY3 : X.2.val ≠ Y.1.val := fun h => hdXY.2.2.1 (ZMod.val_injective _ h)
   have hXY4 : X.2.val ≠ Y.2.val := fun h => hdXY.2.2.2 (ZMod.val_injective _ h)
+  have hltX1 := ZMod.val_lt X.1
+  have hltX2 := ZMod.val_lt X.2
+  have hltY1 := ZMod.val_lt Y.1
+  have hltY2 := ZMod.val_lt Y.2
   have hal := aligned_kChords (n + 1) τ hτ (n + 1) B hB X hX Y hY (Ne.symm hXB) hXY
     (Ne.symm hYB)
-  rcases hal with h | h | h
-  · exfalso
-    unfold ChordSep at h
-    simp only [sbtw_zmod_def] at h
-    rcases hBw with ⟨hb1, hb2⟩ | ⟨hb1, hb2⟩ <;> rcases hside with hs | hs <;> omega
-  · refine Or.inr ?_
-    unfold ChordSep at h
-    simp only [sbtw_zmod_def] at h
-    unfold ChordStrictlyInside
-    rcases hBw with ⟨hb1, hb2⟩ | ⟨hb1, hb2⟩ <;> rcases hside with hs | hs <;> omega
-  · refine Or.inl ?_
-    unfold ChordSep at h
-    simp only [sbtw_zmod_def] at h
-    unfold ChordStrictlyInside
-    rcases hBw with ⟨hb1, hb2⟩ | ⟨hb1, hb2⟩ <;> rcases hside with hs | hs <;> omega
+  rcases hBw with ⟨hb1, hb2⟩ | ⟨hb1, hb2⟩
+  · -- `B.1.val = n`, `B.2.val = w`
+    have hB2le : B.2.val ≤ B.1.val := by omega
+    have hX1le : X.1.val ≤ B.1.val := by omega
+    have hX2le : X.2.val ≤ B.1.val := by omega
+    have hY1le : Y.1.val ≤ B.1.val := by omega
+    have hY2le : Y.2.val ≤ B.1.val := by omega
+    have hX1lt : X.1.val < B.1.val := by omega
+    have hX2lt : X.2.val < B.1.val := by omega
+    have hY1lt : Y.1.val < B.1.val := by omega
+    have hY2lt : Y.2.val < B.1.val := by omega
+    rcases hal with h | h | h
+    · exfalso
+      unfold ChordSep at h
+      rw [sbtw_of_val_ge hX1le hB2le, sbtw_of_val_ge hX2le hB2le,
+        sbtw_of_val_ge hY1le hB2le, sbtw_of_val_ge hY2le hB2le] at h
+      rcases hside with hs | hs <;> omega
+    · refine Or.inr ?_
+      unfold ChordSep at h
+      unfold ChordStrictlyInside
+      rw [sbtw_of_lt_max hX1lt hX2lt] at h
+      rcases hside with hs | hs
+      · rw [sbtw_of_lt_max (by omega : X.1.val < B.2.val)
+          (by omega : X.2.val < B.2.val)] at h
+        by_cases hXe : X.1 = X.2
+        · rw [hXe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hXne : X.1.val ≠ X.2.val := fun hh => hXe (ZMod.val_injective _ hh)
+          rcases le_total X.1.val X.2.val with hX12 | hX12
+          · rw [min_eq_left hX12, max_eq_right hX12]
+            simp only [sbtw_of_val_le hX12] at h
+            omega
+          · rw [min_eq_right (by omega : X.2.val ≤ X.1.val),
+              max_eq_left (by omega : X.1.val ≥ X.2.val)]
+            simp only [sbtw_of_val_gt (by omega : X.2.val < X.1.val)] at h
+            omega
+      · rw [sbtw_of_gt_min (by omega : B.2.val < X.1.val)
+          (by omega : B.2.val < X.2.val)] at h
+        by_cases hXe : X.1 = X.2
+        · rw [hXe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hXne : X.1.val ≠ X.2.val := fun hh => hXe (ZMod.val_injective _ hh)
+          rcases le_total X.1.val X.2.val with hX12 | hX12
+          · rw [min_eq_left hX12, max_eq_right hX12]
+            simp only [sbtw_of_val_le hX12] at h
+            omega
+          · rw [min_eq_right (by omega : X.2.val ≤ X.1.val),
+              max_eq_left (by omega : X.1.val ≥ X.2.val)]
+            simp only [sbtw_of_val_gt (by omega : X.2.val < X.1.val)] at h
+            omega
+    · refine Or.inl ?_
+      unfold ChordSep at h
+      unfold ChordStrictlyInside
+      rw [sbtw_of_lt_max hY1lt hY2lt] at h
+      rcases hside with hs | hs
+      · rw [sbtw_of_lt_max (by omega : Y.1.val < B.2.val)
+          (by omega : Y.2.val < B.2.val)] at h
+        by_cases hYe : Y.1 = Y.2
+        · rw [hYe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hYne : Y.1.val ≠ Y.2.val := fun hh => hYe (ZMod.val_injective _ hh)
+          rcases le_total Y.1.val Y.2.val with hY12 | hY12
+          · rw [min_eq_left hY12, max_eq_right hY12]
+            simp only [sbtw_of_val_le hY12] at h
+            omega
+          · rw [min_eq_right (by omega : Y.2.val ≤ Y.1.val),
+              max_eq_left (by omega : Y.1.val ≥ Y.2.val)]
+            simp only [sbtw_of_val_gt (by omega : Y.2.val < Y.1.val)] at h
+            omega
+      · rw [sbtw_of_gt_min (by omega : B.2.val < Y.1.val)
+          (by omega : B.2.val < Y.2.val)] at h
+        by_cases hYe : Y.1 = Y.2
+        · rw [hYe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hYne : Y.1.val ≠ Y.2.val := fun hh => hYe (ZMod.val_injective _ hh)
+          rcases le_total Y.1.val Y.2.val with hY12 | hY12
+          · rw [min_eq_left hY12, max_eq_right hY12]
+            simp only [sbtw_of_val_le hY12] at h
+            omega
+          · rw [min_eq_right (by omega : Y.2.val ≤ Y.1.val),
+              max_eq_left (by omega : Y.1.val ≥ Y.2.val)]
+            simp only [sbtw_of_val_gt (by omega : Y.2.val < Y.1.val)] at h
+            omega
+  · -- `B.1.val = w`, `B.2.val = n`
+    have hB1le : B.1.val ≤ B.2.val := by omega
+    have hX1lt2 : X.1.val < B.2.val := by omega
+    have hX2lt2 : X.2.val < B.2.val := by omega
+    have hY1lt2 : Y.1.val < B.2.val := by omega
+    have hY2lt2 : Y.2.val < B.2.val := by omega
+    rcases hal with h | h | h
+    · exfalso
+      unfold ChordSep at h
+      simp only [sbtw_of_val_le hB1le] at h
+      rcases hside with hs | hs <;> omega
+    · refine Or.inr ?_
+      unfold ChordSep at h
+      unfold ChordStrictlyInside
+      rw [sbtw_of_lt_max hX1lt2 hX2lt2] at h
+      rcases hside with hs | hs
+      · rw [sbtw_of_lt_max (by omega : X.1.val < B.1.val)
+          (by omega : X.2.val < B.1.val)] at h
+        by_cases hXe : X.1 = X.2
+        · rw [hXe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hXne : X.1.val ≠ X.2.val := fun hh => hXe (ZMod.val_injective _ hh)
+          rcases le_total X.1.val X.2.val with hX12 | hX12
+          · rw [min_eq_left hX12, max_eq_right hX12]
+            simp only [sbtw_of_val_le hX12] at h
+            omega
+          · rw [min_eq_right (by omega : X.2.val ≤ X.1.val),
+              max_eq_left (by omega : X.1.val ≥ X.2.val)]
+            simp only [sbtw_of_val_gt (by omega : X.2.val < X.1.val)] at h
+            omega
+      · rw [sbtw_of_gt_min (by omega : B.1.val < X.1.val)
+          (by omega : B.1.val < X.2.val)] at h
+        by_cases hXe : X.1 = X.2
+        · rw [hXe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hXne : X.1.val ≠ X.2.val := fun hh => hXe (ZMod.val_injective _ hh)
+          rcases le_total X.1.val X.2.val with hX12 | hX12
+          · rw [min_eq_left hX12, max_eq_right hX12]
+            simp only [sbtw_of_val_le hX12] at h
+            omega
+          · rw [min_eq_right (by omega : X.2.val ≤ X.1.val),
+              max_eq_left (by omega : X.1.val ≥ X.2.val)]
+            simp only [sbtw_of_val_gt (by omega : X.2.val < X.1.val)] at h
+            omega
+    · refine Or.inl ?_
+      unfold ChordSep at h
+      unfold ChordStrictlyInside
+      rw [sbtw_of_lt_max hY1lt2 hY2lt2] at h
+      rcases hside with hs | hs
+      · rw [sbtw_of_lt_max (by omega : Y.1.val < B.1.val)
+          (by omega : Y.2.val < B.1.val)] at h
+        by_cases hYe : Y.1 = Y.2
+        · rw [hYe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hYne : Y.1.val ≠ Y.2.val := fun hh => hYe (ZMod.val_injective _ hh)
+          rcases le_total Y.1.val Y.2.val with hY12 | hY12
+          · rw [min_eq_left hY12, max_eq_right hY12]
+            simp only [sbtw_of_val_le hY12] at h
+            omega
+          · rw [min_eq_right (by omega : Y.2.val ≤ Y.1.val),
+              max_eq_left (by omega : Y.1.val ≥ Y.2.val)]
+            simp only [sbtw_of_val_gt (by omega : Y.2.val < Y.1.val)] at h
+            omega
+      · rw [sbtw_of_gt_min (by omega : B.1.val < Y.1.val)
+          (by omega : B.1.val < Y.2.val)] at h
+        by_cases hYe : Y.1 = Y.2
+        · rw [hYe] at h
+          simp only [sbtw_zmod_def] at h
+          omega
+        · have hYne : Y.1.val ≠ Y.2.val := fun hh => hYe (ZMod.val_injective _ hh)
+          rcases le_total Y.1.val Y.2.val with hY12 | hY12
+          · rw [min_eq_left hY12, max_eq_right hY12]
+            simp only [sbtw_of_val_le hY12] at h
+            omega
+          · rw [min_eq_right (by omega : Y.2.val ≤ Y.1.val),
+              max_eq_left (by omega : Y.1.val ≥ Y.2.val)]
+            simp only [sbtw_of_val_gt (by omega : Y.2.val < Y.1.val)] at h
+            omega
 
 /-- The rainbow (tower) lemma: a pairwise strictly nested family of chords covering
 a whole value interval `[a, b]`, with all endpoint values in `[a, b]`, is the
@@ -9374,7 +9094,7 @@ theorem beautifulCount_succ {n : ℕ} (hn : 2 ≤ n) :
     (Finset.univ.filter fun τ : ZMod (n + 1) ≃ ZMod (n + 1) => Beautiful τ ∧ τ 0 = 0).sigma
       fun τ => Finset.univ.filter fun c : ZMod (n + 1) => Beautiful (InsertNorm τ c) := by
     ext ⟨τ, c⟩
-    simp [and_assoc]
+    simp only [Finset.mem_filter, Finset.mem_univ, Finset.mem_sigma, true_and, and_assoc]
   rw [hs, Finset.card_sigma]
   have h2 : ∀ τ ∈ (Finset.univ.filter fun τ : ZMod (n + 1) ≃ ZMod (n + 1) =>
         Beautiful τ ∧ τ 0 = 0),
@@ -9407,98 +9127,4 @@ problem imo2013_p6 (n : ℕ) (hn : 3 ≤ n) :
   exact key n (by omega)
 
 end Imo2013P6
-
-/-!
-## PROGRESS NOTES (for the next session resuming this file)
-
-### Status
-
-COMPLETE — zero errors, zero `sorry`. The full proof of
-`imo2013_p6` (`beautifulCount n = pairCount n + 1`) is in place:
-
-- `sbtw`/`btw` on `ZMod (n+1)` via `instCircularOrderZMod`, with the workhorse
-  characterizations `sbtw_zmod_def` (disjunction of val inequalities) and `sbtw_val`
-  (difference formula `(b - a).val < (c - a).val`), plus `sbtw_add` (translation
-  invariance), `sbtw_ne'`, `sbtw_same_arc`, `sbtw_total'`, `card_sbtw_arc`
-  (arc cardinality), `val_sub'`, `val_sub_if`, `val_neg'`.
-- `Beautiful`, `Crossing`, rotation invariance `Beautiful.rot`.
-- The circle-cut isomorphism: `circleIncl q x = q + 1 + x.val` from `ZMod (n+1)` to
-  `ZMod (n+2) \ {q}`, with `circleIncl_sbtw`/`cutCircle_sbtw` (betweenness
-  preservation), `circleIso`, `circleIncl_cutCircle`, `cutCircle_circleIncl`.
-- `Del`/`Insert` (delete/insert the largest label, re-indexing the circle) with
-  `Del_beautiful`, `Del_Insert`, `Insert_Del`, and the normalized variants
-  `DelNorm`/`InsertNorm` with `InsertNorm_zero`, `InsertNorm_DelNorm`,
-  `DelNorm_InsertNorm`, `Del_InsertNorm_zero`.
-- The exact bijection `countEquiv`:
-  normalized beautiful labellings of `[0,n+1]` ≅
-  `{ (τ, c) : τ normalized beautiful on [0,n], c : ZMod (n+1), Beautiful (InsertNorm τ c) }`.
-- `linear_count` PROVED: normalized linear beautiful labellings of `[0,n]` are
-  exactly `APEquiv s` for `s : (ZMod (n+1))ˣ`, counted by `φ(n+1)`
-  (`ZMod.card_units_eq_totient`); `APEquiv_beautiful` via `sbtw_sum_const`
-  (constant endpoint-sum chords are parallel).
-- The chord vocabulary (`Chord`, `ChordSep`, `ChordAligned`, `ChordNonCrossing`,
-  `ChordDisjoint`, `kChords`) and the Claim (`aligned_kChords`): in a beautiful
-  arrangement, for every sum `k` the `k`-chords are aligned (strong induction with
-  delete-top/delete-zero, following the official Solution 1).
-- The structure theorem `const_sum_of_aligned`: an aligned, non-crossing,
-  vertex-disjoint, covering chord family with at most one degenerate chord has
-  constant endpoint-sum; and its strengthening `const_sum_of_aligned_two` to two
-  antipodal degenerate chords — antipodality itself is derived in
-  `two_degenerate_sum_eq` (every other chord separates the two degenerate points,
-  so the partner map swaps the two open arcs, which then have equal cardinality).
-- `ExtParallel τ c` (the `(n+1)`-chords of the inserted arrangement are parallel)
-  is equivalent to `Beautiful (InsertNorm τ c)` (`Beautiful.extParallel`,
-  `ExtParallel.beautiful`); its val form is `ExtParallel.star`.
-- Type 2 ⟺ Linear: `lin_type2` (linear ⟹ Type 2 via `ChordAligned_of_const_sum`)
-  and `type2_lin` (Type 2 ⟹ linear via the two parallel families `sum_kChords_n`,
-  `sum_kChords_succ_of_type2` and the recursion `linear_of_two_sums`; the
-  two-degenerate case of the first family uses `const_sum_of_aligned_two`).
-- Type 1: `ExtParallel.exists` (insert at the gap determined by the partner `w`
-  of position `n`: same-side chords are nested by the Claim — disjoint same-side
-  chords with `B` would form a non-aligned triple — hence form rainbows with
-  constant sums `w` and `n + w` by `rainbow_of_tower`, giving `ExtParallel.two_sums`)
-  and `ExtParallel.unique` (`c = 0` would force Type 2
-  (`type2_of_extParallel_zero`), and nonzero `c` has `c.val = n + 1 - w`
-  (`val_eq_of_extParallel_ne_zero`)).
-- `fiber_count` PROVED: `#{c // Beautiful (InsertNorm τ c)} = if Linear τ then 2 else 1`.
-- `pairCount_succ`, `pairCount_two`, `beautifulCount_two` (the last two by
-  `decide`), `beautifulCount_succ`, and the final induction `imo2013_p6`.
-
-### How the proof goes (map of the official Solution 1 onto the code)
-
-- The recurrence `beautifulCount (n+1) = beautifulCount n + φ(n+1)` comes from
-  `countEquiv` (delete/insert the largest label) summed over the fiber:
-  `fiber_count` says the fiber over a normalized beautiful `τ` has size
-  `2` if `τ` is linear (Type 2) and `1` otherwise (Type 1); `linear_count`
-  says there are exactly `φ(n+1)` linear ones.
-- Type 2 ⟺ Linear: Type 2 means `{0,0}` is aligned with the `(n+1)`-chords.
-  Both the `(n+1)`-chords (with `{0,0}` adjoined) and the `n`-chords are
-  constant-sum families (`const_sum_of_aligned`, resp. `_two` when `n` is odd),
-  giving `τ x + τ (-x) = 0` and `τ x + τ (n - x) = τ n`; the recurrence then
-  forces `τ x = -(τ n) * x` with `-τ n` a unit.
-- Type 1 existence: the `(n+1)`-chords, seen from position `0`, split into two
-  nested "rainbow" towers on the two sides of the chord `B` through position
-  `n`; inserting the new label at the end of `B`'s arc makes the `(n+1)`-chords
-  of the extension parallel (`ExtParallel`), hence the extension beautiful.
-  Uniqueness: the parallel condition on `B` alone forces the insertion value.
-
-### Lean-specific gotchas encountered (do NOT re-learn)
-
-- Represent `ZMod` elements via NAT CASTS `((x.val : ℕ) : ZMod (n+2))`, never
-  anonymous Fin literals `⟨x.val, _⟩` (elaboration/instance mismatches).
-  `ZMod.natCast_zmod_val x : (↑x.val : ZMod n) = x` is the key simplifier.
-- `rw [← ZMod.natCast_zmod_val X]` rewrites ALL `X` including inside `X.val`;
-  use `conv_lhs => congr; rw [...]` to target one occurrence.
-- Rewriting inside subtype literals `⟨elem, ⋯⟩` hits motive/dependent-proof
-  errors; instead `set y := ⟨elem, ⋯⟩ with hy`, or prove a `Subtype.ext` equation
-  between subtype elements and rewrite that.
-- `Equiv.subtypeCongr` + `Equiv.sumCompl_symm_apply_of_pos/neg` (needs explicit
-  `(p := ...)` argument) is the clean way to build `Insert`.
-- `linear_combination`/`ring` work in `ZMod`; `omega` does NOT handle `ZMod`, and
-  it also failed on a propositional `↔` with a free Prop atom — destructure
-  conjunctions manually with exact right-nested tuples.
-- `sbtw_val` needs the hypothesis `a ≠ b` for each call site; watch argument order.
-- `Classical.propDecidable`-based `noncomputable instance` is used for
-  `Decidable (Linear τ)` (needed in `if` inside `fiber_count`'s statement).
--/
 
