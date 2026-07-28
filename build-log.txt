@@ -14424,3 +14424,170 @@ Build completed successfully (2535 jobs).
 Build completed successfully (8656 jobs).
 ✔ [8656/8656] Built Compfiles.Usa2011P6 (9.6s)
 Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2012P1 (13s)
+Build completed successfully (8656 jobs).
+✔ [1870/1870] Built Compfiles.Usa2011P3 (46s)
+Build completed successfully (1870 jobs).
+✔ [8656/8656] Built Compfiles.Usa2012P2 (7.9s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2011P5 (29s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2012P4 (9.1s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2012P3 (15s)
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2012P5 (13s)
+warning: Compfiles/Usa2012P5.lean:165:5: Variable name `hABC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+ℹ [8656/8656] Built Compfiles.Usa2012P6 (13s)
+info: Compfiles/Usa2012P6.lean:131:6: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2013P2 (8.4s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2013P1 (19s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa2013P4 (14s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2013P5 (12s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [971/971] Built Compfiles.Usa2013P3 (42s)
+Build completed successfully (971 jobs).
+✔ [8656/8656] Built Compfiles.Usa2015P2 (14s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2015P3 (13s)
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2014P5 (41s)
+warning: Compfiles/Usa2014P5.lean:50:0: automatically included section variable(s) unused in theorem `Usa2014P5.not_affineIndependent_of_vsub_smul`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2014P5.lean:298:0: automatically included section variable(s) unused in theorem `Usa2014P5.orthocenter_map`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Usa2014P5.lean:509:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2014P5.lean:512:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2014P5.lean:515:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2014P5.lean:518:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2015P4 (8.5s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2014P6 (43s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2015P6 (14s)
+Build completed successfully (8656 jobs).
+✔ [1120/1120] Built Compfiles.Usa2016P1 (21s)
+Build completed successfully (1120 jobs).
+✔ [8656/8656] Built Compfiles.Usa2016P2 (13s)
+Build completed successfully (8656 jobs).
+✔ [2830/2830] Built Compfiles.Usa2016P3 (19s)
+Build completed successfully (2830 jobs).
+Build completed successfully (994 jobs).
+✔ [8656/8656] Built Compfiles.Usa2016P4 (14s)
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2016P6 (20s)
+warning: Compfiles/Usa2016P6.lean:174:15: This simp argument is unused:
+  Fin.val_mk
+
+Hint: Omit it from the simp argument list.
+  simp only ̵[̵F̵i̵n̵.̵v̵a̵l̵_̵m̵k̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2016P6.lean:178:29: This simp argument is unused:
+  Fin.val_mk
+
+Hint: Omit it from the simp argument list.
+  simp only ̵[̵F̵i̵n̵.̵v̵a̵l̵_̵m̵k̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2016P6.lean:203:15: This simp argument is unused:
+  Fin.val_mk
+
+Hint: Omit it from the simp argument list.
+  simp only ̵[̵F̵i̵n̵.̵v̵a̵l̵_̵m̵k̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2016P6.lean:207:29: This simp argument is unused:
+  Fin.val_mk
+
+Hint: Omit it from the simp argument list.
+  simp only ̵[̵F̵i̵n̵.̵v̵a̵l̵_̵m̵k̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2017P2 (19s)
+warning: Compfiles/Usa2017P2.lean:1137:44: Variable name `hm` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+✔ [3110/3110] Built Compfiles.Usa2016P5 (37s)
+Build completed successfully (3110 jobs).
+Build completed successfully (1027 jobs).
+Build completed successfully (3003 jobs).
+✔ [8656/8656] Built Compfiles.Usa2017P4 (18s)
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2017P3 (29s)
+warning: Compfiles/Usa2017P3.lean:375:37: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [ptS, map_div₀, cj_a2mbc ha hb hc, map_sub, map_add, map_mul, map_pow, conj_a ha,
+  ̲  ̲ ̲ ̲conj_b hb, conj_c h̵c̵,̵ ̵m̵a̵p̵_̵o̵f̵N̵a̵t̵]̵h̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2017P3.lean:393:37: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [ptL, map_div₀, cj_2abc ha hb hc, map_add, map_mul, map_pow, conj_a ha, conj_b hb,
+  ̲  ̲ ̲ ̲conj_c h̵c̵,̵ ̵m̵a̵p̵_̵o̵f̵N̵a̵t̵]̵h̲c̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2017P3.lean:806:5: Variable name `hab` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2017P3.lean:806:41: Variable name `hac` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2018P2 (22s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2018P4 (10s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2018P3 (15s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa2017P5 (47s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
