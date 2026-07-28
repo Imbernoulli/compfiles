@@ -1043,3 +1043,792 @@ The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 Build completed successfully (2856 jobs).
+⚠ [1079/1079] Built Compfiles.Usa2009P3 (43s)
+warning: Compfiles/Usa2009P3.lean:1255:24: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:1255:44: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:1255:75: Variable name `hs` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:1404:26: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:1404:46: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:1404:77: Variable name `hs` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:1706:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:1762:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:1817:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:1874:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:1650:5: Variable name `hinj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:1651:5: Variable name `hm` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2157:40: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:2166:16: This simp argument is unused:
+  Int.toNat_of_nonneg h3
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵I̵n̵t̵.̵t̵o̵N̵a̵t̵_̵o̵f̵_̵n̵o̵n̵n̵e̵g̵ ̵h̵3̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:2173:30: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:2173:30: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:2175:30: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:2175:30: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:2177:30: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:2177:30: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:2179:26: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:2354:44: Variable name `hpeγ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2357:35: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:2357:35: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:2399:44: Variable name `huuγ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2453:30: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:2453:30: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:2535:5: Variable name `hinj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2605:25: Variable name `htg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2722:23: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:2722:23: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:2716:19: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:2745:5: Variable name `hinj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2746:5: Variable name `hm` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2746:18: Variable name `hret` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:2859:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3001:27: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:3001:27: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:2948:21: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:2995:21: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:3127:45: Variable name `hodd` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:3139:45: Variable name `hodd` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:3151:45: Variable name `hodd` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:3163:45: Variable name `hodd` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:3180:59: Variable name `m` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:3272:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3331:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3354:23: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:3354:23: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:3347:19: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:3396:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3567:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3579:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3588:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3595:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:4035:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:3978:23: Variable name `hi` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:3983:53: Variable name `hk` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4088:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:4252:10: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:4270:27: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:4270:27: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:4245:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Compfiles/Usa2009P3.lean:4378:13: This simp argument is unused:
+  ne_eq
+
+Hint: Omit it from the simp argument list.
+  simp only [̵n̵e̵_̵e̵q̵,̵ ̵e̵q̵_̵c̵o̵m̵m̵]̵[̲e̲q̲_̲c̲o̲m̲m̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:4427:49: This simp argument is unused:
+  not_not
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_erase, ne_eq, not_and,̵ ̵n̵o̵t̵_̵n̵o̵t̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:4451:55: This simp argument is unused:
+  not_not
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_erase, ne_eq, not_and,̵ ̵n̵o̵t̵_̵n̵o̵t̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:4480:57: Variable name `hcc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4481:7: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4481:27: Variable name `htf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4481:48: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4481:68: Variable name `htg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4482:17: Variable name `hsS` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4482:36: Variable name `hodd` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4482:57: Variable name `hmin` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4483:7: Variable name `hfu` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4483:37: Variable name `hgr` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4484:15: Variable name `hm` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4484:28: Variable name `hsd` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4485:7: Variable name `hinj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4486:7: Variable name `hret` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4487:7: Variable name `hw1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4487:44: Variable name `hw2` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4488:7: Variable name `hwlast` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4489:17: Variable name `hi` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4490:7: Variable name `hprefix` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4492:7: Variable name `hnolv` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4493:7: Variable name `hNi` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4494:7: Variable name `hgap` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:4938:15: Variable name `hs` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5091:20: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5093:13: This simp argument is unused:
+  add_sub_cancel
+
+Hint: Omit it from the simp argument list.
+  simp [crN, a̵d̵d̵_̵s̵u̵b̵_̵c̵a̵n̵c̵e̵l̵,̵ ̵hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:5095:20: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5097:13: This simp argument is unused:
+  add_sub_cancel
+
+Hint: Omit it from the simp argument list.
+  simp [crE, a̵d̵d̵_̵s̵u̵b̵_̵c̵a̵n̵c̵e̵l̵,̵ ̵hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:5221:24: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5221:44: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5229:24: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5229:44: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5262:23: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5262:43: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5385:27: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5385:47: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5429:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:5448:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:5451:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:5454:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:5457:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:5543:13: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5543:33: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:5617:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:5628:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:5671:4: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:5671:4: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:6201:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:6257:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:6312:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:6369:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:6135:5: Variable name `hinj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:6780:77: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:6781:85: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:6851:77: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:6852:85: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:6780:77: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:6781:85: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:6851:77: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:6852:85: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:7089:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:7730:5: Variable name `hinj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:7776:5: Variable name `hinj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8005:17: This simp argument is unused:
+  hm
+
+Hint: Omit it from the simp argument list.
+  simp [hLeft, h̵m̵,̵ ̵Prod.eta]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8005:21: This simp argument is unused:
+  Prod.eta
+
+Hint: Omit it from the simp argument list.
+  simp [hLeft, hm,̵ ̵P̵r̵o̵d̵.̵e̵t̵a̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8008:17: This simp argument is unused:
+  hm
+
+Hint: Omit it from the simp argument list.
+  simp [hLeft, h̵m̵,̵ ̵Prod.eta]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8008:21: This simp argument is unused:
+  Prod.eta
+
+Hint: Omit it from the simp argument list.
+  simp [hLeft, hm,̵ ̵P̵r̵o̵d̵.̵e̵t̵a̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8100:17: This simp argument is unused:
+  min_eq_left (by omega : (w i).1 ≤ (w i).1 + 1)
+
+Hint: Omit it from the simp argument list.
+  simp [hLeft,̵ ̵m̵i̵n̵_̵e̵q̵_̵l̵e̵f̵t̵ ̵(̵b̵y̵ ̵o̵m̵e̵g̵a̵ ̵:̵ ̵(̵w̵ ̵i̵)̵.̵1̵ ̵≤̵ ̵(̵w̵ ̵i̵)̵.̵1̵ ̵+̵ ̵1̵)̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8102:17: This simp argument is unused:
+  min_eq_right (by omega : (w i).1 - 1 ≤ (w i).1)
+
+Hint: Omit it from the simp argument list.
+  simp [hLeft,̵ ̵m̵i̵n̵_̵e̵q̵_̵r̵i̵g̵h̵t̵ ̵(̵b̵y̵ ̵o̵m̵e̵g̵a̵ ̵:̵ ̵(̵w̵ ̵i̵)̵.̵1̵ ̵-̵ ̵1̵ ̵≤̵ ̵(̵w̵ ̵i̵)̵.̵1̵)̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8121:16: This simp argument is unused:
+  hm
+
+Hint: Omit it from the simp argument list.
+  simp [botV, h̵m̵,̵ ̵Prod.eta]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8121:20: This simp argument is unused:
+  Prod.eta
+
+Hint: Omit it from the simp argument list.
+  simp [botV, hm,̵ ̵P̵r̵o̵d̵.̵e̵t̵a̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8124:16: This simp argument is unused:
+  hm
+
+Hint: Omit it from the simp argument list.
+  simp [botV, h̵m̵,̵ ̵Prod.eta]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8124:20: This simp argument is unused:
+  Prod.eta
+
+Hint: Omit it from the simp argument list.
+  simp [botV, hm,̵ ̵P̵r̵o̵d̵.̵e̵t̵a̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8220:16: This simp argument is unused:
+  min_eq_left (by omega : (w i).2 ≤ (w i).2 + 1)
+
+Hint: Omit it from the simp argument list.
+  simp [botV,̵ ̵m̵i̵n̵_̵e̵q̵_̵l̵e̵f̵t̵ ̵(̵b̵y̵ ̵o̵m̵e̵g̵a̵ ̵:̵ ̵(̵w̵ ̵i̵)̵.̵2̵ ̵≤̵ ̵(̵w̵ ̵i̵)̵.̵2̵ ̵+̵ ̵1̵)̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8222:16: This simp argument is unused:
+  min_eq_right (by omega : (w i).2 - 1 ≤ (w i).2)
+
+Hint: Omit it from the simp argument list.
+  simp [botV,̵ ̵m̵i̵n̵_̵e̵q̵_̵r̵i̵g̵h̵t̵ ̵(̵b̵y̵ ̵o̵m̵e̵g̵a̵ ̵:̵ ̵(̵w̵ ̵i̵)̵.̵2̵ ̵-̵ ̵1̵ ̵≤̵ ̵(̵w̵ ̵i̵)̵.̵2̵)̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Usa2009P3.lean:8261:13: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8261:33: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8266:30: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:8266:30: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:8269:13: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8269:33: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8274:30: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Usa2009P3.lean:8274:30: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Usa2009P3.lean:8277:13: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8282:13: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8449:25: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8449:45: Variable name `hg` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8511:22: Variable name `hf` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2009P3.lean:8572:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Usa2009P3.lean:8654:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+Build completed successfully (1079 jobs).
