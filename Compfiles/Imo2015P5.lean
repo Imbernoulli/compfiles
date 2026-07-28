@@ -6,8 +6,9 @@ Authors: David Renshaw
 
 module
 
-public import Mathlib.Tactic
-
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

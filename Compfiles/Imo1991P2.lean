@@ -6,8 +6,14 @@ Authors: Benpigchu
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Nat.ModEq
+public import Mathlib.Tactic.Cases
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

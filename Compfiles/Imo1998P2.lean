@@ -3,10 +3,19 @@ Copyright (c) 2020 Oliver Nash. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Oliver Nash
 -/
+
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Ring.Canonical
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Fintype.Prod
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Rat.Star
+public import Mathlib.Tactic.NoncommRing
+public import Mathlib.Tactic.Ring.RingNF
 public import ProblemExtraction
 
 @[expose] public section

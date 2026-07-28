@@ -6,8 +6,12 @@ Authors: Jeremy Tan
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.EuclideanDomain.Int
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Analysis.Polynomial.Basic
+public import Mathlib.Data.Int.Star
+public import Mathlib.RingTheory.Polynomial.UniqueFactorization
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,8 +6,17 @@ Authors: Roozbeh Yousefzadeh, David Renshaw
 
 module
 
-public import Mathlib.Tactic
-
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Nat.Prime.Defs
+public import Mathlib.Order.Lattice.Nat
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Lemmas
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.IsSquare
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
+public import Mathlib.Tactic.Zify
 public import ProblemExtraction
 
 @[expose] public section

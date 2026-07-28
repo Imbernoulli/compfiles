@@ -6,8 +6,9 @@ Authors: Zheng Yuan
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.MeanInequalities
 public import ProblemExtraction
 
 @[expose] public section

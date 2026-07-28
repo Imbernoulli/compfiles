@@ -6,7 +6,7 @@ Authors: Daniel Liao
 
 module
 
-public import Mathlib
+public import Mathlib.NumberTheory.LegendreSymbol.QuadraticChar.Basic
 public import ProblemExtraction
 
 @[expose] public section

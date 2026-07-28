@@ -6,12 +6,18 @@ Authors: David Renshaw
 
 module
 
-public import Mathlib.Tactic
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Ring.Nat
+public import Mathlib.Data.Finset.Max
 public import Mathlib.Data.Nat.Dist
-
+public import Mathlib.Data.Nat.SuccPred
+public import Mathlib.Order.Interval.Finset.Nat
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
-public section
+@[expose] public section
 
 problem_file { tags := [.Combinatorics] }
 
@@ -64,7 +70,6 @@ end
 snip begin
 
 namespace Imo2018P3
-
 
 /-- Number of rows. -/
 private def NR : ℕ := 2018
@@ -656,7 +661,7 @@ end Imo2018P3
 
 snip end
 
-public section
+@[expose] public section
 
 namespace Imo2018P3
 

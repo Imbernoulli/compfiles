@@ -3,10 +3,12 @@ Copyright (c) 2023 Moritz Firsching. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Moritz Firsching
 -/
+
 module
 
-public import Mathlib.Tactic
-
+public import Mathlib.Analysis.Normed.Ring.Lemmas
+public import Mathlib.LinearAlgebra.Dual.Defs
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

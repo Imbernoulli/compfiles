@@ -3,10 +3,18 @@ Copyright (c) 2026 pacmanboss256. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Pacmanboss256, hillosanation
 -/
+
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.AffineMonoid.UniqueSums
+public import Mathlib.Algebra.MvPolynomial.Nilpotent
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Analysis.SpecialFunctions.Complex.Log
+public import Mathlib.RingTheory.MvPolynomial.Symmetric.NewtonIdentities
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,8 +6,13 @@ Authors: Benpigchu
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.BigOperators.Associated
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
+public import Mathlib.NumberTheory.PrimeCounting
+public import Mathlib.Tactic.Cases
+public import Mathlib.Tactic.NormNum
 public import ProblemExtraction
 
 @[expose] public section

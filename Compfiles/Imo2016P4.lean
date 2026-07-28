@@ -6,7 +6,14 @@ Authors: Benpigchu
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.PNat.Basic
+public import Mathlib.Data.PNat.Interval
+public import Mathlib.Data.Set.Card
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.NormNum.GCD
+public import Mathlib.Tactic.NormNum.Prime
+public import Mathlib.Tactic.Ring.RingNF
 
 public import ProblemExtraction
 

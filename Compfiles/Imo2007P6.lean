@@ -6,8 +6,11 @@ Authors: Markus Rydh, Codex
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.RCLike.Basic
+public import Mathlib.Combinatorics.Nullstellensatz
 public import ProblemExtraction
 
 @[expose] public section

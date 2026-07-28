@@ -6,7 +6,9 @@ Authors: Evan Chen
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
 public import ProblemExtraction
 
 @[expose] public section

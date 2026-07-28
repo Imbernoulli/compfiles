@@ -6,9 +6,11 @@ Authors: Benpigchu
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.FieldTheory.Finite.Basic
+public import Mathlib.NumberTheory.Multiplicity
+public import Mathlib.Tactic.NormNum.Prime
 public import Mathlib.Tactic
-
 public import ProblemExtraction
 
 @[expose] public section

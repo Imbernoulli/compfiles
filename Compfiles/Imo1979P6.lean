@@ -6,8 +6,10 @@ Authors: Constantin Seebach
 
 module
 
-public import Mathlib
-
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions
+public import Mathlib.Combinatorics.SimpleGraph.Walk.Counting
 public import ProblemExtraction
 
 @[expose] public section

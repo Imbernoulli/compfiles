@@ -3,10 +3,16 @@ Copyright (c) 2025 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joseph Myers, Benpigchu
 -/
+
 module
 
-public import Mathlib
-
+public import Mathlib.Combinatorics.Pigeonhole
+public import Mathlib.Combinatorics.SimpleGraph.Acyclic
+public import Mathlib.Data.Set.Card.Arithmetic
+public import Mathlib.Data.SetLike.Fintype
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.Order.Monotone.Monovary
+public import Mathlib.Tactic.Cases
 public import ProblemExtraction
 
 @[expose] public section

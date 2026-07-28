@@ -3,12 +3,16 @@ Copyright (c) 2025 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jia-Jun Ma
 -/
+
 module
 
 public import Mathlib.Data.Nat.Prime.Basic
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Data.Int.Star
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
 public import Mathlib.Tactic.Ring
-
 public import ProblemExtraction
 
 @[expose] public section

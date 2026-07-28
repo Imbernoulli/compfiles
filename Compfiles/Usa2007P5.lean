@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Pacmanboss256
+Authors: Pacmanboss256, Kimi K3
 -/
 
 module
@@ -11,13 +11,15 @@ public import ProblemExtraction
 
 @[expose] public section
 
+problem_file { tags := [.NumberTheory] }
+
 /-!
 # USA Mathematical Olympiad 2007 P5
 Prove that for every nonnegative integer n, the number 7^7^n + 1 is the product of at
 least 2n + 3 (not necessarily distinct) primes.
 -/
 
-namespace USA2007P5
+namespace Usa2007P5
 open Nat
 snip begin
 /-Proof ideas derived from an assortment of posts on https://artofproblemsolving.com/community/c6h145849p825508
@@ -214,4 +216,4 @@ problem usa2007_p5 (n : ℕ) : (primeFactorsList (7^(7^n)+1)).length ≥ 2*n + 3
   omega
 
 
-end USA2007P5
+end Usa2007P5

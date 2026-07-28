@@ -6,8 +6,11 @@ Authors: David Renshaw, Markus Rydh
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.NumberTheory.SiegelsLemma
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
 public import ProblemExtraction
 
 @[expose] public section
