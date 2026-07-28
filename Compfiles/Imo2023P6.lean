@@ -9,6 +9,11 @@ import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
 import Mathlib.Geometry.Euclidean.Circumcenter
 import ProblemExtraction
 
+-- This file's proofs are memory-bound: asynchronous elaboration retains per-tactic
+-- snapshots whose peak exceeds 4 GiB. Elaborating synchronously lowers peak RSS
+-- at the cost of some wall-clock time.
+set_option Elab.async false
+
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
 
@@ -1152,50 +1157,122 @@ lemma scalene_params {A B C A₁ B₁ C₁ : P}
   exact ⟨huv, hdA, hdB⟩
 
 /- Self-contained algebraic lemmas for the main proof. -/
-lemma incAA (u v R : ℝ) : ((-1) * 24 * u * v ^ 4 + 48 * u * v ^ 3 + 144 * u * v + 216 * u + 24 * v ^ 4 + 144 * v ^ 3 + 432 * v - 216) * ((R)^2 + (0)^2) + (12 * R * u ^ 2 * v ^ 4 - 24 * R * u ^ 2 * v ^ 3 - 72 * R * u ^ 2 * v - 108 * R * u ^ 2 - 96 * R * u * v ^ 3 - 288 * R * u * v - 12 * R * v ^ 4 - 72 * R * v ^ 3 - 216 * R * v + 108 * R) * (R) + ((-1) * 4 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 48 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 - 108 * R * u ^ 2 * Real.sqrt 3 - 96 * R * u * v ^ 3 * Real.sqrt 3 - 288 * R * u * v * Real.sqrt 3 - 60 * R * v ^ 4 * Real.sqrt 3 + 72 * R * v ^ 3 * Real.sqrt 3 - 144 * R * v ^ 2 * Real.sqrt 3 + 216 * R * v * Real.sqrt 3 + 108 * R * Real.sqrt 3) * (0) + ((-1) * 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 + 144 * R ^ 2 * u * v - 216 * R ^ 2 * u - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 216 * R ^ 2 * v + 108 * R ^ 2) = 0 := by ring
-lemma incAA1 (u v R : ℝ) : ((-1) * 24 * u * v ^ 4 + 48 * u * v ^ 3 + 144 * u * v + 216 * u + 24 * v ^ 4 + 144 * v ^ 3 + 432 * v - 216) * ((R * (u - 1) / 2)^2 + (0)^2) + (12 * R * u ^ 2 * v ^ 4 - 24 * R * u ^ 2 * v ^ 3 - 72 * R * u ^ 2 * v - 108 * R * u ^ 2 - 96 * R * u * v ^ 3 - 288 * R * u * v - 12 * R * v ^ 4 - 72 * R * v ^ 3 - 216 * R * v + 108 * R) * (R * (u - 1) / 2) + ((-1) * 4 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 48 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 - 108 * R * u ^ 2 * Real.sqrt 3 - 96 * R * u * v ^ 3 * Real.sqrt 3 - 288 * R * u * v * Real.sqrt 3 - 60 * R * v ^ 4 * Real.sqrt 3 + 72 * R * v ^ 3 * Real.sqrt 3 - 144 * R * v ^ 2 * Real.sqrt 3 + 216 * R * v * Real.sqrt 3 + 108 * R * Real.sqrt 3) * (0) + ((-1) * 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 + 144 * R ^ 2 * u * v - 216 * R ^ 2 * u - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 216 * R ^ 2 * v + 108 * R ^ 2) = 0 := by ring
+
+noncomputable def sigAd (u v : ℝ) : ℝ := (-24) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)
+noncomputable def delAd (u v R : ℝ) : ℝ := 12 * R * (u+1) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)
+noncomputable def epsAd (u v R : ℝ) : ℝ := (-4) * R * (v^2+3) * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 + 24 * u * v + 15 * v ^ 2 - 18 * v - 9) * Real.sqrt 3
+noncomputable def phiAd (u v R : ℝ) : ℝ := (-12) * R^2 * (u-1) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)
+noncomputable def sigBd (u v : ℝ) : ℝ := 24 * (u^2+3) * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3)
+noncomputable def delBd (u v R : ℝ) : ℝ := 12 * R * (u^2+3) * (u ^ 2 * v ^ 2 + 7 * u ^ 2 - 4 * u * v ^ 2 + 8 * u * v - 12 * u + 3 * v ^ 2 - 3)
+noncomputable def epsBd (u v R : ℝ) : ℝ := (-4) * R * (u^2+3) * (u*v - 3*u - 3*v - 3) * (u*v + 3*u + 3*v - 3) * Real.sqrt 3
+noncomputable def phiBd (u v R : ℝ) : ℝ := 12 * R^2 * (u^2+3) * (v-1) * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3)
+noncomputable def sigCd (u v : ℝ) : ℝ := 6 * (u-v) * (u*v - u - v - 3)^3
+noncomputable def delCd (u v R : ℝ) : ℝ := 6 * R * (u*v - u - v - 3)^2 * (u ^ 2 * v ^ 2 - u ^ 2 * v + 2 * u ^ 2 - 2 * u * v ^ 2 - 6 * u + v ^ 2 - 3 * v)
+noncomputable def epsCd (u v R : ℝ) : ℝ := (-2) * R * v * (u^2+3) * (v-3) * (u*v - u - v - 3)^2 * Real.sqrt 3
+noncomputable def phiCd (u v R : ℝ) : ℝ := 12 * R^2 * (u-v) * (u+v) * (u*v - u - v - 3)^2
+noncomputable def ald (u v R : ℝ) : ℝ := 288 * R * (u^2+3) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3) * (u ^ 3 * v - u ^ 3 + u ^ 2 * v ^ 2 - u ^ 2 * v - 4 * u * v ^ 2 + 3 * u * v - 15 * u + 3 * v ^ 2 - 3 * v)
+noncomputable def bed (u v R : ℝ) : ℝ := (-96) * R * (u^2+3) * (v^2+3) * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 4 * u ^ 3 * v ^ 3 + 18 * u ^ 3 * v ^ 2 + 12 * u ^ 3 * v - 27 * u ^ 3 - u ^ 2 * v ^ 4 - 18 * u ^ 2 * v ^ 3 - 54 * u ^ 2 * v + 9 * u ^ 2 - 9 * u * v ^ 4 + 12 * u * v ^ 3 + 54 * u * v ^ 2 + 108 * u * v + 27 * u + 9 * v ^ 4 + 9 * v ^ 3 + 63 * v ^ 2 - 81 * v) * Real.sqrt 3
+noncomputable def gad (u v R : ℝ) : ℝ := (-288) * R^2 * (u-v) * (u^2+3) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3) * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3)
+noncomputable def epsA2d (u v R : ℝ) : ℝ := 48 * R^2 * (v^2+3)^2 * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 + 24 * u * v + 15 * v ^ 2 - 18 * v - 9)^2
+noncomputable def be2d (u v R : ℝ) : ℝ := 27648 * R^2 * (u^2+3)^2 * (v^2+3)^2 * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 4 * u ^ 3 * v ^ 3 + 18 * u ^ 3 * v ^ 2 + 12 * u ^ 3 * v - 27 * u ^ 3 - u ^ 2 * v ^ 4 - 18 * u ^ 2 * v ^ 3 - 54 * u ^ 2 * v + 9 * u ^ 2 - 9 * u * v ^ 4 + 12 * u * v ^ 3 + 54 * u * v ^ 2 + 108 * u * v + 27 * u + 9 * v ^ 4 + 9 * v ^ 3 + 63 * v ^ 2 - 81 * v)^2
+noncomputable def beepsd (u v R : ℝ) : ℝ := 1152 * R^2 * (u^2+3) * (v^2+3)^2 * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 4 * u ^ 3 * v ^ 3 + 18 * u ^ 3 * v ^ 2 + 12 * u ^ 3 * v - 27 * u ^ 3 - u ^ 2 * v ^ 4 - 18 * u ^ 2 * v ^ 3 - 54 * u ^ 2 * v + 9 * u ^ 2 - 9 * u * v ^ 4 + 12 * u * v ^ 3 + 54 * u * v ^ 2 + 108 * u * v + 27 * u + 9 * v ^ 4 + 9 * v ^ 3 + 63 * v ^ 2 - 81 * v) * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 + 24 * u * v + 15 * v ^ 2 - 18 * v - 9)
+noncomputable def nn0d (u v R : ℝ) : ℝ := 110592 * R^2 * (u^2+3)^3 * (v^2+3)^3 * (u ^ 6 * v ^ 4 - 8 * u ^ 6 * v ^ 3 + 22 * u ^ 6 * v ^ 2 - 24 * u ^ 6 * v + 9 * u ^ 6 + 2 * u ^ 5 * v ^ 5 - 16 * u ^ 5 * v ^ 4 + 32 * u ^ 5 * v ^ 3 + 12 * u ^ 5 * v ^ 2 - 66 * u ^ 5 * v + 36 * u ^ 5 + u ^ 4 * v ^ 6 - 16 * u ^ 4 * v ^ 5 + 36 * u ^ 4 * v ^ 4 + 132 * u ^ 4 * v ^ 3 - 351 * u ^ 4 * v ^ 2 + 108 * u ^ 4 * v + 90 * u ^ 4 - 8 * u ^ 3 * v ^ 6 + 32 * u ^ 3 * v ^ 5 + 132 * u ^ 3 * v ^ 4 - 696 * u ^ 3 * v ^ 3 + 72 * u ^ 3 * v ^ 2 + 792 * u ^ 3 * v - 324 * u ^ 3 + 22 * u ^ 2 * v ^ 6 + 12 * u ^ 2 * v ^ 5 - 351 * u ^ 2 * v ^ 4 + 72 * u ^ 2 * v ^ 3 + 1836 * u ^ 2 * v ^ 2 - 756 * u ^ 2 * v + 189 * u ^ 2 - 24 * u * v ^ 6 - 66 * u * v ^ 5 + 108 * u * v ^ 4 + 792 * u * v ^ 3 - 756 * u * v ^ 2 - 54 * u * v + 9 * v ^ 6 + 36 * v ^ 5 + 90 * v ^ 4 - 324 * v ^ 3 + 189 * v ^ 2)
+noncomputable def trhod (u v R : ℝ) : ℝ := (-4608) * R^2 * (u^2+3)^2 * (v^2+3)^3 * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 10 * u ^ 3 * v ^ 3 + 24 * u ^ 3 * v ^ 2 - 6 * u ^ 3 * v - 9 * u ^ 3 - u ^ 2 * v ^ 4 + 6 * u ^ 2 * v ^ 3 + 36 * u ^ 2 * v ^ 2 - 54 * u ^ 2 * v + 45 * u ^ 2 - 9 * u * v ^ 4 + 30 * u * v ^ 3 - 108 * u * v ^ 2 + 18 * u * v - 27 * u + 9 * v ^ 4 - 27 * v ^ 3 - 9 * v ^ 2 + 27 * v)
+noncomputable def Rtmp0d (u v R : ℝ) : ℝ := 192 * R^2 * (u^2+3) * (v^2+3)^3 * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 - 6 * u * v ^ 2 + 24 * u * v - 18 * u + 21 * v ^ 2 - 18 * v + 9)
+noncomputable def sqNd (u v R : ℝ) : ℝ := (21233664 * R^4 * (u^2+3)^4 * (v^2+3)^6) * (12 * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)^2 * (-(u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 13 * u ^ 3 * v ^ 3 + 45 * u ^ 3 * v ^ 2 - 51 * u ^ 3 * v + 18 * u ^ 3 - 7 * u ^ 2 * v ^ 4 + 45 * u ^ 2 * v ^ 3 - 90 * u ^ 2 * v ^ 2 + 45 * u ^ 2 * v - 9 * u ^ 2 + 15 * u * v ^ 4 - 51 * u * v ^ 3 + 45 * u * v ^ 2 - 9 * u * v - 9 * v ^ 4 + 18 * v ^ 3 - 9 * v ^ 2)))
+noncomputable def dA2d (u₃ v : ℝ) : ℝ := u₃ * v - u₃ - v - 3
+noncomputable def dB2d (u v u₃ : ℝ) : ℝ := 2 * (u * u₃ - u - u₃ - 3)
+noncomputable def dC2d (u v : ℝ) : ℝ := 2 * (u * v - u - v - 3)
+noncomputable def al2d (u v R : ℝ) : ℝ := (sigCd u v) * (delAd u v R) - (sigAd u v) * (delCd u v R)
+noncomputable def be2pd (u v R : ℝ) : ℝ := (sigCd u v) * (epsAd u v R) - (sigAd u v) * (epsCd u v R)
+noncomputable def ga2d (u v R : ℝ) : ℝ := (sigCd u v) * (phiAd u v R) - (sigAd u v) * (phiCd u v R)
+noncomputable def Sd (u v R : ℝ) : ℝ := Real.sqrt ((sqNd u v R) * (sigAd u v) ^ 2) / (2 * (sigAd u v) ^ 2 * (nn0d u v R))
+noncomputable def caxd (u v R : ℝ) : ℝ := -(delAd u v R) / (2 * (sigAd u v))
+noncomputable def cayd (u v R : ℝ) : ℝ := -(epsAd u v R) / (2 * (sigAd u v))
+noncomputable def ρ'd (u v R : ℝ) : ℝ := (trhod u v R) / (2 * (sigAd u v) * (nn0d u v R))
+noncomputable def Mxd (u v R : ℝ) : ℝ := (caxd u v R) - (ρ'd u v R) * (ald u v R)
+noncomputable def Myd (u v R : ℝ) : ℝ := (cayd u v R) - (ρ'd u v R) * (bed u v R)
+noncomputable def P1xd (u v R : ℝ) : ℝ := (Mxd u v R) - (Sd u v R) * (bed u v R)
+noncomputable def P1yd (u v R : ℝ) : ℝ := (Myd u v R) + (Sd u v R) * (ald u v R)
+noncomputable def P2xd (u v R : ℝ) : ℝ := (Mxd u v R) + (Sd u v R) * (bed u v R)
+noncomputable def P2yd (u v R : ℝ) : ℝ := (Myd u v R) - (Sd u v R) * (ald u v R)
+noncomputable def RA2d (u v R : ℝ) : ℝ := (Rtmp0d u v R) / (4 * (sigAd u v) ^ 2)
+
+lemma incAA (u v R : ℝ) : (sigAd u v) * ((R)^2 + (0)^2) + (delAd u v R) * (R) + (epsAd u v R) * (0) + (phiAd u v R) = 0 := by
+  simp only [sigAd, delAd, epsAd, phiAd]
+  set dA : ℝ := (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3) with hdA
+  ring
+
+lemma incAA1 (u v R : ℝ) : (sigAd u v) * ((R * (u - 1) / 2)^2 + (0)^2) + (delAd u v R) * (R * (u - 1) / 2) + (epsAd u v R) * (0) + (phiAd u v R) = 0 := by
+  simp only [sigAd, delAd, epsAd, phiAd]
+  set dA : ℝ := (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3) with hdA
+  ring
+
 lemma incAA2 (u v u₃ R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3)
     (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) (hdenA2C : (u₃ * v - u₃ - v - 3) ≠ 0) :
-    ((-1) * 24 * u * v ^ 4 + 48 * u * v ^ 3 + 144 * u * v + 216 * u + 24 * v ^ 4 + 144 * v ^ 3 + 432 * v - 216) * (((-R * (u₃ * v - 2 * u₃ - 2 * v + 3)) / (u₃ * v - u₃ - v - 3))^2 + ((Real.sqrt 3 * R * (u₃ - v)) / (u₃ * v - u₃ - v - 3))^2) + (12 * R * u ^ 2 * v ^ 4 - 24 * R * u ^ 2 * v ^ 3 - 72 * R * u ^ 2 * v - 108 * R * u ^ 2 - 96 * R * u * v ^ 3 - 288 * R * u * v - 12 * R * v ^ 4 - 72 * R * v ^ 3 - 216 * R * v + 108 * R) * ((-R * (u₃ * v - 2 * u₃ - 2 * v + 3)) / (u₃ * v - u₃ - v - 3)) + ((-1) * 4 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 48 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 - 108 * R * u ^ 2 * Real.sqrt 3 - 96 * R * u * v ^ 3 * Real.sqrt 3 - 288 * R * u * v * Real.sqrt 3 - 60 * R * v ^ 4 * Real.sqrt 3 + 72 * R * v ^ 3 * Real.sqrt 3 - 144 * R * v ^ 2 * Real.sqrt 3 + 216 * R * v * Real.sqrt 3 + 108 * R * Real.sqrt 3) * ((Real.sqrt 3 * R * (u₃ - v)) / (u₃ * v - u₃ - v - 3)) + ((-1) * 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 + 144 * R ^ 2 * u * v - 216 * R ^ 2 * u - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 216 * R ^ 2 * v + 108 * R ^ 2) = 0 := by
+    (sigAd u v) * (((-R * (u₃ * v - 2 * u₃ - 2 * v + 3)) / (u₃ * v - u₃ - v - 3))^2 + ((Real.sqrt 3 * R * (u₃ - v)) / (u₃ * v - u₃ - v - 3))^2) + (delAd u v R) * ((-R * (u₃ * v - 2 * u₃ - 2 * v + 3)) / (u₃ * v - u₃ - v - 3)) + (epsAd u v R) * ((Real.sqrt 3 * R * (u₃ - v)) / (u₃ * v - u₃ - v - 3)) + (phiAd u v R) = 0 := by
+  simp only [sigAd, delAd, epsAd, phiAd]
   set D : ℝ := (u₃ * v - u₃ - v - 3) with hD
   have hdenD : D ≠ 0 := by rw [hD]; exact hdenA2C
   field_simp [hdenD]
   linear_combination (-12 * R^2 * (v^2+3) * (-2) * (v - 3) * (u*u₃*v^2 - 3*u*u₃ - 2*u*v^2 + u₃*v^2 - 6*u₃*v + 3*u₃ + 6*v)) * hrel + ((-4) * (v^2+3) * R^2 * (u₃ - v) * (u^2*u₃*v^3 - 7*u^2*u₃*v^2 + 15*u^2*u₃*v - 9*u^2*u₃ - u^2*v^3 + 3*u^2*v^2 + 9*u^2*v - 27*u^2 + 30*u*u₃*v^2 - 36*u*u₃*v - 18*u*u₃ - 6*u*v^3 - 12*u*v^2 - 54*u*v + 15*u₃*v^3 - 39*u₃*v^2 - 27*u₃*v + 27*u₃ - 9*v^3 + 9*v^2 + 45*v + 27)) * hw
-lemma incBB (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (24 * u ^ 4 * v - 24 * u ^ 4 - 48 * u ^ 3 * v - 144 * u ^ 3 - 144 * u * v - 432 * u - 216 * v + 216) * ((-R / 2)^2 + (R * Real.sqrt 3 / 2)^2) + (12 * R * u ^ 4 * v ^ 2 + 84 * R * u ^ 4 - 48 * R * u ^ 3 * v ^ 2 + 96 * R * u ^ 3 * v - 144 * R * u ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 216 * R * u ^ 2 - 144 * R * u * v ^ 2 + 288 * R * u * v - 432 * R * u + 108 * R * v ^ 2 - 108 * R) * (-R / 2) + ((-1) * 4 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 4 * Real.sqrt 3 + 96 * R * u ^ 3 * v * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * Real.sqrt 3 + 288 * R * u * v * Real.sqrt 3 + 108 * R * v ^ 2 * Real.sqrt 3 - 108 * R * Real.sqrt 3) * (R * Real.sqrt 3 / 2) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 144 * R ^ 2 * u * v + 216 * R ^ 2 * u - 108 * R ^ 2 * v ^ 2 + 216 * R ^ 2 * v - 108 * R ^ 2) = 0 := by linear_combination ((-1) * 2 * R ^ 2 * u ^ 4 * v ^ 2 + 6 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 + 36 * R ^ 2 * u ^ 3 * v - 36 * R ^ 2 * u ^ 3 + 12 * R ^ 2 * u ^ 2 * v ^ 2 + 36 * R ^ 2 * u ^ 2 + 108 * R ^ 2 * u * v - 108 * R ^ 2 * u + 54 * R ^ 2 * v ^ 2 - 54 * R ^ 2 * v) * hw
-lemma incBB1aux (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (2) * ((24 * u ^ 4 * v - 24 * u ^ 4 - 48 * u ^ 3 * v - 144 * u ^ 3 - 144 * u * v - 432 * u - 216 * v + 216) * ((R * (1 - v) / 4)^2 + (R * Real.sqrt 3 * (v - 1) / 4)^2) + (12 * R * u ^ 4 * v ^ 2 + 84 * R * u ^ 4 - 48 * R * u ^ 3 * v ^ 2 + 96 * R * u ^ 3 * v - 144 * R * u ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 216 * R * u ^ 2 - 144 * R * u * v ^ 2 + 288 * R * u * v - 432 * R * u + 108 * R * v ^ 2 - 108 * R) * (R * (1 - v) / 4) + ((-1) * 4 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 4 * Real.sqrt 3 + 96 * R * u ^ 3 * v * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * Real.sqrt 3 + 288 * R * u * v * Real.sqrt 3 + 108 * R * v ^ 2 * Real.sqrt 3 - 108 * R * Real.sqrt 3) * (R * Real.sqrt 3 * (v - 1) / 4) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 144 * R ^ 2 * u * v + 216 * R ^ 2 * u - 108 * R ^ 2 * v ^ 2 + 216 * R ^ 2 * v - 108 * R ^ 2)) = 0 := by linear_combination (R ^ 2 * u ^ 4 * v ^ 3 - 7 * R ^ 2 * u ^ 4 * v ^ 2 + 27 * R ^ 2 * u ^ 4 * v - 21 * R ^ 2 * u ^ 4 - 6 * R ^ 2 * u ^ 3 * v ^ 3 + 42 * R ^ 2 * u ^ 3 * v ^ 2 - 18 * R ^ 2 * u ^ 3 * v - 18 * R ^ 2 * u ^ 3 + 12 * R ^ 2 * u ^ 2 * v ^ 3 - 12 * R ^ 2 * u ^ 2 * v ^ 2 + 36 * R ^ 2 * u ^ 2 * v - 36 * R ^ 2 * u ^ 2 - 18 * R ^ 2 * u * v ^ 3 + 126 * R ^ 2 * u * v ^ 2 - 54 * R ^ 2 * u * v - 54 * R ^ 2 * u + 27 * R ^ 2 * v ^ 3 + 27 * R ^ 2 * v ^ 2 - 135 * R ^ 2 * v + 81 * R ^ 2) * hw
-lemma incBB1 (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (24 * u ^ 4 * v - 24 * u ^ 4 - 48 * u ^ 3 * v - 144 * u ^ 3 - 144 * u * v - 432 * u - 216 * v + 216) * ((R * (1 - v) / 4)^2 + (R * Real.sqrt 3 * (v - 1) / 4)^2) + (12 * R * u ^ 4 * v ^ 2 + 84 * R * u ^ 4 - 48 * R * u ^ 3 * v ^ 2 + 96 * R * u ^ 3 * v - 144 * R * u ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 216 * R * u ^ 2 - 144 * R * u * v ^ 2 + 288 * R * u * v - 432 * R * u + 108 * R * v ^ 2 - 108 * R) * (R * (1 - v) / 4) + ((-1) * 4 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 4 * Real.sqrt 3 + 96 * R * u ^ 3 * v * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * Real.sqrt 3 + 288 * R * u * v * Real.sqrt 3 + 108 * R * v ^ 2 * Real.sqrt 3 - 108 * R * Real.sqrt 3) * (R * Real.sqrt 3 * (v - 1) / 4) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 144 * R ^ 2 * u * v + 216 * R ^ 2 * u - 108 * R ^ 2 * v ^ 2 + 216 * R ^ 2 * v - 108 * R ^ 2) = 0 := by
+
+lemma incBB (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (sigBd u v) * ((-R / 2)^2 + (R * Real.sqrt 3 / 2)^2) + (delBd u v R) * (-R / 2) + (epsBd u v R) * (R * Real.sqrt 3 / 2) + (phiBd u v R) = 0 := by
+  have hcore : (2*v+2) * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3)
+      = (u^2*v^2 + 7*u^2 - 4*u*v^2 + 8*u*v - 12*u + 3*v^2 - 3) + (u*v - 3*u - 3*v - 3)*(u*v + 3*u + 3*v - 3) := by ring
+  simp only [sigBd, delBd, epsBd, phiBd]
+  linear_combination (2 * R^2 * (u^2+3) * (3 * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3) - (u*v - 3*u - 3*v - 3)*(u*v + 3*u + 3*v - 3))) * hw + (6 * R^2 * (u^2+3)) * hcore
+
+lemma incBB1aux (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (2) * ((sigBd u v) * ((R * (1 - v) / 4)^2 + (R * Real.sqrt 3 * (v - 1) / 4)^2) + (delBd u v R) * (R * (1 - v) / 4) + (epsBd u v R) * (R * Real.sqrt 3 * (v - 1) / 4) + (phiBd u v R)) = 0 := by
+  simp only [sigBd, delBd, epsBd, phiBd]
+  linear_combination (R^2 * (u^2+3) * (v - 1) * (u^2*v^2 - 6*u^2*v + 21*u^2 - 6*u*v^2 + 36*u*v + 18*u + 9*v^2 + 18*v - 27)) * hw
+
+lemma incBB1 (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (sigBd u v) * ((R * (1 - v) / 4)^2 + (R * Real.sqrt 3 * (v - 1) / 4)^2) + (delBd u v R) * (R * (1 - v) / 4) + (epsBd u v R) * (R * Real.sqrt 3 * (v - 1) / 4) + (phiBd u v R) = 0 := by
   have h := incBB1aux u v R hw
   rcases mul_eq_zero.1 h with h2 | h2
   · norm_num at h2
   · exact h2
+
 lemma incBB2 (u v u₃ R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3)
     (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) (hdenB2C : (2 * (u * u₃ - u - u₃ - 3)) ≠ 0) :
-    (24 * u ^ 4 * v - 24 * u ^ 4 - 48 * u ^ 3 * v - 144 * u ^ 3 - 144 * u * v - 432 * u - 216 * v + 216) * (((R * (u * u₃ - 5 * u + u₃ + 3)) / (2 * (u * u₃ - u - u₃ - 3)))^2 + ((-Real.sqrt 3 * R * (u - 3) * (u₃ - 1)) / (2 * (u * u₃ - u - u₃ - 3)))^2) + (12 * R * u ^ 4 * v ^ 2 + 84 * R * u ^ 4 - 48 * R * u ^ 3 * v ^ 2 + 96 * R * u ^ 3 * v - 144 * R * u ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 216 * R * u ^ 2 - 144 * R * u * v ^ 2 + 288 * R * u * v - 432 * R * u + 108 * R * v ^ 2 - 108 * R) * ((R * (u * u₃ - 5 * u + u₃ + 3)) / (2 * (u * u₃ - u - u₃ - 3))) + ((-1) * 4 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 4 * Real.sqrt 3 + 96 * R * u ^ 3 * v * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * Real.sqrt 3 + 288 * R * u * v * Real.sqrt 3 + 108 * R * v ^ 2 * Real.sqrt 3 - 108 * R * Real.sqrt 3) * ((-Real.sqrt 3 * R * (u - 3) * (u₃ - 1)) / (2 * (u * u₃ - u - u₃ - 3))) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 144 * R ^ 2 * u * v + 216 * R ^ 2 * u - 108 * R ^ 2 * v ^ 2 + 216 * R ^ 2 * v - 108 * R ^ 2) = 0 := by
+    (sigBd u v) * (((R * (u * u₃ - 5 * u + u₃ + 3)) / (2 * (u * u₃ - u - u₃ - 3)))^2 + ((-Real.sqrt 3 * R * (u - 3) * (u₃ - 1)) / (2 * (u * u₃ - u - u₃ - 3)))^2) + (delBd u v R) * ((R * (u * u₃ - 5 * u + u₃ + 3)) / (2 * (u * u₃ - u - u₃ - 3))) + (epsBd u v R) * ((-Real.sqrt 3 * R * (u - 3) * (u₃ - 1)) / (2 * (u * u₃ - u - u₃ - 3))) + (phiBd u v R) = 0 := by
+  simp only [sigBd, delBd, epsBd, phiBd]
   set D : ℝ := (2 * (u * u₃ - u - u₃ - 3)) with hD
   have hdenD : D ≠ 0 := by rw [hD]; exact hdenB2C
   field_simp [hdenD]
   linear_combination ((-96) * R^2 * (u - 3) * (u^2+3) * (u^2*u₃*v + u^2*u₃ - 2*u^2*v - 6*u*u₃ + 6*u - 3*u₃*v + 3*u₃)) * hrel + (8 * R^2 * (u - 3) * (u^2+3) * (u₃ - 1) * (u^3*u₃*v^2 + 3*u^3*u₃*v - 12*u^3*u₃ - u^3*v^2 - 3*u^3*v + 12*u^3 - u^2*u₃*v^2 - 39*u^2*u₃*v - 3*u^2*v^2 + 39*u^2*v + 36*u^2 - 9*u*u₃*v^2 + 33*u*u₃*v + 72*u*u₃ + 9*u*v^2 + 63*u*v - 72*u + 9*u₃*v^2 + 27*u₃*v - 36*u₃ + 27*v^2 - 27*v)) * hw
-lemma incCCaux (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (2) * ((6 * u ^ 4 * v ^ 3 - 18 * u ^ 4 * v ^ 2 + 18 * u ^ 4 * v - 6 * u ^ 4 - 6 * u ^ 3 * v ^ 4 - 36 * u ^ 3 * v ^ 2 + 96 * u ^ 3 * v - 54 * u ^ 3 + 18 * u ^ 2 * v ^ 4 + 36 * u ^ 2 * v ^ 3 + 108 * u ^ 2 * v - 162 * u ^ 2 - 18 * u * v ^ 4 - 96 * u * v ^ 3 - 108 * u * v ^ 2 - 162 * u + 6 * v ^ 4 + 54 * v ^ 3 + 162 * v ^ 2 + 162 * v) * ((-R / 2)^2 + (-R * Real.sqrt 3 / 2)^2) + (6 * R * u ^ 4 * v ^ 4 - 18 * R * u ^ 4 * v ^ 3 + 30 * R * u ^ 4 * v ^ 2 - 30 * R * u ^ 4 * v + 12 * R * u ^ 4 - 24 * R * u ^ 3 * v ^ 4 + 12 * R * u ^ 3 * v ^ 3 - 12 * R * u ^ 3 * v ^ 2 - 12 * R * u ^ 3 * v + 36 * R * u ^ 3 + 36 * R * u ^ 2 * v ^ 4 + 48 * R * u ^ 2 * v ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 144 * R * u ^ 2 * v - 108 * R * u ^ 2 - 24 * R * u * v ^ 4 - 60 * R * u * v ^ 3 - 36 * R * u * v ^ 2 - 324 * R * u * v - 324 * R * u + 6 * R * v ^ 4 + 18 * R * v ^ 3 - 54 * R * v ^ 2 - 162 * R * v) * (-R / 2) + ((-1) * 2 * R * u ^ 4 * v ^ 4 * Real.sqrt 3 + 10 * R * u ^ 4 * v ^ 3 * Real.sqrt 3 - 14 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 6 * R * u ^ 4 * v * Real.sqrt 3 + 4 * R * u ^ 3 * v ^ 4 * Real.sqrt 3 - 4 * R * u ^ 3 * v ^ 3 * Real.sqrt 3 - 36 * R * u ^ 3 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 3 * v * Real.sqrt 3 - 8 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 + 12 * R * u * v ^ 4 * Real.sqrt 3 - 12 * R * u * v ^ 3 * Real.sqrt 3 - 108 * R * u * v ^ 2 * Real.sqrt 3 + 108 * R * u * v * Real.sqrt 3 - 6 * R * v ^ 4 * Real.sqrt 3 - 18 * R * v ^ 3 * Real.sqrt 3 + 54 * R * v ^ 2 * Real.sqrt 3 + 162 * R * v * Real.sqrt 3) * (-R * Real.sqrt 3 / 2) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 108 * R ^ 2 * v ^ 2)) = 0 := by linear_combination (2 * R ^ 2 * u ^ 4 * v ^ 4 - 7 * R ^ 2 * u ^ 4 * v ^ 3 + 5 * R ^ 2 * u ^ 4 * v ^ 2 + 3 * R ^ 2 * u ^ 4 * v - 3 * R ^ 2 * u ^ 4 - 7 * R ^ 2 * u ^ 3 * v ^ 4 + 4 * R ^ 2 * u ^ 3 * v ^ 3 + 18 * R ^ 2 * u ^ 3 * v ^ 2 + 12 * R ^ 2 * u ^ 3 * v - 27 * R ^ 2 * u ^ 3 + 17 * R ^ 2 * u ^ 2 * v ^ 4 - 6 * R ^ 2 * u ^ 2 * v ^ 3 + 24 * R ^ 2 * u ^ 2 * v ^ 2 - 18 * R ^ 2 * u ^ 2 * v - 81 * R ^ 2 * u ^ 2 - 21 * R ^ 2 * u * v ^ 4 - 36 * R ^ 2 * u * v ^ 3 + 54 * R ^ 2 * u * v ^ 2 - 108 * R ^ 2 * u * v - 81 * R ^ 2 * u + 9 * R ^ 2 * v ^ 4 + 45 * R ^ 2 * v ^ 3 + 27 * R ^ 2 * v ^ 2 - 81 * R ^ 2 * v) * hw
-lemma incCC (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (6 * u ^ 4 * v ^ 3 - 18 * u ^ 4 * v ^ 2 + 18 * u ^ 4 * v - 6 * u ^ 4 - 6 * u ^ 3 * v ^ 4 - 36 * u ^ 3 * v ^ 2 + 96 * u ^ 3 * v - 54 * u ^ 3 + 18 * u ^ 2 * v ^ 4 + 36 * u ^ 2 * v ^ 3 + 108 * u ^ 2 * v - 162 * u ^ 2 - 18 * u * v ^ 4 - 96 * u * v ^ 3 - 108 * u * v ^ 2 - 162 * u + 6 * v ^ 4 + 54 * v ^ 3 + 162 * v ^ 2 + 162 * v) * ((-R / 2)^2 + (-R * Real.sqrt 3 / 2)^2) + (6 * R * u ^ 4 * v ^ 4 - 18 * R * u ^ 4 * v ^ 3 + 30 * R * u ^ 4 * v ^ 2 - 30 * R * u ^ 4 * v + 12 * R * u ^ 4 - 24 * R * u ^ 3 * v ^ 4 + 12 * R * u ^ 3 * v ^ 3 - 12 * R * u ^ 3 * v ^ 2 - 12 * R * u ^ 3 * v + 36 * R * u ^ 3 + 36 * R * u ^ 2 * v ^ 4 + 48 * R * u ^ 2 * v ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 144 * R * u ^ 2 * v - 108 * R * u ^ 2 - 24 * R * u * v ^ 4 - 60 * R * u * v ^ 3 - 36 * R * u * v ^ 2 - 324 * R * u * v - 324 * R * u + 6 * R * v ^ 4 + 18 * R * v ^ 3 - 54 * R * v ^ 2 - 162 * R * v) * (-R / 2) + ((-1) * 2 * R * u ^ 4 * v ^ 4 * Real.sqrt 3 + 10 * R * u ^ 4 * v ^ 3 * Real.sqrt 3 - 14 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 6 * R * u ^ 4 * v * Real.sqrt 3 + 4 * R * u ^ 3 * v ^ 4 * Real.sqrt 3 - 4 * R * u ^ 3 * v ^ 3 * Real.sqrt 3 - 36 * R * u ^ 3 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 3 * v * Real.sqrt 3 - 8 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 + 12 * R * u * v ^ 4 * Real.sqrt 3 - 12 * R * u * v ^ 3 * Real.sqrt 3 - 108 * R * u * v ^ 2 * Real.sqrt 3 + 108 * R * u * v * Real.sqrt 3 - 6 * R * v ^ 4 * Real.sqrt 3 - 18 * R * v ^ 3 * Real.sqrt 3 + 54 * R * v ^ 2 * Real.sqrt 3 + 162 * R * v * Real.sqrt 3) * (-R * Real.sqrt 3 / 2) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 108 * R ^ 2 * v ^ 2) = 0 := by
+
+lemma incCCaux (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (2) * ((sigCd u v) * ((-R / 2)^2 + (-R * Real.sqrt 3 / 2)^2) + (delCd u v R) * (-R / 2) + (epsCd u v R) * (-R * Real.sqrt 3 / 2) + (phiCd u v R)) = 0 := by
+  simp only [sigCd, delCd, epsCd, phiCd]
+  linear_combination (R^2 * (u*v - u - v - 3)^2 * (2*u^2*v^2 - 3*u^2*v - 3*u^2 - 3*u*v^2 - 9*u + 9*v^2 - 9*v)) * hw
+
+lemma incCC (u v R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3) : (sigCd u v) * ((-R / 2)^2 + (-R * Real.sqrt 3 / 2)^2) + (delCd u v R) * (-R / 2) + (epsCd u v R) * (-R * Real.sqrt 3 / 2) + (phiCd u v R) = 0 := by
   have h := incCCaux u v R hw
   rcases mul_eq_zero.1 h with h2 | h2
   · norm_num at h2
   · exact h2
+
 lemma incCC1aux (u v u₃ R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3)
-    (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) : (8) * ((6 * u ^ 4 * v ^ 3 - 18 * u ^ 4 * v ^ 2 + 18 * u ^ 4 * v - 6 * u ^ 4 - 6 * u ^ 3 * v ^ 4 - 36 * u ^ 3 * v ^ 2 + 96 * u ^ 3 * v - 54 * u ^ 3 + 18 * u ^ 2 * v ^ 4 + 36 * u ^ 2 * v ^ 3 + 108 * u ^ 2 * v - 162 * u ^ 2 - 18 * u * v ^ 4 - 96 * u * v ^ 3 - 108 * u * v ^ 2 - 162 * u + 6 * v ^ 4 + 54 * v ^ 3 + 162 * v ^ 2 + 162 * v) * ((R * (1 - u₃) / 4)^2 + (R * Real.sqrt 3 * (1 - u₃) / 4)^2) + (6 * R * u ^ 4 * v ^ 4 - 18 * R * u ^ 4 * v ^ 3 + 30 * R * u ^ 4 * v ^ 2 - 30 * R * u ^ 4 * v + 12 * R * u ^ 4 - 24 * R * u ^ 3 * v ^ 4 + 12 * R * u ^ 3 * v ^ 3 - 12 * R * u ^ 3 * v ^ 2 - 12 * R * u ^ 3 * v + 36 * R * u ^ 3 + 36 * R * u ^ 2 * v ^ 4 + 48 * R * u ^ 2 * v ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 144 * R * u ^ 2 * v - 108 * R * u ^ 2 - 24 * R * u * v ^ 4 - 60 * R * u * v ^ 3 - 36 * R * u * v ^ 2 - 324 * R * u * v - 324 * R * u + 6 * R * v ^ 4 + 18 * R * v ^ 3 - 54 * R * v ^ 2 - 162 * R * v) * (R * (1 - u₃) / 4) + ((-1) * 2 * R * u ^ 4 * v ^ 4 * Real.sqrt 3 + 10 * R * u ^ 4 * v ^ 3 * Real.sqrt 3 - 14 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 6 * R * u ^ 4 * v * Real.sqrt 3 + 4 * R * u ^ 3 * v ^ 4 * Real.sqrt 3 - 4 * R * u ^ 3 * v ^ 3 * Real.sqrt 3 - 36 * R * u ^ 3 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 3 * v * Real.sqrt 3 - 8 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 + 12 * R * u * v ^ 4 * Real.sqrt 3 - 12 * R * u * v ^ 3 * Real.sqrt 3 - 108 * R * u * v ^ 2 * Real.sqrt 3 + 108 * R * u * v * Real.sqrt 3 - 6 * R * v ^ 4 * Real.sqrt 3 - 18 * R * v ^ 3 * Real.sqrt 3 + 54 * R * v ^ 2 * Real.sqrt 3 + 162 * R * v * Real.sqrt 3) * (R * Real.sqrt 3 * (1 - u₃) / 4) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 108 * R ^ 2 * v ^ 2)) = 0 := by linear_combination (3 * R ^ 2 * u ^ 4 * u₃ ^ 2 * v ^ 3 - 9 * R ^ 2 * u ^ 4 * u₃ ^ 2 * v ^ 2 + 9 * R ^ 2 * u ^ 4 * u₃ ^ 2 * v - 3 * R ^ 2 * u ^ 4 * u₃ ^ 2 + 4 * R ^ 2 * u ^ 4 * u₃ * v ^ 4 - 26 * R ^ 2 * u ^ 4 * u₃ * v ^ 3 + 46 * R ^ 2 * u ^ 4 * u₃ * v ^ 2 - 30 * R ^ 2 * u ^ 4 * u₃ * v + 6 * R ^ 2 * u ^ 4 * u₃ - 4 * R ^ 2 * u ^ 4 * v ^ 4 + 23 * R ^ 2 * u ^ 4 * v ^ 3 - 37 * R ^ 2 * u ^ 4 * v ^ 2 + 21 * R ^ 2 * u ^ 4 * v - 3 * R ^ 2 * u ^ 4 - 3 * R ^ 2 * u ^ 3 * u₃ ^ 2 * v ^ 4 - 18 * R ^ 2 * u ^ 3 * u₃ ^ 2 * v ^ 2 + 48 * R ^ 2 * u ^ 3 * u₃ ^ 2 * v - 27 * R ^ 2 * u ^ 3 * u₃ ^ 2 - 2 * R ^ 2 * u ^ 3 * u₃ * v ^ 4 + 8 * R ^ 2 * u ^ 3 * u₃ * v ^ 3 + 108 * R ^ 2 * u ^ 3 * u₃ * v ^ 2 - 168 * R ^ 2 * u ^ 3 * u₃ * v + 54 * R ^ 2 * u ^ 3 * u₃ + 5 * R ^ 2 * u ^ 3 * v ^ 4 - 8 * R ^ 2 * u ^ 3 * v ^ 3 - 90 * R ^ 2 * u ^ 3 * v ^ 2 + 120 * R ^ 2 * u ^ 3 * v - 27 * R ^ 2 * u ^ 3 + 9 * R ^ 2 * u ^ 2 * u₃ ^ 2 * v ^ 4 + 18 * R ^ 2 * u ^ 2 * u₃ ^ 2 * v ^ 3 + 54 * R ^ 2 * u ^ 2 * u₃ ^ 2 * v - 81 * R ^ 2 * u ^ 2 * u₃ ^ 2 - 2 * R ^ 2 * u ^ 2 * u₃ * v ^ 4 - 84 * R ^ 2 * u ^ 2 * u₃ * v ^ 3 + 48 * R ^ 2 * u ^ 2 * u₃ * v ^ 2 - 252 * R ^ 2 * u ^ 2 * u₃ * v + 162 * R ^ 2 * u ^ 2 * u₃ - 7 * R ^ 2 * u ^ 2 * v ^ 4 + 66 * R ^ 2 * u ^ 2 * v ^ 3 - 48 * R ^ 2 * u ^ 2 * v ^ 2 + 198 * R ^ 2 * u ^ 2 * v - 81 * R ^ 2 * u ^ 2 - 9 * R ^ 2 * u * u₃ ^ 2 * v ^ 4 - 48 * R ^ 2 * u * u₃ ^ 2 * v ^ 3 - 54 * R ^ 2 * u * u₃ ^ 2 * v ^ 2 - 81 * R ^ 2 * u * u₃ ^ 2 - 6 * R ^ 2 * u * u₃ * v ^ 4 + 120 * R ^ 2 * u * u₃ * v ^ 3 + 324 * R ^ 2 * u * u₃ * v ^ 2 - 216 * R ^ 2 * u * u₃ * v + 162 * R ^ 2 * u * u₃ + 15 * R ^ 2 * u * v ^ 4 - 72 * R ^ 2 * u * v ^ 3 - 270 * R ^ 2 * u * v ^ 2 + 216 * R ^ 2 * u * v - 81 * R ^ 2 * u + 3 * R ^ 2 * u₃ ^ 2 * v ^ 4 + 27 * R ^ 2 * u₃ ^ 2 * v ^ 3 + 81 * R ^ 2 * u₃ ^ 2 * v ^ 2 + 81 * R ^ 2 * u₃ ^ 2 * v + 6 * R ^ 2 * u₃ * v ^ 4 - 18 * R ^ 2 * u₃ * v ^ 3 - 270 * R ^ 2 * u₃ * v ^ 2 - 486 * R ^ 2 * u₃ * v - 9 * R ^ 2 * v ^ 4 - 9 * R ^ 2 * v ^ 3 + 189 * R ^ 2 * v ^ 2 + 405 * R ^ 2 * v) * hw + ((-1) * 12 * R ^ 2 * u ^ 3 * u₃ * v ^ 2 + 24 * R ^ 2 * u ^ 3 * u₃ * v - 12 * R ^ 2 * u ^ 3 * u₃ + 36 * R ^ 2 * u ^ 3 * v ^ 2 - 72 * R ^ 2 * u ^ 3 * v + 36 * R ^ 2 * u ^ 3 + 12 * R ^ 2 * u ^ 2 * u₃ * v ^ 3 + 60 * R ^ 2 * u ^ 2 * u₃ * v - 72 * R ^ 2 * u ^ 2 * u₃ - 36 * R ^ 2 * u ^ 2 * v ^ 3 - 180 * R ^ 2 * u ^ 2 * v + 216 * R ^ 2 * u ^ 2 - 24 * R ^ 2 * u * u₃ * v ^ 3 - 60 * R ^ 2 * u * u₃ * v ^ 2 - 108 * R ^ 2 * u * u₃ + 72 * R ^ 2 * u * v ^ 3 + 180 * R ^ 2 * u * v ^ 2 + 324 * R ^ 2 * u + 12 * R ^ 2 * u₃ * v ^ 3 + 72 * R ^ 2 * u₃ * v ^ 2 + 108 * R ^ 2 * u₃ * v - 36 * R ^ 2 * v ^ 3 - 216 * R ^ 2 * v ^ 2 - 324 * R ^ 2 * v) * hrel
+    (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) : (8) * ((sigCd u v) * ((R * (1 - u₃) / 4)^2 + (R * Real.sqrt 3 * (1 - u₃) / 4)^2) + (delCd u v R) * (R * (1 - u₃) / 4) + (epsCd u v R) * (R * Real.sqrt 3 * (1 - u₃) / 4) + (phiCd u v R)) = 0 := by
+  simp only [sigCd, delCd, epsCd, phiCd]
+  linear_combination (R^2 * (u₃ - 1) * (u*v - u - v - 3)^2 * (3*u^2*u₃*v - 3*u^2*u₃ + 4*u^2*v^2 - 15*u^2*v + 3*u^2 - 3*u*u₃*v^2 - 9*u*u₃ + 3*u*v^2 + 9*u + 3*u₃*v^2 + 9*u₃*v + 9*v^2 - 45*v)) * hw + ((-12) * R^2 * u^3*u₃*v^2 + 24 * R^2 * u^3*u₃*v - 12 * R^2 * u^3*u₃ + 36 * R^2 * u^3*v^2 - 72 * R^2 * u^3*v + 36 * R^2 * u^3 + 12 * R^2 * u^2*u₃*v^3 + 60 * R^2 * u^2*u₃*v - 72 * R^2 * u^2*u₃ - 36 * R^2 * u^2*v^3 - 180 * R^2 * u^2*v + 216 * R^2 * u^2 - 24 * R^2 * u*u₃*v^3 - 60 * R^2 * u*u₃*v^2 - 108 * R^2 * u*u₃ + 72 * R^2 * u*v^3 + 180 * R^2 * u*v^2 + 324 * R^2 * u + 12 * R^2 * u₃*v^3 + 72 * R^2 * u₃*v^2 + 108 * R^2 * u₃*v - 36 * R^2 * v^3 - 216 * R^2 * v^2 - 324 * R^2 * v) * hrel
+
 lemma incCC1 (u v u₃ R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3)
-    (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) : (6 * u ^ 4 * v ^ 3 - 18 * u ^ 4 * v ^ 2 + 18 * u ^ 4 * v - 6 * u ^ 4 - 6 * u ^ 3 * v ^ 4 - 36 * u ^ 3 * v ^ 2 + 96 * u ^ 3 * v - 54 * u ^ 3 + 18 * u ^ 2 * v ^ 4 + 36 * u ^ 2 * v ^ 3 + 108 * u ^ 2 * v - 162 * u ^ 2 - 18 * u * v ^ 4 - 96 * u * v ^ 3 - 108 * u * v ^ 2 - 162 * u + 6 * v ^ 4 + 54 * v ^ 3 + 162 * v ^ 2 + 162 * v) * ((R * (1 - u₃) / 4)^2 + (R * Real.sqrt 3 * (1 - u₃) / 4)^2) + (6 * R * u ^ 4 * v ^ 4 - 18 * R * u ^ 4 * v ^ 3 + 30 * R * u ^ 4 * v ^ 2 - 30 * R * u ^ 4 * v + 12 * R * u ^ 4 - 24 * R * u ^ 3 * v ^ 4 + 12 * R * u ^ 3 * v ^ 3 - 12 * R * u ^ 3 * v ^ 2 - 12 * R * u ^ 3 * v + 36 * R * u ^ 3 + 36 * R * u ^ 2 * v ^ 4 + 48 * R * u ^ 2 * v ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 144 * R * u ^ 2 * v - 108 * R * u ^ 2 - 24 * R * u * v ^ 4 - 60 * R * u * v ^ 3 - 36 * R * u * v ^ 2 - 324 * R * u * v - 324 * R * u + 6 * R * v ^ 4 + 18 * R * v ^ 3 - 54 * R * v ^ 2 - 162 * R * v) * (R * (1 - u₃) / 4) + ((-1) * 2 * R * u ^ 4 * v ^ 4 * Real.sqrt 3 + 10 * R * u ^ 4 * v ^ 3 * Real.sqrt 3 - 14 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 6 * R * u ^ 4 * v * Real.sqrt 3 + 4 * R * u ^ 3 * v ^ 4 * Real.sqrt 3 - 4 * R * u ^ 3 * v ^ 3 * Real.sqrt 3 - 36 * R * u ^ 3 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 3 * v * Real.sqrt 3 - 8 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 + 12 * R * u * v ^ 4 * Real.sqrt 3 - 12 * R * u * v ^ 3 * Real.sqrt 3 - 108 * R * u * v ^ 2 * Real.sqrt 3 + 108 * R * u * v * Real.sqrt 3 - 6 * R * v ^ 4 * Real.sqrt 3 - 18 * R * v ^ 3 * Real.sqrt 3 + 54 * R * v ^ 2 * Real.sqrt 3 + 162 * R * v * Real.sqrt 3) * (R * Real.sqrt 3 * (1 - u₃) / 4) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 108 * R ^ 2 * v ^ 2) = 0 := by
+    (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) : (sigCd u v) * ((R * (1 - u₃) / 4)^2 + (R * Real.sqrt 3 * (1 - u₃) / 4)^2) + (delCd u v R) * (R * (1 - u₃) / 4) + (epsCd u v R) * (R * Real.sqrt 3 * (1 - u₃) / 4) + (phiCd u v R) = 0 := by
   have h := incCC1aux u v u₃ R hw hrel
   rcases mul_eq_zero.1 h with h2 | h2
   · norm_num at h2
   · exact h2
+
 lemma incCC2 (u v u₃ R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3)
     (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) (hdenC2C : (2 * (u * v - u - v - 3)) ≠ 0) :
-    (6 * u ^ 4 * v ^ 3 - 18 * u ^ 4 * v ^ 2 + 18 * u ^ 4 * v - 6 * u ^ 4 - 6 * u ^ 3 * v ^ 4 - 36 * u ^ 3 * v ^ 2 + 96 * u ^ 3 * v - 54 * u ^ 3 + 18 * u ^ 2 * v ^ 4 + 36 * u ^ 2 * v ^ 3 + 108 * u ^ 2 * v - 162 * u ^ 2 - 18 * u * v ^ 4 - 96 * u * v ^ 3 - 108 * u * v ^ 2 - 162 * u + 6 * v ^ 4 + 54 * v ^ 3 + 162 * v ^ 2 + 162 * v) * (((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3)))^2 + ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3)))^2) + (6 * R * u ^ 4 * v ^ 4 - 18 * R * u ^ 4 * v ^ 3 + 30 * R * u ^ 4 * v ^ 2 - 30 * R * u ^ 4 * v + 12 * R * u ^ 4 - 24 * R * u ^ 3 * v ^ 4 + 12 * R * u ^ 3 * v ^ 3 - 12 * R * u ^ 3 * v ^ 2 - 12 * R * u ^ 3 * v + 36 * R * u ^ 3 + 36 * R * u ^ 2 * v ^ 4 + 48 * R * u ^ 2 * v ^ 3 + 72 * R * u ^ 2 * v ^ 2 + 144 * R * u ^ 2 * v - 108 * R * u ^ 2 - 24 * R * u * v ^ 4 - 60 * R * u * v ^ 3 - 36 * R * u * v ^ 2 - 324 * R * u * v - 324 * R * u + 6 * R * v ^ 4 + 18 * R * v ^ 3 - 54 * R * v ^ 2 - 162 * R * v) * ((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3))) + ((-1) * 2 * R * u ^ 4 * v ^ 4 * Real.sqrt 3 + 10 * R * u ^ 4 * v ^ 3 * Real.sqrt 3 - 14 * R * u ^ 4 * v ^ 2 * Real.sqrt 3 + 6 * R * u ^ 4 * v * Real.sqrt 3 + 4 * R * u ^ 3 * v ^ 4 * Real.sqrt 3 - 4 * R * u ^ 3 * v ^ 3 * Real.sqrt 3 - 36 * R * u ^ 3 * v ^ 2 * Real.sqrt 3 + 36 * R * u ^ 3 * v * Real.sqrt 3 - 8 * R * u ^ 2 * v ^ 4 * Real.sqrt 3 + 24 * R * u ^ 2 * v ^ 3 * Real.sqrt 3 - 24 * R * u ^ 2 * v ^ 2 * Real.sqrt 3 + 72 * R * u ^ 2 * v * Real.sqrt 3 + 12 * R * u * v ^ 4 * Real.sqrt 3 - 12 * R * u * v ^ 3 * Real.sqrt 3 - 108 * R * u * v ^ 2 * Real.sqrt 3 + 108 * R * u * v * Real.sqrt 3 - 6 * R * v ^ 4 * Real.sqrt 3 - 18 * R * v ^ 3 * Real.sqrt 3 + 54 * R * v ^ 2 * Real.sqrt 3 + 162 * R * v * Real.sqrt 3) * ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3))) + (12 * R ^ 2 * u ^ 4 * v ^ 2 - 24 * R ^ 2 * u ^ 4 * v + 12 * R ^ 2 * u ^ 4 - 24 * R ^ 2 * u ^ 3 * v ^ 2 - 48 * R ^ 2 * u ^ 3 * v + 72 * R ^ 2 * u ^ 3 - 12 * R ^ 2 * u ^ 2 * v ^ 4 + 24 * R ^ 2 * u ^ 2 * v ^ 3 + 72 * R ^ 2 * u ^ 2 * v + 108 * R ^ 2 * u ^ 2 + 24 * R ^ 2 * u * v ^ 4 + 48 * R ^ 2 * u * v ^ 3 - 72 * R ^ 2 * u * v ^ 2 - 12 * R ^ 2 * v ^ 4 - 72 * R ^ 2 * v ^ 3 - 108 * R ^ 2 * v ^ 2) = 0 := by
+    (sigCd u v) * (((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3)))^2 + ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3)))^2) + (delCd u v R) * ((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3))) + (epsCd u v R) * ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3))) + (phiCd u v R) = 0 := by
+  simp only [sigCd, delCd, epsCd, phiCd]
   set D : ℝ := (2 * (u * v - u - v - 3)) with hD
   have hdenD : D ≠ 0 := by rw [hD]; exact hdenC2C
   field_simp [hdenD]
   linear_combination ((-2) * R^2 * (u - 3) * (v - 1) * (u*v - u - v - 3)^3 * (2*u^2*v^2 - 9*u^2*v + 3*u^2 + 3*u*v^2 + 6*u*v - 9*u - 3*v^2 - 9*v)) * hw
+
 lemma hepsA2eqL_aux (v R ep s : ℝ) (hw : s ^ 2 = 3) :
     ((-4) * R * (v^2+3) * ep * s)^2 = (48 * R^2 * (v^2+3)^2 * ep^2) := by
   linear_combination (16 * R^2 * (v^2+3)^2 * ep^2) * hw
@@ -1309,46 +1386,6 @@ lemma q3negL {u v u₃ : ℝ} (hu0 : 0 < u) (hu1 : u < 1) (hv0 : 0 < v) (hv1 : v
     by_contra hc
     exact absurd hpos (not_lt.2 (mul_nonpos_of_nonneg_of_nonpos hfac.le (neg_nonpos.2 (le_of_not_gt hc))))
   exact hQ3
-
-noncomputable def sigAd (u v : ℝ) : ℝ := (-24) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)
-noncomputable def delAd (u v R : ℝ) : ℝ := 12 * R * (u+1) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)
-noncomputable def epsAd (u v R : ℝ) : ℝ := (-4) * R * (v^2+3) * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 + 24 * u * v + 15 * v ^ 2 - 18 * v - 9) * Real.sqrt 3
-noncomputable def phiAd (u v R : ℝ) : ℝ := (-12) * R^2 * (u-1) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)
-noncomputable def sigBd (u v : ℝ) : ℝ := 24 * (u^2+3) * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3)
-noncomputable def delBd (u v R : ℝ) : ℝ := 12 * R * (u^2+3) * (u ^ 2 * v ^ 2 + 7 * u ^ 2 - 4 * u * v ^ 2 + 8 * u * v - 12 * u + 3 * v ^ 2 - 3)
-noncomputable def epsBd (u v R : ℝ) : ℝ := (-4) * R * (u^2+3) * (u*v - 3*u - 3*v - 3) * (u*v + 3*u + 3*v - 3) * Real.sqrt 3
-noncomputable def phiBd (u v R : ℝ) : ℝ := 12 * R^2 * (u^2+3) * (v-1) * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3)
-noncomputable def sigCd (u v : ℝ) : ℝ := 6 * (u-v) * (u*v - u - v - 3)^3
-noncomputable def delCd (u v R : ℝ) : ℝ := 6 * R * (u*v - u - v - 3)^2 * (u ^ 2 * v ^ 2 - u ^ 2 * v + 2 * u ^ 2 - 2 * u * v ^ 2 - 6 * u + v ^ 2 - 3 * v)
-noncomputable def epsCd (u v R : ℝ) : ℝ := (-2) * R * v * (u^2+3) * (v-3) * (u*v - u - v - 3)^2 * Real.sqrt 3
-noncomputable def phiCd (u v R : ℝ) : ℝ := 12 * R^2 * (u-v) * (u+v) * (u*v - u - v - 3)^2
-noncomputable def ald (u v R : ℝ) : ℝ := 288 * R * (u^2+3) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3) * (u ^ 3 * v - u ^ 3 + u ^ 2 * v ^ 2 - u ^ 2 * v - 4 * u * v ^ 2 + 3 * u * v - 15 * u + 3 * v ^ 2 - 3 * v)
-noncomputable def bed (u v R : ℝ) : ℝ := (-96) * R * (u^2+3) * (v^2+3) * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 4 * u ^ 3 * v ^ 3 + 18 * u ^ 3 * v ^ 2 + 12 * u ^ 3 * v - 27 * u ^ 3 - u ^ 2 * v ^ 4 - 18 * u ^ 2 * v ^ 3 - 54 * u ^ 2 * v + 9 * u ^ 2 - 9 * u * v ^ 4 + 12 * u * v ^ 3 + 54 * u * v ^ 2 + 108 * u * v + 27 * u + 9 * v ^ 4 + 9 * v ^ 3 + 63 * v ^ 2 - 81 * v) * Real.sqrt 3
-noncomputable def gad (u v R : ℝ) : ℝ := (-288) * R^2 * (u-v) * (u^2+3) * (v^2+3) * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3) * (u ^ 2 * v - u ^ 2 - 2 * u * v - 6 * u - 3 * v + 3)
-noncomputable def epsA2d (u v R : ℝ) : ℝ := 48 * R^2 * (v^2+3)^2 * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 + 24 * u * v + 15 * v ^ 2 - 18 * v - 9)^2
-noncomputable def be2d (u v R : ℝ) : ℝ := 27648 * R^2 * (u^2+3)^2 * (v^2+3)^2 * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 4 * u ^ 3 * v ^ 3 + 18 * u ^ 3 * v ^ 2 + 12 * u ^ 3 * v - 27 * u ^ 3 - u ^ 2 * v ^ 4 - 18 * u ^ 2 * v ^ 3 - 54 * u ^ 2 * v + 9 * u ^ 2 - 9 * u * v ^ 4 + 12 * u * v ^ 3 + 54 * u * v ^ 2 + 108 * u * v + 27 * u + 9 * v ^ 4 + 9 * v ^ 3 + 63 * v ^ 2 - 81 * v)^2
-noncomputable def beepsd (u v R : ℝ) : ℝ := 1152 * R^2 * (u^2+3) * (v^2+3)^2 * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 4 * u ^ 3 * v ^ 3 + 18 * u ^ 3 * v ^ 2 + 12 * u ^ 3 * v - 27 * u ^ 3 - u ^ 2 * v ^ 4 - 18 * u ^ 2 * v ^ 3 - 54 * u ^ 2 * v + 9 * u ^ 2 - 9 * u * v ^ 4 + 12 * u * v ^ 3 + 54 * u * v ^ 2 + 108 * u * v + 27 * u + 9 * v ^ 4 + 9 * v ^ 3 + 63 * v ^ 2 - 81 * v) * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 + 24 * u * v + 15 * v ^ 2 - 18 * v - 9)
-noncomputable def nn0d (u v R : ℝ) : ℝ := 110592 * R^2 * (u^2+3)^3 * (v^2+3)^3 * (u ^ 6 * v ^ 4 - 8 * u ^ 6 * v ^ 3 + 22 * u ^ 6 * v ^ 2 - 24 * u ^ 6 * v + 9 * u ^ 6 + 2 * u ^ 5 * v ^ 5 - 16 * u ^ 5 * v ^ 4 + 32 * u ^ 5 * v ^ 3 + 12 * u ^ 5 * v ^ 2 - 66 * u ^ 5 * v + 36 * u ^ 5 + u ^ 4 * v ^ 6 - 16 * u ^ 4 * v ^ 5 + 36 * u ^ 4 * v ^ 4 + 132 * u ^ 4 * v ^ 3 - 351 * u ^ 4 * v ^ 2 + 108 * u ^ 4 * v + 90 * u ^ 4 - 8 * u ^ 3 * v ^ 6 + 32 * u ^ 3 * v ^ 5 + 132 * u ^ 3 * v ^ 4 - 696 * u ^ 3 * v ^ 3 + 72 * u ^ 3 * v ^ 2 + 792 * u ^ 3 * v - 324 * u ^ 3 + 22 * u ^ 2 * v ^ 6 + 12 * u ^ 2 * v ^ 5 - 351 * u ^ 2 * v ^ 4 + 72 * u ^ 2 * v ^ 3 + 1836 * u ^ 2 * v ^ 2 - 756 * u ^ 2 * v + 189 * u ^ 2 - 24 * u * v ^ 6 - 66 * u * v ^ 5 + 108 * u * v ^ 4 + 792 * u * v ^ 3 - 756 * u * v ^ 2 - 54 * u * v + 9 * v ^ 6 + 36 * v ^ 5 + 90 * v ^ 4 - 324 * v ^ 3 + 189 * v ^ 2)
-noncomputable def trhod (u v R : ℝ) : ℝ := (-4608) * R^2 * (u^2+3)^2 * (v^2+3)^3 * (u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 10 * u ^ 3 * v ^ 3 + 24 * u ^ 3 * v ^ 2 - 6 * u ^ 3 * v - 9 * u ^ 3 - u ^ 2 * v ^ 4 + 6 * u ^ 2 * v ^ 3 + 36 * u ^ 2 * v ^ 2 - 54 * u ^ 2 * v + 45 * u ^ 2 - 9 * u * v ^ 4 + 30 * u * v ^ 3 - 108 * u * v ^ 2 + 18 * u * v - 27 * u + 9 * v ^ 4 - 27 * v ^ 3 - 9 * v ^ 2 + 27 * v)
-noncomputable def Rtmp0d (u v R : ℝ) : ℝ := 192 * R^2 * (u^2+3) * (v^2+3)^3 * (u ^ 2 * v ^ 2 - 6 * u ^ 2 * v + 9 * u ^ 2 - 6 * u * v ^ 2 + 24 * u * v - 18 * u + 21 * v ^ 2 - 18 * v + 9)
-noncomputable def sqNd (u v R : ℝ) : ℝ := (21233664 * R^4 * (u^2+3)^4 * (v^2+3)^6) * (12 * (u * v ^ 2 - 2 * u * v - 3 * u - v ^ 2 - 6 * v + 3)^2 * (-(u ^ 4 * v ^ 3 - 7 * u ^ 4 * v ^ 2 + 15 * u ^ 4 * v - 9 * u ^ 4 + u ^ 3 * v ^ 4 - 13 * u ^ 3 * v ^ 3 + 45 * u ^ 3 * v ^ 2 - 51 * u ^ 3 * v + 18 * u ^ 3 - 7 * u ^ 2 * v ^ 4 + 45 * u ^ 2 * v ^ 3 - 90 * u ^ 2 * v ^ 2 + 45 * u ^ 2 * v - 9 * u ^ 2 + 15 * u * v ^ 4 - 51 * u * v ^ 3 + 45 * u * v ^ 2 - 9 * u * v - 9 * v ^ 4 + 18 * v ^ 3 - 9 * v ^ 2)))
-noncomputable def dA2d (u₃ v : ℝ) : ℝ := u₃ * v - u₃ - v - 3
-noncomputable def dB2d (u v u₃ : ℝ) : ℝ := 2 * (u * u₃ - u - u₃ - 3)
-noncomputable def dC2d (u v : ℝ) : ℝ := 2 * (u * v - u - v - 3)
-noncomputable def al2d (u v R : ℝ) : ℝ := (sigCd u v) * (delAd u v R) - (sigAd u v) * (delCd u v R)
-noncomputable def be2pd (u v R : ℝ) : ℝ := (sigCd u v) * (epsAd u v R) - (sigAd u v) * (epsCd u v R)
-noncomputable def ga2d (u v R : ℝ) : ℝ := (sigCd u v) * (phiAd u v R) - (sigAd u v) * (phiCd u v R)
-noncomputable def Sd (u v R : ℝ) : ℝ := Real.sqrt ((sqNd u v R) * (sigAd u v) ^ 2) / (2 * (sigAd u v) ^ 2 * (nn0d u v R))
-noncomputable def caxd (u v R : ℝ) : ℝ := -(delAd u v R) / (2 * (sigAd u v))
-noncomputable def cayd (u v R : ℝ) : ℝ := -(epsAd u v R) / (2 * (sigAd u v))
-noncomputable def ρ'd (u v R : ℝ) : ℝ := (trhod u v R) / (2 * (sigAd u v) * (nn0d u v R))
-noncomputable def Mxd (u v R : ℝ) : ℝ := (caxd u v R) - (ρ'd u v R) * (ald u v R)
-noncomputable def Myd (u v R : ℝ) : ℝ := (cayd u v R) - (ρ'd u v R) * (bed u v R)
-noncomputable def P1xd (u v R : ℝ) : ℝ := (Mxd u v R) - (Sd u v R) * (bed u v R)
-noncomputable def P1yd (u v R : ℝ) : ℝ := (Myd u v R) + (Sd u v R) * (ald u v R)
-noncomputable def P2xd (u v R : ℝ) : ℝ := (Mxd u v R) + (Sd u v R) * (bed u v R)
-noncomputable def P2yd (u v R : ℝ) : ℝ := (Myd u v R) - (Sd u v R) * (ald u v R)
-noncomputable def RA2d (u v R : ℝ) : ℝ := (Rtmp0d u v R) / (4 * (sigAd u v) ^ 2)
 
 
 /-- Completing the square for a circle equation, with atomic coefficients. -/
@@ -2343,8 +2380,7 @@ problem imo2023_p6 {A B C A₁ B₁ C₁ A₂ B₂ C₂ : P}
       · simp only [caxd, cayd] at h3; linear_combination h3
     have h2 : dist A (((-(delAd u v R) / (2 * (sigAd u v))) • e₁ + (-(epsAd u v R) / (2 * (sigAd u v))) • e₂) +ᵥ O) ^ 2 = (RA2d u v R) := by
       rw [hA', coord_dist_sq he₁ he₂ he₁₂]
-      have incAAf : (sigAd u v) * (R ^ 2 + 0 ^ 2) + (delAd u v R) * R + (epsAd u v R) * 0 + (phiAd u v R) = 0 := by
-        simp only [sigAd, delAd, epsAd, phiAd]; linear_combination incAA
+      have incAAf : (sigAd u v) * (R ^ 2 + 0 ^ 2) + (delAd u v R) * R + (epsAd u v R) * 0 + (phiAd u v R) = 0 := incAA
       have h4 := hsqformA R 0
       rw [incAAf] at h4
       rcases mul_eq_zero.1 h4.symm with h3 | h3
@@ -2376,7 +2412,7 @@ problem imo2023_p6 {A B C A₁ B₁ C₁ A₂ B₂ C₂ : P}
     have h2 : dist B (((-(delBd u v R) / (2 * (sigBd u v))) • e₁ + (-(epsBd u v R) / (2 * (sigBd u v))) • e₂) +ᵥ O) ^ 2 = RB2 := by
       rw [hB', coord_dist_sq he₁ he₂ he₁₂]
       have incBBf : (sigBd u v) * ((-R / 2) ^ 2 + (R * Real.sqrt 3 / 2) ^ 2) + (delBd u v R) * (-R / 2) + (epsBd u v R) * (R * Real.sqrt 3 / 2) + (phiBd u v R) = 0 := by
-        simp only [sigBd, delBd, epsBd, phiBd]; linear_combination incBB
+        exact incBB
       have h4 := hsqformB (-R / 2) (R * Real.sqrt 3 / 2)
       rw [incBBf] at h4
       rcases mul_eq_zero.1 h4.symm with h3 | h3
@@ -2408,7 +2444,7 @@ problem imo2023_p6 {A B C A₁ B₁ C₁ A₂ B₂ C₂ : P}
     have h2 : dist C (((-(delCd u v R) / (2 * (sigCd u v))) • e₁ + (-(epsCd u v R) / (2 * (sigCd u v))) • e₂) +ᵥ O) ^ 2 = RC2 := by
       rw [hC', coord_dist_sq he₁ he₂ he₁₂]
       have incCCf : (sigCd u v) * ((-R / 2) ^ 2 + (-R * Real.sqrt 3 / 2) ^ 2) + (delCd u v R) * (-R / 2) + (epsCd u v R) * (-R * Real.sqrt 3 / 2) + (phiCd u v R) = 0 := by
-        simp only [sigCd, delCd, epsCd, phiCd]; linear_combination incCC
+        exact incCC
       have h4 := hsqformC (-R / 2) (-R * Real.sqrt 3 / 2)
       rw [incCCf] at h4
       rcases mul_eq_zero.1 h4.symm with h3 | h3
@@ -2420,17 +2456,17 @@ problem imo2023_p6 {A B C A₁ B₁ C₁ A₂ B₂ C₂ : P}
       rw [h1, h2]
     exact (sq_eq_sq₀ dist_nonneg dist_nonneg).mp h3
   have incAA1f : (sigAd u v) * ((R * (u - 1) / 2) ^ 2 + (0) ^ 2) + (delAd u v R) * (R * (u - 1) / 2) + (epsAd u v R) * 0 + (phiAd u v R) = 0 := by
-    simp only [sigAd, delAd, epsAd, phiAd]; linear_combination incAA1
+    exact incAA1
   have incAA2f : (sigAd u v) * (((-R * (u₃ * v - 2 * u₃ - 2 * v + 3)) / (u₃ * v - u₃ - v - 3)) ^ 2 + ((Real.sqrt 3 * R * (u₃ - v)) / (u₃ * v - u₃ - v - 3)) ^ 2) + (delAd u v R) * ((-R * (u₃ * v - 2 * u₃ - 2 * v + 3)) / (u₃ * v - u₃ - v - 3)) + (epsAd u v R) * ((Real.sqrt 3 * R * (u₃ - v)) / (u₃ * v - u₃ - v - 3)) + (phiAd u v R) = 0 := by
-    simp only [sigAd, delAd, epsAd, phiAd]; linear_combination incAA2
+    exact incAA2
   have incBB1f : (sigBd u v) * ((R * (1 - v) / 4) ^ 2 + (R * Real.sqrt 3 * (v - 1) / 4) ^ 2) + (delBd u v R) * (R * (1 - v) / 4) + (epsBd u v R) * (R * Real.sqrt 3 * (v - 1) / 4) + (phiBd u v R) = 0 := by
-    simp only [sigBd, delBd, epsBd, phiBd]; linear_combination incBB1
+    exact incBB1
   have incBB2f : (sigBd u v) * (((R * (u * u₃ - 5 * u + u₃ + 3)) / (2 * (u * u₃ - u - u₃ - 3))) ^ 2 + ((-Real.sqrt 3 * R * (u - 3) * (u₃ - 1)) / (2 * (u * u₃ - u - u₃ - 3))) ^ 2) + (delBd u v R) * ((R * (u * u₃ - 5 * u + u₃ + 3)) / (2 * (u * u₃ - u - u₃ - 3))) + (epsBd u v R) * ((-Real.sqrt 3 * R * (u - 3) * (u₃ - 1)) / (2 * (u * u₃ - u - u₃ - 3))) + (phiBd u v R) = 0 := by
-    simp only [sigBd, delBd, epsBd, phiBd]; linear_combination incBB2
+    exact incBB2
   have incCC1f : (sigCd u v) * ((R * (1 - u₃) / 4) ^ 2 + (R * Real.sqrt 3 * (1 - u₃) / 4) ^ 2) + (delCd u v R) * (R * (1 - u₃) / 4) + (epsCd u v R) * (R * Real.sqrt 3 * (1 - u₃) / 4) + (phiCd u v R) = 0 := by
-    simp only [sigCd, delCd, epsCd, phiCd]; linear_combination incCC1
+    exact incCC1
   have incCC2f : (sigCd u v) * (((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3))) ^ 2 + ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3))) ^ 2) + (delCd u v R) * ((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3))) + (epsCd u v R) * ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3))) + (phiCd u v R) = 0 := by
-    simp only [sigCd, delCd, epsCd, phiCd]; linear_combination incCC2
+    exact incCC2
   -- circumcenters and circumradii via uniqueness
   have : FiniteDimensional ℝ V := .of_fact_finrank_eq_two
   have hspanA : affineSpan ℝ (Set.range (⟨_, hAIAA1A2⟩ : Triangle ℝ P).points) = ⊤ := by

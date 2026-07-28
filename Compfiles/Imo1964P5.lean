@@ -16,6 +16,11 @@ import Mathlib.Data.Finset.Card
 import Mathlib.Data.List.Nodup
 import ProblemExtraction
 
+-- This file's proofs are memory-bound: asynchronous elaboration retains per-tactic
+-- snapshots whose peak exceeds 3 GiB. Elaborating synchronously lowers peak RSS
+-- at the cost of some wall-clock time.
+set_option Elab.async false
+
 problem_file { tags := [.Combinatorics, .Geometry] }
 
 /-!

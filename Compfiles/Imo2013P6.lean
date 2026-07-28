@@ -14,6 +14,11 @@ import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.LinearCombination.Lemmas
 import ProblemExtraction
 
+-- This file's proofs are memory-bound: asynchronous elaboration retains per-tactic
+-- snapshots whose peak exceeds 3 GiB. Elaborating synchronously keeps peak RSS near
+-- 2.5 GiB at the cost of some wall-clock time.
+set_option Elab.async false
+
 problem_file { tags := [.Combinatorics] }
 
 /-!
