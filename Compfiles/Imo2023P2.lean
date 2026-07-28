@@ -5,7 +5,19 @@ Authors: Bolton Bailey, Benpigchu
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.OfNorm
+public import Mathlib.Data.Int.Star
+public import Mathlib.Geometry.Euclidean.Altitude
+public import Mathlib.Geometry.Euclidean.Angle.Sphere
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality
+public import Mathlib.Geometry.Euclidean.Simplex
+public import Mathlib.Geometry.Euclidean.Sphere.SecondInter
+public import Mathlib.Geometry.Euclidean.Triangle
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.SimpleRing.Principal
 
 public import ProblemExtraction
 

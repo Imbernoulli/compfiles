@@ -1,14 +1,21 @@
 /-
-Copyright (c) 2025 The Compfiles Contributors. All rights reserved.
+Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Joseph Myers, Benpigchu
+Authors: Joseph Myers, Benpigchu, Kimi K3
 -/
+
 module
 
 public import Mathlib
+public import ProblemExtraction
 
 @[expose] public section
 
+problem_file {
+  tags := [.Combinatorics]
+  problemImportedFrom :=
+    "https://github.com/jsm28/IMOLean/blob/main/IMO/IMO2022P1.lean"
+}
 
 /-!
 # International Mathematical Olympiad 2022, Problem 1
@@ -17,7 +24,7 @@ The bank of Oslo issues two types of coin: aluminum (denoted A)
 and bronze (denoted B). Marianne has n aluminum coins and n bronze
 coins arranged in a row in some arbitrary initial order. A chain
 is any subsequence of consecutive coins of the same type. Given a
-fixed positive integer k ≤ 2n, Gilberty repeatedly performs the
+fixed positive integer k ≤ 2n, Gilbert repeatedly performs the
 following operation: he identifies the longest chain containing
 the kth coin from the left and moves all the coins in that chain
 to the left end of the row. For example, if n = 4 and k = 4, the
@@ -77,6 +84,8 @@ def Row.operationOneBased {n k : ℕ} (hk1 : 1 ≤ k) (hkn : k ≤ 2 * n) (c : R
 /-- The property of a row having leftmost `n` coin with the same type. -/
 def Row.leftmostNSame {n : ℕ} (c : Row n) := ∀ j₁ j₂ : Fin (2 * n),
   (j₁ : ℕ) < n → (j₂ : ℕ) < n → c j₁ = c j₂
+
+snip begin
 
 lemma Nat.ceilDiv_two_add_floorDiv_two (n : Nat) : n ⌈/⌉ 2 + n ⌊/⌋ 2 = n := by
   rw [Nat.ceilDiv_eq_add_pred_div, Nat.floorDiv_eq_div]
@@ -2071,10 +2080,12 @@ lemma Row.exists_length_blocks_operationOneBased_iterate_eq_two
       rw [← hc', hj]
 
 
-/-- The answer to be determined. -/
-abbrev answer : Set (ℕ × ℕ) := {(n, k) : ℕ × ℕ | 0 < n ∧ n ≤ k ∧ k ≤ 3 * n ⌈/⌉ 2}
+snip end
 
-theorem imo2022_p1 : {(n, k) | ∃ hk1 : 1 ≤ k, ∃ hkn : k ≤ 2 * n, ∀ c : Row n, c.valid →
+/-- The answer to be determined. -/
+determine answer : Set (ℕ × ℕ) := {(n, k) : ℕ × ℕ | 0 < n ∧ n ≤ k ∧ k ≤ 3 * n ⌈/⌉ 2}
+
+problem imo2022_p1 : {(n, k) | ∃ hk1 : 1 ≤ k, ∃ hkn : k ≤ 2 * n, ∀ c : Row n, c.valid →
     ∃ i, ((Row.operationOneBased hk1 hkn)^[i] c).leftmostNSame} =
     answer := by
   rw [answer]

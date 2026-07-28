@@ -6,7 +6,14 @@ Authors: David Renshaw, Benpigchu
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Analysis.Convex.Jensen
+public import Mathlib.Analysis.Convex.SpecificFunctions.Pow
+public import Mathlib.Analysis.Convex.Strong
+public import Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.TotallySplit
+public import Mathlib.Tactic.Cases
 
 public import ProblemExtraction
 

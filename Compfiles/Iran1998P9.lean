@@ -6,11 +6,8 @@ Authors: David Renshaw
 
 module
 
-public import Mathlib.Data.Real.Basic
-public import Mathlib
-
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 public import Mathlib.Analysis.InnerProductSpace.PiL2
-public import Mathlib.Analysis.Normed.Lp.PiLp
 
 public import ProblemExtraction
 

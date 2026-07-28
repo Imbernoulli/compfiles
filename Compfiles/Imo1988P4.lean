@@ -6,8 +6,12 @@ Authors: hillosanation
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Int.Star
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.Order.CompletePartialOrder
 public import ProblemExtraction
 
 @[expose] public section

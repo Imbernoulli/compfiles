@@ -6,7 +6,13 @@ Authors:
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Group.Nat.Range
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Nat.Prime.Basic
+public import Mathlib.Order.Interval.Finset.Nat
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Ring
 
 public import ProblemExtraction
 
