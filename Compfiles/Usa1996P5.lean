@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Normed.Affine.AddTorsorBases
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality
+public import Mathlib.MeasureTheory.Measure.Haar.Basic
 public import ProblemExtraction
 
 @[expose] public section

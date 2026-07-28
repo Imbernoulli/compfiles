@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Complex
+public import Mathlib.Geometry.Euclidean.Triangle
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

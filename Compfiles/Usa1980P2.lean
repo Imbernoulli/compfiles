@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Order.Lattice.Nat
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

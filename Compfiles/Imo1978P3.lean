@@ -6,8 +6,10 @@ Authors: David Renshaw
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.NumberTheory.Rayleigh
+public import Mathlib.NumberTheory.Real.GoldenRatio
 public import ProblemExtraction
 
 @[expose] public section

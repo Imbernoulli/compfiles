@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Data.Real.Basic
+public import Mathlib.Data.Set.Card
+public import Mathlib.Tactic.Choose
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.LinearCombination.Lemmas
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

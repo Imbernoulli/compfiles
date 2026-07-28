@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

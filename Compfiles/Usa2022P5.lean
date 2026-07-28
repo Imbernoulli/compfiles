@@ -6,7 +6,16 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Fintype.BigOperators
+public import Mathlib.Data.Nat.Bitwise
+public import Mathlib.Data.Nat.Log
+public import Mathlib.Data.Nat.SuccPred
+public import Mathlib.Tactic.IntervalCases
 public import ProblemExtraction
 
 @[expose] public section

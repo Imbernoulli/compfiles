@@ -6,7 +6,9 @@ Authors: Constantin Seebach
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.BigOperators.Group.List
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Nat.Digits.Div
 public import ProblemExtraction
 
 @[expose] public section

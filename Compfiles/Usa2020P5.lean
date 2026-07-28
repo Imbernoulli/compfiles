@@ -6,7 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Algebra.Polynomial.Roots
 public import ProblemExtraction
 
 @[expose] public section

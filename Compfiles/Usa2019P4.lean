@@ -6,7 +6,10 @@ Authors: David Renshaw, Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Nat.Factorial.BigOperators
+public import Mathlib.Data.Set.Card
 public import ProblemExtraction
 
 @[expose] public section

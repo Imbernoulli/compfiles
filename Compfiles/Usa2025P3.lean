@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Analysis.InnerProductSpace.Basic
+public import Mathlib.Analysis.Normed.Group.AddTorsor
+public import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
+public import Mathlib.Order.CompletePartialOrder
 public import ProblemExtraction
 
 @[expose] public section

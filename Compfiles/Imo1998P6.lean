@@ -3,9 +3,20 @@ Copyright (c) 2026 lean-tom. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Daniel Liao
 -/
+
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Sub.Prod
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Nat.Factorization.Defs
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Lemmas
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.PNat
+public import Mathlib.Tactic.Zify
 public import ProblemExtraction
 
 @[expose] public section

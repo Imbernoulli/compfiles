@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Analysis.SpecialFunctions.Log.Base
+public import Mathlib.Data.Nat.Digits.Lemmas
 public import ProblemExtraction
 
 @[expose] public section

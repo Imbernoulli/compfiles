@@ -6,7 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Combinatorics.SimpleGraph.DegreeSum
 public import ProblemExtraction
 
 @[expose] public section

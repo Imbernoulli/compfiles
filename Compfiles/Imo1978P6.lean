@@ -6,8 +6,12 @@ Authors: InternLM-MATH LEAN Formalizer v0.1, Constantin Seebach
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Floor.Div
+public import Mathlib.Algebra.Order.Star.Basic
+public import Mathlib.Combinatorics.Pigeonhole
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.GroupTheory.GroupAction.Ring
+public import Mathlib.Order.Interval.Finset.Nat
 public import ProblemExtraction
 
 @[expose] public section

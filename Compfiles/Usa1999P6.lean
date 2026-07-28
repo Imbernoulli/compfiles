@@ -6,11 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Analysis.Convex.Segment
 public import Mathlib.Analysis.InnerProductSpace.PiL2
 public import Mathlib.Geometry.Euclidean.Sphere.Basic
-public import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
-public import Mathlib.Tactic
 public import ProblemExtraction
 
 @[expose] public section

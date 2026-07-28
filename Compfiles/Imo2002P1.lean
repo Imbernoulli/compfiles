@@ -6,8 +6,11 @@ Authors: David Renshaw
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Data.Finset.Powerset
+public import Mathlib.Data.Fintype.BigOperators
+public import Mathlib.Tactic.DeriveFintype
 public import ProblemExtraction
 
 @[expose] public section

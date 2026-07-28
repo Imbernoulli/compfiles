@@ -6,7 +6,18 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Associated
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Data.Nat.Cast.Order.Field
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Nat.Log
+public import Mathlib.Data.Rat.Star
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

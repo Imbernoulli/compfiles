@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Analysis.Normed.Field.Lemmas
+public import Mathlib.Data.Int.ModEq
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Nat.Prime.Int
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.LinearCombination.Lemmas
 public import ProblemExtraction
 
 @[expose] public section

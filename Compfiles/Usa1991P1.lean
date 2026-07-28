@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Tactic
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

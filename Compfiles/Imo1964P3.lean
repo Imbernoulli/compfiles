@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Convex.Side
+public import Mathlib.Analysis.Convex.StrictConvexBetween
+public import Mathlib.Analysis.InnerProductSpace.OfNorm
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Geometry.Euclidean.Projection
 public import ProblemExtraction
 
 @[expose] public section

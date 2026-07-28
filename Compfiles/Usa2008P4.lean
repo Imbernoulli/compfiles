@@ -6,7 +6,11 @@ Authors: David Renshaw, Kimi K3
 
 module
 
-public import Mathlib.Tactic
+public import Mathlib.Algebra.BigOperators.Ring.List
+public import Mathlib.Algebra.Order.BigOperators.Group.List
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

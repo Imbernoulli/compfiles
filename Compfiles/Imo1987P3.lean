@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Analysis.Normed.Ring.Lemmas
+public import Mathlib.Data.Int.Star
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity.Basic
 public import ProblemExtraction
 
 @[expose] public section

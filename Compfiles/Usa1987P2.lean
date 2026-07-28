@@ -6,7 +6,7 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
 public import ProblemExtraction
 
 @[expose] public section

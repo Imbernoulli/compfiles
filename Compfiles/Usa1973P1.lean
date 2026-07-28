@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Positivity.Core
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Geometry.Euclidean.Projection
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Positivity.Basic
 public import ProblemExtraction
 
 @[expose] public section

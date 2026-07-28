@@ -6,7 +6,21 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Order.Interval.Set.Infinite
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.LinearCombination.Lemmas
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity.Core
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

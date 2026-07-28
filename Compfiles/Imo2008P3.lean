@@ -3,15 +3,17 @@ Copyright (c) 2021 Manuel Candales. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Manuel Candales
 -/
+
 module
 
 public import Mathlib.Data.Real.Basic
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.Star
+public import Mathlib.NumberTheory.LegendreSymbol.Basic
 public import Mathlib.Data.Nat.Prime.Basic
 public import Mathlib.NumberTheory.PrimesCongruentOne
 public import Mathlib.NumberTheory.LegendreSymbol.QuadraticReciprocity
 public import Mathlib.Tactic.LinearCombination
-
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Polynomial.RingDivision
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

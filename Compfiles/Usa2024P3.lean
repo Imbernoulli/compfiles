@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.RingTheory.RootsOfUnity.Complex
+public import Mathlib.RingTheory.RootsOfUnity.Minpoly
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

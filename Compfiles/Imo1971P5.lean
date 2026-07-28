@@ -6,8 +6,14 @@ Authors: David Renshaw, Benpigchu
 
 module
 
-public import Mathlib
-
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Analysis.Normed.Module.Connected
+public import Mathlib.Geometry.Euclidean.Sphere.Basic
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.Tactic.Cases
+public import Mathlib.Topology.GDelta.MetrizableSpace
+public import Mathlib.Topology.Separation.Connected
 public import ProblemExtraction
 
 @[expose] public section

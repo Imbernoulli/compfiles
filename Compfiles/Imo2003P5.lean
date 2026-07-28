@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.EuclideanDomain.Basic
+public import Mathlib.Algebra.EuclideanDomain.Field
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.LinearCombination.Lemmas
+public import Mathlib.Tactic.Linarith
 public import ProblemExtraction
 
 @[expose] public section
@@ -243,8 +250,10 @@ problem imo2003_p5_equality (n : ℕ) (hn : 2 < n) (x : ℕ → ℝ) (hx : Monot
     have hn3 : (3 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
     have hDpos : 0 < D := by
       rw [hDval]
-      have h1 : (0 : ℝ) < (n : ℝ) ^ 2 - 1 := by nlinarith [hn3]
-      have h2 : (0 : ℝ) < (n : ℝ) := by linarith
+      have h1 : (0 : ℝ) < (n : ℝ) ^ 2 - 1 := by
+        rw [sub_pos, one_lt_sq_iff₀ (Nat.cast_nonneg n)]
+        exact_mod_cast (show 1 < n by omega)
+      have h2 : (0 : ℝ) < (n : ℝ) := three_pos.trans_le hn3
       exact div_pos (mul_pos h2 h1) three_pos
     have hDne : D ≠ 0 := ne_of_gt hDpos
     set t : ℝ := C / D with ht
@@ -269,7 +278,7 @@ problem imo2003_p5_equality (n : ℕ) (hn : 2 < n) (x : ℕ → ℝ) (hx : Monot
     have hform : ∀ i ∈ range n, y i = t * (2 * (i : ℝ) + 1 - (n : ℝ)) := fun i hi => by
       have h := hall i hi
       rw [sq_eq_zero_iff] at h
-      linarith
+      exact (sub_eq_zero.mp h).symm
     refine ⟨m + t * (1 - (n : ℝ)), 2 * t, fun i hi => ?_⟩
     have h1 : x i = y i + m := by rw [yeq i]; ring
     rw [h1, hform i hi]

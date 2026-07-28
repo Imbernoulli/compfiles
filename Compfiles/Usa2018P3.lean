@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Basic
+public import Mathlib.Data.Nat.Choose.Sum
+public import Mathlib.Data.Nat.Totient
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
 public import ProblemExtraction
 
 @[expose] public section

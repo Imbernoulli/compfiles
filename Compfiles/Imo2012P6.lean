@@ -6,8 +6,18 @@ Authors: Markus Rydh, Codex
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Rat.Star
+public import Mathlib.Order.Lattice.Nat
+public import Mathlib.Tactic.Cases
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.FieldSimp.Lemmas
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Convex.StrictConvexBetween
+public import Mathlib.Analysis.InnerProductSpace.OfNorm
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
 public import ProblemExtraction
 
 @[expose] public section

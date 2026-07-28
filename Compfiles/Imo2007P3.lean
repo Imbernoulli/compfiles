@@ -6,7 +6,7 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Combinatorics.SimpleGraph.Clique
 public import ProblemExtraction
 
 @[expose] public section

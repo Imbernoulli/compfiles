@@ -6,7 +6,19 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Nat.Factorization.Defs
+public import Mathlib.Order.Lattice.Nat
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Lemmas
+public import Mathlib.Tactic.NormNum.DivMod
+public import Mathlib.Tactic.Positivity.Core
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
+public import Mathlib.Tactic.Zify
 public import ProblemExtraction
 
 @[expose] public section

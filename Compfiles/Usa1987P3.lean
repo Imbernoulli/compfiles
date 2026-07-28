@@ -6,7 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Data.Real.Basic
 public import ProblemExtraction
 
 @[expose] public section

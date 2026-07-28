@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Data.Int.Star
+public import Mathlib.NumberTheory.Bertrand
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,16 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.EuclideanDomain.Basic
+public import Mathlib.Algebra.EuclideanDomain.Field
+public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.Algebra.Polynomial.RingDivision
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Data.Nat.Factorial.BigOperators
+public import Mathlib.RingTheory.Coprime.Lemmas
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

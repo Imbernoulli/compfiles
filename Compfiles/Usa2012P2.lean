@@ -6,7 +6,9 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Tactic.Abel
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Convex.Measure
+public import Mathlib.Analysis.InnerProductSpace.OfNorm
+public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

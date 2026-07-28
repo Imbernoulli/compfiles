@@ -2,7 +2,9 @@
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import ProblemExtraction
 
 @[expose] public section

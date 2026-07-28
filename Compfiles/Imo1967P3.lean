@@ -6,8 +6,12 @@ Authors: Roozbeh Yousefzadeh
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Analysis.Normed.Ring.Lemmas
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Nat.Factorial.BigOperators
+public import Mathlib.Data.Nat.Prime.Factorial
+public import Mathlib.Tactic.Bound
 public import ProblemExtraction
 
 @[expose] public section

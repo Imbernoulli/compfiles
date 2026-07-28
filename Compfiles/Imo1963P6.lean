@@ -6,7 +6,9 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Fin.VecNotation
+public import Mathlib.Data.Fintype.Perm
 public import ProblemExtraction
 
 @[expose] public section

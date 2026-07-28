@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.AffineMonoid.Basic
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Normed.Ring.Lemmas
+public import Mathlib.GroupTheory.Perm.Fin
 public import ProblemExtraction
 
 @[expose] public section

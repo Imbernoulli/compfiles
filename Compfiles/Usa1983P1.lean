@@ -6,9 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Data.Fintype.Perm
 public import Mathlib.Probability.Distributions.Uniform
-public import Mathlib.Tactic
+public import Mathlib.Tactic.NormNum
 public import ProblemExtraction
 
 @[expose] public section

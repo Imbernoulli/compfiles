@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Combinatorics.SimpleGraph.Finite
+public import Mathlib.FieldTheory.Finiteness
+public import Mathlib.RingTheory.PicardGroup
 public import ProblemExtraction
 
 @[expose] public section

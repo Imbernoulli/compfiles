@@ -6,7 +6,9 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Analysis.PSeries
 public import ProblemExtraction
 
 @[expose] public section

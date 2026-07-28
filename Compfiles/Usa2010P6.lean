@@ -6,7 +6,20 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Field.Basic
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Rat.Star
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Lemmas
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

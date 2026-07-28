@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.GCDMonoid.Nat
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Nat.Prime.Defs
+public import Mathlib.Data.ZMod.Defs
+public import Mathlib.RingTheory.Coprime.Lemmas
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.LinearCombination
 public import ProblemExtraction
 
 @[expose] public section

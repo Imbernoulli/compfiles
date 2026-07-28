@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.TwoDim
+public import Mathlib.Geometry.Euclidean.Sphere.Basic
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

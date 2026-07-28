@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.LinearCombination.Lemmas
 public import ProblemExtraction
 
 @[expose] public section

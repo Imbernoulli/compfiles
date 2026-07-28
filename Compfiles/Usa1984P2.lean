@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Basic
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Nat.Factorization.Defs
+public import Mathlib.GroupTheory.GroupAction.Ring
+public import Mathlib.Order.Interval.Finset.Nat
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,8 +6,12 @@ Authors: Markus Rydh
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Polynomial.Bivariate
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Analysis.Normed.Module.RCLike.Real
+public import Mathlib.Tactic.Cases
+public import Mathlib.Topology.Algebra.Module.ModuleTopology
+public import Mathlib.Topology.Algebra.Polynomial
 public import ProblemExtraction
 
 @[expose] public section

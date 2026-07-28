@@ -6,7 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

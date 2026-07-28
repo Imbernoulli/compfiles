@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Positivity.Core
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

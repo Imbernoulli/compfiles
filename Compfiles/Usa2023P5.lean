@@ -7,7 +7,9 @@ Authors: David Renshaw, Kimi K3
 module
 
 public import Mathlib.Tactic
-public import Mathlib
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

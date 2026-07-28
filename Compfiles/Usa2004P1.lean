@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Normed.Affine.Convex
+public import Mathlib.Geometry.Euclidean.Triangle
 public import ProblemExtraction
 
 @[expose] public section

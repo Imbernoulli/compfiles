@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Tactic
+public import Mathlib.Analysis.Normed.Ring.Lemmas
+public import Mathlib.RingTheory.Polynomial.Vieta
+public import Mathlib.Tactic.GCongr
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

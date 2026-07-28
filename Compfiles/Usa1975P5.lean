@@ -6,7 +6,17 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.EuclideanDomain.Basic
+public import Mathlib.Algebra.EuclideanDomain.Field
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Rat.Star
+public import Mathlib.Order.Interval.Finset.Nat
+public import Mathlib.Tactic.CancelDenoms.Core
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,15 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+public import Mathlib.RingTheory.Finiteness.Prod
+public import Mathlib.Topology.EMetricSpace.Paracompact
+public import Mathlib.Topology.Separation.CompletelyRegular
 public import ProblemExtraction
 
 @[expose] public section

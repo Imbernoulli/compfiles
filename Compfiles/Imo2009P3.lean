@@ -6,8 +6,17 @@ Authors: hillosanation
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Nat.SuccPred
+public import Mathlib.Order.Lattice.Nat
+public import Mathlib.Order.SuccPred.CompleteLinearOrder
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Lemmas
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.Zify
 public import ProblemExtraction
 
 @[expose] public section

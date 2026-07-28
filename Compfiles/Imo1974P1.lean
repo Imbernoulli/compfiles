@@ -6,8 +6,10 @@ Authors: Lynn Van Hauwe
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.Group.End
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.NumberTheory.Divisors
 public import ProblemExtraction
 
 @[expose] public section

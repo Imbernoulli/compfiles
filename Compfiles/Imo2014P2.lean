@@ -6,8 +6,10 @@ Authors:
 
 module
 
-public import Mathlib
-
+public import Mathlib.Data.Fintype.Sum
+public import Mathlib.Order.Interval.Finset.Nat
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

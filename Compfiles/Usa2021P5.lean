@@ -6,7 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Data.ZMod.Defs
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Canonical
+public import Mathlib.Algebra.Order.Star.Basic
+public import Mathlib.Combinatorics.Enumerative.DoubleCounting
+public import Mathlib.Combinatorics.SimpleGraph.Finite
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.GCongr
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

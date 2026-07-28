@@ -6,11 +6,12 @@ Authors: David Renshaw, Kimi K3
 
 module
 
-public import Mathlib.Data.Fintype.Card
-public import Mathlib.Data.Nat.Log
 public import Mathlib.Algebra.BigOperators.Intervals
 public import Mathlib.Algebra.Order.BigOperators.Group.Finset
-public import Mathlib.Tactic
+public import Mathlib.Data.Nat.Log
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

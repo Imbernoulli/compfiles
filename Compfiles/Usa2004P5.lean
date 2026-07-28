@@ -6,8 +6,8 @@ Authors: Evan Chen
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Analysis.MeanInequalities
 public import ProblemExtraction
 
 @[expose] public section

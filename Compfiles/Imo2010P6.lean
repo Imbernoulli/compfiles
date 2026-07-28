@@ -6,8 +6,14 @@ Authors: Markus Rydh
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Multiset
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Data.Multiset.Functor
+public import Mathlib.Data.Nat.SuccPred
+public import Mathlib.Data.PNat.Interval
+public import Mathlib.Data.PNat.Order
+public import Mathlib.Data.Set.Finite.List
 public import ProblemExtraction
 
 @[expose] public section

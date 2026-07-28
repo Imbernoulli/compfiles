@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Geometry.Euclidean.Sphere.Basic
+public import Mathlib.RingTheory.SimpleRing.Principal
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

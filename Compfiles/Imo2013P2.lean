@@ -6,8 +6,17 @@ Authors: David Renshaw
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Convex.Side
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Geometry.Euclidean.Sphere.Basic
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.SimpleRing.Principal
+public import Mathlib.RingTheory.TotallySplit
 public import ProblemExtraction
 
 @[expose] public section

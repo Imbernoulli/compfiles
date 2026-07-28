@@ -6,8 +6,12 @@ Authors: Francesco Vercellesi
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Nat.SuccPred
+public import Mathlib.Order.Interval.Finset.Nat
+public import Mathlib.Order.Partition.Finpartition
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Ineq
 public import ProblemExtraction
 
 @[expose] public section

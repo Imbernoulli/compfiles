@@ -6,7 +6,11 @@ Authors: Constantin Seebach
 
 module
 
-public import Mathlib
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Analysis.Complex.Circle
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Inverse
+public import Mathlib.NumberTheory.Niven
+public import Mathlib.Tactic.NormNum.RealSqrt
 public import ProblemExtraction
 
 @[expose] public section

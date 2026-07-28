@@ -6,7 +6,17 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Ring.GeomSum
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Nat.Factorial.DoubleFactorial
+public import Mathlib.Order.Lattice.Nat
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Lemmas
 public import ProblemExtraction
 
 @[expose] public section

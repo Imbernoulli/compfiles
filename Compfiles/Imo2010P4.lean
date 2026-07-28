@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.OfNorm
+public import Mathlib.Geometry.Euclidean.Sphere.Power
+public import Mathlib.Geometry.Euclidean.Sphere.SecondInter
 public import ProblemExtraction
 
 @[expose] public section

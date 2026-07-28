@@ -6,7 +6,21 @@ Authors: Joseph Myers, Benpigchu, Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.BigOperators.Group.List
+public import Mathlib.Algebra.Order.Floor.Div
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.List.SplitBy
+public import Mathlib.Data.Nat.SuccPred
+public import Mathlib.GroupTheory.GroupAction.Ring
+public import Mathlib.Order.Interval.Finset.Fin
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Cases
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Parity
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

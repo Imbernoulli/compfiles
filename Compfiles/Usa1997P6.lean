@@ -6,7 +6,9 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Order.Interval.Finset.Nat
 public import ProblemExtraction
 
 @[expose] public section

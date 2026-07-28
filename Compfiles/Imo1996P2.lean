@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Geometry.Euclidean.Angle.Sphere
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.MeasureTheory.Measure.Haar.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

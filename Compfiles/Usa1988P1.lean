@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Nat.ModEq
+public import Mathlib.Data.Nat.Prime.Defs
+public import Mathlib.Tactic.NormNum.GCD
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

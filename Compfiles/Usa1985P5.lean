@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+public import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.BigOperators
 public import ProblemExtraction
 
 @[expose] public section

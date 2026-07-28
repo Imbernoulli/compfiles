@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.Geometry.Euclidean.Sphere.Power
+public import Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.TotallySplit
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Tactic
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.Data.Finset.NatAntidiagonal
+public import Mathlib.Data.Set.Card
+public import Mathlib.Tactic.NormNum.BigOperators
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

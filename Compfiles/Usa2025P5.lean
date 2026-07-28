@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Data.Nat.Factorial.BigOperators
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Nat.GCD.BigOperators
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.LinearCombination.Lemmas
 public import ProblemExtraction
 
 @[expose] public section

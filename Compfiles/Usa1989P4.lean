@@ -6,13 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Analysis.Convex.Between
-public import Mathlib.Analysis.Convex.StrictConvexBetween
 public import Mathlib.Analysis.InnerProductSpace.TwoDim
 public import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
 public import Mathlib.Geometry.Euclidean.Circumcenter
 public import Mathlib.Geometry.Euclidean.Incenter
-public import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,8 +6,12 @@ Authors:
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.Order.Ring.Nat
+public import Mathlib.Data.Finset.Powerset
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

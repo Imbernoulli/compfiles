@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Field.Basic
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Nat.Dist
+public import Mathlib.Data.Rat.Star
+public import Mathlib.Order.Interval.Set.Infinite
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

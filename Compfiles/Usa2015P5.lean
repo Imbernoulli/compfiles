@@ -6,9 +6,19 @@ Authors: Evan Chen, Kenny Lau, Jujian Zhang
 
 module
 
-public import Mathlib
-public import Mathlib.Tactic
-
+public import Mathlib.Algebra.Group.NatPowAssoc
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Tactic.GCongr
+public import Mathlib.Tactic.Group
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Lemmas
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Positivity.Core
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.Zify
 public import ProblemExtraction
 
 @[expose] public section

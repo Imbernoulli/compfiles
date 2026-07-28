@@ -6,8 +6,7 @@ Authors: Sebastian Willmann (with assistance from Github Copilot and Aristotle)
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Star.Real
 public import ProblemExtraction
 
 @[expose] public section

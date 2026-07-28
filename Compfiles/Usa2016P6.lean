@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.GroupWithZero.Nat
+public import Mathlib.Data.Finset.Option
+public import Mathlib.Data.Fintype.Perm
+public import Mathlib.Data.Fintype.Pigeonhole
 public import ProblemExtraction
 
 @[expose] public section

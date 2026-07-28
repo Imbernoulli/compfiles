@@ -6,7 +6,16 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Algebra.Ring.IsFormallyReal
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Positivity.Finset
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

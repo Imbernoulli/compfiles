@@ -6,7 +6,8 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Probability.Distributions.Uniform
+public import Mathlib.Tactic.LinearCombination
 public import ProblemExtraction
 
 @[expose] public section

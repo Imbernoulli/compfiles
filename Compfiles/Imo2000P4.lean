@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Fin.VecNotation
+public import Mathlib.Data.Fintype.Perm
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.Tactic.IntervalCases
 public import ProblemExtraction
 
 @[expose] public section

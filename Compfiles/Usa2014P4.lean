@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section
@@ -835,9 +841,8 @@ lemma midphase : ∀ n : ℕ, ∀ Nx Ny P : Finset Cell,
         obtain ⟨c, hc, rfl⟩ := ht
         have e : insert y₀ (insert (3, 0) ({(0, 0), (5, 0)} ∪ Nx ∪ ySlots ∪ {x₀}))
             = {(0, 0), (5, 0)} ∪ ySlots ∪ Nx ∪ {(3, 0), x₀, y₀} := by
-          ext z
-          simp only [Finset.mem_insert, Finset.mem_union, Finset.mem_singleton]
-          tauto
+          simp only [Finset.insert_eq]
+          ac_rfl
         rw [e] at hc ⊢
         exact endgame_y_Bturn Nx hNx _ ⟨c, hc, rfl⟩
       · -- Pick a fresh neighbor slot `sy` of `y₀` and play `y₀`, `sy`.
@@ -916,9 +921,8 @@ lemma midphase : ∀ n : ℕ, ∀ Nx Ny P : Finset Cell,
             rw [Finset.erase_insert (by
               simp only [Finset.mem_insert, not_or]
               exact ⟨hsyne.symm, hymem⟩)]
-            ext z
-            simp only [Finset.mem_insert, Finset.mem_union, Finset.mem_singleton]
-            tauto
+            simp only [Finset.insert_eq]
+            ac_rfl
           rw [e]
           apply ih (n - 1) (by omega) Nx (insert sy Ny) {x₀} _ hNx
             (Finset.insert_subset hsy hNy) (Or.inl rfl)
@@ -979,9 +983,8 @@ lemma midphase : ∀ n : ℕ, ∀ Nx Ny P : Finset Cell,
                   have ex4 : x₀ ∉ Ny := fun h => (by decide : x₀ ∉ ySlots) (hNy h)
                   simp only [Finset.mem_union, Finset.mem_insert, Finset.mem_singleton, not_or]
                   exact ⟨⟨⟨ex1, ex2⟩, ex3⟩, ex4⟩)]
-              ext z
-              simp only [Finset.mem_insert, Finset.mem_union, Finset.mem_singleton]
-              tauto
+              simp only [Finset.insert_eq]
+              ac_rfl
             rw [e]
             apply ih (n - 1) (by omega) Nx (insert sy Ny) {y₀} _ hNx
               (Finset.insert_subset hsy hNy) (Or.inr rfl)
@@ -1015,9 +1018,8 @@ lemma midphase : ∀ n : ℕ, ∀ Nx Ny P : Finset Cell,
         obtain ⟨c, hc, rfl⟩ := ht
         have e : insert x₀ (insert (2, 0) ({(0, 0), (5, 0)} ∪ xSlots ∪ Ny ∪ {y₀}))
             = {(0, 0), (5, 0)} ∪ xSlots ∪ Ny ∪ {(2, 0), x₀, y₀} := by
-          ext z
-          simp only [Finset.mem_insert, Finset.mem_union, Finset.mem_singleton]
-          tauto
+          simp only [Finset.insert_eq]
+          ac_rfl
         rw [e] at hc ⊢
         exact endgame_x_Bturn Ny hNy _ ⟨c, hc, rfl⟩
       · -- Pick a fresh neighbor slot `sx` of `x₀` and play `x₀`, `sx`.
@@ -1096,9 +1098,8 @@ lemma midphase : ∀ n : ℕ, ∀ Nx Ny P : Finset Cell,
             rw [Finset.erase_insert (by
               simp only [Finset.mem_insert, not_or]
               exact ⟨hsxne.symm, hxmem⟩)]
-            ext z
-            simp only [Finset.mem_insert, Finset.mem_union, Finset.mem_singleton]
-            tauto
+            simp only [Finset.insert_eq]
+            ac_rfl
           rw [e]
           apply ih (n - 1) (by omega) (insert sx Nx) Ny {y₀} _
             (Finset.insert_subset hsx hNx) hNy (Or.inr rfl)
@@ -1159,9 +1160,8 @@ lemma midphase : ∀ n : ℕ, ∀ Nx Ny P : Finset Cell,
                   have ex4 : y₀ ∉ Ny := fun h => (by decide : y₀ ∉ ySlots) (hNy h)
                   simp only [Finset.mem_union, Finset.mem_insert, Finset.mem_singleton, not_or]
                   exact ⟨⟨⟨ex1, ex2⟩, ex3⟩, ex4⟩)]
-              ext z
-              simp only [Finset.mem_insert, Finset.mem_union, Finset.mem_singleton]
-              tauto
+              simp only [Finset.insert_eq]
+              ac_rfl
             rw [e]
             apply ih (n - 1) (by omega) (insert sx Nx) Ny {x₀} _
               (Finset.insert_subset hsx hNx) hNy (Or.inl rfl)

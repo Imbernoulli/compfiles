@@ -6,8 +6,14 @@ Authors: David Renshaw
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Combinatorics.Enumerative.DoubleCounting
+public import Mathlib.Data.Rat.Star
+public import Mathlib.Geometry.Euclidean.Simplex
+public import Mathlib.Geometry.Euclidean.Triangle
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import ProblemExtraction
 
 @[expose] public section

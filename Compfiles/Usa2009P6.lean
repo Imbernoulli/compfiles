@@ -6,7 +6,13 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.GCDMonoid.Finset
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Analysis.Normed.Field.Lemmas
+public import Mathlib.Data.Int.Star
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.LinearCombination.Lemmas
 public import ProblemExtraction
 
 @[expose] public section

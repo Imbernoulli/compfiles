@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Prime
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,10 +6,15 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Geometry.Euclidean.Sphere.Basic
 public import Mathlib.Analysis.InnerProductSpace.PiL2
-public import Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional
-public import Mathlib.Tactic
+public import Mathlib.Geometry.Euclidean.Sphere.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.FinCases
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

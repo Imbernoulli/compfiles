@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Geometry.Euclidean.Sphere.Basic
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Positivity.Finset
 public import ProblemExtraction
 
 @[expose] public section

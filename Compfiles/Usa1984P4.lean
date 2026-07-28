@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Tactic
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Order.ConditionallyCompleteLattice.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

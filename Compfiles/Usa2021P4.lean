@@ -7,7 +7,8 @@ Authors: Kimi K3
 module
 
 public import Mathlib.Tactic
-public import Mathlib
+public import Mathlib.Data.Nat.Nth
+public import Mathlib.NumberTheory.ArithmeticFunction.Misc
 public import ProblemExtraction
 
 @[expose] public section

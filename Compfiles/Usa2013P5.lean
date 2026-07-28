@@ -6,7 +6,14 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Nat.Digits.Defs
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.ZMod.Units
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.GCD
+public import Mathlib.Tactic.NormNum.Prime
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

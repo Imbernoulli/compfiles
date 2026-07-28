@@ -6,7 +6,22 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Data.Rat.Star
+public import Mathlib.NumberTheory.Divisors
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.FieldSimp.Lemmas
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Linarith.Preprocessing
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Positivity.Core
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section

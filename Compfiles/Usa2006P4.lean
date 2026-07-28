@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Analysis.MeanInequalities
+public import Mathlib.Data.Rat.Star
+public import Mathlib.NumberTheory.Real.Irrational
+public import Mathlib.Tactic.NormNum.Prime
 public import ProblemExtraction
 
 @[expose] public section

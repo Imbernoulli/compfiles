@@ -6,7 +6,11 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.CharP.Lemmas
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.Tactic.NormNum
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,9 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Analysis.Polynomial.Basic
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.Topology.Algebra.Polynomial
 public import ProblemExtraction
 
 @[expose] public section

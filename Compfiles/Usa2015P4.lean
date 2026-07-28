@@ -6,7 +6,9 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Data.Multiset.Sort
+public import Mathlib.Data.Sym.Card
+public import Mathlib.SetTheory.Cardinal.Finite
 public import ProblemExtraction
 
 @[expose] public section

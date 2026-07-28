@@ -6,7 +6,12 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Algebra.EuclideanDomain.Basic
+public import Mathlib.Algebra.EuclideanDomain.Field
+public import Mathlib.Algebra.Order.Chebyshev
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Analysis.Normed.Field.Basic
 public import ProblemExtraction
 
 @[expose] public section

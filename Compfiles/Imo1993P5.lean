@@ -6,8 +6,9 @@ Authors: Roozbeh Yousefzadeh, Zheng Yuan
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Int.Star
+public import Mathlib.NumberTheory.Real.GoldenRatio
 public import ProblemExtraction
 
 @[expose] public section

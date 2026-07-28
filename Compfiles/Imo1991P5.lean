@@ -6,8 +6,18 @@ Authors: Benpigchu
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.Convex.SpecificFunctions.Deriv
+public import Mathlib.Analysis.Normed.Affine.AddTorsorBases
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality
+public import Mathlib.MeasureTheory.Measure.Haar.Basic
+public import Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.TotallySplit
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity.Basic
 public import ProblemExtraction
 
 @[expose] public section

@@ -7,8 +7,12 @@ Authors: Daniel Liao
 module
 
 public import Mathlib.Tactic
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Archimedean.Real.Hom
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
+public import Mathlib.Geometry.Euclidean.Sphere.Basic
 public import ProblemExtraction
 
 @[expose] public section

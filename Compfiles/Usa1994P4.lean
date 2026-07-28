@@ -6,7 +6,10 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Algebra.BigOperators.Module
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Order.Star.Real
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,9 +6,12 @@ Authors: Roozbeh Yousefzadeh
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Real
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Data.Real.ConjExponents
+public import Mathlib.Order.Interval.Set.Monotone
 public import Mathlib.Tactic
-
 public import ProblemExtraction
 
 @[expose] public section

@@ -6,7 +6,12 @@ Authors: Joseph Myers, Kimi K3
 
 module
 
-public import Mathlib.Tactic
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Analysis.Normed.Ring.Lemmas
+public import Mathlib.Logic.Equiv.Fin.Rotate
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

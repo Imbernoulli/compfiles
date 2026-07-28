@@ -6,7 +6,12 @@ Authors: Joseph Myers, Markus Rydh, Kimi K3
 
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Abs
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Data.Int.Star
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
 public import ProblemExtraction
 
 @[expose] public section

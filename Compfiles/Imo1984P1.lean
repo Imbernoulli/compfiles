@@ -6,8 +6,12 @@ Authors: InternLM-MATH LEAN Formalizer v0.1, Hongyu Ouyang
 
 module
 
-public import Mathlib
-
+public import Mathlib.Analysis.MeanInequalities
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity.Basic
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

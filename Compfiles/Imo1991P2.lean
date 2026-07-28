@@ -6,8 +6,14 @@ Authors: Benpigchu
 
 module
 
-public import Mathlib
-
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Nat.ModEq
+public import Mathlib.Tactic.Cases
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Ring.Basic
 public import ProblemExtraction
 
 @[expose] public section
@@ -101,14 +107,7 @@ problem imo1991_p2 (n : ℕ) (hn : 6 < n)
   · right
     obtain ⟨t, l, hl, htl⟩ := Nat.exists_eq_two_pow_mul_odd (show n ≠ 0 by lia)
     by_cases! hl1 : l = 1
-    · have hp : ∀ t, (2 ^ t).isPowerOfTwo := by
-        intro t
-        induction t with
-        | zero => exact Nat.isPowerOfTwo_one
-        | succ t ih =>
-          simpa [pow_succ] using Nat.isPowerOfTwo_mul_two_of_isPowerOfTwo ih
-      rw [htl, hl1, mul_one]
-      exact hp t
+    · exact ⟨t, by rw [htl, hl1, mul_one]⟩
     exfalso
     have hl2 : l % 2 = 1 := Nat.odd_iff.mp hl
     have ht : t ≠ 0 := by

@@ -6,8 +6,6 @@ Authors: Kimi K3
 
 module
 
-public import Mathlib.Tactic
-public import Mathlib.Geometry.Euclidean.Basic
 public import Mathlib.Analysis.InnerProductSpace.PiL2
 public import ProblemExtraction
 
