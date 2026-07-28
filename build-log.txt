@@ -727,3 +727,20 @@ macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
 Build completed successfully (2832 jobs).
 ✔ [2823/2823] Built Compfiles.Imo2008P6 (28s)
 Build completed successfully (2823 jobs).
+⚠ [1271/1271] Built Compfiles.Imo2013P6 (95s)
+warning: Compfiles/Imo2013P6.lean:6866:5: Variable name `hbc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2013P6.lean:7328:49: Variable name `hy` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2013P6.lean:7621:5: Variable name `hτ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (1271 jobs).
