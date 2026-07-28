@@ -1178,72 +1178,8 @@ theorem mem_convexHull_of_same_side {A C V W R X₀ : Plane} {f : Plane → ℝ}
 
 /-- A convex quadrilateral is the union of the two triangles cut out by a diagonal:
 `hull {A,B,C,D} ⊆ hull {A,B,C} ∪ hull {A,C,D}`. -/
-theorem convexHull_quad_subset_union_triangle {A B C D : Plane} (h : ConvexQuad A B C D)
-    {X : Plane} (hX : X ∈ convexHull ℝ {A, B, C, D}) :
-    X ∈ convexHull ℝ {A, B, C} ∪ convexHull ℝ {A, C, D} := by
-  obtain ⟨X₀, hAC, hBD⟩ := h.diagonals
-  obtain ⟨σ₀, hσ₀, hX₀σ⟩ := hAC.1
-  obtain ⟨τ₀, hτ₀, hX₀τ⟩ := hBD.1
-  rw [AffineMap.lineMap_apply_module] at hX₀σ hX₀τ
-  have hσ₀0 : 0 < σ₀ := by
-    rcases hσ₀ with ⟨h1, h2⟩
-    by_contra h'
-    push_neg at h'
-    have : σ₀ = 0 := by linarith [h1, h']
-    rw [this] at hX₀σ
-    simp at hX₀σ
-    exact hAC.2.1 hX₀σ.symm
-  have hσ₀1 : σ₀ < 1 := by
-    rcases hσ₀ with ⟨h1, h2⟩
-    by_contra h'
-    push_neg at h'
-    have : σ₀ = 1 := by linarith [h2, h']
-    rw [this] at hX₀σ
-    simp at hX₀σ
-    exact hAC.2.2 hX₀σ.symm
-  have hτ₀0 : 0 < τ₀ := by
-    rcases hτ₀ with ⟨h1, h2⟩
-    by_contra h'
-    push_neg at h'
-    have : τ₀ = 0 := by linarith [h1, h']
-    rw [this] at hX₀τ
-    simp at hX₀τ
-    exact hBD.2.1 hX₀τ.symm
-  have hτ₀1 : τ₀ < 1 := by
-    rcases hτ₀ with ⟨h1, h2⟩
-    by_contra h'
-    push_neg at h'
-    have : τ₀ = 1 := by linarith [h2, h']
-    rw [this] at hX₀τ
-    simp at hX₀τ
-    exact hBD.2.2 hX₀τ.symm
-  -- the functional and its basic values
-  set f : Plane → ℝ := fun Y ↦ ω (Y - A) (C - A) with hfdef
-  have hf : ∀ (x y : Plane) (t : ℝ), f ((1 - t) • x + t • y) = (1 - t) * f x + t * f y := by
-    intro x y t
-    simp only [hfdef]
-    rw [show (1 - t) • x + t • y - A = (1 - t) • (x - A) + t • (y - A) by module]
-    rw [ω_add_left, ω_smul_left, ω_smul_left]
-  have hfA : f A = 0 := by
-    rw [hfdef]
-    show ω (A - A) (C - A) = 0
-    rw [sub_self, ω_zero_left]
-  have hfC : f C = 0 := by
-    rw [hfdef]
-    show ω (C - A) (C - A) = 0
-    rw [ω_self]
-  have hCA : C - A ≠ 0 := by
-    intro h'
-    apply h.not_mem₁
-    have hAC' : A = C := (sub_eq_zero.mp h').symm
-    rw [hAC']
-    exact subset_convexHull ℝ _ (Set.mem_insert_of_mem _ (Set.mem_insert _ _))
-  have hfX₀ : f X₀ = 0 := by
-    rw [hfdef, ← hX₀σ]
-    show ω (((1 - σ₀) • A + σ₀ • C) - A) (C - A) = 0
-    rw [show (1 - σ₀) • A + σ₀ • C - A = σ₀ • (C - A) by module,
-      ω_smul_left, ω_self, mul_zero]
-  have hfB : f B ≠ 0 := by
+theorem omega_BA_CA_ne_zero {A B C D : Plane} (h : ConvexQuad A B C D) (hCA : C - A ≠ 0) :
+    ω (B - A) (C - A) ≠ 0 := by
     intro hB0
     have hB0' : ω (C - A) (B - A) = 0 := by
       have h2 : ω (B - A) (C - A) = 0 := hB0
@@ -1318,7 +1254,10 @@ theorem convexHull_quad_subset_union_triangle {A B C D : Plane} (h : ConvexQuad 
           (subset_convexHull ℝ _ (Set.mem_insert_of_mem _ (Set.mem_insert _ _)))
           (subset_convexHull ℝ _ (Set.mem_insert_of_mem _
             (Set.mem_insert_of_mem _ (Set.mem_singleton _)))) hseg)
-  have hfD : f D ≠ 0 := by
+
+
+theorem omega_DA_CA_ne_zero {A B C D : Plane} (h : ConvexQuad A B C D) (hCA : C - A ≠ 0) :
+    ω (D - A) (C - A) ≠ 0 := by
     intro hD0
     have hD0' : ω (C - A) (D - A) = 0 := by
       have h2 : ω (D - A) (C - A) = 0 := hD0
@@ -1389,6 +1328,75 @@ theorem convexHull_quad_subset_union_triangle {A B C D : Plane} (h : ConvexQuad 
         exact h.not_mem₃ (Convex.segment_subset (convex_convexHull ℝ _)
           (subset_convexHull ℝ _ (Set.mem_insert_of_mem _ (Set.mem_insert _ _)))
           (subset_convexHull ℝ _ (Set.mem_insert _ _)) hseg)
+
+
+theorem convexHull_quad_subset_union_triangle {A B C D : Plane} (h : ConvexQuad A B C D)
+    {X : Plane} (hX : X ∈ convexHull ℝ {A, B, C, D}) :
+    X ∈ convexHull ℝ {A, B, C} ∪ convexHull ℝ {A, C, D} := by
+  obtain ⟨X₀, hAC, hBD⟩ := h.diagonals
+  obtain ⟨σ₀, hσ₀, hX₀σ⟩ := hAC.1
+  obtain ⟨τ₀, hτ₀, hX₀τ⟩ := hBD.1
+  rw [AffineMap.lineMap_apply_module] at hX₀σ hX₀τ
+  have hσ₀0 : 0 < σ₀ := by
+    rcases hσ₀ with ⟨h1, h2⟩
+    by_contra h'
+    push_neg at h'
+    have : σ₀ = 0 := by linarith [h1, h']
+    rw [this] at hX₀σ
+    simp at hX₀σ
+    exact hAC.2.1 hX₀σ.symm
+  have hσ₀1 : σ₀ < 1 := by
+    rcases hσ₀ with ⟨h1, h2⟩
+    by_contra h'
+    push_neg at h'
+    have : σ₀ = 1 := by linarith [h2, h']
+    rw [this] at hX₀σ
+    simp at hX₀σ
+    exact hAC.2.2 hX₀σ.symm
+  have hτ₀0 : 0 < τ₀ := by
+    rcases hτ₀ with ⟨h1, h2⟩
+    by_contra h'
+    push_neg at h'
+    have : τ₀ = 0 := by linarith [h1, h']
+    rw [this] at hX₀τ
+    simp at hX₀τ
+    exact hBD.2.1 hX₀τ.symm
+  have hτ₀1 : τ₀ < 1 := by
+    rcases hτ₀ with ⟨h1, h2⟩
+    by_contra h'
+    push_neg at h'
+    have : τ₀ = 1 := by linarith [h2, h']
+    rw [this] at hX₀τ
+    simp at hX₀τ
+    exact hBD.2.2 hX₀τ.symm
+  -- the functional and its basic values
+  set f : Plane → ℝ := fun Y ↦ ω (Y - A) (C - A) with hfdef
+  have hf : ∀ (x y : Plane) (t : ℝ), f ((1 - t) • x + t • y) = (1 - t) * f x + t * f y := by
+    intro x y t
+    simp only [hfdef]
+    rw [show (1 - t) • x + t • y - A = (1 - t) • (x - A) + t • (y - A) by module]
+    rw [ω_add_left, ω_smul_left, ω_smul_left]
+  have hfA : f A = 0 := by
+    rw [hfdef]
+    show ω (A - A) (C - A) = 0
+    rw [sub_self, ω_zero_left]
+  have hfC : f C = 0 := by
+    rw [hfdef]
+    show ω (C - A) (C - A) = 0
+    rw [ω_self]
+  have hCA : C - A ≠ 0 := by
+    intro h'
+    apply h.not_mem₁
+    have hAC' : A = C := (sub_eq_zero.mp h').symm
+    rw [hAC']
+    exact subset_convexHull ℝ _ (Set.mem_insert_of_mem _ (Set.mem_insert _ _))
+  have hfX₀ : f X₀ = 0 := by
+    rw [hfdef, ← hX₀σ]
+    show ω (((1 - σ₀) • A + σ₀ • C) - A) (C - A) = 0
+    rw [show (1 - σ₀) • A + σ₀ • C - A = σ₀ • (C - A) by module,
+      ω_smul_left, ω_self, mul_zero]
+  have hfB : f B ≠ 0 := omega_BA_CA_ne_zero h hCA
+  have hfD : f D ≠ 0 := omega_DA_CA_ne_zero h hCA
   -- opposite signs of f(B), f(D)
   have hsign : (0 < f B ∧ f D < 0) ∨ (f B < 0 ∧ 0 < f D) := by
     have h1 : (1 - τ₀) * f B + τ₀ * f D = 0 := by
@@ -4578,461 +4586,122 @@ theorem cyclicQuad_of_cospherical {W X Y Z : Plane} (hconv : ConvexQuad W X Y Z)
   exact ⟨hconv, sp.center, sp.radius, hW, hX, hY, hZ⟩
 
 set_option maxHeartbeats 2400000 in
-/-- **Base case, anchor form.**  If the diagonal `BD` is strictly longer than the two
-sides adjacent to `B` (the "anchor at `A`"), the cyclic quadrilateral `ABCD` admits a
-dissection into four cyclic quadrilaterals, one of which is an isosceles trapezoid
-(the kalva construction at the anchor `A`). -/
-theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
-    (hdiag : dist B C < dist B D ∧ dist A B < dist B D) :
-    DissectionWithTrapezoid A B C D 4 := by
-  -- basic nondegeneracy and the two diagonal gaps
-  have hAB : A ≠ B := h.convex.ne₁₂
-  have hBC : B ≠ C := h.convex.ne₂₃
-  have hCD : C ≠ D := h.convex.ne₃₄
-  have hDA : D ≠ A := h.convex.ne₄₁
-  have hBD : B ≠ D := h.convex.ne₂₄
-  have hμ : 0 < dist B D ^ 2 - dist B C ^ 2 := by
-    nlinarith [hdiag.1, @dist_nonneg _ _ B C, @dist_nonneg _ _ B D]
-  have hκ : 0 < dist B D ^ 2 - dist A B ^ 2 := by
-    nlinarith [hdiag.2, @dist_nonneg _ _ A B, @dist_nonneg _ _ B D]
-  have hCD2 : 0 < dist C D ^ 2 := by
-    have hd := dist_pos.mpr hCD
-    nlinarith
-  have hAD2 : 0 < dist A D ^ 2 := by
-    have hd := dist_pos.mpr hDA.symm
-    nlinarith
-  -- the construction parameter `s`, small enough for both landing conditions
-  set u₁ := dist C D ^ 2 / (dist B D ^ 2 - dist B C ^ 2) with hu₁
-  set u₂ := dist A D ^ 2 / (dist B D ^ 2 - dist A B ^ 2) with hu₂
-  have hu₁pos : 0 < u₁ := div_pos hCD2 hμ
-  have hu₂pos : 0 < u₂ := div_pos hAD2 hκ
-  set s := min 1 (min u₁ u₂) / 2 with hsdef
-  have hs0 : 0 < s := by
-    rw [hsdef]
-    exact half_pos (lt_min zero_lt_one (lt_min hu₁pos hu₂pos))
-  have hs1 : s < 1 := by
-    rw [hsdef]
-    have h1 : min 1 (min u₁ u₂) ≤ 1 := min_le_left 1 (min u₁ u₂)
-    linarith [h1]
-  have hsu₁ : s < u₁ := by
-    rw [hsdef]
-    have h1 : min 1 (min u₁ u₂) ≤ u₁ := le_trans (min_le_right 1 _) (min_le_left u₁ u₂)
-    have h2 : 0 < min 1 (min u₁ u₂) := lt_min zero_lt_one (lt_min hu₁pos hu₂pos)
-    linarith [h1, h2]
-  have hsu₂ : s < u₂ := by
-    rw [hsdef]
-    have h1 : min 1 (min u₁ u₂) ≤ u₂ := le_trans (min_le_right 1 _) (min_le_right u₁ u₂)
-    have h2 : 0 < min 1 (min u₁ u₂) := lt_min zero_lt_one (lt_min hu₁pos hu₂pos)
-    linarith [h1, h2]
-  have hboundM : s * (dist B D ^ 2 - dist B C ^ 2) < dist C D ^ 2 := by
-    rw [hu₁] at hsu₁
-    rw [lt_div_iff₀ hμ] at hsu₁
-    exact hsu₁
-  have hboundN : s * (dist B D ^ 2 - dist A B ^ 2) < dist A D ^ 2 := by
-    rw [hu₂] at hsu₂
-    rw [lt_div_iff₀ hκ] at hsu₂
-    exact hsu₂
-  -- the kalva construction anchored at `A`
-  obtain ⟨P, K, L, M, N, hKdef, hPdef, hLdef, hMdef, hNdef, hKb, hLb, hMb, hNb,
-    hBKP, hCLP, hDMP, hAPN, c, hpar⟩ :=
-    landing_anchor h.convex h.concyclic hdiag hs0 hs1 hboundM hboundN
-  set tM := (dist C D ^ 2 - s * (dist B D ^ 2 - dist B C ^ 2)) / dist C D ^ 2 with htMdef
-  set tN := s * (dist B D ^ 2 - dist A B ^ 2) / dist A D ^ 2 with htNdef
-  have htM0 : 0 < tM := by
-    rw [htMdef]
-    exact div_pos (by nlinarith [hboundM]) hCD2
-  have htM1 : tM < 1 := by
-    rw [htMdef, div_lt_one hCD2]
-    nlinarith [mul_pos hs0 hμ]
-  have htN0 : 0 < tN := by
-    rw [htNdef]
-    exact div_pos (mul_pos hs0 hκ) hAD2
-  have htN1 : tN < 1 := by
-    rw [htNdef, div_lt_one hAD2]
-    nlinarith [hboundN]
-  have hs1' : (0:ℝ) < 1 - s := sub_pos.mpr hs1
-  have hs1'' : (1:ℝ) - s ≠ 0 := hs1'.ne'
-  have htM1' : (0:ℝ) < 1 - tM := sub_pos.mpr htM1
-  have htN1' : (0:ℝ) < 1 - tN := sub_pos.mpr htN1
-  -- the four pieces are strictly convex
-  have hconvA : ConvexQuad A K P N :=
-    convexQuad_A_piece h.convex hs0 hs1 htN0 htN1 hKdef hPdef hNdef hAPN
-  have hconvB : ConvexQuad B K P L :=
-    convexQuad_B_piece h.convex hs0 hs1 hKdef hPdef hLdef hBKP
-  have hconvC : ConvexQuad C L P M :=
-    convexQuad_C_piece h.convex hs0 hs1 htM0 htM1 hLdef hPdef hMdef hCLP
-  have hconvD : ConvexQuad D N P M :=
-    convexQuad_D_piece h.convex hs0 hs1 htN0 htN1 htM0 htM1 hNdef hPdef hMdef hDMP
-  -- cyclicity of the four pieces (in the boundary orders used by the dissection)
-  have hcy0 : Cospherical ({K, P, N, A} : Set Plane) :=
-    Cospherical.subset (by
-      intro x hx
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
-      tauto) hAPN
-  have hcy1 : Cospherical ({B, K, P, L} : Set Plane) :=
-    Cospherical.subset (by
-      intro x hx
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
-      tauto) hBKP
-  have hcy2 : Cospherical ({C, L, P, M} : Set Plane) :=
-    Cospherical.subset (by
-      intro x hx
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
-      tauto) hCLP
-  have hcy3 : Cospherical ({D, N, P, M} : Set Plane) :=
-    Cospherical.subset (by
-      intro x hx
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
-      tauto) hDMP
-  have hconvA' : ConvexQuad K P N A :=
-    ⟨hconvA.not_mem₂, hconvA.not_mem₃, hconvA.not_mem₄, hconvA.not_mem₁, by
-      obtain ⟨X, hX1, hX2⟩ := hconvA.diagonals
-      exact ⟨X, hX2, hX1.symm⟩⟩
-  have hcyc0 : CyclicQuad K P N A := cyclicQuad_of_cospherical hconvA' hcy0
-  have hcyc1 : CyclicQuad B K P L := cyclicQuad_of_cospherical hconvB hcy1
-  have hcyc2 : CyclicQuad C L P M := cyclicQuad_of_cospherical hconvC hcy2
-  have hcyc3 : CyclicQuad D N P M := cyclicQuad_of_cospherical hconvD hcy3
-  -- the trapezoid witness
-  have hAN : A ≠ N := hNb.2.2.symm
-  have hlegs : dist P N = dist K A := dist_eq_of_cospherical_parallel hAPN ⟨c, hpar⟩ hAN
-  have htrap : IsoscelesTrapezoid K P N A := ⟨hconvA', ⟨c, hpar⟩, hlegs⟩
-  -- vector forms of the construction points
-  have hvKP : P - K = (1 - s) • (D - A) := by
-    rw [hPdef, hKdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvBK : B - K = (1 - s) • (B - A) := by
-    rw [hKdef, AffineMap.lineMap_apply_module]
-    module
-  have hvAK : A - K = s • (A - B) := by
-    rw [hKdef, AffineMap.lineMap_apply_module]
-    module
-  have hvLK : L - K = (1 - s) • (C - A) := by
-    rw [hLdef, hKdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvNK : N - K = (1 - tN) • (D - A) - s • (B - A) := by
-    rw [hNdef, hKdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvDK : D - K = (D - A) - s • (B - A) := by
-    rw [hKdef, AffineMap.lineMap_apply_module]
-    module
-  have hvPL : P - L = (1 - s) • (D - C) := by
-    rw [hPdef, hLdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvBL : B - L = (1 - s) • (B - C) := by
-    rw [hLdef, AffineMap.lineMap_apply_module]
-    module
-  have hvKL : K - L = (1 - s) • (A - C) := by
-    rw [hKdef, hLdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvCL : C - L = s • (C - B) := by
-    rw [hLdef, AffineMap.lineMap_apply_module]
-    module
-  have hvML : M - L = tM • (D - C) + s • (C - B) := by
-    rw [hMdef, hLdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvDL : D - L = (D - C) + s • (C - B) := by
-    rw [hLdef, AffineMap.lineMap_apply_module]
-    module
-  have hvPM : P - M = s • (B - D) + (1 - tM) • (D - C) := by
-    rw [hPdef, hMdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvCM : C - M = tM • (C - D) := by
-    rw [hMdef, AffineMap.lineMap_apply_module]
-    module
-  have hvLM : L - M = s • (B - C) + tM • (C - D) := by
-    rw [hLdef, hMdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvDM : D - M = (1 - tM) • (D - C) := by
-    rw [hMdef, AffineMap.lineMap_apply_module]
-    module
-  have hvPN : P - N = s • (B - D) - tN • (A - D) := by
-    rw [hPdef, hNdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvDN : D - N = tN • (D - A) := by
-    rw [hNdef, AffineMap.lineMap_apply_module]
-    module
-  have hvAN : A - N = (1 - tN) • (A - D) := by
-    rw [hNdef, AffineMap.lineMap_apply_module]
-    module
-  have hvKN : K - N = s • (B - A) + (1 - tN) • (A - D) := by
-    rw [hKdef, hNdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
-    module
-  have hvKB : K - B = (1 - s) • (A - B) := by
-    rw [hKdef, AffineMap.lineMap_apply_module]
-    module
-  have hvNB : N - B = (1 - tN) • (D - A) + (A - B) := by
-    rw [hNdef, AffineMap.lineMap_apply_module]
-    module
-  have hvLB : L - B = (1 - s) • (C - B) := by
-    rw [hLdef, AffineMap.lineMap_apply_module]
-    module
-  have hvMB : M - B = tM • (D - C) + (C - B) := by
-    rw [hMdef, AffineMap.lineMap_apply_module]
-    module
-  have hvPB : P - B = (1 - s) • (D - B) := by
-    rw [hPdef, AffineMap.lineMap_apply_module]
-    module
-  -- the oriented-area constants and their sign facts
-  set w1 := ω (D - A) (B - A) with hw1def
-  set w1c := ω (D - A) (C - A) with hw1cdef
-  set w2 := ω (D - C) (B - C) with hw2def
-  set w2a := ω (D - C) (A - C) with hw2adef
-  set w3 := ω (D - B) (A - B) with hw3def
-  set w4 := ω (D - B) (C - B) with hw4def
-  set w5 := ω (B - D) (C - D) with hw5def
-  set w6 := ω (B - D) (A - D) with hw6def
-  have hw1 : w1 ≠ 0 := by
-    rw [hw1def]
-    have e : ω (D - A) (B - A) = ω (A - B) (D - B) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e]
-    exact h.convex.ω_ABD_ne
-  have hw2 : w2 ≠ 0 := by
-    rw [hw2def]
-    have e : ω (D - C) (B - C) = -ω (B - C) (D - C) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e]
-    exact neg_ne_zero.mpr h.convex.ω_BCD_ne
-  have hw3 : w3 ≠ 0 := by
-    rw [hw3def]
-    have e : ω (D - B) (A - B) = -ω (A - B) (D - B) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e]
-    exact neg_ne_zero.mpr h.convex.ω_ABD_ne
-  have hw4 : w4 ≠ 0 := by
-    rw [hw4def]
-    have e : ω (D - B) (C - B) = ω (B - C) (D - C) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e]
-    exact h.convex.ω_BCD_ne
-  have hw5 : w5 ≠ 0 := by
-    rw [hw5def]
-    have e : ω (B - D) (C - D) = -ω (B - C) (D - C) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e]
-    exact neg_ne_zero.mpr h.convex.ω_BCD_ne
-  have hw6 : w6 ≠ 0 := by
-    rw [hw6def]
-    have e : ω (B - D) (A - D) = ω (A - B) (D - B) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e]
-    exact h.convex.ω_ABD_ne
-  have hw1w1c : 0 < w1 * w1c := by
-    have hss := h.convex.side_sign_DA
-    have e1 : ω (A - D) (B - D) = -ω (D - A) (B - A) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    have e2 : ω (A - D) (C - D) = -ω (D - A) (C - A) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e1, e2, ← hw1def, ← hw1cdef, neg_mul_neg] at hss
-    exact hss
-  have hw2w2a : 0 < w2a * w2 := by
-    have hss := h.convex.side_sign_CD
-    rw [← hw2adef, ← hw2def] at hss
-    exact hss
-  have hw3w4 : w3 * w4 < 0 := by
-    have hos := h.convex.opp_side_BD
-    rw [← hw3def, ← hw4def] at hos
-    exact hos
-  -- the `ω`-values of the construction points against the separating lines
-  have hfB_KP : ω (P - K) (B - K) = ((1 - s) * (1 - s)) * w1 := by
-    rw [hw1def, hvKP, hvBK]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfL_KP : ω (P - K) (L - K) = ((1 - s) * (1 - s)) * w1c := by
-    rw [hw1cdef, hvKP, hvLK]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfA_KP : ω (P - K) (A - K) = -(s * (1 - s)) * w1 := by
-    rw [hw1def, hvKP, hvAK]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfN_KP : ω (P - K) (N - K) = -(s * (1 - s)) * w1 := by
-    rw [hw1def, hvKP, hvNK]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfD_KP : ω (P - K) (D - K) = -(s * (1 - s)) * w1 := by
-    rw [hw1def, hvKP, hvDK]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfB_PL : ω (P - L) (B - L) = ((1 - s) * (1 - s)) * w2 := by
-    rw [hw2def, hvPL, hvBL]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfK_PL : ω (P - L) (K - L) = ((1 - s) * (1 - s)) * w2a := by
-    rw [hw2adef, hvPL, hvKL]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfC_PL : ω (P - L) (C - L) = -(s * (1 - s)) * w2 := by
-    rw [hw2def, hvPL, hvCL]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfM_PL : ω (P - L) (M - L) = -(s * (1 - s)) * w2 := by
-    rw [hw2def, hvPL, hvML]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfD_PL : ω (P - L) (D - L) = -(s * (1 - s)) * w2 := by
-    rw [hw2def, hvPL, hvDL]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfC_PM : ω (P - M) (C - M) = (s * tM) * w5 := by
-    rw [hw5def, hvPM, hvCM]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfL_PM : ω (P - M) (L - M) = (s * (1 - s)) * w5 := by
-    rw [hw5def, hvPM, hvLM]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfD_PM : ω (P - M) (D - M) = -(s * (1 - tM)) * w5 := by
-    rw [hw5def, hvPM, hvDM]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfD_PN : ω (P - N) (D - N) = -(s * tN) * w6 := by
-    rw [hw6def, hvPN, hvDN]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfA_PN : ω (P - N) (A - N) = (s * (1 - tN)) * w6 := by
-    rw [hw6def, hvPN, hvAN]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfK_PN : ω (P - N) (K - N) = (s * (1 - s)) * w6 := by
-    rw [hw6def, hvPN, hvKN]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfK_BD : ω (D - B) (K - B) = (1 - s) * w3 := by
-    rw [hw3def, hvKB]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfN_BD : ω (D - B) (N - B) = tN * w3 := by
-    rw [hw3def, hvNB]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfL_BD : ω (D - B) (L - B) = (1 - s) * w4 := by
-    rw [hw4def, hvLB]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfM_BD : ω (D - B) (M - B) = (1 - tM) * w4 := by
-    rw [hw4def, hvMB]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfP_BD : ω (D - B) (P - B) = 0 := by
-    rw [hvPB]
-    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
-    ring
-  have hfA_BD : ω (D - B) (A - B) = w3 := hw3def.symm
-  have hfC_BD : ω (D - B) (C - B) = w4 := hw4def.symm
-  -- the separating lines are nondegenerate
-  have hKPne : K ≠ P := by
-    intro heq
-    rw [heq, sub_self, ω_zero_left] at hfB_KP
-    exact mul_ne_zero (mul_ne_zero hs1'' hs1'') hw1 hfB_KP.symm
-  have hLPne : L ≠ P := by
-    intro heq
-    rw [heq, sub_self, ω_zero_left] at hfB_PL
-    exact mul_ne_zero (mul_ne_zero hs1'' hs1'') hw2 hfB_PL.symm
-  have hMPne : M ≠ P := by
-    intro heq
-    rw [heq, sub_self, ω_zero_left] at hfC_PM
-    exact mul_ne_zero (mul_ne_zero hs0.ne' htM0.ne') hw5 hfC_PM.symm
-  have hNPne : N ≠ P := by
-    intro heq
-    rw [heq, sub_self, ω_zero_left] at hfD_PN
-    exact mul_ne_zero (neg_ne_zero.mpr (mul_ne_zero hs0.ne' htN0.ne')) hw6 hfD_PN.symm
-  -- side-sign products transported to the `ω`-functionals of the lines `PM` and `PN`
-  have hsideD_PM : (0:ℝ) < ω (P - M) (D - M) * ω (P - M) (N - M) := by
-    have hss := hconvD.side_sign_CD
-    have e1 : ω (M - P) (D - P) = -ω (P - M) (D - M) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    have e2 : ω (M - P) (N - P) = -ω (P - M) (N - M) := by
-      simp only [ω, PiLp.sub_apply]; ring
-    rw [e1, e2, neg_mul_neg] at hss
-    exact hss
-  have hsideD_PN : (0:ℝ) < ω (P - N) (D - N) * ω (P - N) (M - N) := hconvD.side_sign_BC
-  -- the construction points lie on the sides, hence in the quadrilateral region
-  have hKseg : K ∈ segment ℝ A B := affineSegment_eq_segment ℝ A B ▸ hKb.1
-  have hLseg : L ∈ segment ℝ B C := affineSegment_eq_segment ℝ B C ▸ hLb.1
-  have hMseg : M ∈ segment ℝ C D := affineSegment_eq_segment ℝ C D ▸ hMb.1
-  have hNseg : N ∈ segment ℝ D A := affineSegment_eq_segment ℝ D A ▸ hNb.1
-  have hKseg' : K ∈ segment ℝ B A := affineSegment_eq_segment ℝ B A ▸ hKb.symm.1
-  have hNseg' : N ∈ segment ℝ A D := affineSegment_eq_segment ℝ A D ▸ hNb.symm.1
-  have hPb : Sbtw ℝ B P D := by
-    rw [hPdef]
-    exact sbtw_lineMap hBD (sub_pos.mpr hs1) (sub_lt_self 1 hs0)
-  have hPseg : P ∈ segment ℝ B D := affineSegment_eq_segment ℝ B D ▸ hPb.1
-  have hPA : P ≠ A := by
-    intro heq
-    have h1 : ω (D - B) (A - B) = 0 := by
-      rw [← heq]
-      exact hfP_BD
-    exact hw3 (by rw [hw3def]; exact h1)
-  have hPC : P ≠ C := by
-    intro heq
-    have h1 : ω (D - B) (C - B) = 0 := by
-      rw [← heq]
-      exact hfP_BD
-    exact hw4 (by rw [hw4def]; exact h1)
-  have hAmem : A ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    subset_convexHull ℝ _ (Set.mem_insert A {B, C, D})
-  have hBmem : B ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    subset_convexHull ℝ _ (Set.mem_insert_of_mem A (Set.mem_insert B {C, D}))
-  have hCmem : C ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    subset_convexHull ℝ _ (Set.mem_insert_of_mem A
-      (Set.mem_insert_of_mem B (Set.mem_insert C {D})))
-  have hDmem : D ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    subset_convexHull ℝ _ (Set.mem_insert_of_mem A (Set.mem_insert_of_mem B
-      (Set.mem_insert_of_mem C (Set.mem_singleton D))))
-  have hKmem : K ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    Convex.segment_subset (convex_convexHull ℝ _) hAmem hBmem hKseg
-  have hLmem : L ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    Convex.segment_subset (convex_convexHull ℝ _) hBmem hCmem hLseg
-  have hMmem : M ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    Convex.segment_subset (convex_convexHull ℝ _) hCmem hDmem hMseg
-  have hNmem : N ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    Convex.segment_subset (convex_convexHull ℝ _) hDmem hAmem hNseg
-  have hPmem : P ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
-    Convex.segment_subset (convex_convexHull ℝ _) hBmem hDmem hPseg
-  -- triangle-to-piece inclusions used by the covering argument
-  have hmonoLBP : convexHull ℝ ({L, B, P} : Set Plane) ⊆
-      convexHull ℝ ({B, K, P, L} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  have hmonoLPC : convexHull ℝ ({L, P, C} : Set Plane) ⊆
-      convexHull ℝ ({C, L, P, M} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  have hmonoMCP : convexHull ℝ ({M, C, P} : Set Plane) ⊆
-      convexHull ℝ ({C, L, P, M} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  have hmonoMPD : convexHull ℝ ({M, P, D} : Set Plane) ⊆
-      convexHull ℝ ({D, N, P, M} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  have hmonoKBP : convexHull ℝ ({K, B, P} : Set Plane) ⊆
-      convexHull ℝ ({B, K, P, L} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  have hmonoKPA : convexHull ℝ ({K, P, A} : Set Plane) ⊆
-      convexHull ℝ ({K, P, N, A} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  have hmonoNAP : convexHull ℝ ({N, A, P} : Set Plane) ⊆
-      convexHull ℝ ({K, P, N, A} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  have hmonoNPD : convexHull ℝ ({N, P, D} : Set Plane) ⊆
-      convexHull ℝ ({D, N, P, M} : Set Plane) :=
-    convexHull_mono (fun z hz ↦ by
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
-      tauto)
-  -- pairwise disjointness of the piece interiors: the five line-separated pairs
-  have hd01 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion B K P L)) :=
+theorem disjoint_four_pieces {A B C D K L M N P : Plane}
+    (hd01 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion B K P L)))
+    (hd02 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion C L P M)))
+    (hd03 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion D N P M)))
+    (hd12 : Disjoint (interior (quadRegion B K P L)) (interior (quadRegion C L P M)))
+    (hd23 : Disjoint (interior (quadRegion C L P M)) (interior (quadRegion D N P M)))
+    (hd13 : Disjoint (interior (quadRegion B K P L)) (interior (quadRegion D N P M))) :
+    ∀ i j : Fin 4, i ≠ j →
+      Disjoint (interior (quadRegion (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).1 (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).2.1 (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).2.2.1 (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).2.2.2))
+        (interior (quadRegion (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] j).1 (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] j).2.1 (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] j).2.2.1 (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] j).2.2.2)) := by
+  intro i j hij
+  fin_cases i <;> fin_cases j
+  · exact absurd rfl hij
+  · exact hd01
+  · exact hd02
+  · exact hd03
+  · exact hd01.symm
+  · exact absurd rfl hij
+  · exact hd12
+  · exact hd13
+  · exact hd02.symm
+  · exact hd12.symm
+  · exact absurd rfl hij
+  · exact hd23
+  · exact hd03.symm
+  · exact hd13.symm
+  · exact hd23.symm
+  · exact absurd rfl hij
+
+set_option maxHeartbeats 2400000 in
+theorem cover_four_pieces {A B C D K L M N P : Plane} (h : ConvexQuad A B C D)
+    (hPseg : P ∈ segment ℝ B D) (hKseg : K ∈ segment ℝ A B) (hLseg : L ∈ segment ℝ B C)
+    (hMseg : M ∈ segment ℝ C D) (hNseg : N ∈ segment ℝ D A) (hKseg' : K ∈ segment ℝ B A)
+    (hNseg' : N ∈ segment ℝ A D)
+    (hAB : A ≠ B) (hBC : B ≠ C) (hCD : C ≠ D) (hDA : D ≠ A) (hBD : B ≠ D)
+    (hPb : Sbtw ℝ B P D) (hPA : P ≠ A) (hPC : P ≠ C)
+    (hmonoLBP : convexHull ℝ ({L, B, P} : Set Plane) ⊆ convexHull ℝ ({B, K, P, L} : Set Plane))
+    (hmonoLPC : convexHull ℝ ({L, P, C} : Set Plane) ⊆ convexHull ℝ ({C, L, P, M} : Set Plane))
+    (hmonoMCP : convexHull ℝ ({M, C, P} : Set Plane) ⊆ convexHull ℝ ({C, L, P, M} : Set Plane))
+    (hmonoMPD : convexHull ℝ ({M, P, D} : Set Plane) ⊆ convexHull ℝ ({D, N, P, M} : Set Plane))
+    (hmonoKBP : convexHull ℝ ({K, B, P} : Set Plane) ⊆ convexHull ℝ ({B, K, P, L} : Set Plane))
+    (hmonoKPA : convexHull ℝ ({K, P, A} : Set Plane) ⊆ convexHull ℝ ({K, P, N, A} : Set Plane))
+    (hmonoNAP : convexHull ℝ ({N, A, P} : Set Plane) ⊆ convexHull ℝ ({K, P, N, A} : Set Plane))
+    (hmonoNPD : convexHull ℝ ({N, P, D} : Set Plane) ⊆ convexHull ℝ ({D, N, P, M} : Set Plane)) :
+    quadRegion A B C D ⊆ ⋃ i, quadRegion (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).1
+      (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).2.1
+      (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).2.2.1
+      (![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)] i).2.2.2 := by
+    intro x hx
+    have hx' : x ∈ convexHull ℝ ({A, B, C, D} : Set Plane) := hx
+    have hrot : ConvexQuad B C D A :=
+      ⟨h.not_mem₂, h.not_mem₃, h.not_mem₄, h.not_mem₁, by
+        obtain ⟨X, hX1, hX2⟩ := h.diagonals
+        exact ⟨X, hX2, hX1.symm⟩⟩
+    have hset1 : ({A, B, C, D} : Set Plane) = {B, C, D, A} := by
+      ext y
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
+      tauto
+    rw [hset1] at hx'
+    rcases convexHull_quad_subset_union_triangle hrot hx' with hxT | hxT
+    · -- `x ∈ hull {B, C, D}`: split by `P ∈ segment B D`
+      rcases triangle_split_of_mem_segment hPseg hBC hBD hCD hxT with hxT | hxT
+      · -- `x ∈ hull {P, B, C}`: split by `L ∈ segment B C`
+        have hset : ({P, B, C} : Set Plane) = {B, P, C} := by
+          ext y
+          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
+          tauto
+        rw [hset] at hxT
+        rcases triangle_split_of_mem_segment hLseg hPb.2.1.symm hBC hPC hxT with hxT | hxT
+        · exact Set.mem_iUnion.mpr ⟨1, hmonoLBP hxT⟩
+        · exact Set.mem_iUnion.mpr ⟨2, hmonoLPC hxT⟩
+      · -- `x ∈ hull {P, C, D}`: split by `M ∈ segment C D`
+        have hset : ({P, C, D} : Set Plane) = {C, P, D} := by
+          ext y
+          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
+          tauto
+        rw [hset] at hxT
+        rcases triangle_split_of_mem_segment hMseg hPC.symm hCD hPb.2.2 hxT with hxT | hxT
+        · exact Set.mem_iUnion.mpr ⟨2, hmonoMCP hxT⟩
+        · exact Set.mem_iUnion.mpr ⟨3, hmonoMPD hxT⟩
+    · -- `x ∈ hull {B, D, A}`: split by `P ∈ segment B D`
+      have hset : ({B, D, A} : Set Plane) = {B, A, D} := by
+        ext y
+        simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
+        tauto
+      rw [hset] at hxT
+      rcases triangle_split_of_mem_segment hPseg hAB.symm hBD hDA.symm hxT with hxT | hxT
+      · -- `x ∈ hull {P, B, A}`: split by `K ∈ segment B A`
+        have hset2 : ({P, B, A} : Set Plane) = {B, P, A} := by
+          ext y
+          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
+          tauto
+        rw [hset2] at hxT
+        rcases triangle_split_of_mem_segment hKseg' hPb.2.1.symm hAB.symm hPA hxT
+          with hxT | hxT
+        · exact Set.mem_iUnion.mpr ⟨1, hmonoKBP hxT⟩
+        · exact Set.mem_iUnion.mpr ⟨0, hmonoKPA hxT⟩
+      · -- `x ∈ hull {P, A, D}`: split by `N ∈ segment A D`
+        have hset2 : ({P, A, D} : Set Plane) = {A, P, D} := by
+          ext y
+          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
+          tauto
+        rw [hset2] at hxT
+        rcases triangle_split_of_mem_segment hNseg' hPA.symm hDA.symm hPb.2.2 hxT
+          with hxT | hxT
+        · exact Set.mem_iUnion.mpr ⟨0, hmonoNAP hxT⟩
+        · exact Set.mem_iUnion.mpr ⟨3, hmonoNPD hxT⟩
+
+set_option maxHeartbeats 2400000 in
+theorem disjoint_KPNA_BKPL {A B K L N P : Plane} {s w1 w1c : ℝ} (hKPne : K ≠ P) (hw1 : w1 ≠ 0)
+    (hfB_KP : ω (P - K) (B - K) = ((1 - s) * (1 - s)) * w1)
+    (hfL_KP : ω (P - K) (L - K) = ((1 - s) * (1 - s)) * w1c)
+    (hfN_KP : ω (P - K) (N - K) = -(s * (1 - s)) * w1)
+    (hfA_KP : ω (P - K) (A - K) = -(s * (1 - s)) * w1)
+    (hs0 : 0 < s) (hs1' : 0 < 1 - s) (hw1w1c : 0 < w1 * w1c) :
+    Disjoint (interior (quadRegion K P N A)) (interior (quadRegion B K P L)) :=
     (disjoint_of_common_sign_line (s := ({B, K, P, L} : Set Plane))
       (t := ({K, P, N, A} : Set Plane)) hKPne hw1
       (fun y hy ↦ by
@@ -5055,7 +4724,19 @@ theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
         · rw [hfA_KP, mul_assoc]
           exact mul_nonpos_of_nonpos_of_nonneg (neg_nonpos.mpr (mul_nonneg hs0.le hs1'.le))
             (mul_self_nonneg w1))).symm
-  have hd02 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion C L P M)) :=
+
+
+set_option maxHeartbeats 2400000 in
+theorem disjoint_KPNA_CLPM {A B C D K L M N P : Plane} {s tN tM w3 w4 : ℝ} (hBD : B ≠ D) (hw3 : w3 ≠ 0)
+    (hfK_BD : ω (D - B) (K - B) = (1 - s) * w3)
+    (hfP_BD : ω (D - B) (P - B) = 0)
+    (hfN_BD : ω (D - B) (N - B) = tN * w3)
+    (hfA_BD : ω (D - B) (A - B) = w3)
+    (hfC_BD : ω (D - B) (C - B) = w4)
+    (hfL_BD : ω (D - B) (L - B) = (1 - s) * w4)
+    (hfM_BD : ω (D - B) (M - B) = (1 - tM) * w4)
+    (hs1' : 0 < 1 - s) (htN0 : 0 < tN) (htM1' : 0 < 1 - tM) (hw3w4 : w3 * w4 < 0) :
+    Disjoint (interior (quadRegion K P N A)) (interior (quadRegion C L P M)) :=
     disjoint_of_common_sign_line (s := ({K, P, N, A} : Set Plane))
       (t := ({C, L, P, M} : Set Plane)) hBD hw3
       (fun y hy ↦ by
@@ -5078,7 +4759,16 @@ theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
         · simp only [hfP_BD, zero_mul, le_refl]
         · rw [hfM_BD, mul_assoc, mul_comm w4 w3]
           exact mul_nonpos_of_nonneg_of_nonpos htM1'.le hw3w4.le)
-  have hd03 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion D N P M)) :=
+
+
+set_option maxHeartbeats 2400000 in
+theorem disjoint_KPNA_DNPM {A D K M N P : Plane} {s tN w6 : ℝ} (hNPne : N ≠ P) (hw6 : w6 ≠ 0)
+    (hfK_PN : ω (P - N) (K - N) = (s * (1 - s)) * w6)
+    (hfA_PN : ω (P - N) (A - N) = (s * (1 - tN)) * w6)
+    (hfD_PN : ω (P - N) (D - N) = -(s * tN) * w6)
+    (hs0 : 0 < s) (hs1' : 0 < 1 - s) (htN0 : 0 < tN) (htN1' : 0 < 1 - tN)
+    (hsideD_PN : (0:ℝ) < ω (P - N) (D - N) * ω (P - N) (M - N)) :
+    Disjoint (interior (quadRegion K P N A)) (interior (quadRegion D N P M)) :=
     disjoint_of_common_sign_line (s := ({K, P, N, A} : Set Plane))
       (t := ({D, N, P, M} : Set Plane)) hNPne hw6
       (fun y hy ↦ by
@@ -5114,7 +4804,16 @@ theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
             rw [h5] at h1
             linarith only [h1, h4]
           exact le_of_lt h3)
-  have hd12 : Disjoint (interior (quadRegion B K P L)) (interior (quadRegion C L P M)) :=
+
+
+set_option maxHeartbeats 2400000 in
+theorem disjoint_BKPL_CLPM {B C K L M P : Plane} {s w2 w2a : ℝ} (hLPne : L ≠ P) (hw2 : w2 ≠ 0)
+    (hfB_PL : ω (P - L) (B - L) = ((1 - s) * (1 - s)) * w2)
+    (hfK_PL : ω (P - L) (K - L) = ((1 - s) * (1 - s)) * w2a)
+    (hfC_PL : ω (P - L) (C - L) = -(s * (1 - s)) * w2)
+    (hfM_PL : ω (P - L) (M - L) = -(s * (1 - s)) * w2)
+    (hs0 : 0 < s) (hs1' : 0 < 1 - s) (hw2w2a : 0 < w2a * w2) :
+    Disjoint (interior (quadRegion B K P L)) (interior (quadRegion C L P M)) :=
     disjoint_of_common_sign_line (s := ({B, K, P, L} : Set Plane))
       (t := ({C, L, P, M} : Set Plane)) hLPne hw2
       (fun y hy ↦ by
@@ -5137,7 +4836,16 @@ theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
         · rw [hfM_PL, mul_assoc]
           exact mul_nonpos_of_nonpos_of_nonneg (neg_nonpos.mpr (mul_nonneg hs0.le hs1'.le))
             (mul_self_nonneg w2))
-  have hd23 : Disjoint (interior (quadRegion C L P M)) (interior (quadRegion D N P M)) :=
+
+
+set_option maxHeartbeats 2400000 in
+theorem disjoint_CLPM_DNPM {C D L M N P : Plane} {s tM w5 : ℝ} (hMPne : M ≠ P) (hw5 : w5 ≠ 0)
+    (hfC_PM : ω (P - M) (C - M) = (s * tM) * w5)
+    (hfL_PM : ω (P - M) (L - M) = (s * (1 - s)) * w5)
+    (hfD_PM : ω (P - M) (D - M) = -(s * (1 - tM)) * w5)
+    (hs0 : 0 < s) (hs1' : 0 < 1 - s) (htM0 : 0 < tM) (htM1' : 0 < 1 - tM)
+    (hsideD_PM : (0:ℝ) < ω (P - M) (D - M) * ω (P - M) (N - M)) :
+    Disjoint (interior (quadRegion C L P M)) (interior (quadRegion D N P M)) :=
     disjoint_of_common_sign_line (s := ({C, L, P, M} : Set Plane))
       (t := ({D, N, P, M} : Set Plane)) hMPne hw5
       (fun y hy ↦ by
@@ -5173,8 +4881,29 @@ theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
           exact le_of_lt h3
         · simp only [ω_self, zero_mul, le_refl]
         · simp only [sub_self, ω_zero_right, zero_mul, le_refl])
-  -- the remaining pair: the B-piece and the D-piece, split along the diagonal `BD`
-  have hd13 : Disjoint (interior (quadRegion B K P L)) (interior (quadRegion D N P M)) := by
+
+
+set_option maxHeartbeats 2400000 in
+theorem disjoint_BKP_DNM {B D P K L M N : Plane} {s tM tN w1 w2 w3 w4 : ℝ}
+    (hBD : B ≠ D) (hconvB : ConvexQuad B K P L) (hconvD : ConvexQuad D N P M)
+    (hKPne : K ≠ P) (hLPne : L ≠ P)
+    (hw1 : w1 ≠ 0) (hw2 : w2 ≠ 0) (hw3 : w3 ≠ 0) (hw4 : w4 ≠ 0)
+    (hw3w4 : w3 * w4 < 0)
+    (hfB_KP : ω (P - K) (B - K) = ((1 - s) * (1 - s)) * w1)
+    (hfD_KP : ω (P - K) (D - K) = -(s * (1 - s)) * w1)
+    (hfN_KP : ω (P - K) (N - K) = -(s * (1 - s)) * w1)
+    (hfB_PL : ω (P - L) (B - L) = ((1 - s) * (1 - s)) * w2)
+    (hfD_PL : ω (P - L) (D - L) = -(s * (1 - s)) * w2)
+    (hfM_PL : ω (P - L) (M - L) = -(s * (1 - s)) * w2)
+    (hfK_BD : ω (D - B) (K - B) = (1 - s) * w3)
+    (hfN_BD : ω (D - B) (N - B) = tN * w3)
+    (hfL_BD : ω (D - B) (L - B) = (1 - s) * w4)
+    (hfM_BD : ω (D - B) (M - B) = (1 - tM) * w4)
+    (hfP_BD : ω (D - B) (P - B) = 0)
+    (hvPB : P - B = (1 - s) • (D - B))
+    (hs0 : 0 < s) (hs1' : 0 < 1 - s) (htN0 : 0 < tN) (htM1' : 0 < 1 - tM)
+    (hPdef : P = AffineMap.lineMap B D (1 - s)) :
+    Disjoint (interior (quadRegion B K P L)) (interior (quadRegion D N P M)) := by
     have hBD' : D - B ≠ 0 := sub_ne_zero.mpr hBD.symm
     have hdecB : ∀ {x : Plane}, x ∈ interior (convexHull ℝ ({B, K, P, L} : Set Plane)) →
         x ∈ interior (convexHull ℝ ({B, K, P} : Set Plane)) ∪
@@ -5441,6 +5170,460 @@ theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
         rw [h1, zero_mul] at h2
         exact lt_irrefl 0 h2
       · exact hsegdis hxSB hxSD
+
+set_option maxHeartbeats 2400000 in
+/-- **Base case, anchor form.**  If the diagonal `BD` is strictly longer than the two
+sides adjacent to `B` (the "anchor at `A`"), the cyclic quadrilateral `ABCD` admits a
+dissection into four cyclic quadrilaterals, one of which is an isosceles trapezoid
+(the kalva construction at the anchor `A`). -/
+theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
+    (hdiag : dist B C < dist B D ∧ dist A B < dist B D) :
+    DissectionWithTrapezoid A B C D 4 := by
+  -- basic nondegeneracy and the two diagonal gaps
+  have hAB : A ≠ B := h.convex.ne₁₂
+  have hBC : B ≠ C := h.convex.ne₂₃
+  have hCD : C ≠ D := h.convex.ne₃₄
+  have hDA : D ≠ A := h.convex.ne₄₁
+  have hBD : B ≠ D := h.convex.ne₂₄
+  have hμ : 0 < dist B D ^ 2 - dist B C ^ 2 := by
+    nlinarith [hdiag.1, @dist_nonneg _ _ B C, @dist_nonneg _ _ B D]
+  have hκ : 0 < dist B D ^ 2 - dist A B ^ 2 := by
+    nlinarith [hdiag.2, @dist_nonneg _ _ A B, @dist_nonneg _ _ B D]
+  have hCD2 : 0 < dist C D ^ 2 := by
+    have hd := dist_pos.mpr hCD
+    nlinarith
+  have hAD2 : 0 < dist A D ^ 2 := by
+    have hd := dist_pos.mpr hDA.symm
+    nlinarith
+  -- the construction parameter `s`, small enough for both landing conditions
+  set u₁ := dist C D ^ 2 / (dist B D ^ 2 - dist B C ^ 2) with hu₁
+  set u₂ := dist A D ^ 2 / (dist B D ^ 2 - dist A B ^ 2) with hu₂
+  have hu₁pos : 0 < u₁ := div_pos hCD2 hμ
+  have hu₂pos : 0 < u₂ := div_pos hAD2 hκ
+  set s := min 1 (min u₁ u₂) / 2 with hsdef
+  have hs0 : 0 < s := by
+    rw [hsdef]
+    exact half_pos (lt_min zero_lt_one (lt_min hu₁pos hu₂pos))
+  have hs1 : s < 1 := by
+    rw [hsdef]
+    have h1 : min 1 (min u₁ u₂) ≤ 1 := min_le_left 1 (min u₁ u₂)
+    linarith [h1]
+  have hsu₁ : s < u₁ := by
+    rw [hsdef]
+    have h1 : min 1 (min u₁ u₂) ≤ u₁ := le_trans (min_le_right 1 _) (min_le_left u₁ u₂)
+    have h2 : 0 < min 1 (min u₁ u₂) := lt_min zero_lt_one (lt_min hu₁pos hu₂pos)
+    linarith [h1, h2]
+  have hsu₂ : s < u₂ := by
+    rw [hsdef]
+    have h1 : min 1 (min u₁ u₂) ≤ u₂ := le_trans (min_le_right 1 _) (min_le_right u₁ u₂)
+    have h2 : 0 < min 1 (min u₁ u₂) := lt_min zero_lt_one (lt_min hu₁pos hu₂pos)
+    linarith [h1, h2]
+  have hboundM : s * (dist B D ^ 2 - dist B C ^ 2) < dist C D ^ 2 := by
+    rw [hu₁] at hsu₁
+    rw [lt_div_iff₀ hμ] at hsu₁
+    exact hsu₁
+  have hboundN : s * (dist B D ^ 2 - dist A B ^ 2) < dist A D ^ 2 := by
+    rw [hu₂] at hsu₂
+    rw [lt_div_iff₀ hκ] at hsu₂
+    exact hsu₂
+  clear_value u₁ u₂ s
+  -- the kalva construction anchored at `A`
+  obtain ⟨P, K, L, M, N, hKdef, hPdef, hLdef, hMdef, hNdef, hKb, hLb, hMb, hNb,
+    hBKP, hCLP, hDMP, hAPN, c, hpar⟩ :=
+    landing_anchor h.convex h.concyclic hdiag hs0 hs1 hboundM hboundN
+  set tM := (dist C D ^ 2 - s * (dist B D ^ 2 - dist B C ^ 2)) / dist C D ^ 2 with htMdef
+  set tN := s * (dist B D ^ 2 - dist A B ^ 2) / dist A D ^ 2 with htNdef
+  have htM0 : 0 < tM := by
+    rw [htMdef]
+    exact div_pos (by nlinarith [hboundM]) hCD2
+  have htM1 : tM < 1 := by
+    rw [htMdef, div_lt_one hCD2]
+    nlinarith [mul_pos hs0 hμ]
+  have htN0 : 0 < tN := by
+    rw [htNdef]
+    exact div_pos (mul_pos hs0 hκ) hAD2
+  have htN1 : tN < 1 := by
+    rw [htNdef, div_lt_one hAD2]
+    nlinarith [hboundN]
+  clear_value tM tN
+  have hs1' : (0:ℝ) < 1 - s := sub_pos.mpr hs1
+  have hs1'' : (1:ℝ) - s ≠ 0 := hs1'.ne'
+  have htM1' : (0:ℝ) < 1 - tM := sub_pos.mpr htM1
+  have htN1' : (0:ℝ) < 1 - tN := sub_pos.mpr htN1
+  -- the four pieces are strictly convex
+  have hconvA : ConvexQuad A K P N :=
+    convexQuad_A_piece h.convex hs0 hs1 htN0 htN1 hKdef hPdef hNdef hAPN
+  have hconvB : ConvexQuad B K P L :=
+    convexQuad_B_piece h.convex hs0 hs1 hKdef hPdef hLdef hBKP
+  have hconvC : ConvexQuad C L P M :=
+    convexQuad_C_piece h.convex hs0 hs1 htM0 htM1 hLdef hPdef hMdef hCLP
+  have hconvD : ConvexQuad D N P M :=
+    convexQuad_D_piece h.convex hs0 hs1 htN0 htN1 htM0 htM1 hNdef hPdef hMdef hDMP
+  -- cyclicity of the four pieces (in the boundary orders used by the dissection)
+  have hcy0 : Cospherical ({K, P, N, A} : Set Plane) :=
+    Cospherical.subset (by
+      intro x hx
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
+      tauto) hAPN
+  have hcy1 : Cospherical ({B, K, P, L} : Set Plane) :=
+    Cospherical.subset (by
+      intro x hx
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
+      tauto) hBKP
+  have hcy2 : Cospherical ({C, L, P, M} : Set Plane) :=
+    Cospherical.subset (by
+      intro x hx
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
+      tauto) hCLP
+  have hcy3 : Cospherical ({D, N, P, M} : Set Plane) :=
+    Cospherical.subset (by
+      intro x hx
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx ⊢
+      tauto) hDMP
+  have hconvA' : ConvexQuad K P N A :=
+    ⟨hconvA.not_mem₂, hconvA.not_mem₃, hconvA.not_mem₄, hconvA.not_mem₁, by
+      obtain ⟨X, hX1, hX2⟩ := hconvA.diagonals
+      exact ⟨X, hX2, hX1.symm⟩⟩
+  have hcyc0 : CyclicQuad K P N A := cyclicQuad_of_cospherical hconvA' hcy0
+  have hcyc1 : CyclicQuad B K P L := cyclicQuad_of_cospherical hconvB hcy1
+  have hcyc2 : CyclicQuad C L P M := cyclicQuad_of_cospherical hconvC hcy2
+  have hcyc3 : CyclicQuad D N P M := cyclicQuad_of_cospherical hconvD hcy3
+  -- the trapezoid witness
+  have hAN : A ≠ N := hNb.2.2.symm
+  have hlegs : dist P N = dist K A := dist_eq_of_cospherical_parallel hAPN ⟨c, hpar⟩ hAN
+  have htrap : IsoscelesTrapezoid K P N A := ⟨hconvA', ⟨c, hpar⟩, hlegs⟩
+  -- vector forms of the construction points
+  have hvKP : P - K = (1 - s) • (D - A) := by
+    rw [hPdef, hKdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvBK : B - K = (1 - s) • (B - A) := by
+    rw [hKdef, AffineMap.lineMap_apply_module]
+    module
+  have hvAK : A - K = s • (A - B) := by
+    rw [hKdef, AffineMap.lineMap_apply_module]
+    module
+  have hvLK : L - K = (1 - s) • (C - A) := by
+    rw [hLdef, hKdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvNK : N - K = (1 - tN) • (D - A) - s • (B - A) := by
+    rw [hNdef, hKdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvDK : D - K = (D - A) - s • (B - A) := by
+    rw [hKdef, AffineMap.lineMap_apply_module]
+    module
+  have hvPL : P - L = (1 - s) • (D - C) := by
+    rw [hPdef, hLdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvBL : B - L = (1 - s) • (B - C) := by
+    rw [hLdef, AffineMap.lineMap_apply_module]
+    module
+  have hvKL : K - L = (1 - s) • (A - C) := by
+    rw [hKdef, hLdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvCL : C - L = s • (C - B) := by
+    rw [hLdef, AffineMap.lineMap_apply_module]
+    module
+  have hvML : M - L = tM • (D - C) + s • (C - B) := by
+    rw [hMdef, hLdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvDL : D - L = (D - C) + s • (C - B) := by
+    rw [hLdef, AffineMap.lineMap_apply_module]
+    module
+  have hvPM : P - M = s • (B - D) + (1 - tM) • (D - C) := by
+    rw [hPdef, hMdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvCM : C - M = tM • (C - D) := by
+    rw [hMdef, AffineMap.lineMap_apply_module]
+    module
+  have hvLM : L - M = s • (B - C) + tM • (C - D) := by
+    rw [hLdef, hMdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvDM : D - M = (1 - tM) • (D - C) := by
+    rw [hMdef, AffineMap.lineMap_apply_module]
+    module
+  have hvPN : P - N = s • (B - D) - tN • (A - D) := by
+    rw [hPdef, hNdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvDN : D - N = tN • (D - A) := by
+    rw [hNdef, AffineMap.lineMap_apply_module]
+    module
+  have hvAN : A - N = (1 - tN) • (A - D) := by
+    rw [hNdef, AffineMap.lineMap_apply_module]
+    module
+  have hvKN : K - N = s • (B - A) + (1 - tN) • (A - D) := by
+    rw [hKdef, hNdef, AffineMap.lineMap_apply_module, AffineMap.lineMap_apply_module]
+    module
+  have hvKB : K - B = (1 - s) • (A - B) := by
+    rw [hKdef, AffineMap.lineMap_apply_module]
+    module
+  have hvNB : N - B = (1 - tN) • (D - A) + (A - B) := by
+    rw [hNdef, AffineMap.lineMap_apply_module]
+    module
+  have hvLB : L - B = (1 - s) • (C - B) := by
+    rw [hLdef, AffineMap.lineMap_apply_module]
+    module
+  have hvMB : M - B = tM • (D - C) + (C - B) := by
+    rw [hMdef, AffineMap.lineMap_apply_module]
+    module
+  have hvPB : P - B = (1 - s) • (D - B) := by
+    rw [hPdef, AffineMap.lineMap_apply_module]
+    module
+  -- the oriented-area constants and their sign facts
+  set w1 := ω (D - A) (B - A) with hw1def
+  set w1c := ω (D - A) (C - A) with hw1cdef
+  set w2 := ω (D - C) (B - C) with hw2def
+  set w2a := ω (D - C) (A - C) with hw2adef
+  set w3 := ω (D - B) (A - B) with hw3def
+  set w4 := ω (D - B) (C - B) with hw4def
+  set w5 := ω (B - D) (C - D) with hw5def
+  set w6 := ω (B - D) (A - D) with hw6def
+  have hw1 : w1 ≠ 0 := by
+    rw [hw1def]
+    have e : ω (D - A) (B - A) = ω (A - B) (D - B) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e]
+    exact h.convex.ω_ABD_ne
+  have hw2 : w2 ≠ 0 := by
+    rw [hw2def]
+    have e : ω (D - C) (B - C) = -ω (B - C) (D - C) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e]
+    exact neg_ne_zero.mpr h.convex.ω_BCD_ne
+  have hw3 : w3 ≠ 0 := by
+    rw [hw3def]
+    have e : ω (D - B) (A - B) = -ω (A - B) (D - B) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e]
+    exact neg_ne_zero.mpr h.convex.ω_ABD_ne
+  have hw4 : w4 ≠ 0 := by
+    rw [hw4def]
+    have e : ω (D - B) (C - B) = ω (B - C) (D - C) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e]
+    exact h.convex.ω_BCD_ne
+  have hw5 : w5 ≠ 0 := by
+    rw [hw5def]
+    have e : ω (B - D) (C - D) = -ω (B - C) (D - C) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e]
+    exact neg_ne_zero.mpr h.convex.ω_BCD_ne
+  have hw6 : w6 ≠ 0 := by
+    rw [hw6def]
+    have e : ω (B - D) (A - D) = ω (A - B) (D - B) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e]
+    exact h.convex.ω_ABD_ne
+  have hw1w1c : 0 < w1 * w1c := by
+    have hss := h.convex.side_sign_DA
+    have e1 : ω (A - D) (B - D) = -ω (D - A) (B - A) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    have e2 : ω (A - D) (C - D) = -ω (D - A) (C - A) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e1, e2, ← hw1def, ← hw1cdef, neg_mul_neg] at hss
+    exact hss
+  have hw2w2a : 0 < w2a * w2 := by
+    have hss := h.convex.side_sign_CD
+    rw [← hw2adef, ← hw2def] at hss
+    exact hss
+  have hw3w4 : w3 * w4 < 0 := by
+    have hos := h.convex.opp_side_BD
+    rw [← hw3def, ← hw4def] at hos
+    exact hos
+  -- the `ω`-values of the construction points against the separating lines
+  have hfB_KP : ω (P - K) (B - K) = ((1 - s) * (1 - s)) * w1 := by
+    rw [hvKP, hvBK, ω_smul_left, ω_smul_right, ← hw1def, mul_assoc]
+  have hfL_KP : ω (P - K) (L - K) = ((1 - s) * (1 - s)) * w1c := by
+    rw [hvKP, hvLK, ω_smul_left, ω_smul_right, ← hw1cdef, mul_assoc]
+  have hfA_KP : ω (P - K) (A - K) = -(s * (1 - s)) * w1 := by
+    rw [hvKP, hvAK, ω_smul_left, ω_smul_right, show A - B = -(B - A) by abel, ω_neg_right, ← hw1def]
+    ring
+  have hfN_KP : ω (P - K) (N - K) = -(s * (1 - s)) * w1 := by
+    rw [hvKP, hvNK, ω_smul_left, ω_sub_right, ω_smul_right, ω_smul_right, ω_self, ← hw1def]
+    ring
+  have hfD_KP : ω (P - K) (D - K) = -(s * (1 - s)) * w1 := by
+    rw [hvKP, hvDK, ω_smul_left, ω_sub_right, ω_self, ω_smul_right, ← hw1def]
+    ring
+  have hfB_PL : ω (P - L) (B - L) = ((1 - s) * (1 - s)) * w2 := by
+    rw [hvPL, hvBL, ω_smul_left, ω_smul_right, ← hw2def, mul_assoc]
+  have hfK_PL : ω (P - L) (K - L) = ((1 - s) * (1 - s)) * w2a := by
+    rw [hvPL, hvKL, ω_smul_left, ω_smul_right, ← hw2adef, mul_assoc]
+  have hfC_PL : ω (P - L) (C - L) = -(s * (1 - s)) * w2 := by
+    rw [hvPL, hvCL, ω_smul_left, ω_smul_right, show C - B = -(B - C) by abel, ω_neg_right, ← hw2def]
+    ring
+  have hfM_PL : ω (P - L) (M - L) = -(s * (1 - s)) * w2 := by
+    rw [hvPL, hvML, ω_smul_left, ω_add_right, ω_smul_right, ω_smul_right, ω_self, show C - B = -(B - C) by abel, ω_neg_right, ← hw2def]
+    ring
+  have hfD_PL : ω (P - L) (D - L) = -(s * (1 - s)) * w2 := by
+    rw [hvPL, hvDL, ω_smul_left, ω_add_right, ω_self, ω_smul_right, show C - B = -(B - C) by abel, ω_neg_right, ← hw2def]
+    ring
+  have hfC_PM : ω (P - M) (C - M) = (s * tM) * w5 := by
+    rw [hw5def, hvPM, hvCM]
+    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
+    ring
+  have hfL_PM : ω (P - M) (L - M) = (s * (1 - s)) * w5 := by
+    rw [hw5def, hvPM, hvLM]
+    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
+    ring
+  have hfD_PM : ω (P - M) (D - M) = -(s * (1 - tM)) * w5 := by
+    rw [hvPM, hvDM, ω_add_left, ω_smul_left, ω_smul_left, ω_smul_right, ω_smul_right, ω_self, show D - C = -(C - D) by abel, ω_neg_right, ← hw5def]
+    ring
+  have hfD_PN : ω (P - N) (D - N) = -(s * tN) * w6 := by
+    rw [hw6def, hvPN, hvDN]
+    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
+    ring
+  have hfA_PN : ω (P - N) (A - N) = (s * (1 - tN)) * w6 := by
+    rw [hw6def, hvPN, hvAN]
+    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
+    ring
+  have hfK_PN : ω (P - N) (K - N) = (s * (1 - s)) * w6 := by
+    rw [hw6def, hvPN, hvKN]
+    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
+    ring
+  have hfK_BD : ω (D - B) (K - B) = (1 - s) * w3 := by
+    rw [hvKB, ω_smul_right, ← hw3def]
+  have hfN_BD : ω (D - B) (N - B) = tN * w3 := by
+    rw [hw3def, hvNB]
+    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
+    ring
+  have hfL_BD : ω (D - B) (L - B) = (1 - s) * w4 := by
+    rw [hvLB, ω_smul_right, ← hw4def]
+  have hfM_BD : ω (D - B) (M - B) = (1 - tM) * w4 := by
+    rw [hw4def, hvMB]
+    simp only [ω, PiLp.sub_apply, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
+    ring
+  have hfP_BD : ω (D - B) (P - B) = 0 := by
+    rw [hvPB, ω_smul_right, ω_self, mul_zero]
+  have hfA_BD : ω (D - B) (A - B) = w3 := hw3def.symm
+  have hfC_BD : ω (D - B) (C - B) = w4 := hw4def.symm
+  clear_value w1 w1c w2 w2a w5 w6
+  -- the separating lines are nondegenerate
+  have hKPne : K ≠ P := by
+    intro heq
+    rw [heq, sub_self, ω_zero_left] at hfB_KP
+    exact mul_ne_zero (mul_ne_zero hs1'' hs1'') hw1 hfB_KP.symm
+  have hLPne : L ≠ P := by
+    intro heq
+    rw [heq, sub_self, ω_zero_left] at hfB_PL
+    exact mul_ne_zero (mul_ne_zero hs1'' hs1'') hw2 hfB_PL.symm
+  have hMPne : M ≠ P := by
+    intro heq
+    rw [heq, sub_self, ω_zero_left] at hfC_PM
+    exact mul_ne_zero (mul_ne_zero hs0.ne' htM0.ne') hw5 hfC_PM.symm
+  have hNPne : N ≠ P := by
+    intro heq
+    rw [heq, sub_self, ω_zero_left] at hfD_PN
+    exact mul_ne_zero (neg_ne_zero.mpr (mul_ne_zero hs0.ne' htN0.ne')) hw6 hfD_PN.symm
+  -- side-sign products transported to the `ω`-functionals of the lines `PM` and `PN`
+  have hsideD_PM : (0:ℝ) < ω (P - M) (D - M) * ω (P - M) (N - M) := by
+    have hss := hconvD.side_sign_CD
+    have e1 : ω (M - P) (D - P) = -ω (P - M) (D - M) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    have e2 : ω (M - P) (N - P) = -ω (P - M) (N - M) := by
+      simp only [ω, PiLp.sub_apply]; ring
+    rw [e1, e2, neg_mul_neg] at hss
+    exact hss
+  have hsideD_PN : (0:ℝ) < ω (P - N) (D - N) * ω (P - N) (M - N) := hconvD.side_sign_BC
+  -- the construction points lie on the sides, hence in the quadrilateral region
+  have hKseg : K ∈ segment ℝ A B := affineSegment_eq_segment ℝ A B ▸ hKb.1
+  have hLseg : L ∈ segment ℝ B C := affineSegment_eq_segment ℝ B C ▸ hLb.1
+  have hMseg : M ∈ segment ℝ C D := affineSegment_eq_segment ℝ C D ▸ hMb.1
+  have hNseg : N ∈ segment ℝ D A := affineSegment_eq_segment ℝ D A ▸ hNb.1
+  have hKseg' : K ∈ segment ℝ B A := affineSegment_eq_segment ℝ B A ▸ hKb.symm.1
+  have hNseg' : N ∈ segment ℝ A D := affineSegment_eq_segment ℝ A D ▸ hNb.symm.1
+  have hPb : Sbtw ℝ B P D := by
+    rw [hPdef]
+    exact sbtw_lineMap hBD (sub_pos.mpr hs1) (sub_lt_self 1 hs0)
+  have hPseg : P ∈ segment ℝ B D := affineSegment_eq_segment ℝ B D ▸ hPb.1
+  have hPA : P ≠ A := by
+    intro heq
+    have h1 : ω (D - B) (A - B) = 0 := by
+      rw [← heq]
+      exact hfP_BD
+    exact hw3 (by rw [hw3def]; exact h1)
+  have hPC : P ≠ C := by
+    intro heq
+    have h1 : ω (D - B) (C - B) = 0 := by
+      rw [← heq]
+      exact hfP_BD
+    exact hw4 (by rw [hw4def]; exact h1)
+  clear_value w3 w4
+  have hAmem : A ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    subset_convexHull ℝ _ (Set.mem_insert A {B, C, D})
+  have hBmem : B ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    subset_convexHull ℝ _ (Set.mem_insert_of_mem A (Set.mem_insert B {C, D}))
+  have hCmem : C ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    subset_convexHull ℝ _ (Set.mem_insert_of_mem A
+      (Set.mem_insert_of_mem B (Set.mem_insert C {D})))
+  have hDmem : D ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    subset_convexHull ℝ _ (Set.mem_insert_of_mem A (Set.mem_insert_of_mem B
+      (Set.mem_insert_of_mem C (Set.mem_singleton D))))
+  have hKmem : K ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    Convex.segment_subset (convex_convexHull ℝ _) hAmem hBmem hKseg
+  have hLmem : L ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    Convex.segment_subset (convex_convexHull ℝ _) hBmem hCmem hLseg
+  have hMmem : M ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    Convex.segment_subset (convex_convexHull ℝ _) hCmem hDmem hMseg
+  have hNmem : N ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    Convex.segment_subset (convex_convexHull ℝ _) hDmem hAmem hNseg
+  have hPmem : P ∈ convexHull ℝ ({A, B, C, D} : Set Plane) :=
+    Convex.segment_subset (convex_convexHull ℝ _) hBmem hDmem hPseg
+  -- triangle-to-piece inclusions used by the covering argument
+  have hmonoLBP : convexHull ℝ ({L, B, P} : Set Plane) ⊆
+      convexHull ℝ ({B, K, P, L} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  have hmonoLPC : convexHull ℝ ({L, P, C} : Set Plane) ⊆
+      convexHull ℝ ({C, L, P, M} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  have hmonoMCP : convexHull ℝ ({M, C, P} : Set Plane) ⊆
+      convexHull ℝ ({C, L, P, M} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  have hmonoMPD : convexHull ℝ ({M, P, D} : Set Plane) ⊆
+      convexHull ℝ ({D, N, P, M} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  have hmonoKBP : convexHull ℝ ({K, B, P} : Set Plane) ⊆
+      convexHull ℝ ({B, K, P, L} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  have hmonoKPA : convexHull ℝ ({K, P, A} : Set Plane) ⊆
+      convexHull ℝ ({K, P, N, A} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  have hmonoNAP : convexHull ℝ ({N, A, P} : Set Plane) ⊆
+      convexHull ℝ ({K, P, N, A} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  have hmonoNPD : convexHull ℝ ({N, P, D} : Set Plane) ⊆
+      convexHull ℝ ({D, N, P, M} : Set Plane) :=
+    convexHull_mono (fun z hz ↦ by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz ⊢
+      tauto)
+  -- pairwise disjointness of the piece interiors: the five line-separated pairs
+  have hd01 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion B K P L)) :=
+    disjoint_KPNA_BKPL hKPne hw1 hfB_KP hfL_KP hfN_KP hfA_KP hs0 hs1' hw1w1c
+  have hd02 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion C L P M)) :=
+    disjoint_KPNA_CLPM hBD hw3 hfK_BD hfP_BD hfN_BD hfA_BD hfC_BD hfL_BD hfM_BD hs1' htN0 htM1' hw3w4
+  have hd03 : Disjoint (interior (quadRegion K P N A)) (interior (quadRegion D N P M)) :=
+    disjoint_KPNA_DNPM hNPne hw6 hfK_PN hfA_PN hfD_PN hs0 hs1' htN0 htN1' hsideD_PN
+  have hd12 : Disjoint (interior (quadRegion B K P L)) (interior (quadRegion C L P M)) :=
+    disjoint_BKPL_CLPM hLPne hw2 hfB_PL hfK_PL hfC_PL hfM_PL hs0 hs1' hw2w2a
+  have hd23 : Disjoint (interior (quadRegion C L P M)) (interior (quadRegion D N P M)) :=
+    disjoint_CLPM_DNPM hMPne hw5 hfC_PM hfL_PM hfD_PM hs0 hs1' htM0 htM1' hsideD_PM
+  -- the remaining pair: the B-piece and the D-piece, split along the diagonal `BD`
+  have hd13 : Disjoint (interior (quadRegion B K P L)) (interior (quadRegion D N P M)) :=
+    disjoint_BKP_DNM hBD hconvB hconvD hKPne hLPne hw1 hw2 hw3 hw4 hw3w4
+      hfB_KP hfD_KP hfN_KP hfB_PL hfD_PL hfM_PL hfK_BD hfN_BD hfL_BD hfM_BD hfP_BD hvPB
+      hs0 hs1' htN0 htM1' hPdef
   -- assemble the dissection
   refine ⟨⟨![(K, P, N, A), (B, K, P, L), (C, L, P, M), (D, N, P, M)], ?_, ?_, ?_, ?_⟩,
     0, ?_⟩
@@ -5492,84 +5675,10 @@ theorem dissection_four_of_hdiag {A B C D : Plane} (h : CyclicQuad A B C D)
       · exact hNmem
       · exact hPmem
       · exact hMmem
-  · -- covering: split the quadrilateral along the diagonal `BD`, then the triangles
-    intro x hx
-    have hx' : x ∈ convexHull ℝ ({A, B, C, D} : Set Plane) := hx
-    have hrot : ConvexQuad B C D A :=
-      ⟨h.convex.not_mem₂, h.convex.not_mem₃, h.convex.not_mem₄, h.convex.not_mem₁, by
-        obtain ⟨X, hX1, hX2⟩ := h.convex.diagonals
-        exact ⟨X, hX2, hX1.symm⟩⟩
-    have hset1 : ({A, B, C, D} : Set Plane) = {B, C, D, A} := by
-      ext y
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
-      tauto
-    rw [hset1] at hx'
-    rcases convexHull_quad_subset_union_triangle hrot hx' with hxT | hxT
-    · -- `x ∈ hull {B, C, D}`: split by `P ∈ segment B D`
-      rcases triangle_split_of_mem_segment hPseg hBC hBD hCD hxT with hxT | hxT
-      · -- `x ∈ hull {P, B, C}`: split by `L ∈ segment B C`
-        have hset : ({P, B, C} : Set Plane) = {B, P, C} := by
-          ext y
-          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
-          tauto
-        rw [hset] at hxT
-        rcases triangle_split_of_mem_segment hLseg hPb.2.1.symm hBC hPC hxT with hxT | hxT
-        · exact Set.mem_iUnion.mpr ⟨1, hmonoLBP hxT⟩
-        · exact Set.mem_iUnion.mpr ⟨2, hmonoLPC hxT⟩
-      · -- `x ∈ hull {P, C, D}`: split by `M ∈ segment C D`
-        have hset : ({P, C, D} : Set Plane) = {C, P, D} := by
-          ext y
-          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
-          tauto
-        rw [hset] at hxT
-        rcases triangle_split_of_mem_segment hMseg hPC.symm hCD hPb.2.2 hxT with hxT | hxT
-        · exact Set.mem_iUnion.mpr ⟨2, hmonoMCP hxT⟩
-        · exact Set.mem_iUnion.mpr ⟨3, hmonoMPD hxT⟩
-    · -- `x ∈ hull {B, D, A}`: split by `P ∈ segment B D`
-      have hset : ({B, D, A} : Set Plane) = {B, A, D} := by
-        ext y
-        simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
-        tauto
-      rw [hset] at hxT
-      rcases triangle_split_of_mem_segment hPseg hAB.symm hBD hDA.symm hxT with hxT | hxT
-      · -- `x ∈ hull {P, B, A}`: split by `K ∈ segment B A`
-        have hset2 : ({P, B, A} : Set Plane) = {B, P, A} := by
-          ext y
-          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
-          tauto
-        rw [hset2] at hxT
-        rcases triangle_split_of_mem_segment hKseg' hPb.2.1.symm hAB.symm hPA hxT
-          with hxT | hxT
-        · exact Set.mem_iUnion.mpr ⟨1, hmonoKBP hxT⟩
-        · exact Set.mem_iUnion.mpr ⟨0, hmonoKPA hxT⟩
-      · -- `x ∈ hull {P, A, D}`: split by `N ∈ segment A D`
-        have hset2 : ({P, A, D} : Set Plane) = {A, P, D} := by
-          ext y
-          simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
-          tauto
-        rw [hset2] at hxT
-        rcases triangle_split_of_mem_segment hNseg' hPA.symm hDA.symm hPb.2.2 hxT
-          with hxT | hxT
-        · exact Set.mem_iUnion.mpr ⟨0, hmonoNAP hxT⟩
-        · exact Set.mem_iUnion.mpr ⟨3, hmonoNPD hxT⟩
-  · intro i j hij
-    fin_cases i <;> fin_cases j
-    · exact absurd rfl hij
-    · exact hd01
-    · exact hd02
-    · exact hd03
-    · exact hd01.symm
-    · exact absurd rfl hij
-    · exact hd12
-    · exact hd13
-    · exact hd02.symm
-    · exact hd12.symm
-    · exact absurd rfl hij
-    · exact hd23
-    · exact hd03.symm
-    · exact hd13.symm
-    · exact hd23.symm
-    · exact absurd rfl hij
+  · exact cover_four_pieces h.convex hPseg hKseg hLseg hMseg hNseg hKseg' hNseg'
+      hAB hBC hCD hDA hBD hPb hPA hPC hmonoLBP hmonoLPC hmonoMCP hmonoMPD hmonoKBP hmonoKPA
+      hmonoNAP hmonoNPD
+  · exact disjoint_four_pieces hd01 hd02 hd03 hd12 hd23 hd13
   · show IsoscelesTrapezoid K P N A
     exact htrap
 
@@ -5590,6 +5699,268 @@ theorem dissection_four {A B C D : Plane} (h : CyclicQuad A B C D) :
   · exact (dissection_four_of_hdiag h.rotate hB).rotate
   · exact (dissection_four_of_hdiag h.rotate.rotate hC).rotate.rotate
   · exact (dissection_four_of_hdiag h.rotate.rotate.rotate hD).rotate.rotate.rotate
+
+set_option maxHeartbeats 2400000 in
+theorem trapezoid_cyclic₀ {A B K L : Plane} {e w : Plane} {κ μ ee ww : ℝ}
+    (hB : B = A + e) (hK : K = A + κ • e + (1 / 2 : ℝ) • w) (hL : L = A + μ • e + (1 / 2 : ℝ) • w)
+    (he : e ≠ 0) (hw : w ≠ 0) (horth : ⟪e, w⟫ = 0) (hμκ : μ < κ) (hκμ : κ + μ = 1)
+    (hww : 0 < ww)
+    (inner_eeww : ∀ a b : ℝ, ⟪a • e + b • w, a • e + b • w⟫ = a ^ 2 * ee + b ^ 2 * ww)
+    (sq_norm_eq : ∀ x : Plane, ‖x‖ ^ 2 = ⟪x, x⟫)
+    (norm_eq_of_sq : ∀ x y : Plane, ‖x‖ ^ 2 = ‖y‖ ^ 2 → ‖x‖ = ‖y‖) :
+    CyclicQuad A B K L := by
+    refine ⟨?_, ?_⟩
+    · rw [hB, hK, hL]
+      exact convexQuad_of_ortho he hw horth (by norm_num) hμκ
+    · set t₁ := (μ * μ - μ) * ee / ww + 1 / 4 with ht₁def
+      set O₁ := A + (1 / 2 : ℝ) • e + t₁ • w with hO₁def
+      clear_value t₁ O₁
+      have hA1 : A - O₁ = (-1 / 2 : ℝ) • e + (-t₁) • w := by rw [hO₁def]; module
+      have hB1 : B - O₁ = (1 / 2 : ℝ) • e + (-t₁) • w := by rw [hO₁def, hB]; module
+      have hK1 : K - O₁ = (κ - 1 / 2) • e + (1 / 2 - t₁) • w := by rw [hO₁def, hK]; module
+      have hL1 : L - O₁ = (μ - 1 / 2) • e + (1 / 2 - t₁) • w := by rw [hO₁def, hL]; module
+      have hsA : ‖A - O₁‖ ^ 2 = (-1 / 2) ^ 2 * ee + (-t₁) ^ 2 * ww := by
+        rw [sq_norm_eq, hA1, inner_eeww]
+      have hsB : ‖B - O₁‖ ^ 2 = (1 / 2) ^ 2 * ee + (-t₁) ^ 2 * ww := by
+        rw [sq_norm_eq, hB1, inner_eeww]
+      have hsK : ‖K - O₁‖ ^ 2 = (κ - 1 / 2) ^ 2 * ee + (1 / 2 - t₁) ^ 2 * ww := by
+        rw [sq_norm_eq, hK1, inner_eeww]
+      have hsL : ‖L - O₁‖ ^ 2 = (μ - 1 / 2) ^ 2 * ee + (1 / 2 - t₁) ^ 2 * ww := by
+        rw [sq_norm_eq, hL1, inner_eeww]
+      have hsBeq : ‖B - O₁‖ ^ 2 = ‖A - O₁‖ ^ 2 := by rw [hsB, hsA]; ring
+      have hsKeq : ‖K - O₁‖ ^ 2 = ‖A - O₁‖ ^ 2 := by
+        rw [hsK, hsA, ht₁def]
+        have hκ1 : κ = 1 - μ := by linarith [hκμ]
+        rw [hκ1]
+        field_simp [hww.ne']
+        ring
+      have hsLeq : ‖L - O₁‖ ^ 2 = ‖A - O₁‖ ^ 2 := by
+        rw [hsL, hsA, ht₁def]
+        field_simp [hww.ne']
+        ring
+      refine ⟨O₁, dist A O₁, rfl, ?_, ?_, ?_⟩
+      · rw [dist_eq_norm, dist_eq_norm]
+        exact norm_eq_of_sq _ _ hsBeq
+      · rw [dist_eq_norm, dist_eq_norm]
+        exact norm_eq_of_sq _ _ hsKeq
+      · rw [dist_eq_norm, dist_eq_norm]
+        exact norm_eq_of_sq _ _ hsLeq
+
+
+set_option maxHeartbeats 2400000 in
+theorem trapezoid_cyclic₁ {A C D K L : Plane} {e w : Plane} {α k κ μ ee ww : ℝ}
+    (hK2show : K = L + (K - L)) (hC2 : C = L + ((α - k - μ) / (κ - μ)) • (K - L) + (1 / 2 : ℝ) • w)
+    (hD2 : D = L + ((α - μ) / (κ - μ)) • (K - L) + (1 / 2 : ℝ) • w)
+    (hK : K = A + κ • e + (1 / 2 : ℝ) • w) (hL : L = A + μ • e + (1 / 2 : ℝ) • w)
+    (hC : C = A + (α - k) • e + w) (hD : D = A + α • e + w)
+    (he' : K - L ≠ 0) (hw : w ≠ 0) (horth'' : ⟪K - L, w⟫ = 0)
+    (hμ₂κ₂ : (α - μ) / (κ - μ) < (α - k - μ) / (κ - μ))
+    (hκμ : κ + μ = 1) (hα : α = (k + 1) / 2) (hκeq : κ = (3 - k) / 4) (hμeq : μ = (k + 1) / 4)
+    (hww : 0 < ww)
+    (inner_eeww : ∀ a b : ℝ, ⟪a • e + b • w, a • e + b • w⟫ = a ^ 2 * ee + b ^ 2 * ww)
+    (sq_norm_eq : ∀ x : Plane, ‖x‖ ^ 2 = ⟪x, x⟫)
+    (norm_eq_of_sq : ∀ x y : Plane, ‖x‖ ^ 2 = ‖y‖ ^ 2 → ‖x‖ = ‖y‖) :
+    CyclicQuad L K C D := by
+    refine ⟨?_, ?_⟩
+    · rw [hK2show, hC2, hD2]
+      exact convexQuad_of_ortho he' hw horth'' (by norm_num) hμ₂κ₂
+    · set t₂ := 3 / 4 - ((1 / 2 - μ) ^ 2 - (1 / 2 - α) ^ 2) * ee / ww with ht₂def
+      set O₂ := A + (1 / 2 : ℝ) • e + t₂ • w with hO₂def
+      clear_value t₂ O₂
+      have hL2 : L - O₂ = (μ - 1 / 2) • e + (1 / 2 - t₂) • w := by rw [hO₂def, hL]; module
+      have hK2 : K - O₂ = (κ - 1 / 2) • e + (1 / 2 - t₂) • w := by rw [hO₂def, hK]; module
+      have hC2v : C - O₂ = (α - k - 1 / 2) • e + (1 - t₂) • w := by
+        rw [hO₂def, hC]; module
+      have hD2v : D - O₂ = (α - 1 / 2) • e + (1 - t₂) • w := by rw [hO₂def, hD]; module
+      have hsL2 : ‖L - O₂‖ ^ 2 = (μ - 1 / 2) ^ 2 * ee + (1 / 2 - t₂) ^ 2 * ww := by
+        rw [sq_norm_eq, hL2, inner_eeww]
+      have hsK2 : ‖K - O₂‖ ^ 2 = (κ - 1 / 2) ^ 2 * ee + (1 / 2 - t₂) ^ 2 * ww := by
+        rw [sq_norm_eq, hK2, inner_eeww]
+      have hsC2 : ‖C - O₂‖ ^ 2 = (α - k - 1 / 2) ^ 2 * ee + (1 - t₂) ^ 2 * ww := by
+        rw [sq_norm_eq, hC2v, inner_eeww]
+      have hsD2 : ‖D - O₂‖ ^ 2 = (α - 1 / 2) ^ 2 * ee + (1 - t₂) ^ 2 * ww := by
+        rw [sq_norm_eq, hD2v, inner_eeww]
+      have hsKeq2 : ‖K - O₂‖ ^ 2 = ‖L - O₂‖ ^ 2 := by
+        rw [hsK2, hsL2]
+        have hκ1 : κ = 1 - μ := by linarith [hκμ]
+        rw [hκ1]; ring
+      have hsCeq2 : ‖C - O₂‖ ^ 2 = ‖L - O₂‖ ^ 2 := by
+        rw [hsC2, hsL2, ht₂def, hα]
+        field_simp [hww.ne']
+        ring
+      have hsDeq2 : ‖D - O₂‖ ^ 2 = ‖L - O₂‖ ^ 2 := by
+        rw [hsD2, hsL2, ht₂def]
+        field_simp [hww.ne']
+        ring
+      refine ⟨O₂, dist L O₂, rfl, ?_, ?_, ?_⟩
+      · rw [dist_eq_norm, dist_eq_norm]
+        exact norm_eq_of_sq _ _ hsKeq2
+      · rw [dist_eq_norm, dist_eq_norm]
+        exact norm_eq_of_sq _ _ hsCeq2
+      · rw [dist_eq_norm, dist_eq_norm]
+        exact norm_eq_of_sq _ _ hsDeq2
+
+
+set_option maxHeartbeats 2400000 in
+theorem trapezoid_disjoint {A B C D K L : Plane} {e w : Plane} {κ μ ww : ℝ}
+    (hBAm_w : ⟪B - A, w⟫ = 0) (hCAm_w : ⟪C - A, w⟫ = ww) (hDAm_w : ⟪D - A, w⟫ = ww)
+    (hww : 0 < ww) (hww_def : ww = ⟪w, w⟫) (horth : ⟪e, w⟫ = 0)
+    (hK : K = A + κ • e + (1 / 2 : ℝ) • w) (hL : L = A + μ • e + (1 / 2 : ℝ) • w) :
+    Disjoint (interior (quadRegion A B K L)) (interior (quadRegion L K C D)) := by
+  have hFA : ⟪A - A, w⟫ / ww = 0 := by rw [sub_self, inner_zero_left, zero_div]
+  have hFB : ⟪B - A, w⟫ / ww = 0 := by rw [hBAm_w, zero_div]
+  have hKAm_w : ⟪K - A, w⟫ = (1 / 2) * ww := by
+    rw [show K - A = κ • e + (1 / 2 : ℝ) • w by rw [hK]; module]
+    rw [inner_add_left, real_inner_smul_left, real_inner_smul_left, horth, mul_zero,
+      zero_add, ← hww_def]
+  have hLAm_w : ⟪L - A, w⟫ = (1 / 2) * ww := by
+    rw [show L - A = μ • e + (1 / 2 : ℝ) • w by rw [hL]; module]
+    rw [inner_add_left, real_inner_smul_left, real_inner_smul_left, horth, mul_zero,
+      zero_add, ← hww_def]
+  have hFK : ⟪K - A, w⟫ / ww = 1 / 2 := by rw [hKAm_w, mul_div_cancel_right₀ _ hww.ne']
+  have hFL : ⟪L - A, w⟫ / ww = 1 / 2 := by rw [hLAm_w, mul_div_cancel_right₀ _ hww.ne']
+  have hFC : ⟪C - A, w⟫ / ww = 1 := by rw [hCAm_w, div_self hww.ne']
+  have hFD : ⟪D - A, w⟫ / ww = 1 := by rw [hDAm_w, div_self hww.ne']
+  have hconv₁ : Convex ℝ {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} := by
+    intro x hx y hy a b ha hb hab
+    simp only [Set.mem_setOf_eq] at hx hy ⊢
+    have hlin : ⟪a • x + b • y - A, w⟫ = a * ⟪x - A, w⟫ + b * ⟪y - A, w⟫ := by
+      have h3 : (a + b) * ⟪A, w⟫ = ⟪A, w⟫ := by rw [hab, one_mul]
+      rw [inner_sub_left, inner_add_left, real_inner_smul_left, real_inner_smul_left,
+        inner_sub_left, inner_sub_left]
+      linear_combination h3
+    rw [show ⟪a • x + b • y - A, w⟫ / ww =
+        a * (⟪x - A, w⟫ / ww) + b * (⟪y - A, w⟫ / ww) by rw [hlin]; ring]
+    have h1 : a * (⟪x - A, w⟫ / ww) ≤ a * (1 / 2) := mul_le_mul_of_nonneg_left hx ha
+    have h2 : b * (⟪y - A, w⟫ / ww) ≤ b * (1 / 2) := mul_le_mul_of_nonneg_left hy hb
+    have h3 : a * (1 / 2) + b * (1 / 2) = 1 / 2 := by rw [← add_mul, hab, one_mul]
+    rw [← h3]; exact add_le_add h1 h2
+  have hconv₂ : Convex ℝ {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} := by
+    intro x hx y hy a b ha hb hab
+    simp only [Set.mem_setOf_eq] at hx hy ⊢
+    have hlin : ⟪a • x + b • y - A, w⟫ = a * ⟪x - A, w⟫ + b * ⟪y - A, w⟫ := by
+      have h3 : (a + b) * ⟪A, w⟫ = ⟪A, w⟫ := by rw [hab, one_mul]
+      rw [inner_sub_left, inner_add_left, real_inner_smul_left, real_inner_smul_left,
+        inner_sub_left, inner_sub_left]
+      linear_combination h3
+    rw [show ⟪a • x + b • y - A, w⟫ / ww =
+        a * (⟪x - A, w⟫ / ww) + b * (⟪y - A, w⟫ / ww) by rw [hlin]; ring]
+    have h1 : a * (1 / 2) ≤ a * (⟪x - A, w⟫ / ww) := mul_le_mul_of_nonneg_left hx ha
+    have h2 : b * (1 / 2) ≤ b * (⟪y - A, w⟫ / ww) := mul_le_mul_of_nonneg_left hy hb
+    have h3 : a * (1 / 2) + b * (1 / 2) = 1 / 2 := by rw [← add_mul, hab, one_mul]
+    rw [← h3]; exact add_le_add h1 h2
+  have hsub1hp : quadRegion A B K L ⊆ {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} := by
+    apply convexHull_min _ hconv₁
+    intro x hx
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
+    simp only [Set.mem_setOf_eq]
+    rcases hx with rfl | rfl | rfl | rfl
+    · rw [hFA]; norm_num
+    · rw [hFB]; norm_num
+    · exact hFK.le
+    · exact hFL.le
+  have hsub2hp : quadRegion L K C D ⊆ {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} := by
+    apply convexHull_min _ hconv₂
+    intro x hx
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
+    simp only [Set.mem_setOf_eq]
+    rcases hx with rfl | rfl | rfl | rfl
+    · exact hFL.ge
+    · exact hFK.ge
+    · rw [hFC]; norm_num
+    · rw [hFD]; norm_num
+  have hkey₁ : ∀ x : Plane, ⟪x - A, w⟫ / ww = 1 / 2 →
+      x ∉ interior {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} := by
+    intro x hx hxint
+    rw [mem_interior_iff_mem_nhds] at hxint
+    rw [Metric.mem_nhds_iff] at hxint
+    obtain ⟨ε, hε, hεsub⟩ := hxint
+    set cc := ε / (2 * (‖w‖ + 1)) with hccdef
+    have hcc : 0 < cc := by
+      rw [hccdef]
+      exact div_pos hε (mul_pos zero_lt_two (add_pos_of_nonneg_of_pos (norm_nonneg w)
+        zero_lt_one))
+    have hy_mem : x + cc • w ∈ Metric.ball x ε := by
+      rw [Metric.mem_ball, dist_eq_norm]
+      rw [show x + cc • w - x = cc • w by abel]
+      rw [norm_smul_of_nonneg hcc.le w, hccdef]
+      have hn : 0 ≤ ‖w‖ := norm_nonneg w
+      rw [div_mul_eq_mul_div, div_lt_iff₀ (show (0 : ℝ) < 2 * (‖w‖ + 1) from
+        mul_pos zero_lt_two (add_pos_of_nonneg_of_pos hn zero_lt_one))]
+      have hsmall : ‖w‖ < 2 * (‖w‖ + 1) := by
+        have h1 : ‖w‖ < ‖w‖ + 2 := lt_add_of_pos_right ‖w‖ (by norm_num)
+        have h2 : ‖w‖ + 2 ≤ 2 * (‖w‖ + 1) := by
+          rw [show 2 * (‖w‖ + 1) = (‖w‖ + 2) + ‖w‖ by ring]
+          exact le_add_of_nonneg_right hn
+        exact lt_of_lt_of_le h1 h2
+      exact mul_lt_mul_of_pos_left hsmall hε
+    have hmemS := hεsub hy_mem
+    simp only [Set.mem_setOf_eq] at hmemS
+    have hF : ⟪x + cc • w - A, w⟫ / ww = 1 / 2 + cc := by
+      rw [show x + cc • w - A = (x - A) + cc • w by abel]
+      rw [inner_add_left, real_inner_smul_left, ← hww_def, add_div, hx,
+        mul_div_cancel_right₀ _ hww.ne']
+    rw [hF] at hmemS
+    exact absurd hmemS (not_le_of_gt (lt_add_of_pos_right _ hcc))
+  have hkey₂ : ∀ x : Plane, ⟪x - A, w⟫ / ww = 1 / 2 →
+      x ∉ interior {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} := by
+    intro x hx hxint
+    rw [mem_interior_iff_mem_nhds] at hxint
+    rw [Metric.mem_nhds_iff] at hxint
+    obtain ⟨ε, hε, hεsub⟩ := hxint
+    set cc := ε / (2 * (‖w‖ + 1)) with hccdef
+    have hcc : 0 < cc := by
+      rw [hccdef]
+      exact div_pos hε (mul_pos zero_lt_two (add_pos_of_nonneg_of_pos (norm_nonneg w)
+        zero_lt_one))
+    have hy_mem : x - cc • w ∈ Metric.ball x ε := by
+      rw [Metric.mem_ball, dist_eq_norm]
+      rw [show x - cc • w - x = -(cc • w) by abel]
+      rw [norm_neg, norm_smul_of_nonneg hcc.le w, hccdef]
+      have hn : 0 ≤ ‖w‖ := norm_nonneg w
+      rw [div_mul_eq_mul_div, div_lt_iff₀ (show (0 : ℝ) < 2 * (‖w‖ + 1) from
+        mul_pos zero_lt_two (add_pos_of_nonneg_of_pos hn zero_lt_one))]
+      have hsmall : ‖w‖ < 2 * (‖w‖ + 1) := by
+        have h1 : ‖w‖ < ‖w‖ + 2 := lt_add_of_pos_right ‖w‖ (by norm_num)
+        have h2 : ‖w‖ + 2 ≤ 2 * (‖w‖ + 1) := by
+          rw [show 2 * (‖w‖ + 1) = (‖w‖ + 2) + ‖w‖ by ring]
+          exact le_add_of_nonneg_right hn
+        exact lt_of_lt_of_le h1 h2
+      exact mul_lt_mul_of_pos_left hsmall hε
+    have hmemS := hεsub hy_mem
+    simp only [Set.mem_setOf_eq] at hmemS
+    have hF : ⟪x - cc • w - A, w⟫ / ww = 1 / 2 - cc := by
+      rw [show x - cc • w - A = (x - A) - cc • w by abel]
+      rw [inner_sub_left, real_inner_smul_left, ← hww_def, sub_div, hx,
+        mul_div_cancel_right₀ _ hww.ne']
+    rw [hF] at hmemS
+    exact absurd hmemS (not_le_of_gt ((sub_lt_self_iff (1 / 2 : ℝ)).mpr hcc))
+  have hint₁ : interior {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} ⊆
+      {X : Plane | ⟪X - A, w⟫ / ww < 1 / 2} := by
+    intro x hx
+    have h1 := interior_subset hx
+    simp only [Set.mem_setOf_eq] at h1
+    simp only [Set.mem_setOf_eq]
+    by_contra hcon
+    rw [not_lt] at hcon
+    exact hkey₁ x (le_antisymm h1 hcon) hx
+  have hint₂ : interior {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} ⊆
+      {X : Plane | 1 / 2 < ⟪X - A, w⟫ / ww} := by
+    intro x hx
+    have h1 := interior_subset hx
+    simp only [Set.mem_setOf_eq] at h1
+    simp only [Set.mem_setOf_eq]
+    by_contra hcon
+    rw [not_lt] at hcon
+    exact hkey₂ x (le_antisymm hcon h1) hx
+  have hdisj01 : Disjoint (interior (quadRegion A B K L))
+      (interior (quadRegion L K C D)) := by
+    rw [Set.disjoint_left]
+    intro x hx1 hx2
+    have h1 : ⟪x - A, w⟫ / ww < 1 / 2 := hint₁ (interior_mono hsub1hp hx1)
+    have h2 : 1 / 2 < ⟪x - A, w⟫ / ww := hint₂ (interior_mono hsub2hp hx2)
+    exact absurd h1 (not_lt_of_gt h2)
+  exact hdisj01
 
 /-- **Induction step, geometric part.** A cyclic isosceles trapezoid can be dissected into
 two isosceles trapezoids by cutting it with a line parallel to its two parallel sides
@@ -5869,83 +6240,12 @@ theorem trapezoid_split {A B C D : Plane} (h : IsoscelesTrapezoid A B C D)
     rw [div_lt_iff₀ hκμ', div_mul_cancel₀ _ hκμne]
     linarith [hkneg]
   -- Piece 1 `(A, B, K, L)` is a cyclic quadrilateral.
-  have hcyc0 : CyclicQuad A B K L := by
-    refine ⟨?_, ?_⟩
-    · rw [hB, hK, hL]
-      exact convexQuad_of_ortho he hw horth (by norm_num) hμκ
-    · set t₁ := (μ * μ - μ) * ee / ww + 1 / 4 with ht₁def
-      set O₁ := A + (1 / 2 : ℝ) • e + t₁ • w with hO₁def
-      clear_value t₁ O₁
-      have hA1 : A - O₁ = (-1 / 2 : ℝ) • e + (-t₁) • w := by rw [hO₁def]; module
-      have hB1 : B - O₁ = (1 / 2 : ℝ) • e + (-t₁) • w := by rw [hO₁def, hB]; module
-      have hK1 : K - O₁ = (κ - 1 / 2) • e + (1 / 2 - t₁) • w := by rw [hO₁def, hK]; module
-      have hL1 : L - O₁ = (μ - 1 / 2) • e + (1 / 2 - t₁) • w := by rw [hO₁def, hL]; module
-      have hsA : ‖A - O₁‖ ^ 2 = (-1 / 2) ^ 2 * ee + (-t₁) ^ 2 * ww := by
-        rw [sq_norm_eq, hA1, inner_eeww]
-      have hsB : ‖B - O₁‖ ^ 2 = (1 / 2) ^ 2 * ee + (-t₁) ^ 2 * ww := by
-        rw [sq_norm_eq, hB1, inner_eeww]
-      have hsK : ‖K - O₁‖ ^ 2 = (κ - 1 / 2) ^ 2 * ee + (1 / 2 - t₁) ^ 2 * ww := by
-        rw [sq_norm_eq, hK1, inner_eeww]
-      have hsL : ‖L - O₁‖ ^ 2 = (μ - 1 / 2) ^ 2 * ee + (1 / 2 - t₁) ^ 2 * ww := by
-        rw [sq_norm_eq, hL1, inner_eeww]
-      have hsBeq : ‖B - O₁‖ ^ 2 = ‖A - O₁‖ ^ 2 := by rw [hsB, hsA]; ring
-      have hsKeq : ‖K - O₁‖ ^ 2 = ‖A - O₁‖ ^ 2 := by
-        rw [hsK, hsA, ht₁def]
-        have hκ1 : κ = 1 - μ := by linarith [hκμ]
-        rw [hκ1]
-        field_simp [hww.ne']
-        ring
-      have hsLeq : ‖L - O₁‖ ^ 2 = ‖A - O₁‖ ^ 2 := by
-        rw [hsL, hsA, ht₁def]
-        field_simp [hww.ne']
-        ring
-      refine ⟨O₁, dist A O₁, rfl, ?_, ?_, ?_⟩
-      · rw [dist_eq_norm, dist_eq_norm]
-        exact norm_eq_of_sq _ _ hsBeq
-      · rw [dist_eq_norm, dist_eq_norm]
-        exact norm_eq_of_sq _ _ hsKeq
-      · rw [dist_eq_norm, dist_eq_norm]
-        exact norm_eq_of_sq _ _ hsLeq
+  have hcyc0 : CyclicQuad A B K L :=
+    trapezoid_cyclic₀ hB hK hL he hw horth hμκ hκμ hww inner_eeww sq_norm_eq norm_eq_of_sq
   -- Piece 2 `(L, K, C, D)` is a cyclic quadrilateral.
-  have hcyc1 : CyclicQuad L K C D := by
-    refine ⟨?_, ?_⟩
-    · rw [hK2show, hC2, hD2]
-      exact convexQuad_of_ortho he' hw horth'' (by norm_num) hμ₂κ₂
-    · set t₂ := 3 / 4 - ((1 / 2 - μ) ^ 2 - (1 / 2 - α) ^ 2) * ee / ww with ht₂def
-      set O₂ := A + (1 / 2 : ℝ) • e + t₂ • w with hO₂def
-      clear_value t₂ O₂
-      have hL2 : L - O₂ = (μ - 1 / 2) • e + (1 / 2 - t₂) • w := by rw [hO₂def, hL]; module
-      have hK2 : K - O₂ = (κ - 1 / 2) • e + (1 / 2 - t₂) • w := by rw [hO₂def, hK]; module
-      have hC2v : C - O₂ = (α - k - 1 / 2) • e + (1 - t₂) • w := by
-        rw [hO₂def, hC]; module
-      have hD2v : D - O₂ = (α - 1 / 2) • e + (1 - t₂) • w := by rw [hO₂def, hD]; module
-      have hsL2 : ‖L - O₂‖ ^ 2 = (μ - 1 / 2) ^ 2 * ee + (1 / 2 - t₂) ^ 2 * ww := by
-        rw [sq_norm_eq, hL2, inner_eeww]
-      have hsK2 : ‖K - O₂‖ ^ 2 = (κ - 1 / 2) ^ 2 * ee + (1 / 2 - t₂) ^ 2 * ww := by
-        rw [sq_norm_eq, hK2, inner_eeww]
-      have hsC2 : ‖C - O₂‖ ^ 2 = (α - k - 1 / 2) ^ 2 * ee + (1 - t₂) ^ 2 * ww := by
-        rw [sq_norm_eq, hC2v, inner_eeww]
-      have hsD2 : ‖D - O₂‖ ^ 2 = (α - 1 / 2) ^ 2 * ee + (1 - t₂) ^ 2 * ww := by
-        rw [sq_norm_eq, hD2v, inner_eeww]
-      have hsKeq2 : ‖K - O₂‖ ^ 2 = ‖L - O₂‖ ^ 2 := by
-        rw [hsK2, hsL2]
-        have hκ1 : κ = 1 - μ := by linarith [hκμ]
-        rw [hκ1]; ring
-      have hsCeq2 : ‖C - O₂‖ ^ 2 = ‖L - O₂‖ ^ 2 := by
-        rw [hsC2, hsL2, ht₂def, hα]
-        field_simp [hww.ne']
-        ring
-      have hsDeq2 : ‖D - O₂‖ ^ 2 = ‖L - O₂‖ ^ 2 := by
-        rw [hsD2, hsL2, ht₂def]
-        field_simp [hww.ne']
-        ring
-      refine ⟨O₂, dist L O₂, rfl, ?_, ?_, ?_⟩
-      · rw [dist_eq_norm, dist_eq_norm]
-        exact norm_eq_of_sq _ _ hsKeq2
-      · rw [dist_eq_norm, dist_eq_norm]
-        exact norm_eq_of_sq _ _ hsCeq2
-      · rw [dist_eq_norm, dist_eq_norm]
-        exact norm_eq_of_sq _ _ hsDeq2
+  have hcyc1 : CyclicQuad L K C D :=
+    trapezoid_cyclic₁ hK2show hC2 hD2 hK hL hC hD he' hw horth'' hμ₂κ₂ hκμ hα hκeq hμeq hww
+      inner_eeww sq_norm_eq norm_eq_of_sq
   -- Inner products of the vertices' displacement vectors (used repeatedly below).
   have hBAm_w : ⟪B - A, w⟫ = 0 := by rw [← he_def]; exact horth
   have hCAm_w : ⟪C - A, w⟫ = ww := by
@@ -6126,166 +6426,14 @@ theorem trapezoid_split {A B C D : Plane} (h : IsoscelesTrapezoid A B C D)
         rw [hs2, hκ₂1, ← mul_div_assoc, hcomb, div_le_iff₀ hκμ', div_mul_cancel₀ _ hκμne,
           hbound2]
         exact sub_le_sub_right hξu μ
-  -- The `disjoint` field, via the height functional `X ↦ ⟪X − A, w⟫ / ww`.
-  have hFA : ⟪A - A, w⟫ / ww = 0 := by rw [sub_self, inner_zero_left, zero_div]
-  have hFB : ⟪B - A, w⟫ / ww = 0 := by rw [hBAm_w, zero_div]
-  have hKAm_w : ⟪K - A, w⟫ = (1 / 2) * ww := by
-    rw [show K - A = κ • e + (1 / 2 : ℝ) • w by rw [hK]; module]
-    rw [inner_add_left, real_inner_smul_left, real_inner_smul_left, horth, mul_zero,
-      zero_add, ← hww_def]
-  have hLAm_w : ⟪L - A, w⟫ = (1 / 2) * ww := by
-    rw [show L - A = μ • e + (1 / 2 : ℝ) • w by rw [hL]; module]
-    rw [inner_add_left, real_inner_smul_left, real_inner_smul_left, horth, mul_zero,
-      zero_add, ← hww_def]
-  have hFK : ⟪K - A, w⟫ / ww = 1 / 2 := by rw [hKAm_w, mul_div_cancel_right₀ _ hww.ne']
-  have hFL : ⟪L - A, w⟫ / ww = 1 / 2 := by rw [hLAm_w, mul_div_cancel_right₀ _ hww.ne']
-  have hFC : ⟪C - A, w⟫ / ww = 1 := by rw [hCAm_w, div_self hww.ne']
-  have hFD : ⟪D - A, w⟫ / ww = 1 := by rw [hDAm_w, div_self hww.ne']
-  have hconv₁ : Convex ℝ {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} := by
-    intro x hx y hy a b ha hb hab
-    simp only [Set.mem_setOf_eq] at hx hy ⊢
-    have hlin : ⟪a • x + b • y - A, w⟫ = a * ⟪x - A, w⟫ + b * ⟪y - A, w⟫ := by
-      have h3 : (a + b) * ⟪A, w⟫ = ⟪A, w⟫ := by rw [hab, one_mul]
-      rw [inner_sub_left, inner_add_left, real_inner_smul_left, real_inner_smul_left,
-        inner_sub_left, inner_sub_left]
-      linear_combination h3
-    rw [show ⟪a • x + b • y - A, w⟫ / ww =
-        a * (⟪x - A, w⟫ / ww) + b * (⟪y - A, w⟫ / ww) by rw [hlin]; ring]
-    have h1 : a * (⟪x - A, w⟫ / ww) ≤ a * (1 / 2) := mul_le_mul_of_nonneg_left hx ha
-    have h2 : b * (⟪y - A, w⟫ / ww) ≤ b * (1 / 2) := mul_le_mul_of_nonneg_left hy hb
-    have h3 : a * (1 / 2) + b * (1 / 2) = 1 / 2 := by rw [← add_mul, hab, one_mul]
-    rw [← h3]; exact add_le_add h1 h2
-  have hconv₂ : Convex ℝ {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} := by
-    intro x hx y hy a b ha hb hab
-    simp only [Set.mem_setOf_eq] at hx hy ⊢
-    have hlin : ⟪a • x + b • y - A, w⟫ = a * ⟪x - A, w⟫ + b * ⟪y - A, w⟫ := by
-      have h3 : (a + b) * ⟪A, w⟫ = ⟪A, w⟫ := by rw [hab, one_mul]
-      rw [inner_sub_left, inner_add_left, real_inner_smul_left, real_inner_smul_left,
-        inner_sub_left, inner_sub_left]
-      linear_combination h3
-    rw [show ⟪a • x + b • y - A, w⟫ / ww =
-        a * (⟪x - A, w⟫ / ww) + b * (⟪y - A, w⟫ / ww) by rw [hlin]; ring]
-    have h1 : a * (1 / 2) ≤ a * (⟪x - A, w⟫ / ww) := mul_le_mul_of_nonneg_left hx ha
-    have h2 : b * (1 / 2) ≤ b * (⟪y - A, w⟫ / ww) := mul_le_mul_of_nonneg_left hy hb
-    have h3 : a * (1 / 2) + b * (1 / 2) = 1 / 2 := by rw [← add_mul, hab, one_mul]
-    rw [← h3]; exact add_le_add h1 h2
-  have hsub1hp : quadRegion A B K L ⊆ {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} := by
-    apply convexHull_min _ hconv₁
-    intro x hx
-    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
-    simp only [Set.mem_setOf_eq]
-    rcases hx with rfl | rfl | rfl | rfl
-    · rw [hFA]; norm_num
-    · rw [hFB]; norm_num
-    · exact hFK.le
-    · exact hFL.le
-  have hsub2hp : quadRegion L K C D ⊆ {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} := by
-    apply convexHull_min _ hconv₂
-    intro x hx
-    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
-    simp only [Set.mem_setOf_eq]
-    rcases hx with rfl | rfl | rfl | rfl
-    · exact hFL.ge
-    · exact hFK.ge
-    · rw [hFC]; norm_num
-    · rw [hFD]; norm_num
-  have hkey₁ : ∀ x : Plane, ⟪x - A, w⟫ / ww = 1 / 2 →
-      x ∉ interior {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} := by
-    intro x hx hxint
-    rw [mem_interior_iff_mem_nhds] at hxint
-    rw [Metric.mem_nhds_iff] at hxint
-    obtain ⟨ε, hε, hεsub⟩ := hxint
-    set cc := ε / (2 * (‖w‖ + 1)) with hccdef
-    have hcc : 0 < cc := by
-      rw [hccdef]
-      exact div_pos hε (mul_pos zero_lt_two (add_pos_of_nonneg_of_pos (norm_nonneg w)
-        zero_lt_one))
-    have hy_mem : x + cc • w ∈ Metric.ball x ε := by
-      rw [Metric.mem_ball, dist_eq_norm]
-      rw [show x + cc • w - x = cc • w by abel]
-      rw [norm_smul_of_nonneg hcc.le w, hccdef]
-      have hn : 0 ≤ ‖w‖ := norm_nonneg w
-      rw [div_mul_eq_mul_div, div_lt_iff₀ (show (0 : ℝ) < 2 * (‖w‖ + 1) from
-        mul_pos zero_lt_two (add_pos_of_nonneg_of_pos hn zero_lt_one))]
-      have hsmall : ‖w‖ < 2 * (‖w‖ + 1) := by
-        have h1 : ‖w‖ < ‖w‖ + 2 := lt_add_of_pos_right ‖w‖ (by norm_num)
-        have h2 : ‖w‖ + 2 ≤ 2 * (‖w‖ + 1) := by
-          rw [show 2 * (‖w‖ + 1) = (‖w‖ + 2) + ‖w‖ by ring]
-          exact le_add_of_nonneg_right hn
-        exact lt_of_lt_of_le h1 h2
-      exact mul_lt_mul_of_pos_left hsmall hε
-    have hmemS := hεsub hy_mem
-    simp only [Set.mem_setOf_eq] at hmemS
-    have hF : ⟪x + cc • w - A, w⟫ / ww = 1 / 2 + cc := by
-      rw [show x + cc • w - A = (x - A) + cc • w by abel]
-      rw [inner_add_left, real_inner_smul_left, ← hww_def, add_div, hx,
-        mul_div_cancel_right₀ _ hww.ne']
-    rw [hF] at hmemS
-    exact absurd hmemS (not_le_of_gt (lt_add_of_pos_right _ hcc))
-  have hkey₂ : ∀ x : Plane, ⟪x - A, w⟫ / ww = 1 / 2 →
-      x ∉ interior {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} := by
-    intro x hx hxint
-    rw [mem_interior_iff_mem_nhds] at hxint
-    rw [Metric.mem_nhds_iff] at hxint
-    obtain ⟨ε, hε, hεsub⟩ := hxint
-    set cc := ε / (2 * (‖w‖ + 1)) with hccdef
-    have hcc : 0 < cc := by
-      rw [hccdef]
-      exact div_pos hε (mul_pos zero_lt_two (add_pos_of_nonneg_of_pos (norm_nonneg w)
-        zero_lt_one))
-    have hy_mem : x - cc • w ∈ Metric.ball x ε := by
-      rw [Metric.mem_ball, dist_eq_norm]
-      rw [show x - cc • w - x = -(cc • w) by abel]
-      rw [norm_neg, norm_smul_of_nonneg hcc.le w, hccdef]
-      have hn : 0 ≤ ‖w‖ := norm_nonneg w
-      rw [div_mul_eq_mul_div, div_lt_iff₀ (show (0 : ℝ) < 2 * (‖w‖ + 1) from
-        mul_pos zero_lt_two (add_pos_of_nonneg_of_pos hn zero_lt_one))]
-      have hsmall : ‖w‖ < 2 * (‖w‖ + 1) := by
-        have h1 : ‖w‖ < ‖w‖ + 2 := lt_add_of_pos_right ‖w‖ (by norm_num)
-        have h2 : ‖w‖ + 2 ≤ 2 * (‖w‖ + 1) := by
-          rw [show 2 * (‖w‖ + 1) = (‖w‖ + 2) + ‖w‖ by ring]
-          exact le_add_of_nonneg_right hn
-        exact lt_of_lt_of_le h1 h2
-      exact mul_lt_mul_of_pos_left hsmall hε
-    have hmemS := hεsub hy_mem
-    simp only [Set.mem_setOf_eq] at hmemS
-    have hF : ⟪x - cc • w - A, w⟫ / ww = 1 / 2 - cc := by
-      rw [show x - cc • w - A = (x - A) - cc • w by abel]
-      rw [inner_sub_left, real_inner_smul_left, ← hww_def, sub_div, hx,
-        mul_div_cancel_right₀ _ hww.ne']
-    rw [hF] at hmemS
-    exact absurd hmemS (not_le_of_gt ((sub_lt_self_iff (1 / 2 : ℝ)).mpr hcc))
-  have hint₁ : interior {X : Plane | ⟪X - A, w⟫ / ww ≤ 1 / 2} ⊆
-      {X : Plane | ⟪X - A, w⟫ / ww < 1 / 2} := by
-    intro x hx
-    have h1 := interior_subset hx
-    simp only [Set.mem_setOf_eq] at h1
-    simp only [Set.mem_setOf_eq]
-    by_contra hcon
-    rw [not_lt] at hcon
-    exact hkey₁ x (le_antisymm h1 hcon) hx
-  have hint₂ : interior {X : Plane | 1 / 2 ≤ ⟪X - A, w⟫ / ww} ⊆
-      {X : Plane | 1 / 2 < ⟪X - A, w⟫ / ww} := by
-    intro x hx
-    have h1 := interior_subset hx
-    simp only [Set.mem_setOf_eq] at h1
-    simp only [Set.mem_setOf_eq]
-    by_contra hcon
-    rw [not_lt] at hcon
-    exact hkey₂ x (le_antisymm hcon h1) hx
   have hdisj01 : Disjoint (interior (quadRegion A B K L))
-      (interior (quadRegion L K C D)) := by
-    rw [Set.disjoint_left]
-    intro x hx1 hx2
-    have h1 : ⟪x - A, w⟫ / ww < 1 / 2 := hint₁ (interior_mono hsub1hp hx1)
-    have h2 : 1 / 2 < ⟪x - A, w⟫ / ww := hint₂ (interior_mono hsub2hp hx2)
-    exact absurd h1 (not_lt_of_gt h2)
+      (interior (quadRegion L K C D)) :=
+    trapezoid_disjoint hBAm_w hCAm_w hDAm_w hww hww_def horth hK hL
   -- Both pieces are isosceles trapezoids.
   clear he hee hee_def hα_def hw_def horth hw hCA hDA hCB hww hww_def horth' inner_ew1
     hnormCB hnormDA hquad hlegs hkneg hKdef hLdef hKhalf hLhalf hκμ hμκ hκμ' hK2show
     hC2 hD2 he' horth'' hμ₂κ₂ hBAm_w hCAm_w hDAm_w hBAm_e hCAm_e hDAm_e hAmem hBmem
-    hCmem hDmem hKmem hLmem hFA hFB hKAm_w hLAm_w hFK hFL hFC hFD hconv₁ hconv₂
-    hsub1hp hsub2hp hkey₁ hkey₂ hint₁ hint₂
+    hCmem hDmem hKmem hLmem
   have hpar0 : ∃ k' : ℝ, L - K = k' • (B - A) :=
     ⟨μ - κ, by rw [hL, hK, ← he_def]; module⟩
   have hlegs0 : dist B K = dist A L := by
