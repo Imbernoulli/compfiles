@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 public import Mathlib.Data.Finset.Max
 public import Mathlib.Data.Set.Finite.Lattice
+public import Mathlib.Order.ConditionallyCompleteLattice.Indexed
 public import ProblemExtraction
 
 @[expose] public section

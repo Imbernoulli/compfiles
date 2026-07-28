@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Ring.IsFormallyReal
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Geometry.Euclidean.Angle.Sphere
 public import Mathlib.Geometry.Euclidean.Sphere.Ptolemy
 public import Mathlib.LinearAlgebra.FreeModule.PID
 public import Mathlib.RingTheory.Flat.TorsionFree

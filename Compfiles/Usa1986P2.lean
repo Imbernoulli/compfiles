@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Order.Ring.Star
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Data.Finset.Powerset
 public import Mathlib.Data.Real.Basic
 public import Mathlib.Tactic.Choose
 public import Mathlib.Tactic.NormNum

@@ -9,8 +9,11 @@ module
 public import Mathlib.Algebra.Order.Star.Real
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 public import Mathlib.Analysis.Convex.SpecificFunctions.Deriv
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Analysis.MeanInequalities
 public import Mathlib.Analysis.Normed.Affine.AddTorsorBases
 public import Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality
+public import Mathlib.Geometry.Euclidean.Triangle
 public import Mathlib.MeasureTheory.Measure.Haar.Basic
 public import Mathlib.RingTheory.Etale.Weakly
 public import Mathlib.RingTheory.Flat.TorsionFree

@@ -6,12 +6,15 @@ Authors: Kimi K3
 
 module
 
+public import Mathlib.Geometry.Euclidean.Angle.Sphere
+public import Mathlib.Geometry.Euclidean.Similarity
 public import Mathlib.Geometry.Euclidean.Sphere.Power
 public import Mathlib.Geometry.Euclidean.Sphere.SecondInter
 public import Mathlib.Tactic.Linarith
 public import Mathlib.Tactic.LinearCombination
 public import Mathlib.Tactic.NormNum
 public import Mathlib.Tactic.Ring
+public import Mathlib.Topology.MetricSpace.Similarity
 public import ProblemExtraction
 
 @[expose] public section

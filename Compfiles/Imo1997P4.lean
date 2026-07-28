@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Order.Ring.Star
 public import Mathlib.Data.Finset.Sort
 public import Mathlib.Data.Matrix.Block
 public import Mathlib.Tactic.NormNum.Ineq
+public import Mathlib.Tactic.Ring
 public import ProblemExtraction
 
 @[expose] public section

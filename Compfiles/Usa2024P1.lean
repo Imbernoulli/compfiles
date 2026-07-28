@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Order.Ring.Star
 public import Mathlib.Data.Int.Star
+public import Mathlib.Data.Nat.Prime.Factorial
 public import Mathlib.NumberTheory.Bertrand
 public import ProblemExtraction
 

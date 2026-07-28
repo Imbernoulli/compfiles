@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Order.Ring.Star
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 public import Mathlib.Geometry.Euclidean.Angle.Sphere
 public import Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality
+public import Mathlib.Geometry.Euclidean.Triangle
 public import Mathlib.LinearAlgebra.FreeModule.PID
 public import Mathlib.MeasureTheory.Measure.Haar.Basic
 public import Mathlib.RingTheory.Flat.TorsionFree
