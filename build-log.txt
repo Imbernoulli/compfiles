@@ -744,3 +744,302 @@ The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 Build completed successfully (1271 jobs).
+⚠ [8656/8656] Built Compfiles.Imo2015P4 (11553s)
+warning: Compfiles/Imo2015P4.lean:338:24: Variable name `O` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2015P4.lean:346:24: Variable name `O` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+✔ [2863/2863] Built Compfiles.Imo2016P6 (41s)
+Build completed successfully (2863 jobs).
+⚠ [2856/2856] Built Compfiles.Imo2021P3 (47s)
+warning: Compfiles/Imo2021P3.lean:50:0: automatically included section variable(s) unused in theorem `Imo2021P3.mem_interior_cycle`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:80:0: automatically included section variable(s) unused in theorem `Imo2021P3.exists_sbtw_cevian_of_mem_interior`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:144:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_mem_line_of_mem_interior`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:176:0: automatically included section variable(s) unused in theorem `Imo2021P3.affineIndependent_cycle`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:185:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_collinear_of_not_mem_line`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:195:0: automatically included section variable(s) unused in theorem `Imo2021P3.dist_mul_sin_eq_dist_mul_sin`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:237:45: This simp argument is unused:
+  Real.sin_sub
+
+Hint: Omit it from the simp argument list.
+  simp only [Real.cos_sub, Real.cos_add, R̵e̵a̵l̵.̵s̵i̵n̵_̵s̵u̵b̵,̵ ̵Real.sin_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2021P3.lean:245:45: This simp argument is unused:
+  Real.sin_sub
+
+Hint: Omit it from the simp argument list.
+  simp only [Real.cos_sub, Real.cos_add, R̵e̵a̵l̵.̵s̵i̵n̵_̵s̵u̵b̵,̵ ̵Real.sin_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2021P3.lean:265:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_collinear_cycle`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:271:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_collinear_swap`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:277:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_collinear_swap23`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:586:32: Variable name `hEw` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:652:32: Variable name `hFw` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:698:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_collinear_EAF`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:803:0: automatically included section variable(s) unused in theorem `Imo2021P3.cospherical_of_mul_dist_eq_mul_dist_of_sbtw`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:887:0: automatically included section variable(s) unused in theorem `Imo2021P3.E_ne_F`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:947:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2021P3.lean:1289:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2021P3.lean:1285:0: automatically included section variable(s) unused in theorem `Imo2021P3.radius_lt_dist_center_of_sbtw_of_mem_sphere`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:1590:0: automatically included section variable(s) unused in theorem `Imo2021P3.inner_eq_zero_of_power_eq_power`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2175:0: automatically included section variable(s) unused in theorem `Imo2021P3.inner_inversion_vsub_center_eq_half_sq`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2199:0: automatically included section variable(s) unused in theorem `Imo2021P3.inversion_sphere_image`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2319:0: automatically included section variable(s) unused in theorem `Imo2021P3.dist_lt_circumradius_of_mem_interior`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2389:0: automatically included section variable(s) unused in theorem `Imo2021P3.affineIndependent_ZCE`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2433:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_mem_line_AC_of_mem_line_BC`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2450:0: automatically included section variable(s) unused in theorem `Imo2021P3.not_mem_line_AB_of_mem_line_BC`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2467:0: automatically included section variable(s) unused in theorem `Imo2021P3.mem_line_CE_of_mem_line_AC`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2490:0: automatically included section variable(s) unused in theorem `Imo2021P3.line_EA_eq_line_CA_of_mem`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:2830:61: Variable name `hME` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:2945:0: automatically included section variable(s) unused in theorem `Imo2021P3.dist_center_lt_radius_of_sbtw_of_mem_sphere`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:3104:5: Variable name `hFw` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3104:26: Variable name `hDF` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3108:5: Variable name `hZEF` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3108:32: Variable name `hZsbtwEF` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3113:33: Variable name `hMC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3328:5: Variable name `hbis` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3329:26: Variable name `hDE` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3330:5: Variable name `hFw` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3330:26: Variable name `hDF` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3334:5: Variable name `hZBC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3334:32: Variable name `hZsbtw` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3335:5: Variable name `hZEF` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3335:32: Variable name `hZsbtwEF` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3337:5: Variable name `hMline` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3338:19: Variable name `hMZ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3600:0: automatically included section variable(s) unused in theorem `Imo2021P3.eq_inversion_of_ray_of_mul_dist_eq`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:3710:0: automatically included section variable(s) unused in theorem `Imo2021P3.O1_ne_O2`:
+  [Fact (finrank ℝ V = 2)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (finrank ℝ V = 2)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2021P3.lean:3712:5: Variable name `hlt` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3714:5: Variable name `hX` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2021P3.lean:3714:30: Variable name `hXCB` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (2856 jobs).
