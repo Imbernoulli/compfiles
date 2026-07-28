@@ -3831,3 +3831,1320 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 Build completed successfully (3177 jobs).
 ✔ [3065/3065] Built Compfiles.Imo1995P3 (92s)
 Build completed successfully (3065 jobs).
+⚠ [8656/8656] Built Compfiles.Imo1996P2 (50s)
+warning: Compfiles/Imo1996P2.lean:933:5: Variable name `hABC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1996P2.lean:934:5: Variable name `hP` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1996P2.lean:936:5: Variable name `hAD` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo1996P2.lean:939:5: Variable name `hAE` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2002P2 (33s)
+Build completed successfully (8656 jobs).
+✔ [2999/2999] Built Compfiles.Imo2006P2 (27s)
+Build completed successfully (2999 jobs).
+✔ [2809/2809] Built Compfiles.Imo2009P4 (32s)
+Build completed successfully (2809 jobs).
+✔ [8656/8656] Built Compfiles.Imo2011P2 (12s)
+Build completed successfully (8656 jobs).
+⚠ [2393/2393] Built Compfiles.Imo2010P2 (40s)
+warning: Compfiles/Imo2010P2.lean:169:15: This simp argument is unused:
+  starRingEnd_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [̵s̵t̵a̵r̵R̵i̵n̵g̵E̵n̵d̵_̵a̵p̵p̵l̵y̵,̵ ̵s̵t̵a̵r̵_̵n̵e̵g̵,̵[̲s̲t̲a̲r̲_̲n̲e̲g̲,̲ star_add, star_mul, hXc, hYc, hZc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2010P2.lean:195:13: This simp argument is unused:
+  starRingEnd_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [̵s̵t̵a̵r̵R̵i̵n̵g̵E̵n̵d̵_̵a̵p̵p̵l̵y̵,̵ ̵s̵t̵a̵r̵_̵s̵u̵b̵,̵[̲s̲t̲a̲r̲_̲s̲u̲b̲,̲ star_add, star_neg, star_mul, star_pow, star_div₀, star_ofNat, star_inv₀,
+  ̲  ̲ ̲ ̲star_star, hic, hec, hXc, hYc, hZc, inv_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2010P2.lean:196:27: This simp argument is unused:
+  star_star
+
+Hint: Omit it from the simp argument list.
+  simp only [starRingEnd_apply, star_sub, star_add, star_neg, star_mul, star_pow, star_div₀,
+      star_ofNat, star_inv₀, s̵t̵a̵r̵_̵s̵t̵a̵r̵,̵ ̵hic, hec, hXc, hYc, hZc, inv_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2010P2.lean:413:31: Variable name `ha` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:413:46: Variable name `hb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:413:61: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:415:5: Variable name `hABC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:520:49: Variable name `hb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:520:64: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:521:5: Variable name `hab` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:521:33: Variable name `hca` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:522:13: Variable name `hi` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:614:20: Variable name `hb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:614:35: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:616:5: Variable name `hρre` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2010P2.lean:897:42: This simp argument is unused:
+  zero_add
+
+Hint: Omit it from the simp argument list.
+  simp only [Complex.add_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, mul_zero,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲zero_mul, a̵d̵d̵_̵z̵e̵r̵o̵,̵ ̵z̵e̵r̵o̵_̵a̵d̵d̵]̵a̲d̲d̲_̲z̲e̲r̲o̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2010P2.lean:1037:25: This simp argument is unused:
+  starRingEnd_self_apply
+
+Hint: Omit it from the simp argument list.
+  simp [map_mul,̵ ̵s̵t̵a̵r̵R̵i̵n̵g̵E̵n̵d̵_̵s̵e̵l̵f̵_̵a̵p̵p̵l̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2010P2.lean:1038:8: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2010P2.lean:1103:10: This simp argument is unused:
+  smul_smul
+
+Hint: Omit it from the simp argument list.
+  simp [s̵m̵u̵l̵_̵s̵m̵u̵l̵,̵ ̵Complex.real_smul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2010P2.lean:1104:4: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2010P2.lean:1354:10: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2010P2.lean:1427:5: Variable name `hlt` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (2393 jobs).
+✔ [8656/8656] Built Compfiles.Imo2014P6 (19s)
+Build completed successfully (8656 jobs).
+⚠ [2124/2124] Built Compfiles.Imo2016P3 (27s)
+warning: Compfiles/Imo2016P3.lean:915:42: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.val_add, Fin.val_one',̵ ̵N̵a̵t̵.̵m̵o̵d̵_̵m̵o̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2016P3.lean:1473:42: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.val_add, Fin.val_one',̵ ̵N̵a̵t̵.̵m̵o̵d̵_̵m̵o̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2016P3.lean:1521:42: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.val_add, Fin.val_one',̵ ̵N̵a̵t̵.̵m̵o̵d̵_̵m̵o̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2016P3.lean:1240:46: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Imo2016P3.lean:1243:46: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Compfiles/Imo2016P3.lean:1240:46: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2016P3.lean:1243:46: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Compfiles/Imo2016P3.lean:1676:46: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.val_add, Fin.val_one',̵ ̵N̵a̵t̵.̵m̵o̵d̵_̵m̵o̵d̵] at h1
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2016P3.lean:1781:52: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.val_add, Fin.val_one',̵ ̵N̵a̵t̵.̵m̵o̵d̵_̵m̵o̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2016P3.lean:1849:54: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.val_add, Fin.val_one',̵ ̵N̵a̵t̵.̵m̵o̵d̵_̵m̵o̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2016P3.lean:1868:54: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.val_add, Fin.val_one',̵ ̵N̵a̵t̵.̵m̵o̵d̵_̵m̵o̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (2124 jobs).
+✔ [8656/8656] Built Compfiles.Imo2022P1 (15s)
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Imo2019P6 (30s)
+warning: Compfiles/Imo2019P6.lean:543:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:595:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:647:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:717:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+info: Compfiles/Imo2019P6.lean:705:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Compfiles/Imo2019P6.lean:770:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:823:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:877:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+info: Compfiles/Imo2019P6.lean:865:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Compfiles/Imo2019P6.lean:930:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:983:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:1041:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+info: Compfiles/Imo2019P6.lean:1029:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Compfiles/Imo2019P6.lean:1029:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Compfiles/Imo2019P6.lean:1029:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Compfiles/Imo2019P6.lean:1098:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:1155:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+info: Compfiles/Imo2019P6.lean:1143:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Compfiles/Imo2019P6.lean:1143:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Compfiles/Imo2019P6.lean:1143:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Compfiles/Imo2019P6.lean:1212:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:1267:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:1320:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+info: Compfiles/Imo2019P6.lean:1308:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Compfiles/Imo2019P6.lean:1378:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:1441:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+info: Compfiles/Imo2019P6.lean:1429:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Compfiles/Imo2019P6.lean:1494:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:1552:35: Custom `field_simp` dischargers do not make use of the `field_simp` arguments list
+warning: Compfiles/Imo2019P6.lean:988:34: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:988:44: This simp argument is unused:
+  map_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_p̵o̵w̵,̵ ̵m̵a̵p̵_̵neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:988:53: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:988:62: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_of̵N̵a̵t̵,̵ ̵m̵a̵p̵_̵o̵ne,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:988:73: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, m̵a̵p̵_̵o̵n̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:989:6: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:990:15: This simp argument is unused:
+  c1
+
+Hint: Omit it from the simp argument list.
+  simp only [c1̵,̵ ̵c̵2, c3, c4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:990:27: This simp argument is unused:
+  c4
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4̵,̵ ̵c̵5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:990:43: This simp argument is unused:
+  c8
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7,̵ ̵c̵8̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:991:42: This simp argument is unused:
+  map_div₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_d̵iv̵₀̵,̵ ̵m̵a̵p̵_̵i̵nv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:991:52: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:991:71: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:992:6: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+        m̵a̵p̵_̵o̵n̵e̵,̵ ̵Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:992:15: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵,̵ ̵hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:992:49: This simp argument is unused:
+  inv_inv
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi,̵ ̵i̵n̵v̵_̵i̵n̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1045:34: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1045:44: This simp argument is unused:
+  map_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_p̵o̵w̵,̵ ̵m̵a̵p̵_̵neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1045:53: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1045:62: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_of̵N̵a̵t̵,̵ ̵m̵a̵p̵_̵o̵ne,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1045:73: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, m̵a̵p̵_̵o̵n̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1046:6: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1047:15: This simp argument is unused:
+  c1
+
+Hint: Omit it from the simp argument list.
+  simp only [c1̵,̵ ̵c̵2, c3, c4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1047:27: This simp argument is unused:
+  c4
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4̵,̵ ̵c̵5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1047:43: This simp argument is unused:
+  c8
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7,̵ ̵c̵8̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1048:42: This simp argument is unused:
+  map_div₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_d̵iv̵₀̵,̵ ̵m̵a̵p̵_̵i̵nv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1048:52: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1048:71: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1049:6: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+        m̵a̵p̵_̵o̵n̵e̵,̵ ̵Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1049:15: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵,̵ ̵hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1049:49: This simp argument is unused:
+  inv_inv
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi,̵ ̵i̵n̵v̵_̵i̵n̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1102:34: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1102:44: This simp argument is unused:
+  map_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_p̵o̵w̵,̵ ̵m̵a̵p̵_̵neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1102:62: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_of̵N̵a̵t̵,̵ ̵m̵a̵p̵_̵o̵ne,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1102:73: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, m̵a̵p̵_̵o̵n̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1103:6: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1104:15: This simp argument is unused:
+  c1
+
+Hint: Omit it from the simp argument list.
+  simp only [c1̵,̵ ̵c̵2, c3, c4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1104:27: This simp argument is unused:
+  c4
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4̵,̵ ̵c̵5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1104:43: This simp argument is unused:
+  c8
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7,̵ ̵c̵8̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1105:42: This simp argument is unused:
+  map_div₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_d̵iv̵₀̵,̵ ̵m̵a̵p̵_̵i̵nv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1105:52: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1105:71: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1106:6: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+        m̵a̵p̵_̵o̵n̵e̵,̵ ̵Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1106:15: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵,̵ ̵hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1106:49: This simp argument is unused:
+  inv_inv
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi,̵ ̵i̵n̵v̵_̵i̵n̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1159:34: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1159:44: This simp argument is unused:
+  map_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_p̵o̵w̵,̵ ̵m̵a̵p̵_̵neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1159:62: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_of̵N̵a̵t̵,̵ ̵m̵a̵p̵_̵o̵ne,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1159:73: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, m̵a̵p̵_̵o̵n̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1160:6: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1161:15: This simp argument is unused:
+  c1
+
+Hint: Omit it from the simp argument list.
+  simp only [c1̵,̵ ̵c̵2, c3, c4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1161:27: This simp argument is unused:
+  c4
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4̵,̵ ̵c̵5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1161:43: This simp argument is unused:
+  c8
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7,̵ ̵c̵8̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1162:42: This simp argument is unused:
+  map_div₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_d̵iv̵₀̵,̵ ̵m̵a̵p̵_̵i̵nv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1162:52: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1162:71: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1163:6: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+        m̵a̵p̵_̵o̵n̵e̵,̵ ̵Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1163:15: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵,̵ ̵hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1163:49: This simp argument is unused:
+  inv_inv
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi,̵ ̵i̵n̵v̵_̵i̵n̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1325:34: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1325:44: This simp argument is unused:
+  map_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_p̵o̵w̵,̵ ̵m̵a̵p̵_̵neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1325:62: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_of̵N̵a̵t̵,̵ ̵m̵a̵p̵_̵o̵ne,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1325:73: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, m̵a̵p̵_̵o̵n̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1327:43: This simp argument is unused:
+  c8
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7,̵ ̵c̵8̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1328:42: This simp argument is unused:
+  map_div₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_d̵iv̵₀̵,̵ ̵m̵a̵p̵_̵i̵nv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1328:52: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1328:71: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1329:6: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+        m̵a̵p̵_̵o̵n̵e̵,̵ ̵Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1329:15: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵,̵ ̵hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1329:49: This simp argument is unused:
+  inv_inv
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi,̵ ̵i̵n̵v̵_̵i̵n̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1388:53: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1388:73: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, m̵a̵p̵_̵o̵n̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1389:6: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1390:19: This simp argument is unused:
+  c2
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2̵,̵ ̵c̵3, c4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1390:23: This simp argument is unused:
+  c3
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3̵,̵ ̵c̵4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1390:31: This simp argument is unused:
+  c5
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5̵,̵ ̵c̵6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1390:35: This simp argument is unused:
+  c6
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6̵,̵ ̵c̵7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1390:39: This simp argument is unused:
+  c7
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7̵,̵ ̵c̵8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1390:43: This simp argument is unused:
+  c8
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7,̵ ̵c̵8̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:15: This simp argument is unused:
+  map_add
+
+Hint: Omit it from the simp argument list.
+  simp only [map_a̵d̵d̵,̵ ̵m̵a̵p̵_̵sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:24: This simp argument is unused:
+  map_sub
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_s̵u̵b̵,̵ ̵ma̵p̵_̵m̵ul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:33: This simp argument is unused:
+  map_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_m̵u̵l̵,̵ ̵m̵a̵p̵_̵div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:42: This simp argument is unused:
+  map_div₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_d̵iv̵₀̵,̵ ̵m̵a̵p̵_̵i̵nv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:52: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:62: This simp argument is unused:
+  map_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_p̵o̵w̵,̵ ̵m̵a̵p̵_̵neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:71: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1391:80: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_of̵N̵a̵t̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵m̵a̵p̵_̵o̵ne,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1392:6: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+        m̵a̵p̵_̵o̵n̵e̵,̵ ̵Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1392:15: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵,̵ ̵hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1499:34: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1499:44: This simp argument is unused:
+  map_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_p̵o̵w̵,̵ ̵m̵a̵p̵_̵neg, map_ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1499:53: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat, map_one,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1499:73: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, m̵a̵p̵_̵o̵n̵e̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.conj_conj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1501:19: This simp argument is unused:
+  c2
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2̵,̵ ̵c̵3, c4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1501:23: This simp argument is unused:
+  c3
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3̵,̵ ̵c̵4, c5, c6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1501:31: This simp argument is unused:
+  c5
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5̵,̵ ̵c̵6, c7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1501:35: This simp argument is unused:
+  c6
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6̵,̵ ̵c̵7, c8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1501:39: This simp argument is unused:
+  c7
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7̵,̵ ̵c̵8]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1501:43: This simp argument is unused:
+  c8
+
+Hint: Omit it from the simp argument list.
+  simp only [c1, c2, c3, c4, c5, c6, c7,̵ ̵c̵8̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1502:15: This simp argument is unused:
+  map_add
+
+Hint: Omit it from the simp argument list.
+  simp only [map_a̵d̵d̵,̵ ̵m̵a̵p̵_̵sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1502:42: This simp argument is unused:
+  map_div₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_d̵iv̵₀̵,̵ ̵m̵a̵p̵_̵i̵nv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1502:52: This simp argument is unused:
+  map_inv₀
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_i̵n̵v̵₀̵,̵ ̵m̵a̵p_̵p̵ow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1502:71: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_n̵e̵g̵,̵ ̵m̵a̵p̵_̵ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1502:80: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_of̵N̵a̵t̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵m̵a̵p̵_̵o̵ne,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1503:6: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+        m̵a̵p̵_̵o̵n̵e̵,̵ ̵Complex.conj_conj, hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1503:15: This simp argument is unused:
+  Complex.conj_conj
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat, map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵n̵j̵_̵c̵o̵n̵j̵,̵ ̵hDi, hEi, hFi, inv_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2019P6.lean:1503:49: This simp argument is unused:
+  inv_inv
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_sub, map_mul, map_div₀, map_inv₀, map_pow, map_neg, map_ofNat,
+  ̵  ̵ ̵ ̵ ̵ ̵map_one,
+  ̲  ̲ ̲ ̲ ̲ ̲Complex.conj_conj, hDi, hEi, hFi,̵ ̵i̵n̵v̵_̵i̵n̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (8656 jobs).
+✔ [1218/1218] Built Compfiles.Imo2022P6 (52s)
+Build completed successfully (1218 jobs).
+⚠ [2846/2846] Built Compfiles.Imo2022P4 (60s)
+warning: Compfiles/Imo2022P4.lean:167:63: Variable name `hU` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2022P4.lean:167:76: Variable name `hQ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2022P4.lean:854:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2022P4.lean:910:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2022P4.lean:1951:71: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_add, map_smul, LinearMap.sub_apply, LinearMap.add_apply,
+          LinearMap.smul_apply, positiveOrientation.areaForm_apply_self, s̵m̵u̵l̵_̵z̵e̵r̵o̵,̵ ̵add_zero,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵smul_eq_mul,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲mul_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:1959:71: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_add, map_smul, LinearMap.sub_apply, LinearMap.add_apply,
+          LinearMap.smul_apply, positiveOrientation.areaForm_apply_self, s̵m̵u̵l̵a̲d̲d̲_zero, z̲e̲r̲o̲_̲add_̵z̵e̵r̵o̵,
+          z̵e̵r̵o̵_̵a̵d̵d̵,̵ ̵smul_eq_mul, mul_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:1959:82: This simp argument is unused:
+  add_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_add, map_smul, LinearMap.sub_apply, LinearMap.add_apply,
+          LinearMap.smul_apply, positiveOrientation.areaForm_apply_self, smul_zero, z̲e̲r̲o̲_̲add_̵z̵e̵r̵o̵,
+          z̵e̵r̵o̵_̵a̵d̵d̵,̵ ̵smul_eq_mul, mul_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2110:55: This simp argument is unused:
+  add_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_smul, LinearMap.add_apply, LinearMap.smul_apply, smul_eq_mul,
+      positiveOrientation.areaForm_apply_self, mul_zero,̵ ̵a̵d̵d̵_̵z̵e̵r̵o̵] at hc1
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2403:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Compfiles/Imo2022P4.lean:2336:71: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_add, map_smul, LinearMap.sub_apply, LinearMap.add_apply,
+          LinearMap.smul_apply, positiveOrientation.areaForm_apply_self, s̵m̵u̵l̵_̵z̵e̵r̵o̵,̵ ̵add_zero,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵smul_eq_mul,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲mul_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2344:71: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_add, map_smul, LinearMap.sub_apply, LinearMap.add_apply,
+          LinearMap.smul_apply, positiveOrientation.areaForm_apply_self, s̵m̵u̵l̵a̲d̲d̲_zero, z̲e̲r̲o̲_̲add_̵z̵e̵r̵o̵,
+          z̵e̵r̵o̵_̵a̵d̵d̵,̵ ̵smul_eq_mul, mul_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2344:82: This simp argument is unused:
+  add_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_add, map_smul, LinearMap.sub_apply, LinearMap.add_apply,
+          LinearMap.smul_apply, positiveOrientation.areaForm_apply_self, smul_zero, z̲e̲r̲o̲_̲add_̵z̵e̵r̵o̵,
+          z̵e̵r̵o̵_̵a̵d̵d̵,̵ ̵smul_eq_mul, mul_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2497:55: This simp argument is unused:
+  add_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, map_smul, LinearMap.add_apply, LinearMap.smul_apply, smul_eq_mul,
+      positiveOrientation.areaForm_apply_self, mul_zero,̵ ̵a̵d̵d̵_̵z̵e̵r̵o̵] at hc1
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2759:34: This simp argument is unused:
+  LinearMap.sub_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_smul, L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵u̵b̵_̵a̵p̵p̵l̵y̵,̵ ̵LinearMap.smul_apply, positiveOrientation.areaForm_apply_self,
+  ̲  ̲ ̲ ̲ ̲ ̲smul_zero, sub_zero, smul_eq_mul, sign_eq_one_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2760:47: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_smul, LinearMap.sub_apply, LinearMap.smul_apply,
+        positiveOrientation.areaForm_apply_self, sm̵ul̵_̵z̵e̵r̵o̵,̵ ̵s̵u̵b_zero, smul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵sign_eq_one_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2760:58: This simp argument is unused:
+  sub_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_smul, LinearMap.sub_apply, LinearMap.smul_apply,
+        positiveOrientation.areaForm_apply_self, smul_zero, su̵b̵_̵z̵e̵r̵o̵,̵ ̵s̵mul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵sign_eq_one_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2775:34: This simp argument is unused:
+  LinearMap.sub_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_smul, L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵u̵b̵_̵a̵p̵p̵l̵y̵,̵ ̵LinearMap.smul_apply, positiveOrientation.areaForm_apply_self,
+  ̲  ̲ ̲ ̲ ̲ ̲smul_zero, sub_zero, smul_eq_mul, sign_eq_neg_one_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2776:47: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_smul, LinearMap.sub_apply, LinearMap.smul_apply,
+        positiveOrientation.areaForm_apply_self, sm̵ul̵_̵z̵e̵r̵o̵,̵ ̵s̵u̵b_zero, smul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵sign_eq_neg_one_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2022P4.lean:2776:58: This simp argument is unused:
+  sub_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_sub, map_smul, LinearMap.sub_apply, LinearMap.smul_apply,
+        positiveOrientation.areaForm_apply_self, smul_zero, su̵b̵_̵z̵e̵r̵o̵,̵ ̵s̵mul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵sign_eq_neg_one_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (2846 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2046 jobs).
