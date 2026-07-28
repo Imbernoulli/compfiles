@@ -14308,3 +14308,119 @@ Build completed successfully (2998 jobs).
 Build completed successfully (8656 jobs).
 ✔ [8656/8656] Built Compfiles.Usa2004P6 (13s)
 Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa2005P4 (6.7s)
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa2005P1 (15s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2006P1 (11s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2005P6 (15s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2005P5 (29s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2006P2 (13s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2006P3 (13s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2005P3 (50s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2006P4 (9.7s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2006P5 (15s)
+✔ [8656/8656] Built Compfiles.Usa2007P1 (10s)
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2007P3 (11s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa2007P5 (16s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2998 jobs).
+⚠ [8656/8656] Built Compfiles.Usa2007P6 (12s)
+warning: Compfiles/Usa2007P6.lean:88:5: Variable name `hac1` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2007P6.lean:88:36: Variable name `hac2` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2007P6.lean:89:5: Variable name `hac3` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2007P4 (14s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2006P6 (49s)
+Build completed successfully (8656 jobs).
+⚠ [2536/2536] Built Compfiles.Usa2008P2 (21s)
+warning: Compfiles/Usa2008P2.lean:180:5: Variable name `hacuteB` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2008P2.lean:181:5: Variable name `hacuteC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2008P2.lean:182:5: Variable name `hscalAB` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2008P2.lean:183:5: Variable name `hscalBC` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2008P2.lean:184:5: Variable name `hscalCA` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Usa2008P2.lean:194:5: Variable name `hFinside` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (2536 jobs).
+✔ [8656/8656] Built Compfiles.Usa2008P3 (19s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa2008P4 (30s)
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Usa2008P5 (11s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2008P6 (10s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2009P1 (9.6s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2009P2 (12s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2009P4 (15s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2009P6 (9.9s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2010P1 (13s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2010P2 (11s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2010P3 (12s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2010P4 (11s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Usa2010P5 (15s)
+Build completed successfully (2998 jobs).
+Build completed successfully (2045 jobs).
+✔ [8656/8656] Built Compfiles.Usa2010P6 (13s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [2535/2535] Built Compfiles.Usa2009P5 (73s)
+Build completed successfully (2535 jobs).
+✔ [8656/8656] Built Compfiles.Usa2011P2 (14s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Usa2011P6 (9.6s)
+Build completed successfully (8656 jobs).
