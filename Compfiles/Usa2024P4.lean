@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Tactic.Ring
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

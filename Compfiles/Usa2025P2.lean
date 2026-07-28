@@ -5,7 +5,10 @@ Authors: Kimi K3
 -/
 
 import Mathlib.Tactic
-import Mathlib
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.Complex.Polynomial.Basic
+import Mathlib.RingTheory.SimpleRing.Principal
 
 import ProblemExtraction
 

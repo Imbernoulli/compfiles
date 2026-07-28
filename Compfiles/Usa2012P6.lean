@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.Analysis.Normed.Field.Basic
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Ring
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics, .Inequality] }

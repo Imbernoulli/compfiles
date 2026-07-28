@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Nat.Digits.Defs
+import Mathlib.Data.Nat.Factorization.Basic
+import Mathlib.Data.ZMod.Units
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.NormNum.GCD
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.Ring
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

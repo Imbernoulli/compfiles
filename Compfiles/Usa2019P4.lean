@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw, Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Data.Nat.Factorial.BigOperators
+import Mathlib.Data.Set.Card
 
 import ProblemExtraction
 

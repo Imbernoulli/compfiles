@@ -5,7 +5,9 @@ Authors: David Renshaw, Kimi K3
 -/
 
 import Mathlib.Tactic
-import Mathlib
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

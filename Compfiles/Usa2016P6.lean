@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.GroupWithZero.Nat
+import Mathlib.Data.Finset.Option
+import Mathlib.Data.Fintype.Perm
+import Mathlib.Data.Fintype.Pigeonhole
 
 import ProblemExtraction
 

@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Complex
+import Mathlib.Geometry.Euclidean.Triangle
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
 import ProblemExtraction
 
 problem_file { tags := [.Geometry] }

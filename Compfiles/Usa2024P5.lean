@@ -3,7 +3,10 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Geometry.Euclidean.Triangle
 
 import ProblemExtraction
 

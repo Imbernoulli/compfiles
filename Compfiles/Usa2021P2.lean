@@ -5,7 +5,8 @@ Authors: David Renshaw, Kimi K3
 -/
 
 import Mathlib.Tactic
-import Mathlib
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Combinatorics.SimpleGraph.Basic
 
 import ProblemExtraction
 

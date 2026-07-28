@@ -4,8 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Evan Chen, Kenny Lau, Jujian Zhang
 -/
 
-import Mathlib
-import Mathlib.Tactic
+import Mathlib.Algebra.Group.NatPowAssoc
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Tactic.GCongr
+import Mathlib.Tactic.Group
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.NormNum.Ineq
+import Mathlib.Tactic.Positivity.Core
+import Mathlib.Tactic.Ring.RingNF
+import Mathlib.Tactic.Zify
 
 import ProblemExtraction
 

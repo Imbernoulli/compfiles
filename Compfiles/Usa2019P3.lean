@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib.Tactic
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Polynomial.Degree.Lemmas
+import Mathlib.Data.List.TakeWhile
+import Mathlib.Data.Nat.Digits.Lemmas
+import Mathlib.Tactic.NormNum.Prime
 
 import ProblemExtraction
 

@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Evan Chen
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.MeanInequalities
 
 import ProblemExtraction
 

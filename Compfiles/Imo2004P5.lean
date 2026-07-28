@@ -4,7 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Geometry.Euclidean.Angle.Oriented.Affine
+import Mathlib.Geometry.Euclidean.Sphere.Basic
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
 
 import ProblemExtraction
 

@@ -5,7 +5,12 @@ Authors: Daniel Liao
 -/
 
 import Mathlib.Tactic
-import Mathlib
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Geometry.Euclidean.Angle.Unoriented.Affine
+import Mathlib.Geometry.Euclidean.Sphere.Basic
 
 import ProblemExtraction
 

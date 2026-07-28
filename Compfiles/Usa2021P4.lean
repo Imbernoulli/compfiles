@@ -5,7 +5,8 @@ Authors: Kimi K3
 -/
 
 import Mathlib.Tactic
-import Mathlib
+import Mathlib.Data.Nat.Nth
+import Mathlib.NumberTheory.ArithmeticFunction.Misc
 
 import ProblemExtraction
 

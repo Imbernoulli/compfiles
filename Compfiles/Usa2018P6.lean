@@ -3,7 +3,13 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Field.Basic
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Data.Rat.Star
+import Mathlib.GroupTheory.Perm.Fin
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
 
 import ProblemExtraction
 

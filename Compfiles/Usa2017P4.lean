@@ -3,7 +3,8 @@ Copyright (c) 2026 Kimi. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Data.Finset.Max
+import Mathlib.Data.Fintype.Card
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

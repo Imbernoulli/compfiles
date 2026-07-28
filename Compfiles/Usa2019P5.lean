@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.CharP.Defs
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.Analysis.Normed.Field.Lemmas
+import Mathlib.Data.Int.ModEq
+import Mathlib.Data.Nat.Factorization.Basic
+import Mathlib.Data.Nat.Prime.Int
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.LinearCombination.Lemmas
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

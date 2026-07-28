@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Daniel Liao
 -/
 
-import Mathlib
+import Mathlib.NumberTheory.LegendreSymbol.QuadraticChar.Basic
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

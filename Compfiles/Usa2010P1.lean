@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.SpecialFunctions.Complex.Arg
+import Mathlib.Geometry.Euclidean.Angle.Unoriented.Basic
+import Mathlib.Geometry.Euclidean.Projection
 
 import ProblemExtraction
 

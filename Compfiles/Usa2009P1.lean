@@ -3,7 +3,11 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.Geometry.Euclidean.Sphere.Power
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
 
 import ProblemExtraction
 

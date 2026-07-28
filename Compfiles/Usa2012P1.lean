@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.Real.Sqrt
+import Mathlib.Data.Fin.Tuple.Sort
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Nat.Fib.Basic
+import Mathlib.Tactic.IntervalCases
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

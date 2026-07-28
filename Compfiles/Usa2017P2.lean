@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.AffineMonoid.Basic
+import Mathlib.Algebra.Polynomial.Coeff
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.Normed.Ring.Lemmas
+import Mathlib.GroupTheory.Perm.Fin
 import ProblemExtraction
 
 problem_file { tags := [.Combinatorics] }

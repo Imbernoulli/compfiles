@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Basic
+import Mathlib.Data.Nat.Choose.Sum
+import Mathlib.Data.Nat.Totient
+import Mathlib.NumberTheory.Padics.PadicVal.Basic
 import ProblemExtraction
 
 problem_file { tags := [.NumberTheory] }

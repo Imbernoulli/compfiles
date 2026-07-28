@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Field
+import Mathlib.Algebra.EuclideanDomain.Basic
+import Mathlib.Algebra.EuclideanDomain.Field
+import Mathlib.Algebra.Order.Chebyshev
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.Normed.Field.Basic
 
 import ProblemExtraction
 
