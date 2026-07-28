@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.Convex.Side
+import Mathlib.Analysis.Convex.StrictConvexBetween
+import Mathlib.Analysis.InnerProductSpace.OfNorm
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Geometry.Euclidean.Projection
 
 import ProblemExtraction
 

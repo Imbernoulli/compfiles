@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Roozbeh Yousefzadeh
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.Normed.Ring.Lemmas
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Nat.Factorial.BigOperators
+import Mathlib.Data.Nat.Prime.Factorial
+import Mathlib.Tactic.Bound
 
 import ProblemExtraction
 

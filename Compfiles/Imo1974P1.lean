@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Lynn Van Hauwe
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.Group.End
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.NumberTheory.Divisors
 
 import ProblemExtraction
 

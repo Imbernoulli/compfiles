@@ -1265,7 +1265,7 @@ lemma incCC1 (u v u₃ R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3)
   · exact h2
 
 lemma incCC2 (u v u₃ R : ℝ) (hw : (Real.sqrt 3 : ℝ)^2 = 3)
-    (hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) (hdenC2C : (2 * (u * v - u - v - 3)) ≠ 0) :
+    (_hrel : u₃ * (3 + u + v - u * v) = 3 - u * v - 3 * u - 3 * v) (hdenC2C : (2 * (u * v - u - v - 3)) ≠ 0) :
     (sigCd u v) * (((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3)))^2 + ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3)))^2) + (delCd u v R) * ((R * (u * v - 5 * u + v + 3)) / (2 * (u * v - u - v - 3))) + (epsCd u v R) * ((Real.sqrt 3 * R * (u - 3) * (v - 1)) / (2 * (u * v - u - v - 3))) + (phiCd u v R) = 0 := by
   simp only [sigCd, delCd, epsCd, phiCd]
   set D : ℝ := (2 * (u * v - u - v - 3)) with hD

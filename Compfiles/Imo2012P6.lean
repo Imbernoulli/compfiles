@@ -4,7 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Markus Rydh, Codex
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Rat.Star
+import Mathlib.Order.Lattice.Nat
+import Mathlib.Tactic.Cases
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.FieldSimp.Lemmas
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Francesco Vercellesi
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Nat.SuccPred
+import Mathlib.Order.Interval.Finset.Nat
+import Mathlib.Order.Partition.Finpartition
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.NormNum.Ineq
 
 import ProblemExtraction
 

@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors:
 -/
 
-import Mathlib
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Interval
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.LinearCombination.Lemmas
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

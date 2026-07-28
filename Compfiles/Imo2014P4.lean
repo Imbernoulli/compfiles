@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw, Benpigchu
 -/
 
-import Mathlib
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Geometry.Euclidean.Angle.Sphere
+import Mathlib.Geometry.Euclidean.Triangle
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
 
 import ProblemExtraction
 

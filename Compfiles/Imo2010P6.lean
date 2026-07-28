@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Markus Rydh
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Archimedean.Real.Basic
+import Mathlib.Algebra.Order.BigOperators.Group.Multiset
+import Mathlib.Data.Finset.Max
+import Mathlib.Data.Multiset.Functor
+import Mathlib.Data.Nat.SuccPred
+import Mathlib.Data.PNat.Interval
+import Mathlib.Data.PNat.Order
+import Mathlib.Data.Set.Finite.List
 
 import ProblemExtraction
 

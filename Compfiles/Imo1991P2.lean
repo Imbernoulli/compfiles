@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Benpigchu
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Nat.Factorization.Basic
+import Mathlib.Data.Nat.ModEq
+import Mathlib.Tactic.Cases
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.NormNum.Ineq
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

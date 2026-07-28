@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Markus Rydh, Codex
 -/
 
-import Mathlib
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.RCLike.Basic
+import Mathlib.Combinatorics.Nullstellensatz
 
 import ProblemExtraction
 

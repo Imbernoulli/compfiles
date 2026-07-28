@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: InternLM-MATH LEAN Formalizer v0.1, Constantin Seebach
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Floor.Div
+import Mathlib.Algebra.Order.Star.Basic
+import Mathlib.Combinatorics.Pigeonhole
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.GroupTheory.GroupAction.Ring
+import Mathlib.Order.Interval.Finset.Nat
 
 import ProblemExtraction
 

@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Benpigchu
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.FieldTheory.Finite.Basic
+import Mathlib.NumberTheory.Multiplicity
+import Mathlib.Tactic.NormNum.Prime
 import Mathlib.Tactic
 
 import ProblemExtraction

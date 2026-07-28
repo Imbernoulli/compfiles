@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Elan Roth
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.ModEq
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.NumberTheory.Multiplicity
 
 import ProblemExtraction
 

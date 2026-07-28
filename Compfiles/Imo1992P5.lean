@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Willmann (with assistance from Github Copilot and Aristotle)
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
 
 import ProblemExtraction
 

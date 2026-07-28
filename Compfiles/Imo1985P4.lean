@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Benpigchu
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Associated
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.NumberTheory.Padics.PadicVal.Basic
+import Mathlib.NumberTheory.PrimeCounting
+import Mathlib.Tactic.Cases
+import Mathlib.Tactic.NormNum
 
 import ProblemExtraction
 

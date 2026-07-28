@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Constantin Seebach
 -/
 
-import Mathlib
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.Real.Sqrt
+import Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions
+import Mathlib.Combinatorics.SimpleGraph.Walk.Counting
 
 import ProblemExtraction
 

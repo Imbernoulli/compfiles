@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Constantin Seebach
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.BigOperators.Group.List
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Nat.Digits.Div
 import ProblemExtraction
 
 

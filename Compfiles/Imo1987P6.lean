@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jia-Jun Ma
 -/
 import Mathlib.Data.Nat.Prime.Basic
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.Real.Sqrt
+import Mathlib.Data.Int.Star
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
 import Mathlib.Tactic.Ring
 
 import ProblemExtraction

@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Constantin Seebach
 -/
 
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.Complex.Circle
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Inverse
+import Mathlib.NumberTheory.Niven
+import Mathlib.Tactic.NormNum.RealSqrt
 import ProblemExtraction
 
 

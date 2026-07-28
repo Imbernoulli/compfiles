@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Markus Rydh
 -/
 
-import Mathlib
+import Mathlib.Algebra.Polynomial.Bivariate
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.Analysis.Normed.Module.RCLike.Real
+import Mathlib.Tactic.Cases
+import Mathlib.Topology.Algebra.Module.ModuleTopology
+import Mathlib.Topology.Algebra.Polynomial
 
 import ProblemExtraction
 

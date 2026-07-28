@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
 
-import Mathlib
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Data.Fin.VecNotation
+import Mathlib.Data.Fintype.Perm
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.Tactic.IntervalCases
 
 import ProblemExtraction
 

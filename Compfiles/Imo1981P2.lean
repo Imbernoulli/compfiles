@@ -3,7 +3,16 @@ Copyright (c) 2026 Constantin Seebach. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Constantin Seebach
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Combinatorics.SimpleGraph.Bipartite
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Rat.Star
+import Mathlib.Tactic.Field
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.FieldSimp.Lemmas
+import Mathlib.Tactic.Positivity.Basic
+import Mathlib.Tactic.Qify
+import Mathlib.Tactic.Ring.Basic
 
 import ProblemExtraction
 

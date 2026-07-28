@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Pjotr Buys
 -/
 
-import Mathlib
+import Mathlib.Algebra.Group.Fin.Basic
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Finset.Sort
+import Mathlib.Data.Matrix.Block
+import Mathlib.Tactic.NormNum.Ineq
 
 import ProblemExtraction
 

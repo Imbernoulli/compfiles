@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Data.Finset.Max
+import Mathlib.Data.Finset.Powerset
+import Mathlib.Data.Fintype.BigOperators
+import Mathlib.Tactic.DeriveFintype
 
 import ProblemExtraction
 

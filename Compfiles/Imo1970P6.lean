@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Combinatorics.Enumerative.DoubleCounting
+import Mathlib.Data.Rat.Star
+import Mathlib.Geometry.Euclidean.Simplex
+import Mathlib.Geometry.Euclidean.Triangle
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
 
 import ProblemExtraction
 

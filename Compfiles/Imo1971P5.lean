@@ -4,7 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: David Renshaw, Benpigchu
 -/
 
-import Mathlib
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Analysis.Normed.Module.Connected
+import Mathlib.Geometry.Euclidean.Sphere.Basic
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.Tactic.Cases
+import Mathlib.Topology.GDelta.MetrizableSpace
+import Mathlib.Topology.Separation.Connected
 
 import ProblemExtraction
 

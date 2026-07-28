@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors:
 -/
 
-import Mathlib
+import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+import Mathlib.Algebra.Group.Fin.Basic
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Data.Fintype.Powerset
+import Mathlib.Order.Interval.Finset.Nat
 
 import ProblemExtraction
 

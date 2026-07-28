@@ -4,7 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Benpigchu
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Analysis.Convex.SpecificFunctions.Deriv
+import Mathlib.Analysis.Normed.Affine.AddTorsorBases
+import Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality
+import Mathlib.MeasureTheory.Measure.Haar.Basic
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Positivity.Basic
 
 import ProblemExtraction
 

@@ -3,7 +3,15 @@ Copyright (c) 2026 Constantin Seebach. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Constantin Seebach
 -/
-import Mathlib
+import Mathlib.Algebra.GCDMonoid.FinsetLemmas
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Nat.Factorial.BigOperators
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.NormNum.Ineq
 
 import ProblemExtraction
 

@@ -3,7 +3,17 @@ Copyright (c) 2026 lean-tom. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Daniel Liao
 -/
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Sub.Prod
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Nat.Factorization.Defs
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Ring.PNat
+import Mathlib.Tactic.Zify
 import ProblemExtraction
 
 problem_file {

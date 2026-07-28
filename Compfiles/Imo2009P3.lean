@@ -4,7 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: hillosanation
 -/
 
-import Mathlib
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Nat.SuccPred
+import Mathlib.Order.Lattice.Nat
+import Mathlib.Order.SuccPred.CompleteLinearOrder
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Linarith.Lemmas
+import Mathlib.Tactic.Ring.RingNF
+import Mathlib.Tactic.Zify
 
 import ProblemExtraction
 

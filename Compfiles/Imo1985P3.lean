@@ -3,7 +3,11 @@ Copyright (c) 2026 The Compfiles Contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kimi K3
 -/
-import Mathlib
+import Mathlib.Algebra.CharP.Lemmas
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.RingTheory.Polynomial.Basic
+import Mathlib.Tactic.NormNum
 import ProblemExtraction
 
 problem_file {
