@@ -13384,3 +13384,201 @@ Build completed successfully (8656 jobs).
 Build completed successfully (2998 jobs).
 Build completed successfully (2998 jobs).
 Build completed successfully (1932 jobs).
+✔ [8656/8656] Built Compfiles.Imo2005P1 (27s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2004P5 (44s)
+Build completed successfully (8656 jobs).
+✔ [2998/2998] Built Compfiles.Imo2004P3 (57s)
+Build completed successfully (2998 jobs).
+Build completed successfully (3070 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (1449 jobs).
+Build completed successfully (2998 jobs).
+✔ [2454/2454] Built Compfiles.Imo2005P5 (37s)
+Build completed successfully (2454 jobs).
+✔ [8656/8656] Built Compfiles.Imo2006P1 (25s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2007P3 (10s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2007P2 (16s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (970 jobs).
+✔ [8656/8656] Built Compfiles.Imo2007P4 (15s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2999 jobs).
+✔ [8656/8656] Built Compfiles.Imo2008P1 (11s)
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (2999 jobs).
+Build completed successfully (2999 jobs).
+Build completed successfully (2998 jobs).
+✔ [8656/8656] Built Compfiles.Imo2009P2 (11s)
+Build completed successfully (8656 jobs).
+Build completed successfully (753 jobs).
+✔ [2998/2998] Built Compfiles.Imo2010P3 (8.1s)
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (845 jobs).
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2010P4 (10s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [2998/2998] Built Compfiles.Imo2011P6 (9.5s)
+Build completed successfully (2998 jobs).
+✔ [1177/1177] Built Compfiles.Imo2005P6 (119s)
+Build completed successfully (1177 jobs).
+Build completed successfully (3003 jobs).
+✔ [8656/8656] Built Compfiles.Imo2011P4 (12s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2451 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+⚠ [8656/8656] Built Compfiles.Imo2012P1 (33s)
+warning: Compfiles/Imo2012P1.lean:62:24: Variable name `A` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2012P1.lean:64:26: Variable name `B` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2012P1.lean:66:28: Variable name `C` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Compfiles/Imo2012P1.lean:143:8: This simp argument is unused:
+  tri
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵t̵r̵i̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2012P1.lean:152:8: This simp argument is unused:
+  tri
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵t̵r̵i̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2012P1.lean:161:8: This simp argument is unused:
+  tri
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵t̵r̵i̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2012P1.lean:451:0: automatically included section variable(s) unused in theorem `Imo2012P1.inner_CB_self`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:454:0: automatically included section variable(s) unused in theorem `Imo2012P1.inner_AB_self`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:457:0: automatically included section variable(s) unused in theorem `Imo2012P1.inner_BA_self`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:460:0: automatically included section variable(s) unused in theorem `Imo2012P1.inner_AB_CB`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:466:0: automatically included section variable(s) unused in theorem `Imo2012P1.inner_BA_CA`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:473:0: automatically included section variable(s) unused in theorem `Imo2012P1.affineComb_eq_lineMap_BC`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:486:0: automatically included section variable(s) unused in theorem `Imo2012P1.affineComb_eq_lineMap_AB`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:499:0: automatically included section variable(s) unused in theorem `Imo2012P1.affineComb_eq_lineMap_AC`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:517:72: This simp argument is unused:
+  zero_add
+
+Hint: Omit it from the simp argument list.
+  simp only [wJ, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.head_cons,
+  ̲  ̲ ̲ ̲Matrix.tail_cons, vsub_self, smul_zero, a̵d̵d̵_̵z̵e̵r̵o̵,̵ ̵z̵e̵r̵o̵_̵a̵d̵d̵]̵a̲d̲d̲_̲z̲e̲r̲o̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2012P1.lean:525:62: This simp argument is unused:
+  add_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [wJ, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.head_cons,
+  ̲  ̲ ̲ ̲Matrix.tail_cons, vsub_self, smul_zero, a̵d̵d̵_̵z̵e̵r̵o̵,̵ ̵zero_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Compfiles/Imo2012P1.lean:665:0: automatically included section variable(s) unused in theorem `Imo2012P1.comb2_eq_lineMap`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:672:0: automatically included section variable(s) unused in theorem `Imo2012P1.comb_vsub_A`:
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Compfiles/Imo2012P1.lean:707:0: automatically included section variable(s) unused in theorem `Imo2012P1.range_pair`:
+  [NormedAddCommGroup V]
+  [InnerProductSpace ℝ V]
+  [MetricSpace P]
+  [NormedAddTorsor V P]
+  hABC
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup V] [InnerProductSpace ℝ V] [MetricSpace P] [NormedAddTorsor V P] hABC in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2012P3 (22s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2013P4 (26s)
+Build completed successfully (8656 jobs).
+✔ [8656/8656] Built Compfiles.Imo2014P5 (18s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+✔ [2524/2524] Built Compfiles.Imo2014P3 (51s)
+Build completed successfully (2524 jobs).
+✔ [8656/8656] Built Compfiles.Imo2015P1 (19s)
+Build completed successfully (8656 jobs).
+Build completed successfully (2998 jobs).
+Build completed successfully (2999 jobs).
+Build completed successfully (8656 jobs).
