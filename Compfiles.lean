@@ -27,6 +27,7 @@ public import Compfiles.Imo1963P5
 public import Compfiles.Imo1964P1
 public import Compfiles.Imo1964P2
 public import Compfiles.Imo1964P4
+public import Compfiles.Imo1964P5
 public import Compfiles.Imo1965P1
 public import Compfiles.Imo1965P2
 public import Compfiles.Imo1965P4
@@ -49,6 +50,7 @@ public import Compfiles.Imo1971P3
 public import Compfiles.Imo1971P5
 public import Compfiles.Imo1971P6
 public import Compfiles.Imo1972P1
+public import Compfiles.Imo1972P2
 public import Compfiles.Imo1972P3
 public import Compfiles.Imo1972P4
 public import Compfiles.Imo1972P5
@@ -152,6 +154,7 @@ public import Compfiles.Imo2001P6
 public import Compfiles.Imo2002P1
 public import Compfiles.Imo2002P3
 public import Compfiles.Imo2002P5
+public import Compfiles.Imo2002P6
 public import Compfiles.Imo2003P1
 public import Compfiles.Imo2003P2
 public import Compfiles.Imo2003P6
@@ -164,6 +167,7 @@ public import Compfiles.Imo2005P4
 public import Compfiles.Imo2006P3
 public import Compfiles.Imo2006P4
 public import Compfiles.Imo2006P5
+public import Compfiles.Imo2006P6
 public import Compfiles.Imo2007P1
 public import Compfiles.Imo2007P5
 public import Compfiles.Imo2007P6
@@ -171,6 +175,7 @@ public import Compfiles.Imo2008P2
 public import Compfiles.Imo2008P3
 public import Compfiles.Imo2008P4
 public import Compfiles.Imo2008P5
+public import Compfiles.Imo2008P6
 public import Compfiles.Imo2009P1
 public import Compfiles.Imo2009P3
 public import Compfiles.Imo2009P5
@@ -189,15 +194,18 @@ public import Compfiles.Imo2012P6
 public import Compfiles.Imo2013P1
 public import Compfiles.Imo2013P2
 public import Compfiles.Imo2013P5
+public import Compfiles.Imo2013P6
 public import Compfiles.Imo2014P1
 public import Compfiles.Imo2014P2
 public import Compfiles.Imo2014P4
 public import Compfiles.Imo2015P2
+public import Compfiles.Imo2015P4
 public import Compfiles.Imo2015P5
 public import Compfiles.Imo2015P6
 public import Compfiles.Imo2016P2
 public import Compfiles.Imo2016P4
 public import Compfiles.Imo2016P5
+public import Compfiles.Imo2016P6
 public import Compfiles.Imo2017P1
 public import Compfiles.Imo2017P2
 public import Compfiles.Imo2017P6
@@ -307,6 +315,7 @@ public import Compfiles.Usa2004P5
 public import Compfiles.Usa2005P2
 public import Compfiles.Usa2007P5
 public import Compfiles.Usa2008P1
+public import Compfiles.Usa2009P3
 public import Compfiles.Usa2010P5
 public import Compfiles.Usa2011P1
 public import Compfiles.Usa2011P4
@@ -326,6 +335,7 @@ public import Compfiles.Usa2022P1
 public import Compfiles.Usa2022P3
 public import Compfiles.Usa2022P4
 public import Compfiles.Usa2023P2
+public import Compfiles.Usa2023P3
 public import Compfiles.Usa2023P4
 public import Compfiles.Usa2023P5
 public import Compfiles.Usa2024P2
